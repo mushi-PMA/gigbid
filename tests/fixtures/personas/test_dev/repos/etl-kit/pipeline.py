@@ -1,4 +1,3 @@
-from airflow import DAG
 
 
 def load_sales(store_ids):

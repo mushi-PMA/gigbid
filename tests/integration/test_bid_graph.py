@@ -1,4 +1,5 @@
 """The bid graph end to end: scripted models, real MCP servers in memory, a fake marketplace, a memory checkpointer."""
+
 from __future__ import annotations
 
 import json
@@ -14,53 +15,118 @@ from common.payloads import edited_payload
 from common.security import mint_approval_token, payload_hash
 from tests.harness import FakeMarketplace, tools_factory
 
-LETTER = ("Your sales numbers arrive late because the nightly loads fail silently, and that is the part I would fix "
-          "first. I built a nightly Airflow DAG in Python that loads sales from 40 stores into PostgreSQL, with "
-          "retries and alerts, and it cut report time from three hours to twenty minutes [test_dev:cs:cs-1]. "
-          "For your stack I would start by mapping each source, then add idempotent upserts so a rerun never "
-          "doubles a row, and finally add a small health page your team can check each morning. I would also "
-          "write short handover notes so your analysts can change a schedule without waiting for me. The first "
-          "milestone would be one store loading cleanly end to end, which gives you something real to review "
-          "within a few days. After that we can add the remaining stores in batches and agree on alert rules that "
-          "match how your team works. Happy to walk through the plan on a short call.")
+LETTER = (
+    "Your sales numbers arrive late because the nightly loads fail silently, and that is the part I would fix "
+    "first. I built a nightly Airflow DAG in Python that loads sales from 40 stores into PostgreSQL, with "
+    "retries and alerts, and it cut report time from three hours to twenty minutes [test_dev:cs:cs-1]. "
+    "For your stack I would start by mapping each source, then add idempotent upserts so a rerun never "
+    "doubles a row, and finally add a small health page your team can check each morning. I would also "
+    "write short handover notes so your analysts can change a schedule without waiting for me. The first "
+    "milestone would be one store loading cleanly end to end, which gives you something real to review "
+    "within a few days. After that we can add the remaining stores in batches and agree on alert rules that "
+    "match how your team works. Happy to walk through the plan on a short call."
+)
 
 JOBS = {
-    "j-good": {"job_id": "j-good", "title": "Airflow ETL for retail sales", "category": "Data Engineering",
-               "description": "We need a reliable nightly Airflow pipeline loading store sales into PostgreSQL.",
-               "skills": ["Python", "Airflow"], "payment_type": "fixed", "budget_min": 600, "budget_max": 1200,
-               "connects_cost": 8, "client_id": "c1"},
-    "j-scam": {"job_id": "j-scam", "title": "Unpaid test task", "category": "Data Engineering",
-               "description": "Do a full dashboard for free as a test, then contact me on WhatsApp.",
-               "skills": ["Python"], "payment_type": "fixed", "budget_max": 0, "connects_cost": 6, "client_id": "c2"},
+    "j-good": {
+        "job_id": "j-good",
+        "title": "Airflow ETL for retail sales",
+        "category": "Data Engineering",
+        "description": "We need a reliable nightly Airflow pipeline loading store sales into PostgreSQL.",
+        "skills": ["Python", "Airflow"],
+        "payment_type": "fixed",
+        "budget_min": 600,
+        "budget_max": 1200,
+        "connects_cost": 8,
+        "client_id": "c1",
+    },
+    "j-scam": {
+        "job_id": "j-scam",
+        "title": "Unpaid test task",
+        "category": "Data Engineering",
+        "description": "Do a full dashboard for free as a test, then contact me on WhatsApp.",
+        "skills": ["Python"],
+        "payment_type": "fixed",
+        "budget_max": 0,
+        "connects_cost": 6,
+        "client_id": "c2",
+    },
 }
 
 
 def replies(critic_approves=True, compliance_allowed=True, scam=False):
     return {
-        "analyst": {"job_id": "x", "title": "x", "requirements": [
-            {"requirement_id": "r1", "text": "nightly Airflow pipeline", "skills": ["Airflow"]},
-            {"requirement_id": "r2", "text": "load into PostgreSQL", "skills": ["SQL"]}],
-            "required_skills": ["Airflow", "Python"], "deliverables": ["pipeline"]},
-        "risk_assessor": {"job_id": "x", "score": 0.95 if scam else 0.1, "client_quality": 0.8, "is_scam": scam,
-                          "flags": [{"kind": "free_work", "evidence": "for free as a test"}] if scam else [],
-                          "explanation": "ok"},
+        "analyst": {
+            "job_id": "x",
+            "title": "x",
+            "requirements": [
+                {"requirement_id": "r1", "text": "nightly Airflow pipeline", "skills": ["Airflow"]},
+                {"requirement_id": "r2", "text": "load into PostgreSQL", "skills": ["SQL"]},
+            ],
+            "required_skills": ["Airflow", "Python"],
+            "deliverables": ["pipeline"],
+        },
+        "risk_assessor": {
+            "job_id": "x",
+            "score": 0.95 if scam else 0.1,
+            "client_quality": 0.8,
+            "is_scam": scam,
+            "flags": [{"kind": "free_work", "evidence": "for free as a test"}] if scam else [],
+            "explanation": "ok",
+        },
         "rag_helper": {"requirements": ["nightly Airflow pipeline", "PostgreSQL loads"]},
-        "fit_matcher": {"job_id": "x", "score": 0.82, "matches": [
-            {"requirement_id": "r1", "requirement": "nightly Airflow pipeline",
-             "evidence_ids": ["test_dev:cs:cs-1"], "strength": "strong", "reason": "same work"}],
-            "matched_skills": ["Airflow"], "missing_skills": [], "reasons": ["built the same pipeline before"]},
-        "pricing": {"job_id": "x", "payment_type": "fixed", "amount": 900, "connects_worth_it": True,
-                    "rationale": "p50 of the market, strong fit"},
+        "fit_matcher": {
+            "job_id": "x",
+            "score": 0.82,
+            "matches": [
+                {
+                    "requirement_id": "r1",
+                    "requirement": "nightly Airflow pipeline",
+                    "evidence_ids": ["test_dev:cs:cs-1"],
+                    "strength": "strong",
+                    "reason": "same work",
+                }
+            ],
+            "matched_skills": ["Airflow"],
+            "missing_skills": [],
+            "reasons": ["built the same pipeline before"],
+        },
+        "pricing": {
+            "job_id": "x",
+            "payment_type": "fixed",
+            "amount": 900,
+            "connects_worth_it": True,
+            "rationale": "p50 of the market, strong fit",
+        },
         "writer": {"cover_letter": LETTER, "screening_answers": []},
-        "verifier": {"claims": [{"text": "I built a nightly Airflow DAG", "evidence_ids": ["test_dev:cs:cs-1"],
-                                 "status": "supported", "reason": "case study"}]},
-        "critic": {"approve": critic_approves, "grounding_ok": True, "personalisation": 0.8 if critic_approves
-                   else 0.3, "length_ok": True, "issues": [] if critic_approves else ["too generic"],
-                   "instructions": "" if critic_approves else "mention their stores"},
-        "compliance": lambda system, user: json.dumps({
-            "allowed": compliance_allowed, "violations": [] if compliance_allowed else
-            [{"rule_id": "no_free_work", "text": "free sample", "fix": "remove"}],
-            "redactions": [], "cleaned_cover_letter": user.split("<text_to_check>\n")[1].split("\n</text_to_check>")[0]}),
+        "verifier": {
+            "claims": [
+                {
+                    "text": "I built a nightly Airflow DAG",
+                    "evidence_ids": ["test_dev:cs:cs-1"],
+                    "status": "supported",
+                    "reason": "case study",
+                }
+            ]
+        },
+        "critic": {
+            "approve": critic_approves,
+            "grounding_ok": True,
+            "personalisation": 0.8 if critic_approves else 0.3,
+            "length_ok": True,
+            "issues": [] if critic_approves else ["too generic"],
+            "instructions": "" if critic_approves else "mention their stores",
+        },
+        "compliance": lambda system, user: json.dumps(
+            {
+                "allowed": compliance_allowed,
+                "violations": []
+                if compliance_allowed
+                else [{"rule_id": "no_free_work", "text": "free sample", "fix": "remove"}],
+                "redactions": [],
+                "cleaned_cover_letter": user.split("<text_to_check>\n")[1].split("\n</text_to_check>")[0],
+            }
+        ),
     }
 
 
@@ -78,8 +144,16 @@ def env(fixture_personas, monkeypatch, tmp_path):
 
 
 def config(thread: str) -> dict:
-    return {"configurable": {"thread_id": thread, "user_id": "local", "persona": "test_dev",
-                             "tools_factory": tools_factory, "settings": {}}, "recursion_limit": 80}
+    return {
+        "configurable": {
+            "thread_id": thread,
+            "user_id": "local",
+            "persona": "test_dev",
+            "tools_factory": tools_factory,
+            "settings": {},
+        },
+        "recursion_limit": 80,
+    }
 
 
 def start(job_id: str) -> dict:
@@ -87,11 +161,15 @@ def start(job_id: str) -> dict:
 
 
 def approve(request: dict, action="approve", **edit) -> dict:
-    payload = edited_payload(request["payload"], edit.get("edited_text"), None) if action == "edit" \
-        else request["payload"]
-    return {"action": action, "approval_token": mint_approval_token("local", "submit_proposal", payload["job_id"],
-                                                                    payload),
-            "payload_hash": payload_hash(payload), **edit}
+    payload = (
+        edited_payload(request["payload"], edit.get("edited_text"), None) if action == "edit" else request["payload"]
+    )
+    return {
+        "action": action,
+        "approval_token": mint_approval_token("local", "submit_proposal", payload["job_id"], payload),
+        "payload_hash": payload_hash(payload),
+        **edit,
+    }
 
 
 async def test_scam_is_skipped_without_writing(env, scripted_llm):

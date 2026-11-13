@@ -11,8 +11,9 @@ import os
 import time
 import uuid
 from collections import defaultdict
-from datetime import datetime, timezone
-from typing import Any, AsyncIterator
+from collections.abc import AsyncIterator
+from datetime import UTC, datetime
+from typing import Any
 
 from langgraph.types import Command
 
@@ -41,7 +42,7 @@ class RunBus:
         self._queues: dict[str, list[asyncio.Queue]] = defaultdict(list)
 
     async def publish(self, thread_id: str, event: dict[str, Any]) -> None:
-        event = {"at": datetime.now(timezone.utc).isoformat(), **event}
+        event = {"at": datetime.now(UTC).isoformat(), **event}
         if self._redis is not None:
             data = json.dumps(event, default=str)
             await self._redis.rpush(f"run:{thread_id}:events", data)

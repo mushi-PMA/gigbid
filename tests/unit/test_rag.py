@@ -1,4 +1,5 @@
 """Retrieval on a tiny fixture corpus (open embedding model on CPU), fusion, chunking and claim verification."""
+
 from __future__ import annotations
 
 import json
@@ -57,7 +58,8 @@ def test_incremental_reindex_only_embeds_changed_documents(fixture_personas):
     first = build_index("test_dev")
     first.save()
     (fixture_personas / "test_dev" / "case_studies" / "cs-3.md").write_text(
-        "---\nid: cs-3\ntitle: New work\n---\nA dbt model for finance reporting.\n", encoding="utf-8")
+        "---\nid: cs-3\ntitle: New work\n---\nA dbt model for finance reporting.\n", encoding="utf-8"
+    )
     second = build_index("test_dev", previous=first)
     assert second.reindexed_documents == 1
     assert len(second.chunks) == len(first.chunks) + 1
@@ -67,12 +69,17 @@ def test_claim_verification_removes_unsupported_claims(scripted_llm):
     from rag.verify import verify_and_fix
 
     evidence = [EvidenceItem(evidence_id="p:cs:1", persona="p", type="case_study", text="Built an Airflow DAG.")]
-    first = {"claims": [{"text": "I built an Airflow DAG", "evidence_ids": ["p:cs:1"], "status": "supported"},
-                        {"text": "I led a team of 20", "evidence_ids": [], "status": "unsupported"}]}
+    first = {
+        "claims": [
+            {"text": "I built an Airflow DAG", "evidence_ids": ["p:cs:1"], "status": "supported"},
+            {"text": "I led a team of 20", "evidence_ids": [], "status": "unsupported"},
+        ]
+    }
     second = {"claims": [{"text": "I built an Airflow DAG", "evidence_ids": ["p:cs:1"], "status": "supported"}]}
     scripted_llm({"verifier": [json.dumps(first), "I built an Airflow DAG [p:cs:1].", json.dumps(second)]})
-    draft = verify_and_fix(ProposalDraft(job_id="j", cover_letter="I built an Airflow DAG [p:cs:1]. I led a team of 20."),
-                           evidence)
+    draft = verify_and_fix(
+        ProposalDraft(job_id="j", cover_letter="I built an Airflow DAG [p:cs:1]. I led a team of 20."), evidence
+    )
     assert draft.unsupported_before_verification == 1 and draft.unsupported_after_verification == 0
     assert "team of 20" not in draft.cover_letter
 

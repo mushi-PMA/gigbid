@@ -21,8 +21,8 @@ from agent.marketplace_port import MarketplacePort
 from agent.mcp_client import ToolError
 from agent.memory.promotion_rules import promote_style, proposal_features
 from agent.nodes.base import ctx, node, tools_for
-from common.security import payload_hash
 from common.payloads import draft_payload
+from common.security import payload_hash
 
 
 def payload_for(state: dict) -> dict[str, Any]:

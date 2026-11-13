@@ -19,6 +19,7 @@ from agent.nodes.base import ctx, node, tools_for
 from agent.nodes.guards import delimit
 from agent.nodes.matcher import _evidence
 from agent.prompts import load_prompt
+from common.config import load_config
 from common.llm import complete_json
 from rag.verify import verify_and_fix
 
@@ -55,7 +56,8 @@ def write(job: Job, spec: JobSpec, evidence: list[EvidenceItem], price: PriceQuo
             f"{delimit('job_post', job.description[:3000])}")
     if revision_notes:
         user += f"\n\nRevise your previous draft. Critic's instructions:\n{revision_notes}"
-    written = complete_json("writer", load_prompt("writer", style_rules=style), user, _Written, max_tokens=2000)
+    strategy = load_config()["writer"]["strategy"]
+    written = complete_json("writer", load_prompt(strategy, style_rules=style), user, _Written, max_tokens=2000)
     return ProposalDraft(job_id=job.job_id, cover_letter=written.cover_letter.strip(),
                          screening_answers=written.screening_answers,
                          evidence_ids=sorted({e.evidence_id for e in evidence}))

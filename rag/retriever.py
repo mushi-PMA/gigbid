@@ -12,8 +12,17 @@ from agent.handoffs import EvidenceItem
 from common.config import load_config
 from common.tracing import span
 from rag.index.store import EvidenceIndex, Hit, build_index
-from rag.variants import (v0_naive, v1_decomposition, v2_hybrid, v3_rerank, v4_outcome, v5_multivector,
-                          v6_contextual, v7_hyde, v8_corrective)
+from rag.variants import (
+    v0_naive,
+    v1_decomposition,
+    v2_hybrid,
+    v3_rerank,
+    v4_outcome,
+    v5_multivector,
+    v6_contextual,
+    v7_hyde,
+    v8_corrective,
+)
 from rag.variants.base import Query, rrf, to_items
 
 KNOWN = {"v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8"}

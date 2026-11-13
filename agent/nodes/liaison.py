@@ -3,7 +3,7 @@ human approval before anything is sent."""
 from __future__ import annotations
 
 import asyncio
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from langchain_core.runnables import RunnableConfig
@@ -81,7 +81,7 @@ async def draft_reply(state: dict, config: RunnableConfig) -> dict:
     persona = ctx(config)["persona"]
     slots: list[str] = []
     if analysis.intent == "interview_request":
-        start = (datetime.now(timezone.utc) + timedelta(days=1)).date().isoformat()
+        start = (datetime.now(UTC) + timedelta(days=1)).date().isoformat()
         found = await tools.call("get_free_slots", {"from_date": start, "days": 5, "duration_minutes": 30,
                                                     "tz": (ctx(config).get("settings") or {}).get("timezone",
                                                                                                  "Asia/Karachi")})

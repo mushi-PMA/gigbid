@@ -13,8 +13,14 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
 
 from agent.nodes.analyst import job_analyst
-from agent.nodes.approval import (after_approval, after_edit_check, approval, learn_from_edit, prepare_approval,
-                                  submit)
+from agent.nodes.approval import (
+    after_approval,
+    after_edit_check,
+    approval,
+    learn_from_edit,
+    prepare_approval,
+    submit,
+)
 from agent.nodes.base import is_stopped, over_budget
 from agent.nodes.compliance import compliance
 from agent.nodes.critic import after_critic, critic
@@ -106,5 +112,6 @@ def build_bid_graph() -> StateGraph:
     return graph
 
 
-def compile_bid_graph(checkpointer=None, store=None):
-    return build_bid_graph().compile(checkpointer=checkpointer, store=store)
+def compile_bid_graph(checkpointer=None, store=None, interrupt_before: list[str] | None = None):
+    """`interrupt_before=["writer"]` stops after the decision and pricing (decision-only evaluation)."""
+    return build_bid_graph().compile(checkpointer=checkpointer, store=store, interrupt_before=interrupt_before)

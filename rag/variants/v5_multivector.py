@@ -19,7 +19,7 @@ def group_by_project(index: EvidenceIndex, hits: list[Hit]) -> list[Hit]:
         project = hit.chunk.metadata.get("project")
         (projects.setdefault(project, []) if project else loose).append(hit)
     scored = []
-    for project, group in projects.items():
+    for group in projects.values():
         types = {h.chunk.metadata.get("type") for h in group}
         scored.append((max(h.score for h in group) * (1 + 0.1 * (len(types) - 1)), group))
     scored += [(h.score, [h]) for h in loose]

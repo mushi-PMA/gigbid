@@ -10,6 +10,7 @@ import itertools
 
 from agent.inmemory import InMemoryAgentTools, load_servers, tools_factory  # noqa: F401  (re-exported for tests)
 
+
 class FakeMarketplace:
     name = "fake"
 

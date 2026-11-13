@@ -3,8 +3,15 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Response, status
 
-from apps.api.auth.users import (COOKIE, SESSION_HOURS, CurrentUser, create_user, find_by_email, issue_session,
-                                 verify_password)
+from apps.api.auth.users import (
+    COOKIE,
+    SESSION_HOURS,
+    CurrentUser,
+    create_user,
+    find_by_email,
+    issue_session,
+    verify_password,
+)
 from apps.api.schemas.models import LoginIn, RegisterIn, SessionOut, UserOut
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])

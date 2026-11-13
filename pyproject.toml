@@ -47,9 +47,19 @@ build-backend = "setuptools.build_meta"
 include = ["agent*", "rag*", "mcp_servers*", "apps*", "worker*", "gigsim*", "evals*", "common*"]
 
 [tool.ruff]
-line-length = 110
+line-length = 120
 target-version = "py311"
-extend-exclude = ["apps/web"]
+# portfolio corpora are sample content, not project code; gigsim/ is the provided simulator and stays unchanged
+extend-exclude = ["apps/web", "data/personas", "tests/fixtures", "gigsim"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "I"]
+# B008: FastAPI dependencies are default arguments by design. B905: zip over equal-length lists by construction.
+# B006: MCP tool signatures use list defaults that are never mutated (FastMCP builds the schema from them).
+ignore = ["B008", "B905", "B006"]
+
+[tool.ruff.lint.per-file-ignores]
+"data/build/*" = ["E501"]   # long sentence templates for the synthetic corpora
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

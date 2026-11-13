@@ -10,7 +10,7 @@ import json
 import os
 import sqlite3
 import uuid
-from datetime import datetime, time, timedelta, timezone
+from datetime import UTC, datetime, time, timedelta
 from pathlib import Path
 from typing import Annotated
 from zoneinfo import ZoneInfo
@@ -153,7 +153,7 @@ async def create_email_draft(
         if row is None:
             row = (f"draft-{uuid.uuid4().hex[:10]}", subject)
             conn.execute("INSERT INTO drafts VALUES (?, ?, ?, ?, ?, ?, ?)",
-                         (row[0], user, recipient_label, subject, body, datetime.now(timezone.utc).isoformat(),
+                         (row[0], user, recipient_label, subject, body, datetime.now(UTC).isoformat(),
                           idempotency_key))
     audit.write(user, SERVER, "create_email_draft", {"subject": subject}, {"id": row[0]}, True)
     return EmailDraft(draft_id=row[0], subject=row[1])

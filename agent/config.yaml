@@ -41,7 +41,28 @@ models:
         rag_helper: openai.gpt-oss-20b-1:0     # HyDE, decomposition, contextual lines, evidence grading
         judge: openai.gpt-oss-120b-1:0
         gigsim_client: openai.gpt-oss-120b-1:0
+        tool_agent: openai.gpt-oss-120b-1:0     # R&D question A and the single-agent baselines
       fallback: qwen.qwen3-32b-v1:0          # used when a cheap node's model fails after retries
+    open_qwen:                  # second open configuration compared on the dev set (evals/runners/model_comparison.py)
+      provider: bedrock
+      region: us-east-1
+      nodes:
+        scout: qwen.qwen3-32b-v1:0
+        analyst: qwen.qwen3-32b-v1:0
+        risk_assessor: qwen.qwen3-32b-v1:0
+        fit_matcher: qwen.qwen3-32b-v1:0
+        pricing: qwen.qwen3-32b-v1:0
+        writer: qwen.qwen3-32b-v1:0
+        verifier: qwen.qwen3-32b-v1:0
+        critic: qwen.qwen3-32b-v1:0
+        compliance: qwen.qwen3-32b-v1:0
+        client_liaison: qwen.qwen3-32b-v1:0
+        intent: qwen.qwen3-32b-v1:0
+        rag_helper: qwen.qwen3-32b-v1:0
+        judge: openai.gpt-oss-120b-1:0          # the judge stays fixed so scores are comparable
+        gigsim_client: openai.gpt-oss-120b-1:0  # the simulated clients stay fixed too
+        tool_agent: qwen.qwen3-32b-v1:0
+      fallback: openai.gpt-oss-20b-1:0
     open_local:                 # same roles on local open models through Ollama (docker compose service "ollama")
       provider: openai_compatible
       base_url: http://ollama:11434/v1      # env OPENAI_BASE_URL overrides
@@ -60,6 +81,7 @@ models:
         rag_helper: qwen3:4b
         judge: qwen3:8b
         gigsim_client: qwen3:8b
+        tool_agent: qwen3:8b
       fallback: qwen3:4b
     paid:
       provider: bedrock
@@ -100,6 +122,12 @@ budgets:
     p95_latency_seconds_per_proposal: 90
     usd_per_job_analysed: 0.002
     usd_per_proposal: 0.01
+
+writer:
+  # Proposal strategy (signature extension X2, A/B tested in evals/runners/x2_ab_test.py):
+  #   writer          = A: open with the client's problem, then the most relevant evidence
+  #   writer_strategy_b = B: open with a short credentials summary, then a step-by-step plan
+  strategy: writer
 
 thresholds:
   bid_min_fit: 0.55

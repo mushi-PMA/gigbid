@@ -10,7 +10,7 @@ from agent.handoffs import BidDecision, FitReport, Job, PriceQuote, RiskReport
 from agent.marketplace_port import MarketplacePort
 from agent.nodes.base import ctx, node, persona_profile, tools_for
 from agent.prompts import load_prompt
-from common.config import load_config, load_policy
+from common.config import defences_on, load_config, load_policy
 from common.llm import complete_json
 
 
@@ -21,7 +21,7 @@ def decide(job: Job, risk: RiskReport, fit: FitReport, settings: dict[str, Any] 
     if risk.is_scam:
         reasons.append("risk: " + "; ".join(f"{f.kind} ('{f.evidence[:60]}')" for f in risk.flags[:3]))
         action = "skip"
-    elif risk.injection_detected:
+    elif risk.injection_detected and defences_on():
         reasons.append("the post contains instructions aimed at automated tools; skipped for safety")
         action = "skip"
     elif risk.score > t["max_risk"]:

@@ -108,9 +108,9 @@ async def regenerate_paragraph(thread_id: str, body: RegenerateIn, user: dict = 
         raise HTTPException(422, "no such paragraph")
     evidence = "\n".join(f"[{e['evidence_id']}] {e['title']}: {e['text'][:400]}"
                          for claim in request["claims"] for e in claim.get("evidence", []))
-    user_text = (f"Rewrite only this paragraph of the proposal, same facts, better wording."
-                 f"{' Instruction: ' + body.instruction if body.instruction else ''}\n\nEvidence:\n{evidence}\n\n"
-                 f"Full proposal:\n{request['draft']['cover_letter']}\n\nParagraph to rewrite:\n"
-                 f"{paragraphs[body.paragraph_index]}\n\nReturn only the new paragraph.")
+    user_text = load_prompt("regenerate_paragraph",
+                            instruction=f"Instruction: {body.instruction}" if body.instruction else "",
+                            evidence=evidence, proposal=request["draft"]["cover_letter"],
+                            paragraph=paragraphs[body.paragraph_index])
     text = await asyncio.to_thread(complete, "writer", load_prompt("writer", style_rules=""), user_text, max_tokens=500)
     return RegenerateOut(paragraph_index=body.paragraph_index, text=text.strip())

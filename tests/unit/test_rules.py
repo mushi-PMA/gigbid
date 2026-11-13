@@ -5,8 +5,15 @@ import pytest
 from langgraph.store.memory import InMemoryStore
 
 from agent.handoffs import FitReport, Job, RiskFlag, RiskReport
-from agent.memory.promotion_rules import (OUTCOME_MIN_PROPOSALS, STYLE_MIN_EVIDENCE, opening_type, promote_style,
-                                          record_outcome, style_candidates, style_rules)
+from agent.memory.promotion_rules import (
+    OUTCOME_MIN_PROPOSALS,
+    STYLE_MIN_EVIDENCE,
+    opening_type,
+    promote_style,
+    record_outcome,
+    style_candidates,
+    style_rules,
+)
 from agent.nodes.critic import structural_issues
 from agent.nodes.guards import delimit, find_violations, injection_signals, redact, scam_signals
 from agent.nodes.pricing import connects_cost, decide

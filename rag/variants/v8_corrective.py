@@ -2,7 +2,8 @@
 and refuse to claim a requirement when no evidence supports it (Yan et al., 2024)."""
 from __future__ import annotations
 
-from typing import Callable, Literal, TypedDict
+from collections.abc import Callable
+from typing import Literal, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, Field

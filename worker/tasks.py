@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import json
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from agent import runner
@@ -49,7 +49,7 @@ async def scout_user(ctx: dict, user_id: str, force: bool = False) -> dict[str, 
     if row is None:
         return {"error": "unknown user"}
     settings = _settings(row)
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     floor_hours = load_config()["marketplace"]["upwork"]["min_poll_minutes"] / 60 \
         if settings.get("marketplace") == "upwork_live" else 0
     due = []

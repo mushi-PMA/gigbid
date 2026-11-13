@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import os
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Any, Iterator
+from typing import Any
 
 import psycopg
 from psycopg.rows import dict_row
@@ -22,7 +23,8 @@ CREATE TABLE IF NOT EXISTS marketplace_accounts (
   secret_enc text NOT NULL, client_info_enc text, updated_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (user_id, provider));
 CREATE TABLE IF NOT EXISTS jobs_seen (
-  user_id text NOT NULL, job_id text NOT NULL, content_hash text NOT NULL, first_seen timestamptz NOT NULL DEFAULT now(),
+  user_id text NOT NULL, job_id text NOT NULL, content_hash text NOT NULL,
+  first_seen timestamptz NOT NULL DEFAULT now(),
   thread_id text, status text NOT NULL DEFAULT 'queued', summary jsonb NOT NULL DEFAULT '{}',
   updated_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY (user_id, job_id));
 CREATE INDEX IF NOT EXISTS jobs_seen_hash ON jobs_seen (user_id, content_hash);

@@ -11,8 +11,21 @@ from __future__ import annotations
 import operator
 from typing import Annotated, Any, Literal, TypedDict
 
-from agent.handoffs import (BidDecision, ComplianceVerdict, Critique, EvidenceItem, FitReport, Job, JobSpec,
-                            Message, MessageAnalysis, PriceQuote, ProposalDraft, ReplyDraft, RiskReport)
+from agent.handoffs import (
+    BidDecision,
+    ComplianceVerdict,
+    Critique,
+    EvidenceItem,
+    FitReport,
+    Job,
+    JobSpec,
+    Message,
+    MessageAnalysis,
+    PriceQuote,
+    ProposalDraft,
+    ReplyDraft,
+    RiskReport,
+)
 
 
 def merge_dicts(left: dict | None, right: dict | None) -> dict:

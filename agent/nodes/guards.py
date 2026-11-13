@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import re
 
-from common.config import load_policy
+from common.config import defences_on, load_policy
 
 
 def delimit(kind: str, text: str) -> str:
     """Wrap untrusted text in tags the prompts call data, and neutralise tag look-alikes inside it."""
+    if not defences_on():
+        return text or ""
     cleaned = re.sub(r"</?\s*(job_post|client_message|system|instructions?)\b[^>]*>", "[tag removed]", text or "",
                      flags=re.IGNORECASE)
     return f"<{kind}>\n{cleaned}\n</{kind}>"
@@ -23,6 +25,8 @@ def scam_signals(text: str) -> list[str]:
 
 
 def injection_signals(text: str) -> list[str]:
+    if not defences_on():
+        return []
     return [m.group(0) for p in _patterns("risk", "injection_signals") for m in [p.search(text)] if m]
 
 

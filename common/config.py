@@ -21,7 +21,17 @@ def load_config() -> dict[str, Any]:
         config["marketplace"]["gigsim_base_url"] = os.environ["GIGSIM_BASE_URL"]
     if os.environ.get("MODEL_PROFILE"):
         config["models"]["profile"] = os.environ["MODEL_PROFILE"]
+    if os.environ.get("RAG_VARIANT"):
+        config["rag"]["variant"] = os.environ["RAG_VARIANT"]
+    if os.environ.get("WRITER_STRATEGY"):
+        config["writer"]["strategy"] = os.environ["WRITER_STRATEGY"]
     return config
+
+
+def defences_on() -> bool:
+    """Injection defences (delimiting, pattern rules, untrusted-data instructions). Off only for the before/after
+    attack measurement in evals/runners/injection_eval.py."""
+    return os.environ.get("GIGBID_DEFENCES", "on") != "off"
 
 
 def model_profile(config: dict[str, Any] | None = None) -> dict[str, Any]:

@@ -219,6 +219,61 @@ def _meter(node: str, model: str, tin: int, tout: int, seconds: float, cached: b
                     cached=cached)
 
 
+def complete_tools(node: str, system: str, user: str, tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """One tool-calling turn with native tool use. `tools` = [{"name", "description", "input_schema"}].
+    Returns the calls the model made: [{"name", "arguments"}] (empty when it answered in text)."""
+    profile = model_profile()
+    model = model_for(node)
+    key = hashlib.sha256(json.dumps(["tools", model, system, user, tools], sort_keys=True).encode()).hexdigest()
+    cache = _cache_path(key)
+    if cache and cache.exists():
+        cached = json.loads(cache.read_text(encoding="utf-8"))
+        _meter(node, model, cached["input_tokens"], cached["output_tokens"], 0.0, cached=True)
+        return cached["calls"]
+    started = time.perf_counter()
+    last: Exception | None = None
+    for attempt in range(load_config()["models"]["retries"]):
+        try:
+            if profile["provider"] == "bedrock":
+                import boto3
+
+                client = _bedrock_clients.get(profile.get("region", "us-east-1")) or boto3.client(
+                    "bedrock-runtime", region_name=profile.get("region", "us-east-1"))
+                response = client.converse(
+                    modelId=model, system=[{"text": system}],
+                    messages=[{"role": "user", "content": [{"text": user}]}],
+                    toolConfig={"tools": [{"toolSpec": {"name": t["name"], "description": t["description"],
+                                                        "inputSchema": {"json": t["input_schema"]}}} for t in tools]},
+                    inferenceConfig={"maxTokens": 800, "temperature": 0.0})
+                calls = [{"name": c["toolUse"]["name"], "arguments": c["toolUse"].get("input", {})}
+                         for c in response["output"]["message"]["content"] if "toolUse" in c]
+                tin, tout = response["usage"]["inputTokens"], response["usage"]["outputTokens"]
+            else:
+                from openai import OpenAI
+
+                client = OpenAI(base_url=os.environ.get("OPENAI_BASE_URL", profile.get("base_url", "")),
+                                api_key=os.environ.get("OPENAI_API_KEY", "none"))
+                response = client.chat.completions.create(
+                    model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+                    tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
+                                                             "parameters": t["input_schema"]}} for t in tools],
+                    temperature=0, max_tokens=800)
+                message = response.choices[0].message
+                calls = [{"name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")}
+                         for c in (message.tool_calls or [])]
+                tin, tout = response.usage.prompt_tokens, response.usage.completion_tokens
+            break
+        except Exception as error:
+            last = error
+            time.sleep(min(2 ** attempt + 0.5, 20))
+    else:
+        raise LLMError(f"{node}: tool call failed ({last})")
+    _meter(node, model, tin, tout, time.perf_counter() - started)
+    if cache:
+        cache.write_text(json.dumps({"calls": calls, "input_tokens": tin, "output_tokens": tout}), encoding="utf-8")
+    return calls
+
+
 def extract_json(text: str) -> Any:
     """Return the first JSON object or array in `text` (models sometimes wrap JSON in prose or fences)."""
     fenced = re.search(r"```(?:json)?\s*(.*?)```", text, flags=re.DOTALL)
@@ -236,13 +291,14 @@ def extract_json(text: str) -> Any:
 def complete_json(node: str, system: str, user: str, schema: type[T], *, max_tokens: int | None = None,
                   temperature: float = 0.0) -> T:
     """Ask for JSON matching `schema`; one repair round if the first answer does not validate."""
+    from agent.prompts import load_prompt
+
     schema_text = json.dumps(schema.model_json_schema(), separators=(",", ":"))
-    instruction = (f"{system}\n\nAnswer with one JSON object only, matching this JSON schema exactly:\n{schema_text}")
+    instruction = f"{system}\n\n{load_prompt('_json_format', schema=schema_text)}"
     text = complete(node, instruction, user, max_tokens=max_tokens, temperature=temperature)
     try:
         return schema.model_validate(extract_json(text))
     except (ValueError, ValidationError) as error:
-        repair = (f"{user}\n\nYour previous answer was not valid ({str(error)[:300]}). "
-                  "Return only the corrected JSON object.")
+        repair = load_prompt("_json_repair", request=user, error=str(error)[:300])
         text = complete(node, instruction, repair, max_tokens=max_tokens, temperature=temperature)
         return schema.model_validate(extract_json(text))

@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 import os
 import threading
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -42,7 +42,7 @@ def _masked(value: Any) -> Any:
 
 def write(user_id: str, server: str, tool: str, arguments: dict[str, Any], result: Any, ok: bool) -> None:
     global _pg_ready
-    row = {"at": datetime.now(timezone.utc).isoformat(), "user_id": user_id, "server": server, "tool": tool,
+    row = {"at": datetime.now(UTC).isoformat(), "user_id": user_id, "server": server, "tool": tool,
            "arguments": _masked(arguments), "result": _masked(result), "ok": ok, "trace_id": current_trace_id()}
     path = Path(os.environ.get("AUDIT_LOG_PATH", ROOT / "data" / "audit" / "audit.jsonl"))
     path.parent.mkdir(parents=True, exist_ok=True)

@@ -7,8 +7,8 @@ from langgraph.types import Command
 
 from agent.graphs.conversation_graph import compile_conversation_graph
 from common.security import mint_approval_token, payload_hash
-from tests.integration.test_bid_graph import env  # noqa: F401  (fixture)
 from tests.harness import tools_factory
+from tests.integration.test_bid_graph import env  # noqa: F401  (fixture)
 
 
 def config(thread: str) -> dict:

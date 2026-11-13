@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 from sse_starlette.sse import EventSourceResponse
 
@@ -17,7 +17,7 @@ async def _events(thread_id: str) -> AsyncIterator[dict]:
     while True:
         try:
             event = await asyncio.wait_for(stream.__anext__(), timeout=15)
-        except asyncio.TimeoutError:
+        except TimeoutError:
             yield {"event": "ping", "data": "{}"}
             continue
         except StopAsyncIteration:

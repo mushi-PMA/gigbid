@@ -9,8 +9,16 @@ from __future__ import annotations
 from langgraph.graph import END, START, StateGraph
 
 from agent.nodes.base import is_stopped
-from agent.nodes.liaison import (after_check, after_reply_approval, check_reply, classify_intent, draft_reply,
-                                 load_messages, reply_approval, send)
+from agent.nodes.liaison import (
+    after_check,
+    after_reply_approval,
+    check_reply,
+    classify_intent,
+    draft_reply,
+    load_messages,
+    reply_approval,
+    send,
+)
 from agent.state import ConversationState
 
 

@@ -21,7 +21,8 @@ def job_metadata(job: Job) -> str:
 
 
 def analyse(job: Job) -> JobSpec:
-    user = f"Job metadata (trusted):\n{job_metadata(job)}\n\nJob post (untrusted):\n{delimit('job_post', job.description)}"
+    user = (f"Job metadata (trusted):\n{job_metadata(job)}\n\n"
+            f"Job post (untrusted):\n{delimit('job_post', job.description)}")
     spec = complete_json("analyst", load_prompt("analyst"), user, JobSpec)
     spec.job_id, spec.title = job.job_id, job.title
     spec.payment_type = job.payment_type

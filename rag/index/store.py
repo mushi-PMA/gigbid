@@ -12,7 +12,6 @@ import os
 import pickle
 import re
 from dataclasses import dataclass
-from pathlib import Path
 
 import numpy as np
 from rank_bm25 import BM25Okapi
