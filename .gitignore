@@ -14,3 +14,5 @@ apps/web/dist/
 apps/web/test-results/
 .cache/
 evals/cache/
+build/
+.env.production

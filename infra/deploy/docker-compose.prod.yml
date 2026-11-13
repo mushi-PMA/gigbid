@@ -1,0 +1,30 @@
+# Production override: one public HTTPS entry point (Caddy, automatic Let's Encrypt certificate).
+#   docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml --env-file .env up -d --build
+# https://SITE_HOST/            web app
+# https://SITE_HOST/api/        API (also the Upwork OAuth callback)
+# https://SITE_HOST/phoenix/    traces (public read-only links in the README)
+services:
+  caddy:
+    image: caddy:2.10.2-alpine
+    ports: ["80:80", "443:443"]
+    environment:
+      SITE_HOST: ${SITE_HOST:?set SITE_HOST in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+    depends_on: [web, api, phoenix]
+    restart: unless-stopped
+
+  web:
+    ports: !reset []
+  api:
+    ports: !reset []
+    environment:
+      APP_ENV: production
+  phoenix:
+    ports: !reset []
+    environment:
+      PHOENIX_HOST_ROOT_PATH: /phoenix
+
+volumes:
+  caddydata: {}

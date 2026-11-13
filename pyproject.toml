@@ -36,6 +36,9 @@ dependencies = [
   "langgraph-supervisor==0.0.31",
 ]
 
+[project.scripts]
+gigbid-portfolio-mcp = "mcp_servers.portfolio.server:main"
+
 [project.optional-dependencies]
 dev = ["pytest==9.2.0", "pytest-asyncio==1.5.0", "ruff==0.17.5", "kagglehub==1.0.3"]
 
@@ -45,6 +48,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["agent*", "rag*", "mcp_servers*", "apps*", "worker*", "gigsim*", "evals*", "common*"]
+
+[tool.setuptools.package-data]
+agent = ["config.yaml", "prompts/*.md"]
 
 [tool.ruff]
 line-length = 120

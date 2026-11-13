@@ -1,0 +1,17 @@
+{$SITE_HOST} {
+	encode zstd gzip
+
+	handle /api/* {
+		reverse_proxy api:8000 {
+			flush_interval -1
+		}
+	}
+
+	handle_path /phoenix/* {
+		reverse_proxy phoenix:6006
+	}
+
+	handle {
+		reverse_proxy web:80
+	}
+}

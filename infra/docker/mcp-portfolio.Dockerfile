@@ -17,4 +17,4 @@ RUN useradd --create-home --uid 10001 gigbid && mkdir -p /app/data/processed /ap
     && chown -R gigbid /app/data /models
 USER gigbid
 EXPOSE 8101
-CMD ["python", "-m", "mcp_servers.portfolio.server"]
+ENTRYPOINT ["python", "-m", "mcp_servers.portfolio.server"]
