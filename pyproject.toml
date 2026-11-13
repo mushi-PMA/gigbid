@@ -1,0 +1,57 @@
+[project]
+name = "gigbid"
+version = "1.0.0"
+description = "GigBid: a multi-agent freelancer copilot (LangGraph, MCP, advanced RAG, human approval)"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "fastapi==0.162.5",
+  "uvicorn[standard]==0.54.0",
+  "pydantic==2.14.3",
+  "pyyaml==6.0.3",
+  "httpx==0.28.1",
+  "python-dotenv==1.2.4",
+  "langgraph==1.2.21",
+  "langgraph-checkpoint-postgres==3.2.0",
+  "langchain-core==1.8.0",
+  "langchain-mcp-adapters==0.3.2",
+  "mcp==1.30.0",
+  "psycopg[binary,pool]==3.3.9",
+  "pgvector==0.5.1",
+  "redis==5.3.1",
+  "arq==0.28.0",
+  "boto3==1.44.2",
+  "openai==3.50.0",
+  "fastembed==0.9.1",
+  "rank-bm25==0.2.2",
+  "numpy==2.5.4",
+  "pypdf==7.0.1",
+  "fpdf2==2.9.0",
+  "opentelemetry-sdk==1.45.2",
+  "opentelemetry-exporter-otlp-proto-http==1.45.2",
+  "cryptography==50.0.2",
+  "pyjwt==2.15.1",
+  "scipy==1.18.1",
+  "sse-starlette==3.7.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0", "pytest-asyncio==1.5.0", "ruff==0.17.5"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["agent*", "rag*", "mcp_servers*", "apps*", "worker*", "gigsim*", "evals*", "common*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["apps/web"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests", "mcp_servers"]
+
+

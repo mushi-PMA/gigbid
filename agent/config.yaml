@@ -1,0 +1,134 @@
+# GigBid configuration. Every model, rule, budget and threshold lives here, never in code.
+# Override the file with GIGBID_CONFIG=/path/to/other.yaml; override single values with env vars where noted.
+
+marketplace:
+  mode: gigsim                 # gigsim | upwork_live   (env MARKETPLACE_MODE overrides)
+  gigsim_base_url: http://localhost:8081
+  max_requests_per_minute: 40  # stays under GigSim's 60/min
+  upwork:
+    mcp_url: https://mcp.upwork.com/mcp
+    # Upwork MCP tool names mapped onto our port. Filled from the server's tool list at connect time; the
+    # names below are the defaults we expect and can be changed without touching code.
+    tool_map:
+      search_jobs: search_jobs
+      get_job: get_job_details
+      get_client_history: get_client_info
+      get_connects_balance: get_connects_balance
+      list_messages: list_messages
+      create_proposal_draft: create_proposal_draft
+      submit_proposal: submit_proposal
+      send_message: send_message
+    min_poll_minutes: 120      # live scouting interval floor (see docs/RUNBOOK.md)
+
+models:
+  profile: open                # open | paid   (env MODEL_PROFILE overrides)
+  profiles:
+    open:
+      provider: bedrock
+      region: us-east-1        # env BEDROCK_REGION overrides
+      nodes:
+        scout: openai.gpt-oss-20b-1:0
+        analyst: openai.gpt-oss-20b-1:0
+        risk_assessor: openai.gpt-oss-20b-1:0
+        fit_matcher: openai.gpt-oss-20b-1:0
+        pricing: openai.gpt-oss-20b-1:0
+        writer: openai.gpt-oss-120b-1:0
+        verifier: openai.gpt-oss-20b-1:0
+        critic: openai.gpt-oss-120b-1:0
+        compliance: openai.gpt-oss-20b-1:0
+        client_liaison: openai.gpt-oss-120b-1:0
+        intent: openai.gpt-oss-20b-1:0
+        rag_helper: openai.gpt-oss-20b-1:0     # HyDE, decomposition, contextual lines, evidence grading
+        judge: openai.gpt-oss-120b-1:0
+        gigsim_client: openai.gpt-oss-120b-1:0
+      fallback: qwen.qwen3-32b-v1:0          # used when a cheap node's model fails after retries
+    open_local:                 # same roles on local open models through Ollama (docker compose service "ollama")
+      provider: openai_compatible
+      base_url: http://ollama:11434/v1      # env OPENAI_BASE_URL overrides
+      nodes:
+        scout: qwen3:4b
+        analyst: qwen3:4b
+        risk_assessor: qwen3:4b
+        fit_matcher: qwen3:4b
+        pricing: qwen3:4b
+        writer: qwen3:8b
+        verifier: qwen3:4b
+        critic: qwen3:8b
+        compliance: qwen3:4b
+        client_liaison: qwen3:8b
+        intent: qwen3:4b
+        rag_helper: qwen3:4b
+        judge: qwen3:8b
+        gigsim_client: qwen3:8b
+      fallback: qwen3:4b
+    paid:
+      provider: bedrock
+      region: us-east-1
+      nodes:
+        writer: deepseek.v3.2
+        critic: deepseek.v3.2
+      inherit: open
+  # USD per million tokens (input, output), on-demand list prices; checked on the provider price page.
+  prices:
+    openai.gpt-oss-20b-1:0: [0.07, 0.30]
+    openai.gpt-oss-120b-1:0: [0.15, 0.60]
+    qwen.qwen3-32b-v1:0: [0.15, 0.60]
+    deepseek.v3.2: [0.62, 1.85]
+  max_output_tokens: 1800
+  timeout_seconds: 90
+  retries: 3
+
+embeddings:
+  model: BAAI/bge-small-en-v1.5        # open, CPU (fastembed / ONNX)
+  reranker: Xenova/ms-marco-MiniLM-L-6-v2
+  dim: 384
+
+rag:
+  variant: v1_v2_v3                     # chosen by evals/runners/rag_eval.py; see docs/adr/0003-rag-variant.md
+  top_k: 8
+  chunk_tokens: 220
+  chunk_overlap: 40
+
+budgets:
+  max_graph_steps: 40
+  max_revisions: 2
+  max_tokens_per_job: 60000
+  max_tokens_per_conversation_turn: 15000
+  node_timeout_seconds: 240
+  declared:                              # declared before the hidden test run (R8, E5)
+    p95_latency_seconds_per_job_analysed: 20
+    p95_latency_seconds_per_proposal: 90
+    usd_per_job_analysed: 0.002
+    usd_per_proposal: 0.01
+
+thresholds:
+  bid_min_fit: 0.55
+  watch_min_fit: 0.40
+  max_risk: 0.60
+  min_client_quality: 0.20
+  critic_min_personalisation: 0.6
+
+platform:
+  policy_file: data/policy_pack/policy.yaml   # rules the Compliance Guard and Pricing read
+
+mcp:
+  servers:                      # URLs can be overridden with <NAME>_MCP_URL env vars
+    portfolio: http://localhost:8101/mcp
+    marketplace: http://localhost:8102/mcp
+    workspace: http://localhost:8103/mcp
+  timeout_seconds: 30
+  retries: 3
+  # Each agent sees only these tools (filtered by name). Analyst and Compliance Guard use no tools.
+  allowlists:
+    scout: [search_jobs, get_job]
+    analyst: []
+    risk_assessor: [get_client_history]
+    fit_matcher: [search_evidence]
+    pricing: [get_market_pricing, get_connects_balance, get_policy]
+    writer: [search_evidence, get_case_study]
+    critic: [search_evidence]
+    compliance: []
+    submitter: [create_proposal_draft, submit_proposal, list_proposals]
+    client_liaison: [list_threads, list_messages, send_message, search_evidence, get_free_slots,
+                     create_interview_hold, create_email_draft]
+    tracker: [list_events, list_proposals, get_connects_balance]
