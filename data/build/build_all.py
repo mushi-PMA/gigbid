@@ -9,7 +9,7 @@ import random
 import shutil
 import time
 from collections import Counter
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from data.build import gold, jobs_seed, persona_build, real_jobs
@@ -83,7 +83,7 @@ def add_duplicates(base: list[dict], count: int, rng: random.Random, latest: dat
     dups = []
     for number, original in enumerate(rng.sample(originals, count)):
         start = datetime.strptime(original["posted_at"], "%Y-%m-%dT%H:%M:%SZ").replace(
-            tzinfo=timezone.utc)
+            tzinfo=UTC)
         when = min(start + timedelta(days=rng.randint(1, 8), hours=rng.randint(0, 20)), jobs_seed.STREAM_END)
         dups.append(jobs_seed.make_duplicate(original, f"tmp-dup-{number}", when, rng))
     return dups

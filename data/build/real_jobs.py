@@ -4,7 +4,7 @@ from __future__ import annotations
 import csv
 import re
 from collections import defaultdict
-from typing import Iterator
+from collections.abc import Iterator
 
 import numpy as np
 

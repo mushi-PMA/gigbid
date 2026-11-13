@@ -4,15 +4,15 @@ from __future__ import annotations
 import hashlib
 import random
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from data.build.real_jobs import SOURCE_60K
 from data.build.skills import canonical_skill
 
-STREAM_START = datetime(2026, 10, 27, tzinfo=timezone.utc)
-STREAM_END = datetime(2026, 11, 30, 23, 0, tzinfo=timezone.utc)
-HISTORY_START = datetime(2023, 2, 1, tzinfo=timezone.utc)
-HISTORY_END = datetime(2023, 3, 31, tzinfo=timezone.utc)
+STREAM_START = datetime(2026, 10, 27, tzinfo=UTC)
+STREAM_END = datetime(2026, 11, 30, 23, 0, tzinfo=UTC)
+HISTORY_START = datetime(2023, 2, 1, tzinfo=UTC)
+HISTORY_END = datetime(2023, 3, 31, tzinfo=UTC)
 SEED_TEXT = "gigsim-seed-2026"
 
 SCREENING = {
