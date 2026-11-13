@@ -1,0 +1,157 @@
+# GigBid: everything in one command.   docker compose -f infra/docker-compose.yml --env-file .env up --build
+# Services: web, api, worker, three MCP servers, GigSim, Postgres (+pgvector), Redis, Phoenix (tracing), Ollama.
+name: gigbid
+
+x-python-env: &python-env
+  APP_ENV: ${APP_ENV:-development}
+  APP_SECRET_KEY: ${APP_SECRET_KEY:?set APP_SECRET_KEY in .env}
+  MCP_SHARED_SECRET: ${MCP_SHARED_SECRET:?set MCP_SHARED_SECRET in .env}
+  TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY:-}
+  DATABASE_URL: postgresql+psycopg://gigbid:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/gigbid
+  REDIS_URL: redis://redis:6379/0
+  MARKETPLACE_MODE: ${MARKETPLACE_MODE:-gigsim}
+  GIGSIM_BASE_URL: http://gigsim:8081
+  MODEL_PROFILE: ${MODEL_PROFILE:-open}
+  BEDROCK_REGION: ${BEDROCK_REGION:-us-east-1}
+  AWS_BEARER_TOKEN_BEDROCK: ${AWS_BEARER_TOKEN_BEDROCK:-}
+  OPENAI_BASE_URL: ${OPENAI_BASE_URL:-http://ollama:11434/v1}
+  OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+  PORTFOLIO_MCP_URL: http://mcp-portfolio:8101/mcp
+  MARKETPLACE_MCP_URL: http://mcp-marketplace:8102/mcp
+  WORKSPACE_MCP_URL: http://mcp-workspace:8103/mcp
+  MCP_HOST: 0.0.0.0
+  PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006/v1/traces
+  PHOENIX_PUBLIC_URL: ${PHOENIX_PUBLIC_URL:-http://localhost:6006}
+  API_PUBLIC_URL: ${API_PUBLIC_URL:-http://localhost:8000}
+  WEB_PUBLIC_URL: ${WEB_PUBLIC_URL:-http://localhost:8080}
+  UPWORK_REDIRECT_URI: ${UPWORK_REDIRECT_URI:-http://localhost:8000/api/integrations/upwork/callback}
+  AUDIT_LOG_PATH: /app/data/audit/audit.jsonl
+  IDEMPOTENCY_STORE: /app/data/audit/marketplace_idempotency.json
+  WORKSPACE_DB: /app/data/audit/workspace.db
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg17
+    environment:
+      POSTGRES_USER: gigbid
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gigbid}
+      POSTGRES_DB: gigbid
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gigbid"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.12-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: [redisdata:/data]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+
+  phoenix:
+    image: arizephoenix/phoenix:version-21.1.0
+    environment:
+      PHOENIX_WORKING_DIR: /phoenix
+      PHOENIX_SQL_DATABASE_URL: postgresql://gigbid:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/gigbid
+    volumes: [phoenixdata:/phoenix]
+    ports: ["${PHOENIX_PORT:-6006}:6006"]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:0.40.15
+    volumes: [ollamadata:/root/.ollama]
+    restart: unless-stopped
+
+  gigsim:
+    build: {context: .., dockerfile: infra/docker/gigsim.Dockerfile}
+    environment:
+      GIGSIM_DB: /data/gigsim.db
+      GIGSIM_ERROR_RATE: ${GIGSIM_ERROR_RATE:-0.02}
+      GIGSIM_ADMIN_TOKEN: ${GIGSIM_ADMIN_TOKEN:-}
+      GIGSIM_LLM: ${GIGSIM_LLM:-on}
+      MODEL_PROFILE: ${MODEL_PROFILE:-open}
+      BEDROCK_REGION: ${BEDROCK_REGION:-us-east-1}
+      AWS_BEARER_TOKEN_BEDROCK: ${AWS_BEARER_TOKEN_BEDROCK:-}
+    volumes: [gigsimdata:/data]
+    restart: unless-stopped
+
+  init:
+    build: {context: .., dockerfile: infra/docker/api.Dockerfile}
+    command: ["python", "-m", "rag.ingest.build_indexes"]
+    environment: *python-env
+    volumes: [processed:/app/data/processed]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: "no"
+
+  mcp-portfolio:
+    build: {context: .., dockerfile: infra/docker/mcp-portfolio.Dockerfile}
+    environment:
+      <<: *python-env
+      PORTFOLIO_MCP_URL: http://mcp-portfolio:8101/mcp
+    volumes: [processed:/app/data/processed, audit:/app/data/audit]
+    depends_on:
+      init: {condition: service_completed_successfully}
+    restart: unless-stopped
+
+  mcp-marketplace:
+    build: {context: .., dockerfile: infra/docker/mcp-marketplace.Dockerfile}
+    environment: *python-env
+    volumes: [audit:/app/data/audit]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      gigsim: {condition: service_started}
+    restart: unless-stopped
+
+  mcp-workspace:
+    build: {context: .., dockerfile: infra/docker/mcp-workspace.Dockerfile}
+    environment: *python-env
+    volumes: [audit:/app/data/audit]
+    restart: unless-stopped
+
+  api:
+    build: {context: .., dockerfile: infra/docker/api.Dockerfile}
+    environment:
+      <<: *python-env
+      CORS_ORIGINS: ${WEB_PUBLIC_URL:-http://localhost:8080}
+      REVIEWER_EMAIL: ${REVIEWER_EMAIL:-}
+      REVIEWER_PASSWORD: ${REVIEWER_PASSWORD:-}
+      REVIEWER_PERSONA: ${REVIEWER_PERSONA:-ai_ml_engineer}
+    volumes: [processed:/app/data/processed, audit:/app/data/audit]
+    ports: ["${API_PORT:-8000}:8000"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      init: {condition: service_completed_successfully}
+    restart: unless-stopped
+
+  worker:
+    build: {context: .., dockerfile: infra/docker/worker.Dockerfile}
+    environment: *python-env
+    volumes: [processed:/app/data/processed, audit:/app/data/audit]
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+
+  web:
+    build: {context: .., dockerfile: infra/docker/web.Dockerfile}
+    ports: ["${WEB_PORT:-8080}:80"]
+    depends_on: [api]
+    restart: unless-stopped
+
+volumes:
+  pgdata: {}
+  redisdata: {}
+  phoenixdata: {}
+  ollamadata: {}
+  gigsimdata: {}
+  processed: {}
+  audit: {}
