@@ -1,0 +1,53 @@
+# Marketplace rules the Compliance Guard, the Pricing Strategist and the Risk Assessor read at run time.
+# Changing platform rules means editing this file, not code. Text version: marketplace_policy.md.
+version: v1
+effective_from: "2026-10-27T00:00:00Z"
+
+rules:
+  - id: off_platform
+    text: No off-platform contact or payment. Do not share or ask for emails, phone numbers, messaging apps
+      (WhatsApp, Telegram, Skype, Discord) or payment outside the platform.
+    action: redact            # redact | block | rewrite
+    patterns:
+      - '[\w.+-]+@[\w-]+\.[\w.-]+'
+      - '(?<!\w)\+?\d[\d\s().-]{7,}\d'
+      - '(?i)\b(whats\s?app|telegram|skype|discord|signal app|wechat)\b'
+      - '(?i)\b(paypal|payoneer|wise transfer|bank transfer|western union|crypto|usdt|bitcoin)\b'
+  - id: no_fabrication
+    text: Never claim experience, clients, results, credentials or years of experience that the portfolio does not
+      support.
+    action: rewrite
+  - id: no_guarantees
+    text: Do not guarantee outcomes (rankings, revenue, accuracy, deadlines that depend on the client).
+    action: rewrite
+    patterns:
+      - '(?i)\bguarantee[sd]?\b'
+      - '(?i)\b100\s?% (accuracy|satisfaction|success|results?)\b'
+      - '(?i)\b(promise|ensure) (you|that you) (will )?(get|rank|earn|double)\b'
+  - id: no_free_work
+    text: Do not offer or accept unpaid work disguised as a test or trial.
+    action: block
+    patterns:
+      - '(?i)\b(free (sample|trial|test)|for free|unpaid (test|trial))\b'
+  - id: human_approval
+    text: Nothing is submitted, sent or paid for (Connects) without explicit human approval, and live sends are
+      confirmed again on the platform.
+    action: block
+
+connects:
+  # Cost of a proposal = the job's listed Connects cost + surcharges below.
+  surcharges: []
+
+risk:
+  # Phrases that signal scams or abuse in job posts and client messages (Risk Assessor, intent classifier).
+  scam_signals:
+    - '(?i)\b(unpaid|free) (test|trial|sample)\b'
+    - '(?i)\b(contact|message|text) me (on|via) (whats\s?app|telegram|skype|discord)\b'
+    - '(?i)\bpay(ment)? (outside|off) (the )?(platform|upwork|gigsim)\b'
+    - '(?i)\b(send|share) (your )?(bank|card|id|passport|login) (details|number)\b'
+    - '(?i)\b(registration|training|equipment) fee\b'
+  injection_signals:
+    - '(?i)ignore (all |any )?(previous|prior|above) (instructions|rules)'
+    - '(?i)\b(system prompt|developer message|you are now|new instructions)\b'
+    - '(?i)\b(include|add|insert) (the word|this phrase|the code)\b'
+    - '(?i)\bas an ai\b'
