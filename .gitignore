@@ -24,3 +24,10 @@ AGENTS.md
 .windsurf/
 .env.*
 !.env.example
+
+# LaTeX build files (the report PDF is built in CI or by hand)
+docs/report/*.aux
+docs/report/*.log
+docs/report/*.out
+docs/report/*.toc
+docs/report/*.synctex.gz
