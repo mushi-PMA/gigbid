@@ -6,17 +6,52 @@
  */
 
 export interface paths {
-    "/api/auth/register": {
+    "/api/analytics": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Analytics */
+        get: operations["analytics_api_analytics_get"];
         put?: never;
-        /** Register */
-        post: operations["register_api_auth_register_post"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/approvals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Pending */
+        get: operations["pending_api_approvals_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/approvals/{thread_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One */
+        get: operations["one_api_approvals__thread_id__get"];
+        put?: never;
+        /** Decide */
+        post: operations["decide_api_approvals__thread_id__post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -74,17 +109,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/settings": {
+    "/api/auth/register": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Read Settings */
-        get: operations["read_settings_api_settings_get"];
-        /** Write Settings */
-        put: operations["write_settings_api_settings_put"];
+        get?: never;
+        put?: never;
+        /** Register */
+        post: operations["register_api_auth_register_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Health */
+        get: operations["health_api_health_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/integrations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Integrations */
+        get: operations["integrations_api_integrations_get"];
+        put?: never;
         post?: never;
         delete?: never;
         options?: never;
@@ -112,37 +180,17 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/integrations": {
+    "/api/integrations/upwork/connect": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Integrations */
-        get: operations["integrations_api_integrations_get"];
+        /** Connect */
+        get: operations["connect_api_integrations_upwork_connect_get"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/portfolio/upload": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Upload Portfolio
-         * @description Add work to the user's portfolio; only changed documents are re-embedded.
-         */
-        post: operations["upload_portfolio_api_portfolio_upload_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -217,32 +265,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/scout/run": {
+    "/api/memory": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
-        /** Scout Now */
-        post: operations["scout_now_api_scout_run_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/approvals": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Pending */
-        get: operations["pending_api_approvals_get"];
+        /** Memory */
+        get: operations["memory_api_memory_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -251,18 +282,71 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/approvals/{thread_id}": {
+    "/api/memory/style": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** One */
-        get: operations["one_api_approvals__thread_id__get"];
+        get?: never;
         put?: never;
-        /** Decide */
-        post: operations["decide_api_approvals__thread_id__post"];
+        /** Pin */
+        post: operations["pin_api_memory_style_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/memory/{namespace}/{key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Forget */
+        delete: operations["forget_api_memory__namespace___key__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/pipeline": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Pipeline */
+        get: operations["pipeline_api_pipeline_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/portfolio/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upload Portfolio
+         * @description Add work to the user's portfolio; only changed documents are re-embedded.
+         */
+        post: operations["upload_portfolio_api_portfolio_upload_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -283,6 +367,95 @@ export interface paths {
          * @description Rewrite one paragraph of the pending draft with the same evidence (the user then approves or edits).
          */
         post: operations["regenerate_paragraph_api_proposals__thread_id__regenerate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{thread_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Run Info */
+        get: operations["run_info_api_runs__thread_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{thread_id}/replay/{checkpoint_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Replay
+         * @description Re-run the thread from an earlier checkpoint (read-only nodes re-execute; submissions stay idempotent).
+         */
+        post: operations["replay_api_runs__thread_id__replay__checkpoint_id__post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/runs/{thread_id}/stream": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Stream */
+        get: operations["stream_api_runs__thread_id__stream_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/scout/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Scout Now */
+        post: operations["scout_now_api_scout_run_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Settings */
+        get: operations["read_settings_api_settings_get"];
+        /** Write Settings */
+        put: operations["write_settings_api_settings_put"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -340,179 +513,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/runs/{thread_id}/stream": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Stream */
-        get: operations["stream_api_runs__thread_id__stream_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/runs/{thread_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Run Info */
-        get: operations["run_info_api_runs__thread_id__get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/runs/{thread_id}/replay/{checkpoint_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Replay
-         * @description Re-run the thread from an earlier checkpoint (read-only nodes re-execute; submissions stay idempotent).
-         */
-        post: operations["replay_api_runs__thread_id__replay__checkpoint_id__post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/pipeline": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Pipeline */
-        get: operations["pipeline_api_pipeline_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/analytics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Analytics */
-        get: operations["analytics_api_analytics_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/memory": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Memory */
-        get: operations["memory_api_memory_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/memory/{namespace}/{key}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /** Forget */
-        delete: operations["forget_api_memory__namespace___key__delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/memory/style": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Pin */
-        post: operations["pin_api_memory_style_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/health": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Health */
-        get: operations["health_api_health_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/integrations/upwork/connect": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Connect */
-        get: operations["connect_api_integrations_upwork_connect_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -520,17 +520,17 @@ export interface components {
         /** Accepted */
         Accepted: {
             /**
+             * Detail
+             * @default
+             */
+            detail: string;
+            /**
              * Queued
              * @default true
              */
             queued: boolean;
             /** Thread Id */
             thread_id: string;
-            /**
-             * Detail
-             * @default
-             */
-            detail: string;
         };
         /** ApprovalIn */
         ApprovalIn: {
@@ -539,10 +539,10 @@ export interface components {
              * @enum {string}
              */
             action: "approve" | "edit" | "reject";
-            /** Edited Text */
-            edited_text?: string | null;
             /** Edited Answers */
             edited_answers?: string[] | null;
+            /** Edited Text */
+            edited_text?: string | null;
             /**
              * Reason
              * @default
@@ -551,21 +551,21 @@ export interface components {
         };
         /** ApprovalItem */
         ApprovalItem: {
-            /** Thread Id */
-            thread_id: string;
+            /** Created At */
+            created_at?: string | null;
             /**
              * Kind
              * @enum {string}
              */
             kind: "proposal" | "message";
-            /** Title */
-            title: string;
-            /** Created At */
-            created_at?: string | null;
             /** Request */
             request: {
                 [key: string]: unknown;
             };
+            /** Thread Id */
+            thread_id: string;
+            /** Title */
+            title: string;
         };
         /** Body_upload_portfolio_api_portfolio_upload_post */
         Body_upload_portfolio_api_portfolio_upload_post: {
@@ -594,73 +594,111 @@ export interface components {
              * @default true
              */
             api: boolean;
-            /** Marketplace */
-            marketplace: boolean;
-            /** Servers */
-            servers: {
-                [key: string]: boolean;
-            };
             /** Degraded */
             degraded: boolean;
-            /**
-             * Queued Jobs
-             * @default 0
-             */
-            queued_jobs: number;
+            /** Marketplace */
+            marketplace: boolean;
             /**
              * Message
              * @default
              */
             message: string;
+            /**
+             * Queued Jobs
+             * @default 0
+             */
+            queued_jobs: number;
+            /** Servers */
+            servers: {
+                [key: string]: boolean;
+            };
         };
         /** InboxItem */
         InboxItem: {
-            /** Job Id */
-            job_id: string;
-            /** Title */
-            title: string;
-            /** Status */
-            status: string;
+            /** Action */
+            action?: string | null;
+            /** Budget Max */
+            budget_max?: number | null;
+            /** Budget Min */
+            budget_min?: number | null;
+            /** Client Quality */
+            client_quality?: number | null;
+            /** Connects Cost */
+            connects_cost?: number | null;
             /** First Seen */
             first_seen: string;
-            /** Thread Id */
-            thread_id?: string | null;
             /** Fit */
             fit?: number | null;
+            /** Job Id */
+            job_id: string;
+            /** Payment Type */
+            payment_type?: string | null;
+            /** Price */
+            price?: number | null;
             /** Risk */
             risk?: number | null;
             /** Risk Flags */
             risk_flags?: string[];
-            /** Client Quality */
-            client_quality?: number | null;
-            /** Action */
-            action?: string | null;
-            /** Price */
-            price?: number | null;
-            /** Payment Type */
-            payment_type?: string | null;
-            /** Connects Cost */
-            connects_cost?: number | null;
+            /** Skills */
+            skills?: string[];
+            /** Status */
+            status: string;
             /**
              * Status Reason
              * @default
              */
             status_reason: string;
-            /** Budget Min */
-            budget_min?: number | null;
-            /** Budget Max */
-            budget_max?: number | null;
-            /** Skills */
-            skills?: string[];
+            /** Thread Id */
+            thread_id?: string | null;
+            /** Title */
+            title: string;
         };
         /** JobDetail */
         JobDetail: {
+            /** Compliance */
+            compliance?: {
+                [key: string]: unknown;
+            } | null;
+            /** Critiques */
+            critiques?: {
+                [key: string]: unknown;
+            }[];
+            /** Decision */
+            decision?: {
+                [key: string]: unknown;
+            } | null;
+            /** Draft */
+            draft?: {
+                [key: string]: unknown;
+            } | null;
+            /** Evidence */
+            evidence?: {
+                [key: string]: unknown;
+            }[];
+            /** Fit */
+            fit?: {
+                [key: string]: unknown;
+            } | null;
             /** Job */
             job: {
                 [key: string]: unknown;
             };
-            /** Thread Id */
-            thread_id?: string | null;
+            /** Job Spec */
+            job_spec?: {
+                [key: string]: unknown;
+            } | null;
+            /** Pending Approval */
+            pending_approval?: {
+                [key: string]: unknown;
+            } | null;
+            /** Price */
+            price?: {
+                [key: string]: unknown;
+            } | null;
+            /** Risk */
+            risk?: {
+                [key: string]: unknown;
+            } | null;
             /** Status */
             status?: string | null;
             /**
@@ -668,64 +706,26 @@ export interface components {
              * @default
              */
             status_reason: string;
-            /** Job Spec */
-            job_spec?: {
-                [key: string]: unknown;
-            } | null;
-            /** Risk */
-            risk?: {
-                [key: string]: unknown;
-            } | null;
-            /** Fit */
-            fit?: {
-                [key: string]: unknown;
-            } | null;
-            /** Evidence */
-            evidence?: {
-                [key: string]: unknown;
-            }[];
-            /** Decision */
-            decision?: {
-                [key: string]: unknown;
-            } | null;
-            /** Price */
-            price?: {
-                [key: string]: unknown;
-            } | null;
-            /** Draft */
-            draft?: {
-                [key: string]: unknown;
-            } | null;
-            /** Critiques */
-            critiques?: {
-                [key: string]: unknown;
-            }[];
-            /** Compliance */
-            compliance?: {
-                [key: string]: unknown;
-            } | null;
             /** Submission */
             submission?: {
                 [key: string]: unknown;
             } | null;
-            /** Pending Approval */
-            pending_approval?: {
-                [key: string]: unknown;
-            } | null;
+            /** Thread Id */
+            thread_id?: string | null;
             /**
              * Tokens
              * @default 0
              */
             tokens: number;
+            /** Trace */
+            trace?: {
+                [key: string]: unknown;
+            }[];
             /**
              * Usd
              * @default 0
              */
             usd: number;
-            /** Trace */
-            trace?: {
-                [key: string]: unknown;
-            }[];
         };
         /** LoginIn */
         LoginIn: {
@@ -736,10 +736,10 @@ export interface components {
         };
         /** MemoryItem */
         MemoryItem: {
-            /** Namespace */
-            namespace: string;
             /** Key */
             key: string;
+            /** Namespace */
+            namespace: string;
             /** Value */
             value: {
                 [key: string]: unknown;
@@ -752,42 +752,42 @@ export interface components {
         };
         /** PipelineCard */
         PipelineCard: {
-            /** Proposal Id */
-            proposal_id: string;
+            /** Data */
+            data?: {
+                [key: string]: unknown;
+            };
             /** Job Id */
             job_id: string;
-            /** Title */
-            title: string;
+            /** Proposal Id */
+            proposal_id: string;
             /**
              * Stage
              * @enum {string}
              */
             stage: "drafted" | "submitted" | "viewed" | "replied" | "interview" | "hired" | "lost";
+            /** Title */
+            title: string;
             /** Updated At */
             updated_at: string;
-            /** Data */
-            data?: {
-                [key: string]: unknown;
-            };
         };
         /** Rates */
         Rates: {
-            /** Hourly Floor */
-            hourly_floor?: number | null;
             /** Fixed Floor */
             fixed_floor?: number | null;
+            /** Hourly Floor */
+            hourly_floor?: number | null;
             /** Target Hourly Rate */
             target_hourly_rate?: number | null;
         };
         /** RegenerateIn */
         RegenerateIn: {
-            /** Paragraph Index */
-            paragraph_index: number;
             /**
              * Instruction
              * @default
              */
             instruction: string;
+            /** Paragraph Index */
+            paragraph_index: number;
         };
         /** RegenerateOut */
         RegenerateOut: {
@@ -798,12 +798,12 @@ export interface components {
         };
         /** RegisterIn */
         RegisterIn: {
+            /** Display Name */
+            display_name: string;
             /** Email */
             email: string;
             /** Password */
             password: string;
-            /** Display Name */
-            display_name: string;
             /**
              * Persona
              * @default ai_ml_engineer
@@ -813,28 +813,19 @@ export interface components {
         };
         /** RunInfo */
         RunInfo: {
-            /** Thread Id */
-            thread_id: string;
             /** Events */
             events: {
                 [key: string]: unknown;
             }[];
-            /** Trace Url */
-            trace_url?: string | null;
             /** History */
             history?: components["schemas"]["TraceStep"][];
+            /** Thread Id */
+            thread_id: string;
+            /** Trace Url */
+            trace_url?: string | null;
         };
         /** SavedSearch */
         SavedSearch: {
-            /** Name */
-            name: string;
-            /**
-             * Query
-             * @default
-             */
-            query: string;
-            /** Skills */
-            skills?: string[];
             /**
              * Category
              * @default
@@ -845,36 +836,30 @@ export interface components {
              * @default 4
              */
             every_hours: number;
+            /** Name */
+            name: string;
+            /**
+             * Query
+             * @default
+             */
+            query: string;
+            /** Skills */
+            skills?: string[];
         };
         /** SessionOut */
         SessionOut: {
-            user: components["schemas"]["UserOut"];
             /** Token */
             token: string;
+            user: components["schemas"]["UserOut"];
         };
         /** SettingsModel */
         SettingsModel: {
-            /** Persona */
-            persona?: ("ai_ml_engineer" | "fullstack_web_dev" | "data_analyst") | null;
             /**
              * Autonomy
              * @default suggest
              * @enum {string}
              */
             autonomy: "suggest" | "auto_skip_low_fit";
-            /**
-             * Weekly Connects Budget
-             * @default 80
-             */
-            weekly_connects_budget: number;
-            /**
-             * Timezone
-             * @default Asia/Karachi
-             */
-            timezone: string;
-            rates?: components["schemas"]["Rates"];
-            /** Saved Searches */
-            saved_searches?: components["schemas"]["SavedSearch"][];
             filters?: components["schemas"]["Filters"];
             /**
              * Marketplace
@@ -882,69 +867,84 @@ export interface components {
              * @enum {string}
              */
             marketplace: "gigsim" | "upwork_live";
+            /** Persona */
+            persona?: ("ai_ml_engineer" | "fullstack_web_dev" | "data_analyst") | null;
+            rates?: components["schemas"]["Rates"];
+            /** Saved Searches */
+            saved_searches?: components["schemas"]["SavedSearch"][];
+            /**
+             * Timezone
+             * @default Asia/Karachi
+             */
+            timezone: string;
+            /**
+             * Weekly Connects Budget
+             * @default 80
+             */
+            weekly_connects_budget: number;
         };
         /** ThreadSummary */
         ThreadSummary: {
-            /** Thread Id */
-            thread_id: string;
-            /**
-             * Job Id
-             * @default
-             */
-            job_id: string;
             /**
              * Client Id
              * @default
              */
             client_id: string;
+            /** Graph Thread Id */
+            graph_thread_id: string;
+            /**
+             * Job Id
+             * @default
+             */
+            job_id: string;
             /** Last Message At */
             last_message_at?: string | null;
+            /** Status */
+            status?: string | null;
+            /** Thread Id */
+            thread_id: string;
             /**
              * Unread
              * @default 0
              */
             unread: number;
-            /** Graph Thread Id */
-            graph_thread_id: string;
-            /** Status */
-            status?: string | null;
         };
         /** TraceStep */
         TraceStep: {
             /** Checkpoint Id */
             checkpoint_id: string;
+            /** Created At */
+            created_at: string | null;
             /** Next */
             next: string[];
             /** Status */
             status: string | null;
             /** Step */
             step: number | null;
-            /** Created At */
-            created_at: string | null;
         };
         /** UserOut */
         UserOut: {
-            /** User Id */
-            user_id: string;
-            /** Email */
-            email: string;
             /** Display Name */
             display_name: string;
+            /** Email */
+            email: string;
             /** Persona */
             persona: string;
+            /** User Id */
+            user_id: string;
         };
         /** ValidationError */
         ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
             /** Location */
             loc: (string | number)[];
             /** Message */
             msg: string;
             /** Error Type */
             type: string;
-            /** Input */
-            input?: unknown;
-            /** Context */
-            ctx?: Record<string, never>;
         };
     };
     responses: never;
@@ -955,26 +955,101 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    register_api_auth_register_post: {
+    analytics_api_analytics_get: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["RegisterIn"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
-            201: {
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SessionOut"];
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    pending_api_approvals_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalItem"][];
+                };
+            };
+        };
+    };
+    one_api_approvals__thread_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalItem"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decide_api_approvals__thread_id__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApprovalIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Accepted"];
                 };
             };
             /** @description Validation Error */
@@ -1059,7 +1134,40 @@ export interface operations {
             };
         };
     };
-    read_settings_api_settings_get: {
+    register_api_auth_register_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    health_api_health_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -1074,23 +1182,19 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SettingsModel"];
+                    "application/json": components["schemas"]["Health"];
                 };
             };
         };
     };
-    write_settings_api_settings_put: {
+    integrations_api_integrations_get: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SettingsModel"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
             200: {
@@ -1098,16 +1202,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SettingsModel"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
         };
@@ -1141,7 +1238,7 @@ export interface operations {
             };
         };
     };
-    integrations_api_integrations_get: {
+    connect_api_integrations_upwork_connect_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -1159,41 +1256,6 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
-                };
-            };
-        };
-    };
-    upload_portfolio_api_portfolio_upload_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["Body_upload_portfolio_api_portfolio_upload_post"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -1322,27 +1384,7 @@ export interface operations {
             };
         };
     };
-    scout_now_api_scout_run_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Accepted"];
-                };
-            };
-        };
-    };
-    pending_api_approvals_get: {
+    memory_api_memory_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -1357,29 +1399,31 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApprovalItem"][];
+                    "application/json": components["schemas"]["MemoryItem"][];
                 };
             };
         };
     };
-    one_api_approvals__thread_id__get: {
+    pin_api_memory_style_post: {
         parameters: {
             query?: never;
             header?: never;
-            path: {
-                thread_id: string;
-            };
+            path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PinRuleIn"];
+            };
+        };
         responses: {
             /** @description Successful Response */
-            200: {
+            201: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ApprovalItem"];
+                    "application/json": components["schemas"]["MemoryItem"];
                 };
             };
             /** @description Validation Error */
@@ -1393,28 +1437,78 @@ export interface operations {
             };
         };
     };
-    decide_api_approvals__thread_id__post: {
+    forget_api_memory__namespace___key__delete: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                thread_id: string;
+                namespace: string;
+                key: string;
             };
             cookie?: never;
         };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["ApprovalIn"];
-            };
-        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
-            202: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Accepted"];
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    pipeline_api_pipeline_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PipelineCard"][];
+                };
+            };
+        };
+    };
+    upload_portfolio_api_portfolio_upload_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_upload_portfolio_api_portfolio_upload_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */
@@ -1450,6 +1544,175 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RegenerateOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_info_api_runs__thread_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunInfo"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    replay_api_runs__thread_id__replay__checkpoint_id__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                thread_id: string;
+                checkpoint_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    stream_api_runs__thread_id__stream_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    scout_now_api_scout_run_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Accepted"];
+                };
+            };
+        };
+    };
+    read_settings_api_settings_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsModel"];
+                };
+            };
+        };
+    };
+    write_settings_api_settings_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettingsModel"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsModel"];
                 };
             };
             /** @description Validation Error */
@@ -1545,269 +1808,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    stream_api_runs__thread_id__stream_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                thread_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    run_info_api_runs__thread_id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                thread_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RunInfo"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    replay_api_runs__thread_id__replay__checkpoint_id__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                thread_id: string;
-                checkpoint_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    pipeline_api_pipeline_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PipelineCard"][];
-                };
-            };
-        };
-    };
-    analytics_api_analytics_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
-                };
-            };
-        };
-    };
-    memory_api_memory_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MemoryItem"][];
-                };
-            };
-        };
-    };
-    forget_api_memory__namespace___key__delete: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                namespace: string;
-                key: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    pin_api_memory_style_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PinRuleIn"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MemoryItem"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    health_api_health_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Health"];
-                };
-            };
-        };
-    };
-    connect_api_integrations_upwork_connect_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
                 };
             };
         };

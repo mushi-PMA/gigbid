@@ -1,0 +1,44 @@
+name: eval
+
+# 30-job smoke evaluation on every pull request. Model calls replay from the committed cache in evals/smoke_cache,
+# so no API key is needed; when a change needs new calls, the job uses the repository secret if one is set.
+# Fails when bid-or-skip F1, scam recall or evidence recall drop, or unsupported claims rise, past evals/thresholds.yaml.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-eval:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          pip install uv==0.13.8
+          uv pip install --system -r pyproject.toml --extra dev
+      - name: Build evidence indexes
+        env:
+          VECTOR_STORE: memory
+        run: python -m rag.ingest.build_indexes
+      - name: Smoke evaluation with thresholds
+        env:
+          VECTOR_STORE: memory
+          MEMORY_STORE: memory
+          CHECKPOINTER: memory
+          MCP_AUTH: "off"
+          GIGBID_LLM_CACHE: evals/smoke_cache
+          AWS_BEARER_TOKEN_BEDROCK: ${{ secrets.AWS_BEARER_TOKEN_BEDROCK }}
+          BEDROCK_REGION: ${{ vars.BEDROCK_REGION || 'us-east-1' }}
+        run: python -m evals.runners.smoke_eval
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-eval
+          path: evals/results/smoke.json
