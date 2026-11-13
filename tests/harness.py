@@ -7,13 +7,8 @@ which behaves like GigSim (drafts, Connects, idempotency, events).
 from __future__ import annotations
 
 import itertools
-from contextlib import asynccontextmanager
-from typing import Any
 
-from mcp.shared.memory import create_connected_server_and_client_session
-
-from agent.mcp_client import AgentTools
-
+from agent.inmemory import InMemoryAgentTools, load_servers, tools_factory  # noqa: F401  (re-exported for tests)
 
 class FakeMarketplace:
     name = "fake"
@@ -90,26 +85,3 @@ class FakeMarketplace:
         self.sent.append({"thread_id": thread_id, "text": text})
         return {"message_id": f"m{len(self.sent) + 10}", "status": "sent"}
 
-
-SERVERS: dict[str, Any] = {}
-
-
-def load_servers() -> dict[str, Any]:
-    if not SERVERS:
-        from mcp_servers.marketplace import server as marketplace
-        from mcp_servers.portfolio import server as portfolio
-        from mcp_servers.workspace import server as workspace
-
-        SERVERS.update(portfolio=portfolio.mcp, marketplace=marketplace.mcp, workspace=workspace.mcp)
-    return SERVERS
-
-
-class InMemoryAgentTools(AgentTools):
-    @asynccontextmanager
-    async def _open(self, server: str):
-        async with create_connected_server_and_client_session(load_servers()[server]._mcp_server) as session:
-            yield session
-
-
-def tools_factory(agent: str, user_id: str, persona: str) -> AgentTools:
-    return InMemoryAgentTools(agent, user_id, persona)

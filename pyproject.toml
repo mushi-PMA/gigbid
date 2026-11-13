@@ -32,6 +32,8 @@ dependencies = [
   "pyjwt==2.15.1",
   "scipy==1.18.1",
   "sse-starlette==3.7.0",
+  "langchain-aws==1.9.3",
+  "langgraph-supervisor==0.0.31",
 ]
 
 [project.optional-dependencies]
