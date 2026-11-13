@@ -16,3 +16,11 @@ apps/web/test-results/
 evals/cache/
 build/
 .env.production
+CLAUDE.md
+.claude/
+AGENTS.md
+.cursor/
+.cursorrules
+.windsurf/
+.env.*
+!.env.example

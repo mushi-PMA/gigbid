@@ -1,7 +1,7 @@
 """Portfolio MCP server (read-only): evidence search over a freelancer's CV, case studies, repos, reviews and past
 proposals, with resource templates and prompt templates a freelancer would actually use.
 
-Standalone use (Claude Desktop, Cursor, any MCP host):
+Standalone use (any MCP host, for example a desktop chat app or Cursor):
     uvx --from git+https://github.com/mushi0541/gigbid gigbid-portfolio-mcp --stdio
     env: PORTFOLIO_DIR=<folder with one sub-folder per persona>  PORTFOLIO_PERSONA=<sub-folder name>
 Inside GigBid it runs over Streamable HTTP with bearer auth; the persona comes from the caller's token.

@@ -39,9 +39,14 @@ def tracked_files() -> list[Path]:
     return [ROOT / line for line in out.splitlines() if line]
 
 
+FORBIDDEN_FILES = re.compile(r"(^|/)(CLAUDE\.md|AGENTS\.md|\.claude|\.cursor|\.cursorrules|\.windsurf)(/|$)", re.I)
+
+
 def check_secrets() -> list[str]:
     problems = []
     for path in tracked_files():
+        if FORBIDDEN_FILES.search(path.relative_to(ROOT).as_posix()):
+            problems.append(f"{path.relative_to(ROOT)}: assistant config files are not part of this repository")
         if path.name == ".env":
             problems.append(f"{path.relative_to(ROOT)} must never be committed")
         if path.suffix in {".png", ".pdf", ".db", ".npy", ".pkl", ".ico", ".woff2"} or not path.exists():

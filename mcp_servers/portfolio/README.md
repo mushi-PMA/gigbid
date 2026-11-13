@@ -1,8 +1,8 @@
 # GigBid Portfolio MCP server
 
 A read-only MCP server that turns a freelancer's portfolio (CV, case studies, repos, client reviews and past
-proposals with outcomes) into evidence an assistant can search and cite. Plug it into Claude Desktop, Cursor or any
-MCP host and ask things like "have I built an Airflow pipeline for a retail client?" or pick the prompt "Answer a
+proposals with outcomes) into evidence you can search and cite. Plug it into any MCP host (desktop chat apps,
+code editors such as Cursor) and ask things like "have I built an Airflow pipeline for a retail client?" or pick the prompt "Answer a
 screening question from my portfolio".
 
 ## Install and run
@@ -21,7 +21,7 @@ docker run --rm -i -e MCP_AUTH=off -e PORTFOLIO_PERSONA=me -v /path/to/portfolio
   -e PORTFOLIO_DIR=/portfolios ghcr.io/mushi0541/gigbid-portfolio-mcp:latest --stdio
 ```
 
-Claude Desktop (`claude_desktop_config.json`):
+In an MCP host's server configuration (the usual `mcpServers` format):
 
 ```json
 {"mcpServers": {"portfolio": {
