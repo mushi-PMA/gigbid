@@ -90,7 +90,7 @@ def check_prompts() -> list[str]:
 
 
 def check_results_in_sync() -> list[str]:
-    before = {p: p.read_text(encoding="utf-8") for p in (ROOT / "README.md", ROOT / "docs" / "RESULTS.md")
+    before = {p: p.read_text(encoding="utf-8") for p in [ROOT / "README.md", *(ROOT / "docs").glob("*.md")]
               if p.exists()}
     subprocess.run([sys.executable, "-m", "scripts.make_tables"], cwd=ROOT, check=True, capture_output=True)
     return [f"{p.relative_to(ROOT)} has numbers not generated from evals/results (run make_tables and commit)"
