@@ -11,9 +11,10 @@ import os
 import subprocess
 import time
 from collections import defaultdict
-from datetime import datetime, timezone
+from collections.abc import Iterable
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from common.config import ROOT, load_config
 
@@ -115,7 +116,7 @@ def git_commit() -> str:
 def write_result(name: str, payload: dict[str, Any]) -> Path:
     RESULTS.mkdir(parents=True, exist_ok=True)
     config = load_config()
-    meta = {"generated_at": datetime.now(timezone.utc).isoformat(), "commit": git_commit(),
+    meta = {"generated_at": datetime.now(UTC).isoformat(), "commit": git_commit(),
             "model_profile": config["models"]["profile"], "rag_variant": config["rag"]["variant"],
             "embedding_model": config["embeddings"]["model"], "reranker": config["embeddings"]["reranker"]}
     path = RESULTS / f"{name}.json"

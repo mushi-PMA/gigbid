@@ -1,0 +1,6 @@
+# CI smoke-eval gates (evals/runners/smoke_eval.py). A pull request fails if a metric crosses its limit.
+# Set from the first full evaluation with a safety margin; tighten them as results improve.
+bid_or_skip_f1: {min: 0.60}
+scam_recall: {min: 0.80}
+evidence_recall_at_5: {min: 0.35}
+unsupported_claims_per_proposal: {max: 0.5}

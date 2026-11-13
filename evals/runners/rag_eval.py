@@ -4,7 +4,7 @@ An evidence item is a portfolio project: its case study, README, code and past p
 a variant is scored on the ranked list of unique projects it returns (gold = projects behind the job's relevant
 evidence). Also reports doc-level nDCG@10 for reference.
 
-    python -m evals.runners.rag_eval                          # all variants that need no model, plus the rest if a key works
+    python -m evals.runners.rag_eval        # variants that need no model, plus the rest when a key works
     python -m evals.runners.rag_eval --variants v0 v1+v2+v3 --limit 60
 """
 from __future__ import annotations
@@ -12,8 +12,18 @@ from __future__ import annotations
 import argparse
 import time
 
-from evals.runners.common import (PERSONAS, enable_cache, job_text, load_set, mean_by, percentile, project_of,
-                                  ranked_projects, retrieval_metrics, write_result)
+from evals.runners.common import (
+    PERSONAS,
+    enable_cache,
+    job_text,
+    load_set,
+    mean_by,
+    percentile,
+    project_of,
+    ranked_projects,
+    retrieval_metrics,
+    write_result,
+)
 from rag.retriever import Retriever, parse_variant
 
 OFFLINE_VARIANTS = ["v0", "v2", "v0+v3", "v2+v3", "v2+v4", "v2+v5", "v2+v3+v4", "v2+v3+v5", "v2+v3+v4+v5"]
