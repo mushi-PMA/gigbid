@@ -1,0 +1,7 @@
+# Secret-scan settings: the default rules plus one reviewed exception.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "GigSim seed accounts: per-persona tokens for the local simulator only (internal Docker network, never exposed by Caddy; each can be replaced with GIGSIM_TOKEN_<PERSONA>)."
+paths = ['''data/gigsim/accounts\.json''']

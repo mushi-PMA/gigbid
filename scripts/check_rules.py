@@ -59,8 +59,11 @@ def check_secrets() -> list[str]:
 
 
 def gigsim_hashes() -> dict[str, str]:
-    files = sorted(p for p in (ROOT / "gigsim").rglob("*") if p.is_file() and p.name != "MANIFEST.sha256"
-                   and "__pycache__" not in p.parts and p.suffix != ".db")
+    # tracked plus new untracked files; git-ignored caches (pytest, __pycache__, the .db) are not GigSim code
+    listed = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard", "gigsim"],
+                                     cwd=ROOT, text=True)
+    files = sorted(p for p in (ROOT / line for line in listed.splitlines() if line)
+                   if p.is_file() and p.name != "MANIFEST.sha256")
     return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
             for p in files}
 
