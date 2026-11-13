@@ -1,0 +1,35 @@
+[
+ {
+  "proposal_id": "prop-1",
+  "job_title": "Airflow pipeline for sales data",
+  "job_category": "Data Engineering",
+  "job_skills": [
+   "Airflow",
+   "Python"
+  ],
+  "date": "2025-02-01",
+  "text": "Your stores need daily numbers you can trust. I built a nightly Airflow DAG that loads 40 stores into PostgreSQL.",
+  "bid_amount": 900,
+  "payment_type": "fixed",
+  "outcome": "won",
+  "project_ids": [
+   "p1"
+  ]
+ },
+ {
+  "proposal_id": "prop-2",
+  "job_title": "React developer needed",
+  "job_category": "Web Development",
+  "job_skills": [
+   "React"
+  ],
+  "date": "2024-05-01",
+  "text": "Dear Sir/Madam, I am the perfect fit for your job.",
+  "bid_amount": 500,
+  "payment_type": "fixed",
+  "outcome": "ignored",
+  "project_ids": [
+   "p2"
+  ]
+ }
+]

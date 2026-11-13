@@ -1,0 +1,15 @@
+{
+ "persona_id": "test_dev",
+ "name": "Test Developer",
+ "headline": "Data engineer",
+ "hourly_floor": 30,
+ "fixed_floor": 300,
+ "target_hourly_rate": 45,
+ "weekly_connects_budget": 80,
+ "skills": [
+  "Python",
+  "Airflow",
+  "SQL",
+  "React"
+ ]
+}

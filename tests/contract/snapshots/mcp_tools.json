@@ -1,0 +1,1454 @@
+{
+ "marketplace": {
+  "create_proposal_draft": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": false
+   },
+   "input": {
+    "$defs": {
+     "ScreeningAnswerIn": {
+      "properties": {
+       "answer": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "title": "Answer",
+        "type": "string"
+       },
+       "question": {
+        "maxLength": 500,
+        "minLength": 1,
+        "title": "Question",
+        "type": "string"
+       }
+      },
+      "required": [
+       "question",
+       "answer"
+      ],
+      "title": "ScreeningAnswerIn",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "approval_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "description": "From the human approval step",
+      "title": "Approval Token"
+     },
+     "bid_amount": {
+      "exclusiveMinimum": 0,
+      "maximum": 1000000,
+      "title": "Bid Amount",
+      "type": "number"
+     },
+     "cover_letter": {
+      "maxLength": 5000,
+      "minLength": 50,
+      "title": "Cover Letter",
+      "type": "string"
+     },
+     "dry_run": {
+      "default": false,
+      "title": "Dry Run",
+      "type": "boolean"
+     },
+     "idempotency_key": {
+      "maxLength": 120,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "job_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Job Id",
+      "type": "string"
+     },
+     "payment_type": {
+      "enum": [
+       "fixed",
+       "hourly"
+      ],
+      "title": "Payment Type",
+      "type": "string"
+     },
+     "screening_answers": {
+      "default": [],
+      "items": {
+       "$ref": "#/$defs/ScreeningAnswerIn"
+      },
+      "maxItems": 10,
+      "title": "Screening Answers",
+      "type": "array"
+     }
+    },
+    "required": [
+     "job_id",
+     "cover_letter",
+     "bid_amount",
+     "payment_type",
+     "idempotency_key"
+    ],
+    "title": "create_proposal_draftArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "get_client_history": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "client_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Client Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "client_id"
+    ],
+    "title": "get_client_historyArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "get_connects_balance": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {},
+    "title": "get_connects_balanceArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "get_job": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "job_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Job Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "job_id"
+    ],
+    "title": "get_jobArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "get_market_pricing": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "category": {
+      "default": "",
+      "maxLength": 80,
+      "title": "Category",
+      "type": "string"
+     },
+     "skills": {
+      "default": [],
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Skills",
+      "type": "array"
+     }
+    },
+    "title": "get_market_pricingArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "get_policy": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {},
+    "title": "get_policyArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "list_events": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "since": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "description": "ISO time",
+      "title": "Since"
+     }
+    },
+    "title": "list_eventsArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "list_messages": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "thread_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Thread Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "thread_id"
+    ],
+    "title": "list_messagesArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "list_proposals": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {},
+    "title": "list_proposalsArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "list_threads": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {},
+    "title": "list_threadsArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "search_jobs": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "category": {
+      "default": "",
+      "maxLength": 80,
+      "title": "Category",
+      "type": "string"
+     },
+     "limit": {
+      "default": 30,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+     },
+     "query": {
+      "default": "",
+      "description": "Words that must appear in the title or description",
+      "maxLength": 200,
+      "title": "Query",
+      "type": "string"
+     },
+     "since": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "description": "ISO time; only jobs posted after it",
+      "title": "Since"
+     },
+     "skills": {
+      "default": [],
+      "description": "Skill tags, e.g. ['Python', 'SQL']",
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Skills",
+      "type": "array"
+     }
+    },
+    "title": "search_jobsArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "send_message": {
+   "annotations": {
+    "destructiveHint": true,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": false
+   },
+   "input": {
+    "properties": {
+     "approval_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Approval Token"
+     },
+     "dry_run": {
+      "default": false,
+      "title": "Dry Run",
+      "type": "boolean"
+     },
+     "idempotency_key": {
+      "maxLength": 120,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 3000,
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+     },
+     "thread_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Thread Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "thread_id",
+     "text",
+     "idempotency_key"
+    ],
+    "title": "send_messageArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  },
+  "submit_proposal": {
+   "annotations": {
+    "destructiveHint": true,
+    "idempotentHint": true,
+    "openWorldHint": true,
+    "readOnlyHint": false
+   },
+   "input": {
+    "properties": {
+     "approval_token": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Approval Token"
+     },
+     "approved_payload": {
+      "additionalProperties": true,
+      "description": "The exact payload the human approved",
+      "title": "Approved Payload",
+      "type": "object"
+     },
+     "dry_run": {
+      "default": false,
+      "title": "Dry Run",
+      "type": "boolean"
+     },
+     "idempotency_key": {
+      "maxLength": 120,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "job_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Job Id",
+      "type": "string"
+     },
+     "proposal_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Proposal Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "proposal_id",
+     "job_id",
+     "idempotency_key",
+     "approved_payload"
+    ],
+    "title": "submit_proposalArguments",
+    "type": "object"
+   },
+   "output": {
+    "description": "Every tool returns `data` on success, or `error` (+ `retryable`) when the marketplace failed or refused.",
+    "properties": {
+     "data": {
+      "additionalProperties": true,
+      "title": "Data",
+      "type": "object"
+     },
+     "detail": {
+      "default": null,
+      "title": "Detail"
+     },
+     "error": {
+      "default": "",
+      "title": "Error",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "ok"
+    ],
+    "title": "ToolResult",
+    "type": "object"
+   }
+  }
+ },
+ "portfolio": {
+  "get_case_study": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "case_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Case Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "case_id"
+    ],
+    "title": "get_case_studyArguments",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "body": {
+      "title": "Body",
+      "type": "string"
+     },
+     "case_id": {
+      "title": "Case Id",
+      "type": "string"
+     },
+     "date": {
+      "title": "Date",
+      "type": "string"
+     },
+     "industry": {
+      "title": "Industry",
+      "type": "string"
+     },
+     "project": {
+      "title": "Project",
+      "type": "string"
+     },
+     "skills": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Skills",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "case_id",
+     "title",
+     "project",
+     "date",
+     "industry",
+     "skills",
+     "body"
+    ],
+    "title": "CaseStudy",
+    "type": "object"
+   }
+  },
+  "list_skills": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {},
+    "title": "list_skillsArguments",
+    "type": "object"
+   },
+   "output": {
+    "$defs": {
+     "SkillCount": {
+      "properties": {
+       "evidence_count": {
+        "title": "Evidence Count",
+        "type": "integer"
+       },
+       "skill": {
+        "title": "Skill",
+        "type": "string"
+       }
+      },
+      "required": [
+       "skill",
+       "evidence_count"
+      ],
+      "title": "SkillCount",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "persona": {
+      "title": "Persona",
+      "type": "string"
+     },
+     "skills": {
+      "items": {
+       "$ref": "#/$defs/SkillCount"
+      },
+      "title": "Skills",
+      "type": "array"
+     }
+    },
+    "required": [
+     "persona",
+     "skills"
+    ],
+    "title": "SkillList",
+    "type": "object"
+   }
+  },
+  "search_evidence": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": true
+   },
+   "input": {
+    "$defs": {
+     "EvidenceFilters": {
+      "properties": {
+       "outcome": {
+        "anyOf": [
+         {
+          "items": {
+           "enum": [
+            "won",
+            "replied",
+            "ignored"
+           ],
+           "type": "string"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "description": "Past proposal outcomes",
+        "title": "Outcome"
+       },
+       "skills": {
+        "anyOf": [
+         {
+          "items": {
+           "type": "string"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "description": "Only items tagged with one of these skills",
+        "title": "Skills"
+       },
+       "types": {
+        "anyOf": [
+         {
+          "items": {
+           "enum": [
+            "cv",
+            "case_study",
+            "readme",
+            "code",
+            "review",
+            "proposal"
+           ],
+           "type": "string"
+          },
+          "type": "array"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null,
+        "description": "Only these evidence types",
+        "title": "Types"
+       }
+      },
+      "title": "EvidenceFilters",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "filters": {
+      "anyOf": [
+       {
+        "$ref": "#/$defs/EvidenceFilters"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null
+     },
+     "k": {
+      "default": 5,
+      "maximum": 20,
+      "minimum": 1,
+      "title": "K",
+      "type": "integer"
+     },
+     "requirement": {
+      "description": "One job requirement",
+      "maxLength": 500,
+      "minLength": 2,
+      "title": "Requirement",
+      "type": "string"
+     }
+    },
+    "required": [
+     "requirement"
+    ],
+    "title": "search_evidenceArguments",
+    "type": "object"
+   },
+   "output": {
+    "$defs": {
+     "Evidence": {
+      "properties": {
+       "client_industry": {
+        "default": "",
+        "title": "Client Industry",
+        "type": "string"
+       },
+       "date": {
+        "default": "",
+        "title": "Date",
+        "type": "string"
+       },
+       "evidence_id": {
+        "title": "Evidence Id",
+        "type": "string"
+       },
+       "excerpt": {
+        "title": "Excerpt",
+        "type": "string"
+       },
+       "outcome": {
+        "default": "",
+        "description": "For past proposals: won, replied or ignored",
+        "title": "Outcome",
+        "type": "string"
+       },
+       "project": {
+        "default": "",
+        "title": "Project",
+        "type": "string"
+       },
+       "score": {
+        "title": "Score",
+        "type": "number"
+       },
+       "skills": {
+        "items": {
+         "type": "string"
+        },
+        "title": "Skills",
+        "type": "array"
+       },
+       "source": {
+        "default": "",
+        "title": "Source",
+        "type": "string"
+       },
+       "title": {
+        "title": "Title",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       }
+      },
+      "required": [
+       "evidence_id",
+       "type",
+       "title",
+       "excerpt",
+       "score"
+      ],
+      "title": "Evidence",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "items": {
+      "items": {
+       "$ref": "#/$defs/Evidence"
+      },
+      "title": "Items",
+      "type": "array"
+     },
+     "requirement": {
+      "title": "Requirement",
+      "type": "string"
+     }
+    },
+    "required": [
+     "requirement",
+     "items"
+    ],
+    "title": "EvidenceSearch",
+    "type": "object"
+   }
+  }
+ },
+ "workspace": {
+  "create_email_draft": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": false
+   },
+   "input": {
+    "properties": {
+     "body": {
+      "maxLength": 5000,
+      "minLength": 1,
+      "title": "Body",
+      "type": "string"
+     },
+     "idempotency_key": {
+      "maxLength": 120,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "recipient_label": {
+      "description": "Name, not an address",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Recipient Label",
+      "type": "string"
+     },
+     "subject": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Subject",
+      "type": "string"
+     }
+    },
+    "required": [
+     "recipient_label",
+     "subject",
+     "body",
+     "idempotency_key"
+    ],
+    "title": "create_email_draftArguments",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "draft_id": {
+      "title": "Draft Id",
+      "type": "string"
+     },
+     "status": {
+      "default": "draft (not sent)",
+      "title": "Status",
+      "type": "string"
+     },
+     "subject": {
+      "title": "Subject",
+      "type": "string"
+     }
+    },
+    "required": [
+     "draft_id",
+     "subject"
+    ],
+    "title": "EmailDraft",
+    "type": "object"
+   }
+  },
+  "create_interview_hold": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": false
+   },
+   "input": {
+    "properties": {
+     "duration_minutes": {
+      "maximum": 180,
+      "minimum": 15,
+      "title": "Duration Minutes",
+      "type": "integer"
+     },
+     "idempotency_key": {
+      "maxLength": 120,
+      "minLength": 8,
+      "title": "Idempotency Key",
+      "type": "string"
+     },
+     "start": {
+      "description": "ISO start time with offset",
+      "title": "Start",
+      "type": "string"
+     },
+     "thread_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Thread Id",
+      "type": "string"
+     },
+     "title": {
+      "maxLength": 120,
+      "minLength": 3,
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "start",
+     "duration_minutes",
+     "title",
+     "thread_id",
+     "idempotency_key"
+    ],
+    "title": "create_interview_holdArguments",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "end": {
+      "title": "End",
+      "type": "string"
+     },
+     "hold_id": {
+      "title": "Hold Id",
+      "type": "string"
+     },
+     "start": {
+      "title": "Start",
+      "type": "string"
+     },
+     "status": {
+      "default": "tentative",
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "hold_id",
+     "start",
+     "end",
+     "title"
+    ],
+    "title": "Hold",
+    "type": "object"
+   }
+  },
+  "get_free_slots": {
+   "annotations": {
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false,
+    "readOnlyHint": true
+   },
+   "input": {
+    "properties": {
+     "days": {
+      "default": 5,
+      "maximum": 14,
+      "minimum": 1,
+      "title": "Days",
+      "type": "integer"
+     },
+     "duration_minutes": {
+      "default": 30,
+      "maximum": 180,
+      "minimum": 15,
+      "title": "Duration Minutes",
+      "type": "integer"
+     },
+     "from_date": {
+      "description": "YYYY-MM-DD, first day to search",
+      "title": "From Date",
+      "type": "string"
+     },
+     "max_slots": {
+      "default": 3,
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Max Slots",
+      "type": "integer"
+     },
+     "tz": {
+      "default": "Asia/Karachi",
+      "description": "IANA time zone of the freelancer",
+      "title": "Tz",
+      "type": "string"
+     }
+    },
+    "required": [
+     "from_date"
+    ],
+    "title": "get_free_slotsArguments",
+    "type": "object"
+   },
+   "output": {
+    "$defs": {
+     "Slot": {
+      "properties": {
+       "end": {
+        "title": "End",
+        "type": "string"
+       },
+       "start": {
+        "title": "Start",
+        "type": "string"
+       }
+      },
+      "required": [
+       "start",
+       "end"
+      ],
+      "title": "Slot",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "slots": {
+      "items": {
+       "$ref": "#/$defs/Slot"
+      },
+      "title": "Slots",
+      "type": "array"
+     },
+     "timezone": {
+      "title": "Timezone",
+      "type": "string"
+     }
+    },
+    "required": [
+     "timezone",
+     "slots"
+    ],
+    "title": "Slots",
+    "type": "object"
+   }
+  }
+ }
+}

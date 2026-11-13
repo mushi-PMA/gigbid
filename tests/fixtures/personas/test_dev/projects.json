@@ -1,0 +1,37 @@
+[
+ {
+  "project_id": "p1",
+  "name": "Nightly sales ETL",
+  "industry": "retail",
+  "skills": [
+   "Python",
+   "Airflow",
+   "SQL"
+  ],
+  "implied_skills": [
+   "Data Engineering"
+  ],
+  "year": 2025,
+  "artifacts": [
+   "case_study:cs-1",
+   "repo:etl-kit",
+   "proposal:prop-1"
+  ]
+ },
+ {
+  "project_id": "p2",
+  "name": "Shop front end",
+  "industry": "ecommerce",
+  "skills": [
+   "React",
+   "TypeScript"
+  ],
+  "implied_skills": [],
+  "year": 2024,
+  "artifacts": [
+   "case_study:cs-2",
+   "repo:shop-ui",
+   "proposal:prop-2"
+  ]
+ }
+]

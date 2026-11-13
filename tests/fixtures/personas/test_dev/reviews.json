@@ -1,0 +1,10 @@
+[
+ {
+  "review_id": "r1",
+  "text": "Delivered the nightly loads on time and documented everything.",
+  "project_id": "p1",
+  "rating": 5,
+  "date": "2025-04-01",
+  "client_industry": "retail"
+ }
+]
