@@ -167,9 +167,17 @@ def holdout() -> str:
     return table(["Budget", "Declared", "Measured (holdout)", "Verdict"], rows)
 
 
+def failures() -> str:
+    f = load("failures")
+    if not f:
+        return PENDING
+    counts = sorted(f["counts"].items(), key=lambda item: -item[1])
+    return table(["Failure category", "Dev jobs"], [[name, str(count)] for name, count in counts])
+
+
 SECTIONS = {"main": main_results, "rag": rag_variants, "decisions": decisions, "claims": claims,
             "architectures": architectures, "tools": tools, "injection": injection, "models": models, "x2": x2,
-            "holdout": holdout}
+            "holdout": holdout, "failures": failures}
 
 
 def fill(path: Path) -> None:
