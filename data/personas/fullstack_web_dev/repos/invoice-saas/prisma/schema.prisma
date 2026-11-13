@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  invoices Invoice[]
+}
+
+model Invoice {
+  id        String   @id @default(cuid())
+  client_name      String
+  total      Float
+  due_date      String?
+  owner     User     @relation(fields: [ownerId], references: [id])
+  ownerId   String
+  createdAt DateTime @default(now())
+
+  @@index([ownerId, createdAt])
+}

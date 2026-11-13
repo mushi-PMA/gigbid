@@ -1,0 +1,99 @@
+{
+  "personas": [
+    {
+      "persona": "ai_ml_engineer",
+      "projects": 20,
+      "case_studies": 18,
+      "repos": 11,
+      "proposals": 150,
+      "outcomes": {
+        "won": 13,
+        "replied": 38,
+        "ignored": 99
+      }
+    },
+    {
+      "persona": "fullstack_web_dev",
+      "projects": 22,
+      "case_studies": 20,
+      "repos": 10,
+      "proposals": 150,
+      "outcomes": {
+        "won": 18,
+        "replied": 33,
+        "ignored": 99
+      }
+    },
+    {
+      "persona": "data_analyst",
+      "projects": 20,
+      "case_studies": 18,
+      "repos": 9,
+      "proposals": 150,
+      "outcomes": {
+        "won": 19,
+        "replied": 38,
+        "ignored": 93
+      }
+    }
+  ],
+  "live": {
+    "regular": 900,
+    "scam": 64,
+    "injection": 42,
+    "duplicate": 53
+  },
+  "history": 1500,
+  "pool": 48857,
+  "eval": {
+    "dev_ai_ml_engineer": {
+      "n": 200,
+      "bid": 68,
+      "scam": 14,
+      "injection": 12,
+      "duplicate": 14,
+      "avg_relevant_evidence": 48.6
+    },
+    "holdout_ai_ml_engineer": {
+      "n": 50,
+      "bid": 17,
+      "scam": 4,
+      "injection": 3,
+      "duplicate": 4,
+      "avg_relevant_evidence": 63.8
+    },
+    "dev_fullstack_web_dev": {
+      "n": 200,
+      "bid": 63,
+      "scam": 14,
+      "injection": 12,
+      "duplicate": 14,
+      "avg_relevant_evidence": 39.7
+    },
+    "holdout_fullstack_web_dev": {
+      "n": 50,
+      "bid": 15,
+      "scam": 4,
+      "injection": 3,
+      "duplicate": 4,
+      "avg_relevant_evidence": 38.8
+    },
+    "dev_data_analyst": {
+      "n": 200,
+      "bid": 61,
+      "scam": 14,
+      "injection": 12,
+      "duplicate": 14,
+      "avg_relevant_evidence": 43.1
+    },
+    "holdout_data_analyst": {
+      "n": 50,
+      "bid": 18,
+      "scam": 4,
+      "injection": 3,
+      "duplicate": 4,
+      "avg_relevant_evidence": 49.4
+    }
+  },
+  "clients": 3060
+}

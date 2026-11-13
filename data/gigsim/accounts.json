@@ -1,0 +1,23 @@
+[
+  {
+    "account_id": "acct-ai_ml_engineer",
+    "persona_id": "ai_ml_engineer",
+    "token": "92feb974be4edbfea62251aebdb4cae6f0bfca343bb287b4a8609bc2b9a3ce5a",
+    "env_token": "GIGSIM_TOKEN_AI_ML_ENGINEER",
+    "initial_connects": 120
+  },
+  {
+    "account_id": "acct-fullstack_web_dev",
+    "persona_id": "fullstack_web_dev",
+    "token": "2a8b3be5939731176f14422b409da428f28c2963ee9859ad3f00ef858af6473d",
+    "env_token": "GIGSIM_TOKEN_FULLSTACK_WEB_DEV",
+    "initial_connects": 120
+  },
+  {
+    "account_id": "acct-data_analyst",
+    "persona_id": "data_analyst",
+    "token": "cb6ddc43e4744e8df9c1bd7746ff50ae5b55bdb420381f9018b77f47750010fc",
+    "env_token": "GIGSIM_TOKEN_DATA_ANALYST",
+    "initial_connects": 120
+  }
+]

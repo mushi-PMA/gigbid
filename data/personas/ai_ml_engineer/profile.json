@@ -1,0 +1,57 @@
+{
+  "persona_id": "ai_ml_engineer",
+  "name": "Arjun Mehta",
+  "headline": "AI/ML engineer: NLP, document AI and LLM applications that reach production",
+  "location": "Pune, India",
+  "years_experience": 7,
+  "summary": "I build machine learning systems for small and mid-sized companies, from the first data audit to a monitored service. Most of my work is language and documents, with a smaller share of vision and forecasting.",
+  "education": "M.Tech in Computer Science, College of Engineering Pune",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Deep Learning",
+    "Natural Language Processing",
+    "Computer Vision",
+    "PyTorch",
+    "TensorFlow",
+    "scikit-learn",
+    "XGBoost",
+    "Hugging Face",
+    "Large Language Models",
+    "OpenAI API",
+    "LangChain",
+    "Retrieval-Augmented Generation",
+    "Vector Databases",
+    "FastAPI",
+    "Docker",
+    "MLOps",
+    "Amazon Web Services",
+    "Time Series Analysis",
+    "Speech Recognition",
+    "Recommendation Systems",
+    "Predictive Modeling",
+    "Chatbot Development",
+    "Pandas"
+  ],
+  "hourly_floor": 30,
+  "hourly_target": 40,
+  "fixed_floor": 100.0,
+  "weekly_connects_budget": 60,
+  "rate_basis": {
+    "market_hourly": {
+      "n": 1709,
+      "p25": 20.5,
+      "p50": 30.0,
+      "p75": 42.5
+    },
+    "market_fixed": {
+      "n": 1484,
+      "p25": 60.0,
+      "p50": 200.0,
+      "p75": 1000.0
+    },
+    "experience_premium": 1.0,
+    "note": "Floor = market median hourly, target = market p75 times the experience premium from the freelancer dataset (which is clipped at 280 USD, so only the ratio is used). Fixed floor = market p25."
+  },
+  "source": "synthetic"
+}

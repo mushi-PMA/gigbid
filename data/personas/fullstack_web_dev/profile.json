@@ -1,0 +1,62 @@
+{
+  "persona_id": "fullstack_web_dev",
+  "name": "Lena Fischer",
+  "headline": "Full-stack web developer: React, Node.js and Postgres products from MVP to paying customers",
+  "location": "Leipzig, Germany",
+  "years_experience": 8,
+  "summary": "I turn product ideas into working web apps: interface, API, database, payments and deployment. I work best with founders and small teams who want one person to own the whole stack.",
+  "education": "B.Sc. Computer Science, HTWK Leipzig",
+  "skills": [
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "Vue.js",
+    "Angular",
+    "PostgreSQL",
+    "MongoDB",
+    "MySQL",
+    "GraphQL",
+    "REST API",
+    "Stripe",
+    "Tailwind CSS",
+    "CSS",
+    "HTML",
+    "Docker",
+    "Amazon Web Services",
+    "Django",
+    "Flask",
+    "Python",
+    "Firebase",
+    "Shopify",
+    "WordPress",
+    "Responsive Design",
+    "Front-End Development",
+    "Back-End Development",
+    "Web Development",
+    "Redux"
+  ],
+  "hourly_floor": 25,
+  "hourly_target": 35,
+  "fixed_floor": 100.0,
+  "weekly_connects_budget": 50,
+  "rate_basis": {
+    "market_hourly": {
+      "n": 5067,
+      "p25": 18.5,
+      "p50": 25.0,
+      "p75": 37.0
+    },
+    "market_fixed": {
+      "n": 4286,
+      "p25": 50.0,
+      "p50": 200.0,
+      "p75": 500.0
+    },
+    "experience_premium": 1.0,
+    "note": "Floor = market median hourly, target = market p75 times the experience premium from the freelancer dataset (which is clipped at 280 USD, so only the ratio is used). Fixed floor = market p25."
+  },
+  "source": "synthetic"
+}

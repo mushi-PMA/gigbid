@@ -1,0 +1,59 @@
+{
+  "persona_id": "data_analyst",
+  "name": "Camila Torres",
+  "headline": "Data analyst: SQL, Power BI and Python reporting that decision makers actually open",
+  "location": "Lisbon, Portugal",
+  "years_experience": 6,
+  "summary": "I help teams answer business questions with data: clean the numbers, model them in SQL and show them in dashboards that stay correct. My background is statistics, so I check the maths behind the chart.",
+  "education": "M.Sc. Applied Statistics, University of Lisbon",
+  "skills": [
+    "SQL",
+    "Python",
+    "Pandas",
+    "Microsoft Power BI",
+    "Tableau",
+    "Looker Studio",
+    "Microsoft Excel",
+    "Google Sheets",
+    "R",
+    "Statistics",
+    "A/B Testing",
+    "Data Visualization",
+    "Dashboard",
+    "Data Analysis",
+    "Data Cleaning",
+    "ETL",
+    "Data Warehousing",
+    "dbt",
+    "Google Analytics",
+    "Marketing Analytics",
+    "Business Intelligence",
+    "Reporting",
+    "Data Modeling",
+    "Data Scraping",
+    "Time Series Analysis",
+    "Automation",
+    "PostgreSQL"
+  ],
+  "hourly_floor": 30,
+  "hourly_target": 50,
+  "fixed_floor": 100.0,
+  "weekly_connects_budget": 45,
+  "rate_basis": {
+    "market_hourly": {
+      "n": 1323,
+      "p25": 21.25,
+      "p50": 30.5,
+      "p75": 50.0
+    },
+    "market_fixed": {
+      "n": 968,
+      "p25": 50.0,
+      "p50": 120.0,
+      "p75": 500.0
+    },
+    "experience_premium": 1.0,
+    "note": "Floor = market median hourly, target = market p75 times the experience premium from the freelancer dataset (which is clipped at 280 USD, so only the ratio is used). Fixed floor = market p25."
+  },
+  "source": "synthetic"
+}

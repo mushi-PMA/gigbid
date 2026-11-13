@@ -1,0 +1,13 @@
+Total Value = SUM ( sales[revenue] )
+
+Value LY =
+CALCULATE ( [Total Value], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+Value YoY % =
+DIVIDE ( [Total Value] - [Value LY], [Value LY] )
+
+Rolling 3M Value =
+CALCULATE ( [Total Value], DATESINPERIOD ( 'Date'[Date], MAX ( 'Date'[Date] ), -3, MONTH ) )
+
+Share of Total =
+DIVIDE ( [Total Value], CALCULATE ( [Total Value], ALL ( sales[store_type] ) ) )

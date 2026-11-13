@@ -1,0 +1,262 @@
+[
+  {
+    "review_id": 1,
+    "client": "Summit Wellness",
+    "rating": 4,
+    "date": "2023-04-25",
+    "text": "Solid work. The first version needed two rounds of changes, and the final result was what we wanted.",
+    "project_ids": [
+      "p-aiml-09"
+    ]
+  },
+  {
+    "review_id": 2,
+    "client": "Meridian Staffing",
+    "rating": 5,
+    "date": "2025-12-19",
+    "text": "Took a messy brief from our ai startup operation and made it simple. Caught three silent quality drops before release.",
+    "project_ids": [
+      "p-aiml-15"
+    ]
+  },
+  {
+    "review_id": 3,
+    "client": "Redwood Insurance",
+    "rating": 5,
+    "date": "2025-09-02",
+    "text": "We hired for the e-commerce piece last year and it paid for itself quickly. Lifted click-through on recommendations by 17%.",
+    "project_ids": [
+      "p-aiml-08"
+    ]
+  },
+  {
+    "review_id": 4,
+    "client": "Ironbridge Parts",
+    "rating": 4,
+    "date": "2023-05-16",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-aiml-04"
+    ]
+  },
+  {
+    "review_id": 5,
+    "client": "Fernhill Charity",
+    "rating": 5,
+    "date": "2023-04-03",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Cut model release time from two weeks to one day.",
+    "project_ids": [
+      "p-aiml-19"
+    ]
+  },
+  {
+    "review_id": 6,
+    "client": "Brightline Foods",
+    "rating": 4,
+    "date": "2025-08-08",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-aiml-11"
+    ]
+  },
+  {
+    "review_id": 7,
+    "client": "Atlas Payments",
+    "rating": 5,
+    "date": "2023-10-24",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Reached 91% accuracy on field photos taken in poor light.",
+    "project_ids": [
+      "p-aiml-13"
+    ]
+  },
+  {
+    "review_id": 8,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2025-11-27",
+    "text": "Took a messy brief from our ai startup operation and made it simple. Caught three silent quality drops before release.",
+    "project_ids": [
+      "p-aiml-15"
+    ]
+  },
+  {
+    "review_id": 9,
+    "client": "Meridian Staffing",
+    "rating": 4,
+    "date": "2025-03-30",
+    "text": "The project for our agritech unit finished a week late but the result was worth it. Reached 91% accuracy on field photos taken in poor light.",
+    "project_ids": [
+      "p-aiml-13"
+    ]
+  },
+  {
+    "review_id": 10,
+    "client": "Pinecrest Legal",
+    "rating": 5,
+    "date": "2025-10-14",
+    "text": "She rebuilt how our energy team handles this part of the business. Gave maintenance teams about 9 hours of warning on average. Clear updates all the way.",
+    "project_ids": [
+      "p-aiml-14"
+    ]
+  },
+  {
+    "review_id": 11,
+    "client": "Greenfield Energy",
+    "rating": 5,
+    "date": "2024-09-17",
+    "text": "Reliable, asks the right questions and delivers early. The fintech work is still running without trouble.",
+    "project_ids": [
+      "p-aiml-01"
+    ]
+  },
+  {
+    "review_id": 12,
+    "client": "Kestrel Health",
+    "rating": 5,
+    "date": "2024-01-22",
+    "text": "Took a messy brief from our e-commerce operation and made it simple. Lifted click-through on recommendations by 17%.",
+    "project_ids": [
+      "p-aiml-08"
+    ]
+  },
+  {
+    "review_id": 13,
+    "client": "Oakmont Retail",
+    "rating": 4,
+    "date": "2025-09-25",
+    "text": "Good technical judgement. Caught 31% more fraud at the same false-positive rate. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-aiml-12"
+    ]
+  },
+  {
+    "review_id": 14,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2024-01-19",
+    "text": "She rebuilt how our healthcare team handles this part of the business. Saved agents about four minutes per call. Clear updates all the way.",
+    "project_ids": [
+      "p-aiml-07"
+    ]
+  },
+  {
+    "review_id": 15,
+    "client": "Oakmont Retail",
+    "rating": 4,
+    "date": "2025-09-09",
+    "text": "Good technical judgement. Cut recruiter screening time by half. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-aiml-16"
+    ]
+  },
+  {
+    "review_id": 16,
+    "client": "Atlas Payments",
+    "rating": 5,
+    "date": "2025-09-04",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Lifted first-contact routing accuracy from 71% to 93%.",
+    "project_ids": [
+      "p-aiml-02"
+    ]
+  },
+  {
+    "review_id": 17,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2025-02-27",
+    "text": "We hired for the recruiting piece last year and it paid for itself quickly. Cut recruiter screening time by half.",
+    "project_ids": [
+      "p-aiml-16"
+    ]
+  },
+  {
+    "review_id": 18,
+    "client": "Kestrel Health",
+    "rating": 5,
+    "date": "2024-09-08",
+    "text": "Reliable, asks the right questions and delivers early. The healthcare work is still running without trouble.",
+    "project_ids": [
+      "p-aiml-17"
+    ]
+  },
+  {
+    "review_id": 19,
+    "client": "Ironbridge Parts",
+    "rating": 4,
+    "date": "2026-05-04",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-aiml-07"
+    ]
+  },
+  {
+    "review_id": 20,
+    "client": "Oakmont Retail",
+    "rating": 5,
+    "date": "2024-07-30",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-aiml-06"
+    ]
+  },
+  {
+    "review_id": 21,
+    "client": "Ironbridge Parts",
+    "rating": 5,
+    "date": "2025-09-13",
+    "text": "She rebuilt how our legal tech team handles this part of the business. Cut clause lookup from 15 minutes to under 20 seconds. Clear updates all the way.",
+    "project_ids": [
+      "p-aiml-05"
+    ]
+  },
+  {
+    "review_id": 22,
+    "client": "Redwood Insurance",
+    "rating": 5,
+    "date": "2025-03-20",
+    "text": "She rebuilt how our media team handles this part of the business. Found 61% of churners in the top decile of scores. Clear updates all the way.",
+    "project_ids": [
+      "p-aiml-06"
+    ]
+  },
+  {
+    "review_id": 23,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2023-06-25",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Deflected 54% of repeat HR questions.",
+    "project_ids": [
+      "p-aiml-11"
+    ]
+  },
+  {
+    "review_id": 24,
+    "client": "Brightline Foods",
+    "rating": 5,
+    "date": "2026-04-04",
+    "text": "She rebuilt how our legal tech team handles this part of the business. Cut clause lookup from 15 minutes to under 20 seconds. Clear updates all the way.",
+    "project_ids": [
+      "p-aiml-05"
+    ]
+  },
+  {
+    "review_id": 25,
+    "client": "Bluepeak Travel",
+    "rating": 4,
+    "date": "2023-12-31",
+    "text": "Solid work. The first version needed two rounds of changes, and the final result was what we wanted.",
+    "project_ids": [
+      "p-aiml-17"
+    ]
+  },
+  {
+    "review_id": 26,
+    "client": "Bluepeak Travel",
+    "rating": 5,
+    "date": "2025-06-19",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-aiml-06"
+    ]
+  }
+]

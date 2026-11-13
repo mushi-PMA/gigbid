@@ -1,0 +1,576 @@
+[
+  {
+    "project_id": "p-aiml-01",
+    "name": "Invoice field extraction",
+    "industry": "fintech",
+    "skills": [
+      "Python",
+      "Natural Language Processing",
+      "PyTorch",
+      "FastAPI"
+    ],
+    "implied_skills": [
+      "OCR",
+      "Docker"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "cut manual review time by 38%",
+    "artifacts": [
+      "case_study:cs-aiml-01",
+      "repo:invoice-extractor",
+      "proposal:prop-aiml-003",
+      "proposal:prop-aiml-008",
+      "proposal:prop-aiml-014",
+      "proposal:prop-aiml-022",
+      "proposal:prop-aiml-028",
+      "proposal:prop-aiml-037",
+      "proposal:prop-aiml-070",
+      "proposal:prop-aiml-077",
+      "proposal:prop-aiml-078",
+      "proposal:prop-aiml-079",
+      "proposal:prop-aiml-080",
+      "proposal:prop-aiml-085",
+      "proposal:prop-aiml-102",
+      "proposal:prop-aiml-108",
+      "proposal:prop-aiml-110",
+      "proposal:prop-aiml-113",
+      "proposal:prop-aiml-122",
+      "proposal:prop-aiml-138",
+      "proposal:prop-aiml-149",
+      "proposal:prop-aiml-150"
+    ]
+  },
+  {
+    "project_id": "p-aiml-02",
+    "name": "Support ticket triage",
+    "industry": "saas",
+    "skills": [
+      "Python",
+      "scikit-learn",
+      "Natural Language Processing"
+    ],
+    "implied_skills": [
+      "MLOps",
+      "A/B Testing"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "lifted first-contact routing accuracy from 71% to 93%",
+    "artifacts": [
+      "case_study:cs-aiml-02",
+      "repo:ticket-routing",
+      "proposal:prop-aiml-009",
+      "proposal:prop-aiml-050",
+      "proposal:prop-aiml-055",
+      "proposal:prop-aiml-109",
+      "proposal:prop-aiml-118",
+      "proposal:prop-aiml-132",
+      "proposal:prop-aiml-143"
+    ]
+  },
+  {
+    "project_id": "p-aiml-03",
+    "name": "Grocery demand forecasting",
+    "industry": "retail",
+    "skills": [
+      "Python",
+      "Time Series Analysis",
+      "XGBoost",
+      "Pandas"
+    ],
+    "implied_skills": [
+      "Apache Airflow",
+      "Data Engineering"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "reduced stock-outs by 22% and waste by 9%",
+    "artifacts": [
+      "case_study:cs-aiml-03",
+      "repo:store-demand",
+      "proposal:prop-aiml-017",
+      "proposal:prop-aiml-033",
+      "proposal:prop-aiml-036",
+      "proposal:prop-aiml-051",
+      "proposal:prop-aiml-066",
+      "proposal:prop-aiml-067"
+    ]
+  },
+  {
+    "project_id": "p-aiml-04",
+    "name": "Surface defect detection",
+    "industry": "manufacturing",
+    "skills": [
+      "Computer Vision",
+      "PyTorch",
+      "Python"
+    ],
+    "implied_skills": [
+      "Image Processing",
+      "MLOps"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "caught 96% of defects at under 80 ms per frame",
+    "artifacts": [
+      "case_study:cs-aiml-04",
+      "repo:line-vision",
+      "proposal:prop-aiml-072",
+      "proposal:prop-aiml-121"
+    ]
+  },
+  {
+    "project_id": "p-aiml-05",
+    "name": "Contract clause search",
+    "industry": "legal tech",
+    "skills": [
+      "Retrieval-Augmented Generation",
+      "LangChain",
+      "OpenAI API",
+      "Python"
+    ],
+    "implied_skills": [
+      "Vector Databases",
+      "Prompt Engineering",
+      "FastAPI"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "cut clause lookup from 15 minutes to under 20 seconds",
+    "artifacts": [
+      "case_study:cs-aiml-05",
+      "repo:clause-finder",
+      "proposal:prop-aiml-006",
+      "proposal:prop-aiml-015",
+      "proposal:prop-aiml-021",
+      "proposal:prop-aiml-031",
+      "proposal:prop-aiml-037",
+      "proposal:prop-aiml-045",
+      "proposal:prop-aiml-058",
+      "proposal:prop-aiml-092",
+      "proposal:prop-aiml-117",
+      "proposal:prop-aiml-129",
+      "proposal:prop-aiml-135",
+      "proposal:prop-aiml-145"
+    ]
+  },
+  {
+    "project_id": "p-aiml-06",
+    "name": "Subscription churn model",
+    "industry": "media",
+    "skills": [
+      "scikit-learn",
+      "Python",
+      "Predictive Modeling"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "Pandas"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "found 61% of churners in the top decile of scores",
+    "artifacts": [
+      "case_study:cs-aiml-06",
+      "repo:retention-notebooks",
+      "proposal:prop-aiml-046",
+      "proposal:prop-aiml-060",
+      "proposal:prop-aiml-065",
+      "proposal:prop-aiml-072"
+    ]
+  },
+  {
+    "project_id": "p-aiml-07",
+    "name": "Call transcripts and summaries",
+    "industry": "healthcare",
+    "skills": [
+      "Speech Recognition",
+      "Python",
+      "Hugging Face"
+    ],
+    "implied_skills": [
+      "Large Language Models",
+      "Amazon Web Services"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "saved agents about four minutes per call",
+    "artifacts": [
+      "case_study:cs-aiml-07",
+      "repo:call-notes",
+      "proposal:prop-aiml-011",
+      "proposal:prop-aiml-057"
+    ]
+  },
+  {
+    "project_id": "p-aiml-08",
+    "name": "Product recommendations",
+    "industry": "e-commerce",
+    "skills": [
+      "Recommendation Systems",
+      "Python",
+      "PyTorch"
+    ],
+    "implied_skills": [
+      "A/B Testing",
+      "Redis"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "lifted click-through on recommendations by 17%",
+    "artifacts": [
+      "case_study:cs-aiml-08",
+      "repo:reco-engine",
+      "proposal:prop-aiml-003",
+      "proposal:prop-aiml-008",
+      "proposal:prop-aiml-010",
+      "proposal:prop-aiml-039",
+      "proposal:prop-aiml-048",
+      "proposal:prop-aiml-061",
+      "proposal:prop-aiml-063",
+      "proposal:prop-aiml-068",
+      "proposal:prop-aiml-070",
+      "proposal:prop-aiml-082",
+      "proposal:prop-aiml-097",
+      "proposal:prop-aiml-104",
+      "proposal:prop-aiml-123",
+      "proposal:prop-aiml-124"
+    ]
+  },
+  {
+    "project_id": "p-aiml-09",
+    "name": "Review sentiment tracker",
+    "industry": "hospitality",
+    "skills": [
+      "Natural Language Processing",
+      "Hugging Face",
+      "Python"
+    ],
+    "implied_skills": [
+      "Data Visualization",
+      "Data Scraping"
+    ],
+    "year": 2023,
+    "client_type": "small business",
+    "outcome_metric": "gave managers a weekly issue list that replaced hours of reading",
+    "artifacts": [
+      "case_study:cs-aiml-09",
+      "proposal:prop-aiml-007",
+      "proposal:prop-aiml-016",
+      "proposal:prop-aiml-036",
+      "proposal:prop-aiml-056",
+      "proposal:prop-aiml-059",
+      "proposal:prop-aiml-064",
+      "proposal:prop-aiml-066",
+      "proposal:prop-aiml-098",
+      "proposal:prop-aiml-130",
+      "proposal:prop-aiml-133",
+      "proposal:prop-aiml-142",
+      "proposal:prop-aiml-146",
+      "proposal:prop-aiml-147",
+      "proposal:prop-aiml-148"
+    ]
+  },
+  {
+    "project_id": "p-aiml-10",
+    "name": "Insurance claim document sorting",
+    "industry": "insurance",
+    "skills": [
+      "Deep Learning",
+      "TensorFlow",
+      "Python"
+    ],
+    "implied_skills": [
+      "OCR",
+      "MLOps"
+    ],
+    "year": 2025,
+    "client_type": "enterprise",
+    "outcome_metric": "automated sorting of 82% of packets with no manual touch",
+    "artifacts": [
+      "case_study:cs-aiml-10",
+      "proposal:prop-aiml-025",
+      "proposal:prop-aiml-027",
+      "proposal:prop-aiml-050",
+      "proposal:prop-aiml-053",
+      "proposal:prop-aiml-057",
+      "proposal:prop-aiml-060"
+    ]
+  },
+  {
+    "project_id": "p-aiml-11",
+    "name": "HR policy chatbot",
+    "industry": "hr tech",
+    "skills": [
+      "Chatbot Development",
+      "OpenAI API",
+      "Python"
+    ],
+    "implied_skills": [
+      "Prompt Engineering",
+      "Vector Databases"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "deflected 54% of repeat HR questions",
+    "artifacts": [
+      "proposal:prop-aiml-012",
+      "proposal:prop-aiml-101"
+    ]
+  },
+  {
+    "project_id": "p-aiml-12",
+    "name": "Payment fraud scoring API",
+    "industry": "payments",
+    "skills": [
+      "XGBoost",
+      "FastAPI",
+      "Python"
+    ],
+    "implied_skills": [
+      "Docker",
+      "Redis"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "caught 31% more fraud at the same false-positive rate",
+    "artifacts": [
+      "case_study:cs-aiml-12",
+      "repo:fraud-score-api",
+      "proposal:prop-aiml-004",
+      "proposal:prop-aiml-013",
+      "proposal:prop-aiml-015",
+      "proposal:prop-aiml-023",
+      "proposal:prop-aiml-029",
+      "proposal:prop-aiml-035",
+      "proposal:prop-aiml-041",
+      "proposal:prop-aiml-045",
+      "proposal:prop-aiml-049",
+      "proposal:prop-aiml-071",
+      "proposal:prop-aiml-092",
+      "proposal:prop-aiml-102",
+      "proposal:prop-aiml-114",
+      "proposal:prop-aiml-117",
+      "proposal:prop-aiml-119",
+      "proposal:prop-aiml-123",
+      "proposal:prop-aiml-126",
+      "proposal:prop-aiml-139"
+    ]
+  },
+  {
+    "project_id": "p-aiml-13",
+    "name": "Crop disease detection",
+    "industry": "agritech",
+    "skills": [
+      "Computer Vision",
+      "TensorFlow"
+    ],
+    "implied_skills": [
+      "Image Processing",
+      "Mobile App Development"
+    ],
+    "year": 2023,
+    "client_type": "startup",
+    "outcome_metric": "reached 91% accuracy on field photos taken in poor light",
+    "artifacts": [
+      "case_study:cs-aiml-13",
+      "proposal:prop-aiml-001",
+      "proposal:prop-aiml-005",
+      "proposal:prop-aiml-034",
+      "proposal:prop-aiml-062",
+      "proposal:prop-aiml-073",
+      "proposal:prop-aiml-090",
+      "proposal:prop-aiml-094",
+      "proposal:prop-aiml-096",
+      "proposal:prop-aiml-100",
+      "proposal:prop-aiml-107",
+      "proposal:prop-aiml-141"
+    ]
+  },
+  {
+    "project_id": "p-aiml-14",
+    "name": "Sensor anomaly detection",
+    "industry": "energy",
+    "skills": [
+      "Python",
+      "Time Series Analysis",
+      "scikit-learn"
+    ],
+    "implied_skills": [
+      "Data Engineering",
+      "Statistics"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "gave maintenance teams about 9 hours of warning on average",
+    "artifacts": [
+      "case_study:cs-aiml-14",
+      "proposal:prop-aiml-030",
+      "proposal:prop-aiml-051",
+      "proposal:prop-aiml-087",
+      "proposal:prop-aiml-089",
+      "proposal:prop-aiml-095",
+      "proposal:prop-aiml-128",
+      "proposal:prop-aiml-143"
+    ]
+  },
+  {
+    "project_id": "p-aiml-15",
+    "name": "LLM evaluation harness",
+    "industry": "ai startup",
+    "skills": [
+      "Large Language Models",
+      "Python",
+      "Prompt Engineering"
+    ],
+    "implied_skills": [
+      "DevOps",
+      "Statistics"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "caught three silent quality drops before release",
+    "artifacts": [
+      "case_study:cs-aiml-15",
+      "repo:prompt-regression",
+      "proposal:prop-aiml-010",
+      "proposal:prop-aiml-109"
+    ]
+  },
+  {
+    "project_id": "p-aiml-16",
+    "name": "Resume parsing and matching",
+    "industry": "recruiting",
+    "skills": [
+      "Natural Language Processing",
+      "Python",
+      "scikit-learn"
+    ],
+    "implied_skills": [
+      "Docker"
+    ],
+    "year": 2023,
+    "client_type": "small business",
+    "outcome_metric": "cut recruiter screening time by half",
+    "artifacts": [
+      "proposal:prop-aiml-025",
+      "proposal:prop-aiml-027",
+      "proposal:prop-aiml-047",
+      "proposal:prop-aiml-052",
+      "proposal:prop-aiml-053"
+    ]
+  },
+  {
+    "project_id": "p-aiml-17",
+    "name": "Voice agent for appointments",
+    "industry": "healthcare",
+    "skills": [
+      "Speech Recognition",
+      "OpenAI API",
+      "Python"
+    ],
+    "implied_skills": [
+      "Prompt Engineering",
+      "AWS Lambda"
+    ],
+    "year": 2025,
+    "client_type": "mid-size company",
+    "outcome_metric": "handled 63% of booking calls end to end",
+    "artifacts": [
+      "case_study:cs-aiml-17",
+      "proposal:prop-aiml-093"
+    ]
+  },
+  {
+    "project_id": "p-aiml-18",
+    "name": "Dynamic pricing model",
+    "industry": "travel",
+    "skills": [
+      "Predictive Modeling",
+      "XGBoost",
+      "Python"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "A/B Testing"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "raised revenue per available room by 6.5%",
+    "artifacts": [
+      "case_study:cs-aiml-18",
+      "proposal:prop-aiml-009",
+      "proposal:prop-aiml-032",
+      "proposal:prop-aiml-104",
+      "proposal:prop-aiml-113",
+      "proposal:prop-aiml-128"
+    ]
+  },
+  {
+    "project_id": "p-aiml-19",
+    "name": "Model serving platform",
+    "industry": "consulting",
+    "skills": [
+      "MLOps",
+      "Docker",
+      "Kubernetes",
+      "Amazon Web Services"
+    ],
+    "implied_skills": [
+      "DevOps",
+      "Python"
+    ],
+    "year": 2024,
+    "client_type": "enterprise",
+    "outcome_metric": "cut model release time from two weeks to one day",
+    "artifacts": [
+      "case_study:cs-aiml-19",
+      "repo:model-release-kit",
+      "proposal:prop-aiml-011",
+      "proposal:prop-aiml-084",
+      "proposal:prop-aiml-089",
+      "proposal:prop-aiml-091",
+      "proposal:prop-aiml-095",
+      "proposal:prop-aiml-106",
+      "proposal:prop-aiml-116",
+      "proposal:prop-aiml-131"
+    ]
+  },
+  {
+    "project_id": "p-aiml-20",
+    "name": "Image search by example",
+    "industry": "media",
+    "skills": [
+      "Computer Vision",
+      "Vector Databases",
+      "PyTorch"
+    ],
+    "implied_skills": [
+      "FastAPI",
+      "Docker"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "editors found a usable photo on the first page 78% of the time",
+    "artifacts": [
+      "case_study:cs-aiml-20",
+      "proposal:prop-aiml-004",
+      "proposal:prop-aiml-006",
+      "proposal:prop-aiml-013",
+      "proposal:prop-aiml-019",
+      "proposal:prop-aiml-026",
+      "proposal:prop-aiml-029",
+      "proposal:prop-aiml-039",
+      "proposal:prop-aiml-042",
+      "proposal:prop-aiml-043",
+      "proposal:prop-aiml-065",
+      "proposal:prop-aiml-079",
+      "proposal:prop-aiml-081",
+      "proposal:prop-aiml-086",
+      "proposal:prop-aiml-107",
+      "proposal:prop-aiml-110",
+      "proposal:prop-aiml-144"
+    ]
+  }
+]

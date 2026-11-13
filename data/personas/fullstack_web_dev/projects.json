@@ -1,0 +1,597 @@
+[
+  {
+    "project_id": "p-web-01",
+    "name": "Yoga studio booking platform",
+    "industry": "wellness",
+    "skills": [
+      "React",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Stripe",
+      "Docker"
+    ],
+    "year": 2025,
+    "client_type": "small business",
+    "outcome_metric": "online bookings grew threefold in two months",
+    "artifacts": [
+      "case_study:cs-web-01",
+      "repo:studio-booking",
+      "proposal:prop-web-022",
+      "proposal:prop-web-052",
+      "proposal:prop-web-091",
+      "proposal:prop-web-114"
+    ]
+  },
+  {
+    "project_id": "p-web-02",
+    "name": "Used camera gear marketplace",
+    "industry": "e-commerce",
+    "skills": [
+      "Next.js",
+      "TypeScript",
+      "Stripe"
+    ],
+    "implied_skills": [
+      "PostgreSQL",
+      "Redis"
+    ],
+    "year": 2024,
+    "client_type": "startup",
+    "outcome_metric": "reached 1,200 listings in the first quarter",
+    "artifacts": [
+      "case_study:cs-web-02",
+      "repo:gear-market",
+      "proposal:prop-web-038",
+      "proposal:prop-web-041",
+      "proposal:prop-web-077",
+      "proposal:prop-web-093"
+    ]
+  },
+  {
+    "project_id": "p-web-03",
+    "name": "Logistics admin dashboard",
+    "industry": "logistics",
+    "skills": [
+      "React",
+      "Express.js",
+      "MongoDB"
+    ],
+    "implied_skills": [
+      "Dashboard",
+      "Docker"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "cut dispatcher handling time per order by 30%",
+    "artifacts": [
+      "case_study:cs-web-03",
+      "repo:ops-admin-panel",
+      "proposal:prop-web-006",
+      "proposal:prop-web-011",
+      "proposal:prop-web-034",
+      "proposal:prop-web-037",
+      "proposal:prop-web-055",
+      "proposal:prop-web-084",
+      "proposal:prop-web-087",
+      "proposal:prop-web-099",
+      "proposal:prop-web-144"
+    ]
+  },
+  {
+    "project_id": "p-web-04",
+    "name": "Invoicing SaaS",
+    "industry": "fintech",
+    "skills": [
+      "Next.js",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Stripe",
+      "TypeScript"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "got the first 300 paying users within five months",
+    "artifacts": [
+      "case_study:cs-web-04",
+      "repo:invoice-saas",
+      "proposal:prop-web-018",
+      "proposal:prop-web-033",
+      "proposal:prop-web-038",
+      "proposal:prop-web-043",
+      "proposal:prop-web-045",
+      "proposal:prop-web-050",
+      "proposal:prop-web-068",
+      "proposal:prop-web-073",
+      "proposal:prop-web-075",
+      "proposal:prop-web-113",
+      "proposal:prop-web-119",
+      "proposal:prop-web-145"
+    ]
+  },
+  {
+    "project_id": "p-web-05",
+    "name": "Property listing site with map search",
+    "industry": "real estate",
+    "skills": [
+      "React",
+      "Django",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "REST API",
+      "Responsive Design"
+    ],
+    "year": 2023,
+    "client_type": "small business",
+    "outcome_metric": "doubled enquiries from mobile visitors",
+    "artifacts": [
+      "case_study:cs-web-05",
+      "repo:homefinder",
+      "proposal:prop-web-018",
+      "proposal:prop-web-029",
+      "proposal:prop-web-051",
+      "proposal:prop-web-054",
+      "proposal:prop-web-068",
+      "proposal:prop-web-098",
+      "proposal:prop-web-100",
+      "proposal:prop-web-102",
+      "proposal:prop-web-149"
+    ]
+  },
+  {
+    "project_id": "p-web-06",
+    "name": "Learning management system",
+    "industry": "edtech",
+    "skills": [
+      "Vue.js",
+      "Express.js",
+      "MongoDB"
+    ],
+    "implied_skills": [
+      "Docker",
+      "Redis"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "supported 5,000 active students on one small server",
+    "artifacts": [
+      "case_study:cs-web-06",
+      "repo:learn-hub",
+      "proposal:prop-web-015",
+      "proposal:prop-web-053",
+      "proposal:prop-web-071"
+    ]
+  },
+  {
+    "project_id": "p-web-07",
+    "name": "Headless Shopify storefront",
+    "industry": "retail",
+    "skills": [
+      "Shopify",
+      "Next.js",
+      "GraphQL"
+    ],
+    "implied_skills": [
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "cut page load from 4.8 to 1.6 seconds and raised conversion by 11%",
+    "artifacts": [
+      "case_study:cs-web-07",
+      "repo:headless-shop",
+      "proposal:prop-web-002",
+      "proposal:prop-web-014",
+      "proposal:prop-web-032",
+      "proposal:prop-web-033",
+      "proposal:prop-web-040",
+      "proposal:prop-web-048",
+      "proposal:prop-web-134",
+      "proposal:prop-web-139"
+    ]
+  },
+  {
+    "project_id": "p-web-08",
+    "name": "Restaurant ordering app",
+    "industry": "hospitality",
+    "skills": [
+      "React",
+      "Firebase",
+      "Tailwind CSS"
+    ],
+    "implied_skills": [
+      "Responsive Design",
+      "Stripe"
+    ],
+    "year": 2023,
+    "client_type": "small business",
+    "outcome_metric": "took over 40% of orders away from the phone line",
+    "artifacts": [
+      "case_study:cs-web-08",
+      "proposal:prop-web-009",
+      "proposal:prop-web-039",
+      "proposal:prop-web-059",
+      "proposal:prop-web-080",
+      "proposal:prop-web-114",
+      "proposal:prop-web-143",
+      "proposal:prop-web-147"
+    ]
+  },
+  {
+    "project_id": "p-web-09",
+    "name": "Insurance customer portal",
+    "industry": "insurance",
+    "skills": [
+      "React",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "REST API",
+      "DevOps"
+    ],
+    "year": 2025,
+    "client_type": "enterprise",
+    "outcome_metric": "moved 35% of service calls to self-service",
+    "artifacts": [
+      "case_study:cs-web-09",
+      "repo:customer-portal",
+      "proposal:prop-web-016",
+      "proposal:prop-web-021",
+      "proposal:prop-web-025",
+      "proposal:prop-web-027",
+      "proposal:prop-web-061",
+      "proposal:prop-web-071",
+      "proposal:prop-web-147"
+    ]
+  },
+  {
+    "project_id": "p-web-10",
+    "name": "Event ticketing site",
+    "industry": "events",
+    "skills": [
+      "Next.js",
+      "Stripe",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Redis",
+      "Docker"
+    ],
+    "year": 2024,
+    "client_type": "small business",
+    "outcome_metric": "sold 9,000 tickets with no double bookings",
+    "artifacts": [
+      "case_study:cs-web-10",
+      "proposal:prop-web-046",
+      "proposal:prop-web-085",
+      "proposal:prop-web-095"
+    ]
+  },
+  {
+    "project_id": "p-web-11",
+    "name": "Niche job board",
+    "industry": "hr tech",
+    "skills": [
+      "Django",
+      "React",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "REST API",
+      "Amazon Web Services"
+    ],
+    "year": 2023,
+    "client_type": "startup",
+    "outcome_metric": "reached 40 paying employers in four months",
+    "artifacts": [
+      "case_study:cs-web-11",
+      "proposal:prop-web-014",
+      "proposal:prop-web-073",
+      "proposal:prop-web-085",
+      "proposal:prop-web-095",
+      "proposal:prop-web-096",
+      "proposal:prop-web-111",
+      "proposal:prop-web-128",
+      "proposal:prop-web-135"
+    ]
+  },
+  {
+    "project_id": "p-web-12",
+    "name": "Fleet tracking web app",
+    "industry": "logistics",
+    "skills": [
+      "React",
+      "Node.js",
+      "MongoDB"
+    ],
+    "implied_skills": [
+      "Dashboard",
+      "REST API"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "cut late deliveries by 14%",
+    "artifacts": [
+      "proposal:prop-web-036",
+      "proposal:prop-web-047",
+      "proposal:prop-web-138",
+      "proposal:prop-web-144"
+    ]
+  },
+  {
+    "project_id": "p-web-13",
+    "name": "Headless CMS migration",
+    "industry": "media",
+    "skills": [
+      "WordPress",
+      "Next.js",
+      "GraphQL"
+    ],
+    "implied_skills": [
+      "TypeScript"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "kept organic traffic flat through the move and halved load time",
+    "artifacts": [
+      "case_study:cs-web-13",
+      "proposal:prop-web-010",
+      "proposal:prop-web-012",
+      "proposal:prop-web-019",
+      "proposal:prop-web-028",
+      "proposal:prop-web-062",
+      "proposal:prop-web-097",
+      "proposal:prop-web-129",
+      "proposal:prop-web-146",
+      "proposal:prop-web-148"
+    ]
+  },
+  {
+    "project_id": "p-web-14",
+    "name": "Telehealth appointment app",
+    "industry": "healthcare",
+    "skills": [
+      "React",
+      "Node.js",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Docker",
+      "Amazon Web Services"
+    ],
+    "year": 2025,
+    "client_type": "mid-size company",
+    "outcome_metric": "reduced no-shows by 19%",
+    "artifacts": [
+      "case_study:cs-web-14",
+      "proposal:prop-web-003",
+      "proposal:prop-web-021",
+      "proposal:prop-web-025",
+      "proposal:prop-web-026",
+      "proposal:prop-web-039",
+      "proposal:prop-web-046",
+      "proposal:prop-web-050",
+      "proposal:prop-web-069",
+      "proposal:prop-web-110",
+      "proposal:prop-web-119",
+      "proposal:prop-web-132"
+    ]
+  },
+  {
+    "project_id": "p-web-15",
+    "name": "Subscription box storefront",
+    "industry": "e-commerce",
+    "skills": [
+      "Shopify",
+      "JavaScript",
+      "Stripe"
+    ],
+    "implied_skills": [
+      "Responsive Design"
+    ],
+    "year": 2024,
+    "client_type": "small business",
+    "outcome_metric": "lowered support emails about billing by 45%",
+    "artifacts": [
+      "case_study:cs-web-15",
+      "proposal:prop-web-011",
+      "proposal:prop-web-023",
+      "proposal:prop-web-027",
+      "proposal:prop-web-032",
+      "proposal:prop-web-060",
+      "proposal:prop-web-066",
+      "proposal:prop-web-067",
+      "proposal:prop-web-094",
+      "proposal:prop-web-139"
+    ]
+  },
+  {
+    "project_id": "p-web-16",
+    "name": "Multi-tenant SaaS starter",
+    "industry": "saas",
+    "skills": [
+      "TypeScript",
+      "Next.js",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Docker",
+      "DevOps"
+    ],
+    "year": 2025,
+    "client_type": "startup",
+    "outcome_metric": "saved the team roughly three months of groundwork",
+    "artifacts": [
+      "case_study:cs-web-16",
+      "repo:saas-starter",
+      "proposal:prop-web-105",
+      "proposal:prop-web-115",
+      "proposal:prop-web-137"
+    ]
+  },
+  {
+    "project_id": "p-web-17",
+    "name": "Inventory management app",
+    "industry": "retail",
+    "skills": [
+      "Angular",
+      "Node.js",
+      "MySQL"
+    ],
+    "implied_skills": [
+      "REST API",
+      "Dashboard"
+    ],
+    "year": 2023,
+    "client_type": "small business",
+    "outcome_metric": "cut stock count errors by 60%",
+    "artifacts": [
+      "proposal:prop-web-009",
+      "proposal:prop-web-047",
+      "proposal:prop-web-051",
+      "proposal:prop-web-075",
+      "proposal:prop-web-079",
+      "proposal:prop-web-080",
+      "proposal:prop-web-104",
+      "proposal:prop-web-145",
+      "proposal:prop-web-150"
+    ]
+  },
+  {
+    "project_id": "p-web-18",
+    "name": "Charity donation site",
+    "industry": "nonprofit",
+    "skills": [
+      "React",
+      "Stripe",
+      "Node.js"
+    ],
+    "implied_skills": [
+      "Responsive Design",
+      "Amazon Web Services"
+    ],
+    "year": 2023,
+    "client_type": "nonprofit",
+    "outcome_metric": "raised monthly donors by 28% after launch",
+    "artifacts": [
+      "case_study:cs-web-18",
+      "proposal:prop-web-036",
+      "proposal:prop-web-091",
+      "proposal:prop-web-100",
+      "proposal:prop-web-109",
+      "proposal:prop-web-120",
+      "proposal:prop-web-134"
+    ]
+  },
+  {
+    "project_id": "p-web-19",
+    "name": "Support chat widget",
+    "industry": "saas",
+    "skills": [
+      "React",
+      "Node.js",
+      "Redis"
+    ],
+    "implied_skills": [
+      "Docker",
+      "REST API"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "answered first messages within 40 seconds on average",
+    "artifacts": [
+      "case_study:cs-web-19",
+      "proposal:prop-web-035",
+      "proposal:prop-web-040",
+      "proposal:prop-web-052",
+      "proposal:prop-web-057",
+      "proposal:prop-web-086",
+      "proposal:prop-web-115",
+      "proposal:prop-web-116"
+    ]
+  },
+  {
+    "project_id": "p-web-20",
+    "name": "Operations internal tools",
+    "industry": "operations",
+    "skills": [
+      "Flask",
+      "Python",
+      "PostgreSQL"
+    ],
+    "implied_skills": [
+      "Docker",
+      "Automation"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "removed about 12 hours of weekly admin",
+    "artifacts": [
+      "case_study:cs-web-20",
+      "proposal:prop-web-034",
+      "proposal:prop-web-044",
+      "proposal:prop-web-054",
+      "proposal:prop-web-064",
+      "proposal:prop-web-067",
+      "proposal:prop-web-082",
+      "proposal:prop-web-121",
+      "proposal:prop-web-137",
+      "proposal:prop-web-143"
+    ]
+  },
+  {
+    "project_id": "p-web-21",
+    "name": "GraphQL gateway",
+    "industry": "fintech",
+    "skills": [
+      "GraphQL",
+      "Node.js",
+      "TypeScript"
+    ],
+    "implied_skills": [
+      "REST API",
+      "Docker"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "cut mobile requests per screen from nine to two",
+    "artifacts": [
+      "case_study:cs-web-21",
+      "repo:api-gateway",
+      "proposal:prop-web-042",
+      "proposal:prop-web-109",
+      "proposal:prop-web-118"
+    ]
+  },
+  {
+    "project_id": "p-web-22",
+    "name": "Performance and accessibility overhaul",
+    "industry": "media",
+    "skills": [
+      "JavaScript",
+      "React",
+      "CSS"
+    ],
+    "implied_skills": [
+      "Responsive Design",
+      "Front-End Development"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "reached a Lighthouse score above 95 and passed the accessibility audit",
+    "artifacts": [
+      "case_study:cs-web-22",
+      "proposal:prop-web-041",
+      "proposal:prop-web-064",
+      "proposal:prop-web-084",
+      "proposal:prop-web-086",
+      "proposal:prop-web-138"
+    ]
+  }
+]

@@ -1,0 +1,292 @@
+[
+  {
+    "review_id": 1,
+    "client": "Summit Wellness",
+    "rating": 4,
+    "date": "2026-01-24",
+    "text": "Good technical judgement. Removed about 12 hours of weekly admin. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-web-20"
+    ]
+  },
+  {
+    "review_id": 2,
+    "client": "Fernhill Charity",
+    "rating": 4,
+    "date": "2023-04-16",
+    "text": "Good technical judgement. Cut mobile requests per screen from nine to two. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-web-21"
+    ]
+  },
+  {
+    "review_id": 3,
+    "client": "Cedar & Co",
+    "rating": 5,
+    "date": "2025-11-28",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Doubled enquiries from mobile visitors.",
+    "project_ids": [
+      "p-web-05"
+    ]
+  },
+  {
+    "review_id": 4,
+    "client": "Greenfield Energy",
+    "rating": 4,
+    "date": "2024-07-14",
+    "text": "The project for our logistics unit finished a week late but the result was worth it. Cut late deliveries by 14%.",
+    "project_ids": [
+      "p-web-12"
+    ]
+  },
+  {
+    "review_id": 5,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2023-11-01",
+    "text": "We hired for the media piece last year and it paid for itself quickly. Reached a Lighthouse score above 95 and passed the accessibility audit.",
+    "project_ids": [
+      "p-web-22"
+    ]
+  },
+  {
+    "review_id": 6,
+    "client": "Redwood Insurance",
+    "rating": 5,
+    "date": "2023-12-27",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-web-06"
+    ]
+  },
+  {
+    "review_id": 7,
+    "client": "Atlas Payments",
+    "rating": 4,
+    "date": "2023-05-06",
+    "text": "Good technical judgement. Moved 35% of service calls to self-service. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-web-09"
+    ]
+  },
+  {
+    "review_id": 8,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2025-10-25",
+    "text": "We hired for the edtech piece last year and it paid for itself quickly. Supported 5,000 active students on one small server.",
+    "project_ids": [
+      "p-web-06"
+    ]
+  },
+  {
+    "review_id": 9,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2025-06-23",
+    "text": "Professional and calm under pressure when our requirements changed mid-way.",
+    "project_ids": [
+      "p-web-03"
+    ]
+  },
+  {
+    "review_id": 10,
+    "client": "Summit Wellness",
+    "rating": 5,
+    "date": "2024-01-22",
+    "text": "Exactly what we needed for the e-commerce work. Reached 1,200 listings in the first quarter. Would hire again.",
+    "project_ids": [
+      "p-web-02"
+    ]
+  },
+  {
+    "review_id": 11,
+    "client": "Atlas Payments",
+    "rating": 4,
+    "date": "2024-08-30",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-web-02"
+    ]
+  },
+  {
+    "review_id": 12,
+    "client": "Oakmont Retail",
+    "rating": 4,
+    "date": "2024-06-30",
+    "text": "The project for our media unit finished a week late but the result was worth it. Reached a Lighthouse score above 95 and passed the accessibility audit.",
+    "project_ids": [
+      "p-web-22"
+    ]
+  },
+  {
+    "review_id": 13,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2024-10-06",
+    "text": "Exactly what we needed for the media work. Reached a Lighthouse score above 95 and passed the accessibility audit. Would hire again.",
+    "project_ids": [
+      "p-web-22"
+    ]
+  },
+  {
+    "review_id": 14,
+    "client": "Tidewater Marine",
+    "rating": 5,
+    "date": "2025-01-27",
+    "text": "We hired for the edtech piece last year and it paid for itself quickly. Supported 5,000 active students on one small server.",
+    "project_ids": [
+      "p-web-06"
+    ]
+  },
+  {
+    "review_id": 15,
+    "client": "Pinecrest Legal",
+    "rating": 5,
+    "date": "2025-10-19",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Cut page load from 4.8 to 1.6 seconds and raised conversion by 11%.",
+    "project_ids": [
+      "p-web-07"
+    ]
+  },
+  {
+    "review_id": 16,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2025-09-01",
+    "text": "Reliable, asks the right questions and delivers early. The logistics work is still running without trouble.",
+    "project_ids": [
+      "p-web-12"
+    ]
+  },
+  {
+    "review_id": 17,
+    "client": "Tidewater Marine",
+    "rating": 5,
+    "date": "2024-01-25",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Answered first messages within 40 seconds on average.",
+    "project_ids": [
+      "p-web-19"
+    ]
+  },
+  {
+    "review_id": 18,
+    "client": "Bluepeak Travel",
+    "rating": 5,
+    "date": "2025-05-22",
+    "text": "She rebuilt how our nonprofit team handles this part of the business. Raised monthly donors by 28% after launch. Clear updates all the way.",
+    "project_ids": [
+      "p-web-18"
+    ]
+  },
+  {
+    "review_id": 19,
+    "client": "Lumen Learning",
+    "rating": 5,
+    "date": "2025-12-09",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-web-04"
+    ]
+  },
+  {
+    "review_id": 20,
+    "client": "Pinecrest Legal",
+    "rating": 5,
+    "date": "2023-12-16",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-web-19"
+    ]
+  },
+  {
+    "review_id": 21,
+    "client": "Kestrel Health",
+    "rating": 4,
+    "date": "2023-06-22",
+    "text": "Solid work. The first version needed two rounds of changes, and the final result was what we wanted.",
+    "project_ids": [
+      "p-web-05"
+    ]
+  },
+  {
+    "review_id": 22,
+    "client": "Copperline Hotels",
+    "rating": 5,
+    "date": "2024-04-21",
+    "text": "Professional and calm under pressure when our requirements changed mid-way.",
+    "project_ids": [
+      "p-web-03"
+    ]
+  },
+  {
+    "review_id": 23,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2024-05-08",
+    "text": "Exactly what we needed for the retail work. Cut stock count errors by 60%. Would hire again.",
+    "project_ids": [
+      "p-web-17"
+    ]
+  },
+  {
+    "review_id": 24,
+    "client": "Atlas Payments",
+    "rating": 4,
+    "date": "2025-01-04",
+    "text": "The project for our edtech unit finished a week late but the result was worth it. Supported 5,000 active students on one small server.",
+    "project_ids": [
+      "p-web-06"
+    ]
+  },
+  {
+    "review_id": 25,
+    "client": "Pinecrest Legal",
+    "rating": 5,
+    "date": "2026-04-13",
+    "text": "Professional and calm under pressure when our requirements changed mid-way.",
+    "project_ids": [
+      "p-web-06"
+    ]
+  },
+  {
+    "review_id": 26,
+    "client": "Meridian Staffing",
+    "rating": 4,
+    "date": "2023-04-16",
+    "text": "Solid work. The first version needed two rounds of changes, and the final result was what we wanted.",
+    "project_ids": [
+      "p-web-07"
+    ]
+  },
+  {
+    "review_id": 27,
+    "client": "Lumen Learning",
+    "rating": 5,
+    "date": "2024-06-29",
+    "text": "Exactly what we needed for the events work. Sold 9,000 tickets with no double bookings. Would hire again.",
+    "project_ids": [
+      "p-web-10"
+    ]
+  },
+  {
+    "review_id": 28,
+    "client": "Redwood Insurance",
+    "rating": 5,
+    "date": "2025-10-13",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Raised monthly donors by 28% after launch.",
+    "project_ids": [
+      "p-web-18"
+    ]
+  },
+  {
+    "review_id": 29,
+    "client": "Redwood Insurance",
+    "rating": 4,
+    "date": "2023-10-27",
+    "text": "Solid work. The first version needed two rounds of changes, and the final result was what we wanted.",
+    "project_ids": [
+      "p-web-02"
+    ]
+  }
+]

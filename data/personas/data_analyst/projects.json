@@ -1,0 +1,553 @@
+[
+  {
+    "project_id": "p-data-01",
+    "name": "Retail sales dashboard",
+    "industry": "retail",
+    "skills": [
+      "Microsoft Power BI",
+      "SQL",
+      "Microsoft Excel"
+    ],
+    "implied_skills": [
+      "Data Modeling",
+      "Business Intelligence"
+    ],
+    "year": 2025,
+    "client_type": "mid-size company",
+    "outcome_metric": "replaced six weekly spreadsheets and cut report prep from two days to two hours",
+    "artifacts": [
+      "case_study:cs-data-01",
+      "repo:sales-model",
+      "proposal:prop-data-039",
+      "proposal:prop-data-087",
+      "proposal:prop-data-116"
+    ]
+  },
+  {
+    "project_id": "p-data-02",
+    "name": "Marketing attribution analysis",
+    "industry": "e-commerce",
+    "skills": [
+      "Google Analytics",
+      "SQL",
+      "Looker Studio"
+    ],
+    "implied_skills": [
+      "Marketing Analytics",
+      "Data Cleaning"
+    ],
+    "year": 2024,
+    "client_type": "scale-up",
+    "outcome_metric": "moved 18% of ad budget to channels with twice the return",
+    "artifacts": [
+      "case_study:cs-data-02",
+      "repo:attribution-sql",
+      "proposal:prop-data-019",
+      "proposal:prop-data-050",
+      "proposal:prop-data-072",
+      "proposal:prop-data-084",
+      "proposal:prop-data-087",
+      "proposal:prop-data-089",
+      "proposal:prop-data-091",
+      "proposal:prop-data-095",
+      "proposal:prop-data-108",
+      "proposal:prop-data-126"
+    ]
+  },
+  {
+    "project_id": "p-data-03",
+    "name": "Customer segmentation",
+    "industry": "retail",
+    "skills": [
+      "Python",
+      "Pandas",
+      "Tableau"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "Data Cleaning"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "lifted email campaign revenue per send by 24%",
+    "artifacts": [
+      "case_study:cs-data-03",
+      "repo:rfm-segments",
+      "proposal:prop-data-044",
+      "proposal:prop-data-056",
+      "proposal:prop-data-136",
+      "proposal:prop-data-143"
+    ]
+  },
+  {
+    "project_id": "p-data-04",
+    "name": "Month-end reporting automation",
+    "industry": "finance",
+    "skills": [
+      "Microsoft Excel",
+      "SQL",
+      "Python"
+    ],
+    "implied_skills": [
+      "Automation",
+      "ETL"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "cut month-end reporting from five days to one",
+    "artifacts": [
+      "case_study:cs-data-04",
+      "repo:month-end-pack",
+      "proposal:prop-data-007",
+      "proposal:prop-data-018",
+      "proposal:prop-data-021",
+      "proposal:prop-data-025",
+      "proposal:prop-data-049",
+      "proposal:prop-data-058",
+      "proposal:prop-data-064",
+      "proposal:prop-data-104",
+      "proposal:prop-data-122",
+      "proposal:prop-data-127",
+      "proposal:prop-data-134",
+      "proposal:prop-data-137"
+    ]
+  },
+  {
+    "project_id": "p-data-05",
+    "name": "Checkout A/B test analysis",
+    "industry": "e-commerce",
+    "skills": [
+      "Python",
+      "Statistics",
+      "SQL"
+    ],
+    "implied_skills": [
+      "A/B Testing",
+      "Data Visualization"
+    ],
+    "year": 2025,
+    "client_type": "scale-up",
+    "outcome_metric": "prevented a rollout that would have cost about 3% of orders",
+    "artifacts": [
+      "case_study:cs-data-05",
+      "repo:checkout-experiment",
+      "proposal:prop-data-003",
+      "proposal:prop-data-004",
+      "proposal:prop-data-031",
+      "proposal:prop-data-042",
+      "proposal:prop-data-055",
+      "proposal:prop-data-080",
+      "proposal:prop-data-081",
+      "proposal:prop-data-109"
+    ]
+  },
+  {
+    "project_id": "p-data-06",
+    "name": "Hospital waiting-time study",
+    "industry": "healthcare",
+    "skills": [
+      "R",
+      "Tableau",
+      "SQL"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "Data Cleaning"
+    ],
+    "year": 2023,
+    "client_type": "enterprise",
+    "outcome_metric": "identified a shift gap that explained 40% of long waits",
+    "artifacts": [
+      "case_study:cs-data-06",
+      "repo:wait-times",
+      "proposal:prop-data-005",
+      "proposal:prop-data-029",
+      "proposal:prop-data-040",
+      "proposal:prop-data-047",
+      "proposal:prop-data-079"
+    ]
+  },
+  {
+    "project_id": "p-data-07",
+    "name": "Subscription cohort analysis",
+    "industry": "saas",
+    "skills": [
+      "SQL",
+      "Python",
+      "Looker Studio"
+    ],
+    "implied_skills": [
+      "Data Warehousing",
+      "Data Modeling"
+    ],
+    "year": 2024,
+    "client_type": "startup",
+    "outcome_metric": "found an onboarding step that explained a 12 point retention gap",
+    "artifacts": [
+      "case_study:cs-data-07",
+      "repo:retention-cohorts",
+      "proposal:prop-data-010",
+      "proposal:prop-data-011",
+      "proposal:prop-data-076",
+      "proposal:prop-data-080",
+      "proposal:prop-data-085",
+      "proposal:prop-data-088",
+      "proposal:prop-data-102",
+      "proposal:prop-data-105",
+      "proposal:prop-data-140"
+    ]
+  },
+  {
+    "project_id": "p-data-08",
+    "name": "Supply chain KPI dashboard",
+    "industry": "logistics",
+    "skills": [
+      "Tableau",
+      "SQL",
+      "Microsoft Excel"
+    ],
+    "implied_skills": [
+      "Data Warehousing",
+      "Business Intelligence"
+    ],
+    "year": 2024,
+    "client_type": "mid-size company",
+    "outcome_metric": "improved on-time delivery tracking from monthly to daily",
+    "artifacts": [
+      "case_study:cs-data-08",
+      "proposal:prop-data-036",
+      "proposal:prop-data-037",
+      "proposal:prop-data-047",
+      "proposal:prop-data-063",
+      "proposal:prop-data-094",
+      "proposal:prop-data-107",
+      "proposal:prop-data-131",
+      "proposal:prop-data-148"
+    ]
+  },
+  {
+    "project_id": "p-data-09",
+    "name": "University survey analysis",
+    "industry": "education",
+    "skills": [
+      "R",
+      "Statistics",
+      "Data Visualization"
+    ],
+    "implied_skills": [
+      "Data Cleaning"
+    ],
+    "year": 2023,
+    "client_type": "enterprise",
+    "outcome_metric": "delivered a board report that shaped the next year's budget",
+    "artifacts": [
+      "case_study:cs-data-09",
+      "proposal:prop-data-071",
+      "proposal:prop-data-085",
+      "proposal:prop-data-116",
+      "proposal:prop-data-126"
+    ]
+  },
+  {
+    "project_id": "p-data-10",
+    "name": "Hotel pricing analysis",
+    "industry": "hospitality",
+    "skills": [
+      "Python",
+      "Pandas",
+      "Tableau"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "Time Series Analysis"
+    ],
+    "year": 2025,
+    "client_type": "mid-size company",
+    "outcome_metric": "showed a 9% rate gap that was worth about 300k a year",
+    "artifacts": [
+      "case_study:cs-data-10",
+      "proposal:prop-data-007",
+      "proposal:prop-data-043",
+      "proposal:prop-data-069",
+      "proposal:prop-data-098",
+      "proposal:prop-data-115",
+      "proposal:prop-data-118"
+    ]
+  },
+  {
+    "project_id": "p-data-11",
+    "name": "Warehouse for an online shop",
+    "industry": "e-commerce",
+    "skills": [
+      "dbt",
+      "SQL",
+      "Data Warehousing"
+    ],
+    "implied_skills": [
+      "Data Engineering",
+      "Apache Airflow",
+      "ETL"
+    ],
+    "year": 2024,
+    "client_type": "startup",
+    "outcome_metric": "gave the team one revenue number everyone agreed on",
+    "artifacts": [
+      "case_study:cs-data-11",
+      "repo:shop-warehouse",
+      "proposal:prop-data-008",
+      "proposal:prop-data-031",
+      "proposal:prop-data-046",
+      "proposal:prop-data-093",
+      "proposal:prop-data-118",
+      "proposal:prop-data-120",
+      "proposal:prop-data-149"
+    ]
+  },
+  {
+    "project_id": "p-data-12",
+    "name": "Charity operations sheet",
+    "industry": "nonprofit",
+    "skills": [
+      "Google Sheets",
+      "Looker Studio"
+    ],
+    "implied_skills": [
+      "Automation",
+      "Data Cleaning"
+    ],
+    "year": 2023,
+    "client_type": "nonprofit",
+    "outcome_metric": "saved coordinators about six hours a week",
+    "artifacts": [
+      "proposal:prop-data-021",
+      "proposal:prop-data-027",
+      "proposal:prop-data-028",
+      "proposal:prop-data-041",
+      "proposal:prop-data-061",
+      "proposal:prop-data-131",
+      "proposal:prop-data-139"
+    ]
+  },
+  {
+    "project_id": "p-data-13",
+    "name": "Competitor price tracker",
+    "industry": "retail",
+    "skills": [
+      "Python",
+      "Data Scraping",
+      "Microsoft Excel"
+    ],
+    "implied_skills": [
+      "Automation",
+      "Data Cleaning"
+    ],
+    "year": 2024,
+    "client_type": "small business",
+    "outcome_metric": "helped reprice 150 products within a day of competitor moves",
+    "artifacts": [
+      "case_study:cs-data-13",
+      "repo:price-watcher",
+      "proposal:prop-data-002",
+      "proposal:prop-data-037",
+      "proposal:prop-data-048",
+      "proposal:prop-data-059",
+      "proposal:prop-data-066",
+      "proposal:prop-data-086",
+      "proposal:prop-data-094",
+      "proposal:prop-data-096",
+      "proposal:prop-data-104",
+      "proposal:prop-data-110",
+      "proposal:prop-data-150"
+    ]
+  },
+  {
+    "project_id": "p-data-14",
+    "name": "Employee attrition analysis",
+    "industry": "hr tech",
+    "skills": [
+      "Python",
+      "Statistics",
+      "Microsoft Power BI"
+    ],
+    "implied_skills": [
+      "Data Cleaning"
+    ],
+    "year": 2023,
+    "client_type": "mid-size company",
+    "outcome_metric": "identified two manager groups with double the average exit rate",
+    "artifacts": [
+      "case_study:cs-data-14",
+      "proposal:prop-data-014",
+      "proposal:prop-data-056",
+      "proposal:prop-data-062",
+      "proposal:prop-data-067",
+      "proposal:prop-data-071",
+      "proposal:prop-data-075",
+      "proposal:prop-data-084",
+      "proposal:prop-data-109"
+    ]
+  },
+  {
+    "project_id": "p-data-15",
+    "name": "Energy usage reporting",
+    "industry": "utilities",
+    "skills": [
+      "SQL",
+      "Microsoft Power BI",
+      "Python"
+    ],
+    "implied_skills": [
+      "ETL",
+      "Time Series Analysis"
+    ],
+    "year": 2025,
+    "client_type": "enterprise",
+    "outcome_metric": "pointed to savings of about 7% on the largest site",
+    "artifacts": [
+      "case_study:cs-data-15",
+      "proposal:prop-data-003",
+      "proposal:prop-data-011",
+      "proposal:prop-data-018",
+      "proposal:prop-data-024",
+      "proposal:prop-data-046",
+      "proposal:prop-data-053",
+      "proposal:prop-data-054",
+      "proposal:prop-data-070",
+      "proposal:prop-data-092",
+      "proposal:prop-data-119",
+      "proposal:prop-data-122",
+      "proposal:prop-data-130",
+      "proposal:prop-data-141",
+      "proposal:prop-data-143",
+      "proposal:prop-data-146"
+    ]
+  },
+  {
+    "project_id": "p-data-16",
+    "name": "Ad spend reporting",
+    "industry": "marketing agency",
+    "skills": [
+      "Looker Studio",
+      "Google Sheets",
+      "SQL"
+    ],
+    "implied_skills": [
+      "Automation",
+      "Marketing Analytics"
+    ],
+    "year": 2024,
+    "client_type": "small business",
+    "outcome_metric": "cut weekly reporting effort per client from three hours to 20 minutes",
+    "artifacts": [
+      "case_study:cs-data-16",
+      "proposal:prop-data-005",
+      "proposal:prop-data-006",
+      "proposal:prop-data-035",
+      "proposal:prop-data-052",
+      "proposal:prop-data-065",
+      "proposal:prop-data-072",
+      "proposal:prop-data-078",
+      "proposal:prop-data-089",
+      "proposal:prop-data-105",
+      "proposal:prop-data-135"
+    ]
+  },
+  {
+    "project_id": "p-data-17",
+    "name": "Restaurant sales forecast",
+    "industry": "hospitality",
+    "skills": [
+      "Python",
+      "Time Series Analysis",
+      "Microsoft Excel"
+    ],
+    "implied_skills": [
+      "Statistics",
+      "Predictive Modeling"
+    ],
+    "year": 2024,
+    "client_type": "small business",
+    "outcome_metric": "forecast error stayed under 8% for staffing decisions",
+    "artifacts": [
+      "case_study:cs-data-17",
+      "proposal:prop-data-013",
+      "proposal:prop-data-016",
+      "proposal:prop-data-040",
+      "proposal:prop-data-055",
+      "proposal:prop-data-058",
+      "proposal:prop-data-075",
+      "proposal:prop-data-092",
+      "proposal:prop-data-093",
+      "proposal:prop-data-100",
+      "proposal:prop-data-101",
+      "proposal:prop-data-106",
+      "proposal:prop-data-119"
+    ]
+  },
+  {
+    "project_id": "p-data-18",
+    "name": "CRM data quality audit",
+    "industry": "b2b software",
+    "skills": [
+      "SQL",
+      "Data Cleaning",
+      "Microsoft Excel"
+    ],
+    "implied_skills": [
+      "Data Modeling",
+      "Reporting"
+    ],
+    "year": 2023,
+    "client_type": "scale-up",
+    "outcome_metric": "merged 31,000 duplicate contacts and fixed owner mapping",
+    "artifacts": [
+      "proposal:prop-data-022",
+      "proposal:prop-data-112",
+      "proposal:prop-data-144"
+    ]
+  },
+  {
+    "project_id": "p-data-19",
+    "name": "Executive KPI scorecard",
+    "industry": "finance",
+    "skills": [
+      "Microsoft Power BI",
+      "Data Modeling"
+    ],
+    "implied_skills": [
+      "Business Intelligence",
+      "Dashboard"
+    ],
+    "year": 2025,
+    "client_type": "enterprise",
+    "outcome_metric": "ended monthly debates about whose number was right",
+    "artifacts": [
+      "case_study:cs-data-19",
+      "proposal:prop-data-090",
+      "proposal:prop-data-100",
+      "proposal:prop-data-117"
+    ]
+  },
+  {
+    "project_id": "p-data-20",
+    "name": "Clinical trial data summary",
+    "industry": "healthcare",
+    "skills": [
+      "R",
+      "Statistics",
+      "Data Visualization"
+    ],
+    "implied_skills": [
+      "Data Cleaning",
+      "Reporting"
+    ],
+    "year": 2023,
+    "client_type": "enterprise",
+    "outcome_metric": "delivered the review pack two weeks before the deadline",
+    "artifacts": [
+      "case_study:cs-data-20",
+      "proposal:prop-data-002",
+      "proposal:prop-data-140"
+    ]
+  }
+]

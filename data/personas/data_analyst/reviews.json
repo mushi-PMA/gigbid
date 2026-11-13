@@ -1,0 +1,292 @@
+[
+  {
+    "review_id": 1,
+    "client": "Copperline Hotels",
+    "rating": 5,
+    "date": "2026-01-28",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-data-01"
+    ]
+  },
+  {
+    "review_id": 2,
+    "client": "Pinecrest Legal",
+    "rating": 5,
+    "date": "2024-07-31",
+    "text": "Exactly what we needed for the b2b software work. Merged 31,000 duplicate contacts and fixed owner mapping. Would hire again.",
+    "project_ids": [
+      "p-data-18"
+    ]
+  },
+  {
+    "review_id": 3,
+    "client": "Tidewater Marine",
+    "rating": 5,
+    "date": "2025-07-15",
+    "text": "Took a messy brief from our e-commerce operation and made it simple. Moved 18% of ad budget to channels with twice the return.",
+    "project_ids": [
+      "p-data-02"
+    ]
+  },
+  {
+    "review_id": 4,
+    "client": "Lumen Learning",
+    "rating": 5,
+    "date": "2025-04-02",
+    "text": "Reliable, asks the right questions and delivers early. The saas work is still running without trouble.",
+    "project_ids": [
+      "p-data-07"
+    ]
+  },
+  {
+    "review_id": 5,
+    "client": "Oakmont Retail",
+    "rating": 5,
+    "date": "2024-03-12",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Improved on-time delivery tracking from monthly to daily.",
+    "project_ids": [
+      "p-data-08"
+    ]
+  },
+  {
+    "review_id": 6,
+    "client": "Northwind Studio",
+    "rating": 4,
+    "date": "2024-07-11",
+    "text": "The project for our e-commerce unit finished a week late but the result was worth it. Prevented a rollout that would have cost about 3% of orders.",
+    "project_ids": [
+      "p-data-05"
+    ]
+  },
+  {
+    "review_id": 7,
+    "client": "Ironbridge Parts",
+    "rating": 4,
+    "date": "2024-03-20",
+    "text": "Good technical judgement. Forecast error stayed under 8% for staffing decisions. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-data-17"
+    ]
+  },
+  {
+    "review_id": 8,
+    "client": "Pinecrest Legal",
+    "rating": 4,
+    "date": "2024-03-26",
+    "text": "The project for our e-commerce unit finished a week late but the result was worth it. Moved 18% of ad budget to channels with twice the return.",
+    "project_ids": [
+      "p-data-02"
+    ]
+  },
+  {
+    "review_id": 9,
+    "client": "Cedar & Co",
+    "rating": 4,
+    "date": "2024-09-20",
+    "text": "Good technical judgement. Delivered a board report that shaped the next year's budget. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-data-09"
+    ]
+  },
+  {
+    "review_id": 10,
+    "client": "Northwind Studio",
+    "rating": 4,
+    "date": "2024-02-10",
+    "text": "Good technical judgement. Replaced six weekly spreadsheets and cut report prep from two days to two hours. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-data-01"
+    ]
+  },
+  {
+    "review_id": 11,
+    "client": "Northwind Studio",
+    "rating": 5,
+    "date": "2024-02-03",
+    "text": "Reliable, asks the right questions and delivers early. The nonprofit work is still running without trouble.",
+    "project_ids": [
+      "p-data-12"
+    ]
+  },
+  {
+    "review_id": 12,
+    "client": "Sable Media",
+    "rating": 4,
+    "date": "2023-08-07",
+    "text": "Good technical judgement. Saved coordinators about six hours a week. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-data-12"
+    ]
+  },
+  {
+    "review_id": 13,
+    "client": "Quartz Software",
+    "rating": 5,
+    "date": "2024-03-17",
+    "text": "Took a messy brief from our retail operation and made it simple. Lifted email campaign revenue per send by 24%.",
+    "project_ids": [
+      "p-data-03"
+    ]
+  },
+  {
+    "review_id": 14,
+    "client": "Harbor Logistics",
+    "rating": 5,
+    "date": "2025-03-26",
+    "text": "We hired for the marketing agency piece last year and it paid for itself quickly. Cut weekly reporting effort per client from three hours to 20 minutes.",
+    "project_ids": [
+      "p-data-16"
+    ]
+  },
+  {
+    "review_id": 15,
+    "client": "Atlas Payments",
+    "rating": 4,
+    "date": "2024-03-28",
+    "text": "Good technical judgement. Gave the team one revenue number everyone agreed on. Communication could be quicker on Fridays, but the quality is high.",
+    "project_ids": [
+      "p-data-11"
+    ]
+  },
+  {
+    "review_id": 16,
+    "client": "Sable Media",
+    "rating": 4,
+    "date": "2025-09-07",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-data-13"
+    ]
+  },
+  {
+    "review_id": 17,
+    "client": "Tidewater Marine",
+    "rating": 5,
+    "date": "2025-12-13",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-data-20"
+    ]
+  },
+  {
+    "review_id": 18,
+    "client": "Brightline Foods",
+    "rating": 5,
+    "date": "2023-04-13",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Identified two manager groups with double the average exit rate.",
+    "project_ids": [
+      "p-data-14"
+    ]
+  },
+  {
+    "review_id": 19,
+    "client": "Fernhill Charity",
+    "rating": 5,
+    "date": "2025-11-09",
+    "text": "Took a messy brief from our retail operation and made it simple. Helped reprice 150 products within a day of competitor moves.",
+    "project_ids": [
+      "p-data-13"
+    ]
+  },
+  {
+    "review_id": 20,
+    "client": "Fernhill Charity",
+    "rating": 5,
+    "date": "2025-04-05",
+    "text": "Professional and calm under pressure when our requirements changed mid-way.",
+    "project_ids": [
+      "p-data-15"
+    ]
+  },
+  {
+    "review_id": 21,
+    "client": "Northwind Studio",
+    "rating": 4,
+    "date": "2024-09-01",
+    "text": "The project for our retail unit finished a week late but the result was worth it. Helped reprice 150 products within a day of competitor moves.",
+    "project_ids": [
+      "p-data-13"
+    ]
+  },
+  {
+    "review_id": 22,
+    "client": "Greenfield Energy",
+    "rating": 5,
+    "date": "2023-06-14",
+    "text": "Exactly what we needed for the e-commerce work. Gave the team one revenue number everyone agreed on. Would hire again.",
+    "project_ids": [
+      "p-data-11"
+    ]
+  },
+  {
+    "review_id": 23,
+    "client": "Lumen Learning",
+    "rating": 5,
+    "date": "2023-04-13",
+    "text": "Honest about what is possible. We saved money because the plan was scoped properly. Merged 31,000 duplicate contacts and fixed owner mapping.",
+    "project_ids": [
+      "p-data-18"
+    ]
+  },
+  {
+    "review_id": 24,
+    "client": "Northwind Studio",
+    "rating": 5,
+    "date": "2026-01-02",
+    "text": "Professional and calm under pressure when our requirements changed mid-way.",
+    "project_ids": [
+      "p-data-12"
+    ]
+  },
+  {
+    "review_id": 25,
+    "client": "Bluepeak Travel",
+    "rating": 4,
+    "date": "2023-11-05",
+    "text": "The project for our nonprofit unit finished a week late but the result was worth it. Saved coordinators about six hours a week.",
+    "project_ids": [
+      "p-data-12"
+    ]
+  },
+  {
+    "review_id": 26,
+    "client": "Copperline Hotels",
+    "rating": 4,
+    "date": "2026-01-06",
+    "text": "Delivered what was agreed, nothing more. Fair price and no surprises.",
+    "project_ids": [
+      "p-data-13"
+    ]
+  },
+  {
+    "review_id": 27,
+    "client": "Sable Media",
+    "rating": 5,
+    "date": "2023-09-15",
+    "text": "Very easy to work with and good documentation at handover. Our own team could take over without a call.",
+    "project_ids": [
+      "p-data-03"
+    ]
+  },
+  {
+    "review_id": 28,
+    "client": "Quartz Software",
+    "rating": 5,
+    "date": "2026-05-19",
+    "text": "We hired for the saas piece last year and it paid for itself quickly. Found an onboarding step that explained a 12 point retention gap.",
+    "project_ids": [
+      "p-data-07"
+    ]
+  },
+  {
+    "review_id": 29,
+    "client": "Greenfield Energy",
+    "rating": 5,
+    "date": "2024-03-15",
+    "text": "She rebuilt how our healthcare team handles this part of the business. Delivered the review pack two weeks before the deadline. Clear updates all the way.",
+    "project_ids": [
+      "p-data-20"
+    ]
+  }
+]
