@@ -112,7 +112,7 @@ def check_openapi() -> list[str]:
 
 def main() -> None:
     if "--freeze-gigsim" in sys.argv:
-        MANIFEST.write_text("".join(f"{h}  {n}\n" for n, h in gigsim_hashes().items()), encoding="utf-8")
+        MANIFEST.write_text("".join(f"{h}  {n}\n" for n, h in gigsim_hashes().items()), encoding="utf-8", newline="\n")
         print(f"wrote {MANIFEST.relative_to(ROOT)}")
         return
     problems = check_secrets() + check_gigsim() + check_prompts() + check_openapi() + check_results_in_sync()

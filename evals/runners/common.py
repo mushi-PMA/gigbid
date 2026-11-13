@@ -120,7 +120,7 @@ def write_result(name: str, payload: dict[str, Any]) -> Path:
             "model_profile": config["models"]["profile"], "rag_variant": config["rag"]["variant"],
             "embedding_model": config["embeddings"]["model"], "reranker": config["embeddings"]["reranker"]}
     path = RESULTS / f"{name}.json"
-    path.write_text(json.dumps({"meta": meta, **payload}, indent=1, default=str) + "\n", encoding="utf-8")
+    path.write_text(json.dumps({"meta": meta, **payload}, indent=1, default=str) + "\n", encoding="utf-8", newline="\n")
     print(f"wrote {path.relative_to(ROOT)}")
     return path
 

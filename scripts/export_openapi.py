@@ -15,7 +15,7 @@ def current() -> str:
 
 
 def main() -> None:
-    PATH.write_text(current(), encoding="utf-8")
+    PATH.write_text(current(), encoding="utf-8", newline="\n")
     print(f"wrote {PATH.relative_to(ROOT)}")
 
 
