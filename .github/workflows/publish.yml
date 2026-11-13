@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Image names must be lowercase
+        run: echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_ENV"
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -29,5 +31,5 @@ jobs:
           file: infra/docker/mcp-portfolio.Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/gigbid-portfolio-mcp:latest
-            ghcr.io/${{ github.repository_owner }}/gigbid-portfolio-mcp:${{ github.sha }}
+            ghcr.io/${{ env.OWNER }}/gigbid-portfolio-mcp:latest
+            ghcr.io/${{ env.OWNER }}/gigbid-portfolio-mcp:${{ github.sha }}

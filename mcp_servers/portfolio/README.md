@@ -11,14 +11,14 @@ With [uv](https://docs.astral.sh/uv/) (no clone needed):
 
 ```bash
 PORTFOLIO_DIR=/path/to/portfolios PORTFOLIO_PERSONA=me MCP_AUTH=off \
-  uvx --from git+https://github.com/mushi0541/gigbid gigbid-portfolio-mcp --stdio
+  uvx --from git+https://github.com/mushi-PMA/gigbid gigbid-portfolio-mcp --stdio
 ```
 
 With Docker:
 
 ```bash
 docker run --rm -i -e MCP_AUTH=off -e PORTFOLIO_PERSONA=me -v /path/to/portfolios:/portfolios \
-  -e PORTFOLIO_DIR=/portfolios ghcr.io/mushi0541/gigbid-portfolio-mcp:latest --stdio
+  -e PORTFOLIO_DIR=/portfolios ghcr.io/mushi-pma/gigbid-portfolio-mcp:latest --stdio
 ```
 
 In an MCP host's server configuration (the usual `mcpServers` format):
@@ -26,7 +26,7 @@ In an MCP host's server configuration (the usual `mcpServers` format):
 ```json
 {"mcpServers": {"portfolio": {
   "command": "uvx",
-  "args": ["--from", "git+https://github.com/mushi0541/gigbid", "gigbid-portfolio-mcp", "--stdio"],
+  "args": ["--from", "git+https://github.com/mushi-PMA/gigbid", "gigbid-portfolio-mcp", "--stdio"],
   "env": {"PORTFOLIO_DIR": "/path/to/portfolios", "PORTFOLIO_PERSONA": "me", "MCP_AUTH": "off"}}}}
 ```
 

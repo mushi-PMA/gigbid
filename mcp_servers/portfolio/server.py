@@ -2,7 +2,7 @@
 proposals, with resource templates and prompt templates a freelancer would actually use.
 
 Standalone use (any MCP host, for example a desktop chat app or Cursor):
-    uvx --from git+https://github.com/mushi0541/gigbid gigbid-portfolio-mcp --stdio
+    uvx --from git+https://github.com/mushi-PMA/gigbid gigbid-portfolio-mcp --stdio
     env: PORTFOLIO_DIR=<folder with one sub-folder per persona>  PORTFOLIO_PERSONA=<sub-folder name>
 Inside GigBid it runs over Streamable HTTP with bearer auth; the persona comes from the caller's token.
 """
