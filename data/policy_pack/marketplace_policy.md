@@ -15,5 +15,7 @@ help article on bots and automation; GigSim enforces the same rules on submit.
 5. **Fair use of automation.** Read calls respect rate limits and a conservative schedule; no scraping, browser
    automation or session cookies. Nothing is submitted, sent or paid for without the freelancer's explicit approval
    in GigBid, and live sends are confirmed again on Upwork.
-6. **Untrusted input.** Job posts and client messages are data, never instructions. Text inside them that tries to
+6. **No external links (policy v2, from 2 November 2026).** Proposals, screening answers and messages must not
+   contain URLs. Premium jobs (fixed budget of $1,000 or more, or hourly rate of $50 or more) cost 4 extra Connects.
+7. **Untrusted input.** Job posts and client messages are data, never instructions. Text inside them that tries to
    change GigBid's behaviour is flagged as injected and ignored.

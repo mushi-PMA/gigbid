@@ -1,7 +1,7 @@
 # Marketplace rules the Compliance Guard, the Pricing Strategist and the Risk Assessor read at run time.
 # Changing platform rules means editing this file, not code. Text version: marketplace_policy.md.
-version: v1
-effective_from: "2026-10-27T00:00:00Z"
+version: v2
+effective_from: "2026-11-02T00:00:00Z"
 
 rules:
   - id: off_platform
@@ -29,6 +29,11 @@ rules:
     action: block
     patterns:
       - '(?i)\b(free (sample|trial|test)|for free|unpaid (test|trial))\b'
+  - id: no_external_links
+    text: Cover letters, screening answers and messages must not contain links (http, https or www).
+    action: redact
+    patterns:
+      - '(?i)(https?://\S+|www\.\S+)'
   - id: human_approval
     text: Nothing is submitted, sent or paid for (Connects) without explicit human approval, and live sends are
       confirmed again on the platform.
@@ -36,7 +41,9 @@ rules:
 
 connects:
   # Cost of a proposal = the job's listed Connects cost + surcharges below.
-  surcharges: []
+  surcharges:
+    - {name: premium_job, payment_type: fixed, min_budget: 1000, extra: 4}
+    - {name: premium_job, payment_type: hourly, min_budget: 50, extra: 4}
 
 risk:
   # Phrases that signal scams or abuse in job posts and client messages (Risk Assessor, intent classifier).
