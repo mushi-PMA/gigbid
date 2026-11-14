@@ -34,8 +34,9 @@ jobs:
           CHECKPOINTER: memory
           MCP_AUTH: "off"
           GIGBID_LLM_CACHE: evals/smoke_cache
-          AWS_BEARER_TOKEN_BEDROCK: ${{ secrets.AWS_BEARER_TOKEN_BEDROCK }}
-          BEDROCK_REGION: ${{ vars.BEDROCK_REGION || 'us-east-1' }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
         run: python -m evals.runners.smoke_eval
       - uses: actions/upload-artifact@v4
         if: always()

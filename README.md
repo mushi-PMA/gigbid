@@ -110,10 +110,12 @@ write is a draft you confirm on Upwork.
 
 | Profile | Frequent nodes | Writer, Critic, Liaison | Where |
 |---|---|---|---|
-| `open` (deployed) | gpt-oss-20b | gpt-oss-120b | hosted open-weight models (Amazon Bedrock) |
+| `open` (deployed) | gpt-oss-20b | gpt-oss-120b | hosted open-weight endpoints used as one pool (Groq, NVIDIA, Cerebras, SambaNova free tiers) |
+| `open_gemma` | Gemma 4 26B-A4B | Gemma 4 31B | second open configuration, compared on the dev set |
 | `open_local` | Qwen3 4B | Qwen3 8B | Ollama service in compose, no GPU needed |
-| `open_qwen` | Qwen3-32B | Qwen3-32B | compared on the dev set |
-| `paid` (optional) | as `open` | DeepSeek V3.2 | only if it beats `open` enough to pay for itself |
+
+No paid model is used; the whole project runs on free tiers. Cost is still reported at list price for the same
+weights, so the budgets mean something at scale.
 
 Embeddings (BAAI/bge-small-en-v1.5) and the reranker are open models on CPU in every profile.
 

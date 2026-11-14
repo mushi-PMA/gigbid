@@ -1,7 +1,8 @@
 """One small client for every model call.
 
-- Providers: `bedrock` (Converse API, bearer key from AWS_BEARER_TOKEN_BEDROCK) and `openai_compatible`
-  (Ollama, vLLM, llama.cpp server, Groq, OpenRouter, Together; base URL and key from env).
+- Providers: `openai_compatible` (one server: Ollama, vLLM, llama.cpp; base URL and key from env) and `pool`
+  (the hosted endpoints in `models.endpoints`, used in turn; one that hits a rate limit rests until it resets, so
+  free tiers add up).
 - The model for each node comes from agent/config.yaml, never from code.
 - Every call is metered (tokens, latency, USD) into the current trace span and into a per-run meter.
 - Bounded retries with backoff; cheap nodes fall back to the profile's fallback model.
@@ -14,7 +15,9 @@ import hashlib
 import json
 import os
 import re
+import threading
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, TypeVar
@@ -77,39 +80,14 @@ def current_usage() -> Usage | None:
 
 def price_usd(model: str, tin: int, tout: int) -> float:
     prices = load_config()["models"].get("prices", {})
-    pin, pout = prices.get(model, [0.0, 0.0])
+    weights = model.split("/")[-1].split(":")[0]       # "openai/gpt-oss-20b:free" and "gpt-oss-20b" share a price
+    pin, pout = prices.get(model, prices.get(weights, [0.0, 0.0]))
     return (tin * pin + tout * pout) / 1_000_000
 
 
 # ---------------------------------------------------------------------------------------------------------
 # Providers
 # ---------------------------------------------------------------------------------------------------------
-
-
-def _bedrock_call(model: str, system: str, user: str, max_tokens: int, temperature: float,
-                  region: str) -> tuple[str, int, int]:
-    import boto3
-    from botocore.config import Config
-
-    timeout = load_config()["models"]["timeout_seconds"]
-    client = _bedrock_clients.get(region)
-    if client is None:
-        client = boto3.client("bedrock-runtime", region_name=region,
-                              config=Config(read_timeout=timeout, retries={"max_attempts": 1}))
-        _bedrock_clients[region] = client
-    response = client.converse(
-        modelId=model,
-        system=[{"text": system}] if system else [],
-        messages=[{"role": "user", "content": [{"text": user}]}],
-        inferenceConfig={"maxTokens": max_tokens, "temperature": temperature},
-    )
-    parts = response["output"]["message"]["content"]
-    text = "".join(p.get("text", "") for p in parts)
-    usage = response.get("usage", {})
-    return text, int(usage.get("inputTokens", 0)), int(usage.get("outputTokens", 0))
-
-
-_bedrock_clients: dict[str, Any] = {}
 
 
 def _openai_call(model: str, system: str, user: str, max_tokens: int, temperature: float,
@@ -126,9 +104,79 @@ def _openai_call(model: str, system: str, user: str, max_tokens: int, temperatur
     return text, int(getattr(usage, "prompt_tokens", 0) or 0), int(getattr(usage, "completion_tokens", 0) or 0)
 
 
+def _openai_tools_call(model: str, system: str, user: str, tools: list[dict[str, Any]], base_url: str,
+                       api_key: str) -> tuple[list[dict[str, Any]], int, int]:
+    from openai import OpenAI
+
+    client = OpenAI(base_url=base_url, api_key=api_key or "none",
+                    timeout=load_config()["models"]["timeout_seconds"], max_retries=0)
+    response = client.chat.completions.create(
+        model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+        tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
+                                                 "parameters": t["input_schema"]}} for t in tools],
+        temperature=0, max_tokens=800)
+    message = response.choices[0].message
+    calls = [{"name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")}
+             for c in (message.tool_calls or [])]
+    return calls, int(response.usage.prompt_tokens or 0), int(response.usage.completion_tokens or 0)
+
+
+def _openai_endpoint(profile: dict[str, Any]) -> tuple[str, str]:
+    """Base URL and key for an OpenAI-compatible profile; the key comes from the env var named in `api_key_env`."""
+    key_env = profile.get("api_key_env", "OPENAI_API_KEY")
+    return os.environ.get("OPENAI_BASE_URL", profile.get("base_url", "")), os.environ.get(key_env, "")
+
+
+_pool_lock = threading.Lock()
+_pool_turn = 0
+_pool_resting: dict[str, float] = {}       # endpoint name -> time it may be used again
+
+
+def _retry_after(error: Exception) -> float:
+    """Seconds to rest an endpoint after `error`: the provider's retry-after on a rate limit, else a short pause."""
+    response = getattr(error, "response", None)
+    if getattr(error, "status_code", None) == 429 or "rate" in type(error).__name__.lower():
+        try:
+            return min(float(response.headers.get("retry-after", 30)), 300)
+        except (AttributeError, TypeError, ValueError):
+            return 30.0
+    return 5.0
+
+
+def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, str]:
+    """Run `call(model, base_url, api_key)` on the next endpoint that serves `size` and is not resting.
+    Returns the result and the model id that answered. Waits for the first endpoint to wake when all rest."""
+    global _pool_turn
+    models = load_config()["models"]
+    endpoints = [e for e in models["endpoints"] if size in e["models"] and os.environ.get(e["api_key_env"])]
+    if not endpoints:
+        raise LLMError(f"no pool endpoint with a key serves '{size}' (set one of the api_key_env variables)")
+    last: Exception | None = None
+    for _ in range(models.get("pool_rounds", 6) * len(endpoints)):
+        with _pool_lock:
+            now = time.time()
+            ready = [e for e in endpoints if _pool_resting.get(e["name"], 0) <= now]
+            if ready:
+                endpoint = ready[_pool_turn % len(ready)]
+                _pool_turn += 1
+            else:
+                endpoint, wait = None, min(_pool_resting[e["name"]] for e in endpoints) - now
+        if endpoint is None:
+            time.sleep(max(wait, 0.5))
+            continue
+        model = endpoint["models"][size]
+        try:
+            return call(model, endpoint["base_url"], os.environ[endpoint["api_key_env"]]), model
+        except Exception as error:  # rate limits, provider errors, timeouts
+            last = error
+            with _pool_lock:
+                _pool_resting[endpoint["name"]] = time.time() + _retry_after(error)
+    raise LLMError(f"pool '{size}': every endpoint failed ({type(last).__name__}: {last})")
+
+
 def _strip_reasoning(text: str) -> str:
     """Open reasoning models sometimes return <reasoning>/<think> blocks inside the text; drop them."""
-    return re.sub(r"<(reasoning|think)>.*?</\1>", "", text, flags=re.DOTALL).strip()
+    return re.sub(r"<(reasoning|think|thought)>.*?(</\1>|$)", "", text, flags=re.DOTALL).strip()
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -189,20 +237,20 @@ def complete(node: str, system: str, user: str, *, max_tokens: int | None = None
         for attempt in range(config["models"]["retries"]):
             started = time.perf_counter()
             try:
-                if profile["provider"] == "bedrock":
-                    text, tin, tout = _bedrock_call(candidate, system, user, max_tokens, temperature,
-                                                    profile.get("region", "us-east-1"))
+                if profile["provider"] == "pool":
+                    (text, tin, tout), served_by = _pool_call(
+                        candidate, lambda m, url, key: _openai_call(m, system, user, max_tokens,
+                                                                             temperature, url, key))
                 else:
                     text, tin, tout = _openai_call(candidate, system, user, max_tokens, temperature,
-                                                   os.environ.get("OPENAI_BASE_URL", profile.get("base_url", "")),
-                                                   os.environ.get("OPENAI_API_KEY", ""))
+                                                   *_openai_endpoint(profile))
             except Exception as error:  # provider errors, throttling, timeouts
                 last_error = error
                 time.sleep(min(2 ** attempt + 0.5, 20))
                 continue
             seconds = time.perf_counter() - started
             text = _strip_reasoning(text)
-            _meter(node, candidate, tin, tout, seconds)
+            _meter(node, served_by if profile["provider"] == "pool" else candidate, tin, tout, seconds)
             if cache:
                 cache.write_text(json.dumps({"text": text, "input_tokens": tin, "output_tokens": tout}),
                                  encoding="utf-8")
@@ -234,41 +282,18 @@ def complete_tools(node: str, system: str, user: str, tools: list[dict[str, Any]
     last: Exception | None = None
     for attempt in range(load_config()["models"]["retries"]):
         try:
-            if profile["provider"] == "bedrock":
-                import boto3
-
-                client = _bedrock_clients.get(profile.get("region", "us-east-1")) or boto3.client(
-                    "bedrock-runtime", region_name=profile.get("region", "us-east-1"))
-                response = client.converse(
-                    modelId=model, system=[{"text": system}],
-                    messages=[{"role": "user", "content": [{"text": user}]}],
-                    toolConfig={"tools": [{"toolSpec": {"name": t["name"], "description": t["description"],
-                                                        "inputSchema": {"json": t["input_schema"]}}} for t in tools]},
-                    inferenceConfig={"maxTokens": 800, "temperature": 0.0})
-                calls = [{"name": c["toolUse"]["name"], "arguments": c["toolUse"].get("input", {})}
-                         for c in response["output"]["message"]["content"] if "toolUse" in c]
-                tin, tout = response["usage"]["inputTokens"], response["usage"]["outputTokens"]
+            if profile["provider"] == "pool":
+                (calls, tin, tout), served_by = _pool_call(
+                    model, lambda m, url, key: _openai_tools_call(m, system, user, tools, url, key))
             else:
-                from openai import OpenAI
-
-                client = OpenAI(base_url=os.environ.get("OPENAI_BASE_URL", profile.get("base_url", "")),
-                                api_key=os.environ.get("OPENAI_API_KEY", "none"))
-                response = client.chat.completions.create(
-                    model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
-                    tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
-                                                             "parameters": t["input_schema"]}} for t in tools],
-                    temperature=0, max_tokens=800)
-                message = response.choices[0].message
-                calls = [{"name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")}
-                         for c in (message.tool_calls or [])]
-                tin, tout = response.usage.prompt_tokens, response.usage.completion_tokens
+                calls, tin, tout = _openai_tools_call(model, system, user, tools, *_openai_endpoint(profile))
             break
         except Exception as error:
             last = error
             time.sleep(min(2 ** attempt + 0.5, 20))
     else:
         raise LLMError(f"{node}: tool call failed ({last})")
-    _meter(node, model, tin, tout, time.perf_counter() - started)
+    _meter(node, served_by if profile["provider"] == "pool" else model, tin, tout, time.perf_counter() - started)
     if cache:
         cache.write_text(json.dumps({"calls": calls, "input_tokens": tin, "output_tokens": tout}), encoding="utf-8")
     return calls

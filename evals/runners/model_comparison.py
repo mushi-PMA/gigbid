@@ -1,7 +1,7 @@
 """Choose models by measurement: two open configurations on the same dev jobs (quality, latency, cost).
 
-    open      = gpt-oss-20b for frequent nodes, gpt-oss-120b for Writer and Critic (routing by node)
-    open_qwen = Qwen3-32B for every node
+    open       = gpt-oss-20b for frequent nodes, gpt-oss-120b for Writer and Critic (routing by node)
+    open_gemma = Gemma 4 26B-A4B for frequent nodes, Gemma 4 31B for Writer and Critic
 The judge and the simulated clients use the same model in both runs, so scores are comparable.
 
     python -m evals.runners.model_comparison --decisions 30 --proposals 6
@@ -16,7 +16,7 @@ from common.config import load_config
 from evals.runners import decision_eval, proposal_eval
 from evals.runners.common import PERSONAS, enable_cache, write_result
 
-PROFILES = ["open", "open_qwen"]
+PROFILES = ["open", "open_gemma"]
 
 
 def main() -> None:
@@ -37,7 +37,7 @@ def main() -> None:
             "per_job_analysed": decisions["per_job_analysed"], "judge_overall": proposals["judge_overall"],
             "unsupported_after": proposals["unsupported_claims_per_proposal"]["after_verification"],
             "gigsim_reply_rate": proposals["gigsim_reply_rate"], "per_proposal": proposals["per_proposal"],
-            "hardware": "hosted (Amazon Bedrock on-demand); no local GPU"}
+            "hardware": "hosted open-weight endpoints (free tiers); no local GPU"}
         print(profile, results[profile])
     os.environ.pop("MODEL_PROFILE", None)
     load_config.cache_clear()

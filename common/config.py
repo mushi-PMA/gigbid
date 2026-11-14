@@ -43,8 +43,6 @@ def model_profile(config: dict[str, Any] | None = None) -> dict[str, Any]:
     if parent:
         base = dict(profiles[parent])
         profile = {**base, **profile, "nodes": {**base["nodes"], **profile.get("nodes", {})}}
-    if os.environ.get("BEDROCK_REGION"):
-        profile["region"] = os.environ["BEDROCK_REGION"]
     return profile
 
 

@@ -8,6 +8,7 @@ Inside GigBid it runs over Streamable HTTP with bearer auth; the persona comes f
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 from collections import Counter
@@ -95,7 +96,8 @@ async def search_evidence(
     user_id, persona = _persona()
     with span("mcp.portfolio.search_evidence", kind="RETRIEVER", requirement=requirement, persona=persona):
         retriever = Retriever(persona)
-        items = retriever.search_text(requirement, k=k * 3 if filters else k)
+        # retrieval is CPU and model bound: run it off the event loop so parallel searches do not queue
+        items = await asyncio.to_thread(retriever.search_text, requirement, k * 3 if filters else k)
         if filters:
             items = [i for i in items
                      if (not filters.types or i.type in filters.types)

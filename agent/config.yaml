@@ -21,48 +21,69 @@ marketplace:
     min_poll_minutes: 120      # live scouting interval floor (see docs/RUNBOOK.md)
 
 models:
-  profile: open                # open | paid   (env MODEL_PROFILE overrides)
+  profile: open                # open | open_gemma | open_local   (env MODEL_PROFILE overrides)
+  # Hosted open-weight endpoints (OpenAI-compatible). Each lists the models it serves by size name. A "pool" profile
+  # sends each call to the next endpoint that serves the size and has its key set; one that hits a rate limit rests
+  # until its retry-after passes, so several free tiers add up. All endpoints for a size serve the SAME weights.
+  endpoints:
+    - name: groq
+      base_url: https://api.groq.com/openai/v1
+      api_key_env: GROQ_API_KEY
+      models: {small: openai/gpt-oss-20b, large: openai/gpt-oss-120b}
+    - name: nvidia
+      base_url: https://integrate.api.nvidia.com/v1
+      api_key_env: NVIDIA_API_KEY
+      models: {small: openai/gpt-oss-20b, large: openai/gpt-oss-120b}
+    - name: cerebras
+      base_url: https://api.cerebras.ai/v1
+      api_key_env: CEREBRAS_API_KEY
+      models: {large: gpt-oss-120b}
+    - name: sambanova
+      base_url: https://api.sambanova.ai/v1
+      api_key_env: SAMBANOVA_API_KEY
+      models: {large: gpt-oss-120b}
+    - name: gemini
+      base_url: https://generativelanguage.googleapis.com/v1beta/openai
+      api_key_env: GEMINI_API_KEY
+      models: {gemma_small: gemma-4-26b-a4b-it, gemma_large: gemma-4-31b-it}
   profiles:
-    open:
-      provider: bedrock
-      region: us-east-1        # env BEDROCK_REGION overrides
+    open:                       # deployed profile: gpt-oss-20b for cheap, frequent nodes; gpt-oss-120b where quality matters
+      provider: pool
       nodes:
-        scout: openai.gpt-oss-20b-1:0
-        analyst: openai.gpt-oss-20b-1:0
-        risk_assessor: openai.gpt-oss-20b-1:0
-        fit_matcher: openai.gpt-oss-20b-1:0
-        pricing: openai.gpt-oss-20b-1:0
-        writer: openai.gpt-oss-120b-1:0
-        verifier: openai.gpt-oss-20b-1:0
-        critic: openai.gpt-oss-120b-1:0
-        compliance: openai.gpt-oss-20b-1:0
-        client_liaison: openai.gpt-oss-120b-1:0
-        intent: openai.gpt-oss-20b-1:0
-        rag_helper: openai.gpt-oss-20b-1:0     # HyDE, decomposition, contextual lines, evidence grading
-        judge: openai.gpt-oss-120b-1:0
-        gigsim_client: openai.gpt-oss-120b-1:0
-        tool_agent: openai.gpt-oss-120b-1:0     # R&D question A and the single-agent baselines
-      fallback: qwen.qwen3-32b-v1:0          # used when a cheap node's model fails after retries
-    open_qwen:                  # second open configuration compared on the dev set (evals/runners/model_comparison.py)
-      provider: bedrock
-      region: us-east-1
+        scout: small
+        analyst: small
+        risk_assessor: small
+        fit_matcher: small
+        pricing: small
+        writer: large
+        verifier: small
+        critic: large
+        compliance: small
+        client_liaison: large
+        intent: small
+        rag_helper: small       # HyDE, decomposition, contextual lines, evidence grading
+        judge: large
+        gigsim_client: large
+        tool_agent: large       # R&D question A and the single-agent baselines
+      fallback: large           # a cheap node whose model keeps failing moves up to the large model
+    open_gemma:                 # second open configuration compared on the dev set (evals/runners/model_comparison.py)
+      provider: pool
       nodes:
-        scout: qwen.qwen3-32b-v1:0
-        analyst: qwen.qwen3-32b-v1:0
-        risk_assessor: qwen.qwen3-32b-v1:0
-        fit_matcher: qwen.qwen3-32b-v1:0
-        pricing: qwen.qwen3-32b-v1:0
-        writer: qwen.qwen3-32b-v1:0
-        verifier: qwen.qwen3-32b-v1:0
-        critic: qwen.qwen3-32b-v1:0
-        compliance: qwen.qwen3-32b-v1:0
-        client_liaison: qwen.qwen3-32b-v1:0
-        intent: qwen.qwen3-32b-v1:0
-        rag_helper: qwen.qwen3-32b-v1:0
-        judge: openai.gpt-oss-120b-1:0          # the judge stays fixed so scores are comparable
-        gigsim_client: openai.gpt-oss-120b-1:0  # the simulated clients stay fixed too
-        tool_agent: qwen.qwen3-32b-v1:0
-      fallback: openai.gpt-oss-20b-1:0
+        scout: gemma_small
+        analyst: gemma_small
+        risk_assessor: gemma_small
+        fit_matcher: gemma_small
+        pricing: gemma_small
+        writer: gemma_large
+        verifier: gemma_small
+        critic: gemma_large
+        compliance: gemma_small
+        client_liaison: gemma_large
+        intent: gemma_small
+        rag_helper: gemma_small
+        judge: large            # the judge stays fixed so scores are comparable
+        gigsim_client: large    # the simulated clients stay fixed too
+        tool_agent: gemma_large
     open_local:                 # same roles on local open models through Ollama (docker compose service "ollama")
       provider: openai_compatible
       base_url: http://ollama:11434/v1      # env OPENAI_BASE_URL overrides
@@ -83,23 +104,16 @@ models:
         gigsim_client: qwen3:8b
         tool_agent: qwen3:8b
       fallback: qwen3:4b
-    paid:
-      provider: bedrock
-      region: us-east-1
-      nodes:
-        writer: deepseek.v3.2
-        critic: deepseek.v3.2
-      inherit: open
-  # USD per million tokens (input, output), on-demand list prices; checked on the provider price page.
+  # USD per million tokens (input, output). We run on free tiers (actual bill US$0), so cost is reported at Groq's
+  # on-demand list price (Nov 2026) for the same weights, which is what the system would cost at scale. Gemma 4 has
+  # no paid list price on the Gemini API; it is reported at US$0 with that caveat. Keys ignore provider prefixes.
   prices:
-    openai.gpt-oss-20b-1:0: [0.07, 0.30]
-    openai.gpt-oss-120b-1:0: [0.15, 0.60]
-    qwen.qwen3-32b-v1:0: [0.15, 0.60]
-    deepseek.v3.2: [0.62, 1.85]
+    gpt-oss-20b: [0.075, 0.30]
+    gpt-oss-120b: [0.15, 0.60]
   max_output_tokens: 1800
   timeout_seconds: 90
   retries: 3
-
+  pool_rounds: 6                # how many times a pool call cycles through its endpoints before giving up
 embeddings:
   model: BAAI/bge-small-en-v1.5        # open, CPU (fastembed / ONNX)
   reranker: Xenova/ms-marco-MiniLM-L-6-v2

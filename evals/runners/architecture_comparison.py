@@ -13,13 +13,14 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import time
 from contextlib import AsyncExitStack
 
 from agent.inmemory import load_servers
 from agent.nodes.guards import find_violations
 from agent.prompts import load_prompt
-from common.config import model_profile
+from common.config import load_config, model_profile
 from common.llm import extract_json, price_usd
 from evals.runners.common import PERSONAS, enable_cache, load_set, percentile, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
@@ -30,12 +31,24 @@ MARKET_TOOLS = {"get_job", "get_client_history", "get_market_pricing", "get_conn
 PORTFOLIO_TOOLS = {"search_evidence", "get_case_study", "list_skills"}
 
 
-def chat_model():
-    from langchain_aws import ChatBedrockConverse
+def baseline_endpoint() -> tuple[dict, str]:
+    """The endpoint and model id the LangChain baselines use: the first pool endpoint with a key that serves the
+    tool_agent size (env ARCH_ENDPOINT picks one by name). Same weights as GigBid's graph uses for that role."""
+    size = model_profile()["nodes"]["tool_agent"]
+    wanted = os.environ.get("ARCH_ENDPOINT")
+    for endpoint in load_config()["models"]["endpoints"]:
+        if size in endpoint["models"] and os.environ.get(endpoint["api_key_env"]) \
+                and wanted in (None, endpoint["name"]):
+            return endpoint, endpoint["models"][size]
+    raise RuntimeError(f"no endpoint with a key serves '{size}'")
 
-    profile = model_profile()
-    return ChatBedrockConverse(model=profile["nodes"]["tool_agent"], region_name=profile.get("region", "us-east-1"),
-                               temperature=0, max_tokens=2000)
+
+def chat_model():
+    from langchain_openai import ChatOpenAI
+
+    endpoint, model = baseline_endpoint()
+    return ChatOpenAI(model=model, base_url=endpoint["base_url"], api_key=os.environ[endpoint["api_key_env"]],
+                      temperature=0, max_tokens=2000, max_retries=8, timeout=load_config()["models"]["timeout_seconds"])
 
 
 async def mcp_tools(stack: AsyncExitStack) -> list:
@@ -51,7 +64,7 @@ async def mcp_tools(stack: AsyncExitStack) -> list:
 
 
 def _usage(messages) -> tuple[int, float]:
-    model = model_profile()["nodes"]["tool_agent"]
+    model = baseline_endpoint()[1]
     tin = sum((getattr(m, "usage_metadata", None) or {}).get("input_tokens", 0) for m in messages)
     tout = sum((getattr(m, "usage_metadata", None) or {}).get("output_tokens", 0) for m in messages)
     return tin + tout, price_usd(model, tin, tout)
