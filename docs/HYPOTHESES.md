@@ -40,6 +40,20 @@ three times lower than with the defences off.
 **H-X2.** No direction is assumed: strategy A (problem first) and strategy B (credentials first) are compared with a
 two-sided exact McNemar test on paired reply outcomes at the 5% level.
 
+## Evaluation sizes (fixed on 14 Nov 2026, before the model-based runs)
+The project runs on free tiers only, so the dev-set runs use the first N items of each persona's set in its fixed
+file order (the sets were shuffled when built). Sizes were chosen from measured rate limits, not from results:
+- Retrieval variants without a model step: 50 dev jobs per persona (150 jobs).
+- Retrieval variants with a model step (V1, V6, V7, V8): 20 dev jobs per persona.
+- Decisions (dev): 40 jobs per persona (120 jobs). Proposals (V0 vs shipped): 10 bid jobs per persona (30 pairs).
+- Architecture comparison (question C): 30 dev jobs (10 per persona) instead of the brief's 50.
+- X2 A/B test: 15 bid jobs per persona (45 paired proposals per arm).
+- Injection: every planted-injection job in the dev sets, defences off and on.
+- Model comparison (open vs open_gemma): 20 decisions and 4 proposals per persona.
+- Holdout: all 50 jobs per persona for decisions; 10 per persona for proposals.
+Latency is measured with several jobs in parallel on shared free-tier endpoints, so it includes waiting for rate
+limits; the parallelism used is stored with each result.
+
 ## Budgets (declared in agent/config.yaml before the holdout run)
 p95 latency per job analysed at most 20 s; p95 latency per proposal at most 90 s; cost per job analysed at most
 US$0.002; cost per proposal at most US$0.01 (open profile).
