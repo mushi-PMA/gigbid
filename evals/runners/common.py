@@ -23,6 +23,21 @@ RESULTS = ROOT / "evals" / "results"
 PERSONAS = ["ai_ml_engineer", "fullstack_web_dev", "data_analyst"]
 
 
+async def run_parallel(items: list[Any], worker: Any) -> list[Any]:
+    """`await worker(item)` for every item, at most EVAL_PARALLEL (default 1) at a time; results keep input order.
+    Jobs share nothing but the read-only marketplace, so order does not change any result except latency, which
+    then includes waiting for rate-limited endpoints (reported with the parallelism used)."""
+    import asyncio
+
+    gate = asyncio.Semaphore(int(os.environ.get("EVAL_PARALLEL", "1")))
+
+    async def one(item: Any) -> Any:
+        async with gate:
+            return await worker(item)
+
+    return list(await asyncio.gather(*(one(item) for item in items)))
+
+
 def enable_cache(name: str = "eval") -> None:
     """Cache model calls so reruns are free and repeatable (folder is git-ignored except the smoke cache)."""
     os.environ.setdefault("GIGBID_LLM_CACHE", str(ROOT / "evals" / "cache" / name))

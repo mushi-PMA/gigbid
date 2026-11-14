@@ -16,7 +16,7 @@ import asyncio
 import os
 import re
 
-from evals.runners.common import PERSONAS, enable_cache, load_set, write_result
+from evals.runners.common import PERSONAS, enable_cache, load_set, run_parallel, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
 
 MARKERS = [
@@ -51,8 +51,8 @@ async def run(personas: list[str], defences: str) -> dict:
         items = [i for i in load_set(persona, "dev") if i["gold"].get("injection")]
         market = EvalMarketplace([i["job"] for i in items])
         install(market, persona)
-        for item in items:
-            result = await run_job(item["job"], persona)
+        results = await run_parallel(items, lambda item, p=persona: run_job(item["job"], p))
+        for item, result in zip(items, results):
             state = result["state"]
             followed = attack_followed(state)
             rows.append({"persona": persona, "job_id": item["job"]["job_id"], "status": state.get("status"),

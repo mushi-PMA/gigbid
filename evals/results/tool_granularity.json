@@ -1,0 +1,1932 @@
+{
+ "meta": {
+  "generated_at": "2026-11-14T23:23:31.291819+00:00",
+  "commit": "9365b38",
+  "model_profile": "open",
+  "rag_variant": "v1_v2_v3",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "n_tasks": 40,
+ "results": {
+  "fine": {
+   "tools": 18,
+   "selection_accuracy": 0.95,
+   "argument_accuracy": 0.925,
+   "tokens_per_task": 692,
+   "rows": [
+    {
+     "request": "Find me new jobs about Airflow data pipelines.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs_by_keyword",
+       "arguments": {
+        "query": "Airflow data pipelines"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 647
+    },
+    {
+     "request": "Find me new jobs about React dashboards.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs_by_keyword",
+       "arguments": {
+        "query": "React dashboards"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 639
+    },
+    {
+     "request": "Find me new jobs about churn prediction.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs_by_keyword",
+       "arguments": {
+        "query": "churn prediction"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 640
+    },
+    {
+     "request": "Find me new jobs about Power BI reports.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs_by_keyword",
+       "arguments": {
+        "query": "Power BI reports"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 650
+    },
+    {
+     "request": "Show me the full post for job gs-0136.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job_description",
+       "arguments": {
+        "job_id": "gs-0136"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 777
+    },
+    {
+     "request": "Show me the full post for job gs-0385.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job_description",
+       "arguments": {
+        "job_id": "gs-0385"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 642
+    },
+    {
+     "request": "Show me the full post for job gs-0599.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job_description",
+       "arguments": {
+        "job_id": "gs-0599"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 642
+    },
+    {
+     "request": "Show me the full post for job gs-0611.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job_description",
+       "arguments": {
+        "job_id": "gs-0611"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 818
+    },
+    {
+     "request": "Is client cl-01008 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_payment_verified",
+       "arguments": {
+        "client_id": "cl-01008"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 878
+    },
+    {
+     "request": "Is client cl-01383 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_rating",
+       "arguments": {
+        "client_id": "cl-01383"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 816
+    },
+    {
+     "request": "Is client cl-00974 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_rating",
+       "arguments": {
+        "client_id": "cl-00974"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 846
+    },
+    {
+     "request": "Is client cl-01147 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_rating",
+       "arguments": {
+        "client_id": "cl-01147"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 867
+    },
+    {
+     "request": "How many Connects do I have left?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 648
+    },
+    {
+     "request": "Can I still afford to bid this week?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 655
+    },
+    {
+     "request": "What's my Connects balance?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 617
+    },
+    {
+     "request": "Check my remaining Connects.",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 622
+    },
+    {
+     "request": "What do clients usually pay for Machine Learning work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_hourly_rate_stats",
+       "arguments": {
+        "category": "Machine Learning"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 676
+    },
+    {
+     "request": "What do clients usually pay for Web Development work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_hourly_rate_stats",
+       "arguments": {
+        "category": "Web Development"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 673
+    },
+    {
+     "request": "What do clients usually pay for Data Analysis work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_hourly_rate_stats",
+       "arguments": {
+        "category": "Data Analysis"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 678
+    },
+    {
+     "request": "What do clients usually pay for Microsoft Power BI work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_hourly_rate_stats",
+       "arguments": {
+        "category": "Power BI"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 836
+    },
+    {
+     "request": "Have I ever built a FastAPI service? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_case_studies",
+       "arguments": {
+        "query": "FastAPI"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 753
+    },
+    {
+     "request": "Have I ever built an Airflow DAG? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_case_studies",
+       "arguments": {
+        "query": "Airflow DAG"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 804
+    },
+    {
+     "request": "Have I ever built a demand forecasting model? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_case_studies",
+       "arguments": {
+        "query": "demand forecasting"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 757
+    },
+    {
+     "request": "Have I ever built an NLP classifier? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_case_studies",
+       "arguments": {
+        "query": "NLP classifier"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 794
+    },
+    {
+     "request": "Open my case study cs-aiml-01 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-01"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 663
+    },
+    {
+     "request": "Open my case study cs-aiml-02 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-02"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 663
+    },
+    {
+     "request": "Open my case study cs-aiml-03 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-03"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 663
+    },
+    {
+     "request": "Open my case study cs-aiml-04 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-04"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 663
+    },
+    {
+     "request": "Which skills does my portfolio show?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 629
+    },
+    {
+     "request": "List my skills.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 633
+    },
+    {
+     "request": "What am I strongest at, by evidence?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "search_case_studies",
+       "arguments": {
+        "query": "strength"
+       }
+      }
+     ],
+     "selected": false,
+     "argument": false,
+     "tokens": 815
+    },
+    {
+     "request": "Give me my skill list with counts.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {
+        "": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 672
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-16 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-16"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 659
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-17 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-17"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 659
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-18 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-18"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 659
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-19 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-19"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 659
+    },
+    {
+     "request": "Draft an email to the client with subject 'Interview times' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I\u2019d like to schedule a call to discuss the interview process and any next steps. Please let me know your availability, or feel free to pick a time that works best for you from my calendar.\n\nLooking forward to speaking with you.\n\nBest regards,\n[Your Name]",
+        "recipient_label": "client",
+        "subject": "Interview times"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 749
+    },
+    {
+     "request": "Draft an email to the client with subject 'Project kickoff' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I\u2019m excited to get started on the project and would like to schedule a kickoff call to discuss the details, timeline, and any questions you might have. Please let me know your availability over the next few days, or feel free to suggest a time that works best for you.\n\nLooking forward to speaking with you soon!\n\nBest regards,\n[Your Name]\n[Your Freelance Platform Profile Link]",
+        "recipient_label": "client",
+        "subject": "Project kickoff"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 758
+    },
+    {
+     "request": "Draft an email to the client with subject 'Invoice question' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I have a quick question regarding the recent invoice and would like to discuss it to ensure everything is clear and accurate. Could we schedule a brief call at your convenience?\n\nPlease let me know a time that works for you, or feel free to suggest a slot, and I\u2019ll do my best to accommodate.\n\nThank you,\n[Your Name]\n[Your Contact Information]",
+        "recipient_label": "client",
+        "subject": "Invoice question"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 762
+    },
+    {
+     "request": "Draft an email to the client with subject 'Follow-up' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [],
+     "selected": false,
+     "argument": false,
+     "tokens": 0
+    }
+   ]
+  },
+  "coarse": {
+   "tools": 3,
+   "selection_accuracy": 0.95,
+   "argument_accuracy": 0.775,
+   "tokens_per_task": 372,
+   "rows": [
+    {
+     "request": "Find me new jobs about Airflow data pipelines.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "search_jobs",
+        "params": {
+         "query": "Airflow data pipelines"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 348
+    },
+    {
+     "request": "Find me new jobs about React dashboards.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "search_jobs",
+        "params": {
+         "query": "React dashboards"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 382
+    },
+    {
+     "request": "Find me new jobs about churn prediction.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "search_jobs",
+        "params": {
+         "query": "churn prediction"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 344
+    },
+    {
+     "request": "Find me new jobs about Power BI reports.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "search_jobs",
+        "params": {
+         "query": "Power BI reports"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 376
+    },
+    {
+     "request": "Show me the full post for job gs-0136.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_job",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 347
+    },
+    {
+     "request": "Show me the full post for job gs-0385.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_job",
+        "params": {
+         "job_id": "gs-0385"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 383
+    },
+    {
+     "request": "Show me the full post for job gs-0599.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_job",
+        "params": {
+         "job_id": "gs-0599"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 369
+    },
+    {
+     "request": "Show me the full post for job gs-0611.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_job",
+        "params": {
+         "job_id": "gs-0611"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 377
+    },
+    {
+     "request": "Is client cl-01008 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_client",
+        "params": {
+         "client_id": "cl-01008"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 351
+    },
+    {
+     "request": "Is client cl-01383 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_client",
+        "params": {
+         "client_id": "cl-01383"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 421
+    },
+    {
+     "request": "Is client cl-00974 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_client",
+        "params": {
+         "client_id": "cl-00974"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 420
+    },
+    {
+     "request": "Is client cl-01147 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_client",
+        "params": {
+         "client_id": "cl-01147"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 396
+    },
+    {
+     "request": "How many Connects do I have left?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_connects"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 330
+    },
+    {
+     "request": "Can I still afford to bid this week?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_connects"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 341
+    },
+    {
+     "request": "What's my Connects balance?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_connects"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 325
+    },
+    {
+     "request": "Check my remaining Connects.",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_connects"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 311
+    },
+    {
+     "request": "What do clients usually pay for Machine Learning work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_pricing",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 427
+    },
+    {
+     "request": "What do clients usually pay for Web Development work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_pricing",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 412
+    },
+    {
+     "request": "What do clients usually pay for Data Analysis work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_pricing"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 413
+    },
+    {
+     "request": "What do clients usually pay for Microsoft Power BI work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "marketplace",
+       "arguments": {
+        "action": "get_pricing",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 445
+    },
+    {
+     "request": "Have I ever built a FastAPI service? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "search",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 382
+    },
+    {
+     "request": "Have I ever built an Airflow DAG? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "search",
+        "params": {
+         "query": "Airflow DAG"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 386
+    },
+    {
+     "request": "Have I ever built a demand forecasting model? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "search",
+        "params": {
+         "query": "demand forecasting"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 405
+    },
+    {
+     "request": "Have I ever built an NLP classifier? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "search",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 369
+    },
+    {
+     "request": "Open my case study cs-aiml-01 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "get_case_study",
+        "params": {
+         "id": "cs-aiml-01"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 437
+    },
+    {
+     "request": "Open my case study cs-aiml-02 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "get_case_study",
+        "params": {
+         "id": "cs-aiml-02"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 391
+    },
+    {
+     "request": "Open my case study cs-aiml-03 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "get_case_study",
+        "params": {
+         "id": "cs-aiml-03"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 414
+    },
+    {
+     "request": "Open my case study cs-aiml-04 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "get_case_study",
+        "params": {
+         "id": "cs-aiml-04"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 482
+    },
+    {
+     "request": "Which skills does my portfolio show?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "list_skills",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 327
+    },
+    {
+     "request": "List my skills.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "list_skills"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 301
+    },
+    {
+     "request": "What am I strongest at, by evidence?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "list_skills",
+        "params": {}
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 667
+    },
+    {
+     "request": "Give me my skill list with counts.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "portfolio",
+       "arguments": {
+        "action": "list_skills"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 355
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-16 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "free_slots",
+        "params": {
+         "date": "2026-11-16",
+         "duration_minutes": 30
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 382
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-17 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "free_slots",
+        "params": {
+         "date": "2026-11-17",
+         "duration_minutes": 30
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 382
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-18 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "free_slots",
+        "params": {
+         "duration_minutes": 30,
+         "start_date": "2026-11-18"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 404
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-19 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "free_slots",
+        "params": {
+         "date": "2026-11-19",
+         "duration": 30
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 387
+    },
+    {
+     "request": "Draft an email to the client with subject 'Interview times' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "email_draft",
+        "params": {
+         "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I\u2019d like to schedule a call to discuss interview times that work for both of us. Please let me know your availability over the next few days, or feel free to suggest a few slots that suit you best.\n\nLooking forward to our conversation.\n\nBest regards,\n[Your Name]",
+         "subject": "Interview times"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 423
+    },
+    {
+     "request": "Draft an email to the client with subject 'Project kickoff' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [],
+     "selected": false,
+     "argument": false,
+     "tokens": 0
+    },
+    {
+     "request": "Draft an email to the client with subject 'Invoice question' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [],
+     "selected": false,
+     "argument": false,
+     "tokens": 0
+    },
+    {
+     "request": "Draft an email to the client with subject 'Follow-up' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "workspace",
+       "arguments": {
+        "action": "email_draft",
+        "params": {
+         "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I wanted to follow up on our recent discussion and see if you\u2019d be available for a quick call to go over the next steps and address any questions you might have.\n\nPlease let me know a time that works best for you, or feel free to suggest a few slots, and I\u2019ll do my best to accommodate.\n\nLooking forward to speaking with you soon.\n\nBest regards,\n[Your Name]\n[Your Freelance Business]\n[Contact Information]",
+         "subject": "Follow-up"
+        }
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 460
+    }
+   ]
+  },
+  "best": {
+   "tools": 10,
+   "selection_accuracy": 1.0,
+   "argument_accuracy": 0.975,
+   "tokens_per_task": 1116,
+   "rows": [
+    {
+     "request": "Find me new jobs about Airflow data pipelines.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs",
+       "arguments": {
+        "query": "Airflow data pipelines",
+        "skills": [
+         "Airflow"
+        ]
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 922
+    },
+    {
+     "request": "Find me new jobs about React dashboards.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs",
+       "arguments": {
+        "query": "React dashboard",
+        "skills": [
+         "React"
+        ]
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 936
+    },
+    {
+     "request": "Find me new jobs about churn prediction.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs",
+       "arguments": {
+        "query": "churn prediction",
+        "skills": [
+         "Python",
+         "Machine Learning"
+        ],
+        "limit": 30
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 955
+    },
+    {
+     "request": "Find me new jobs about Power BI reports.",
+     "expected": "search_jobs",
+     "calls": [
+      {
+       "name": "search_jobs",
+       "arguments": {
+        "limit": 10,
+        "query": "Power BI reports",
+        "skills": [
+         "Power BI"
+        ]
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1155
+    },
+    {
+     "request": "Show me the full post for job gs-0136.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job",
+       "arguments": {
+        "job_id": "gs-0136"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 889
+    },
+    {
+     "request": "Show me the full post for job gs-0385.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job",
+       "arguments": {
+        "job_id": "gs-0385"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 890
+    },
+    {
+     "request": "Show me the full post for job gs-0599.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job",
+       "arguments": {
+        "job_id": "gs-0599"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1129
+    },
+    {
+     "request": "Show me the full post for job gs-0611.",
+     "expected": "get_job",
+     "calls": [
+      {
+       "name": "get_job",
+       "arguments": {
+        "job_id": "gs-0611"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1129
+    },
+    {
+     "request": "Is client cl-01008 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_history",
+       "arguments": {
+        "client_id": "cl-01008"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1120
+    },
+    {
+     "request": "Is client cl-01383 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_history",
+       "arguments": {
+        "client_id": "cl-01383"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1120
+    },
+    {
+     "request": "Is client cl-00974 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_history",
+       "arguments": {
+        "client_id": "cl-00974"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1120
+    },
+    {
+     "request": "Is client cl-01147 trustworthy? Check their history.",
+     "expected": "get_client_history",
+     "calls": [
+      {
+       "name": "get_client_history",
+       "arguments": {
+        "client_id": "cl-01147"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1120
+    },
+    {
+     "request": "How many Connects do I have left?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1100
+    },
+    {
+     "request": "Can I still afford to bid this week?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1138
+    },
+    {
+     "request": "What's my Connects balance?",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1367
+    },
+    {
+     "request": "Check my remaining Connects.",
+     "expected": "get_connects_balance",
+     "calls": [
+      {
+       "name": "get_connects_balance",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1102
+    },
+    {
+     "request": "What do clients usually pay for Machine Learning work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_market_pricing",
+       "arguments": {
+        "skills": [
+         "Machine Learning"
+        ]
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 962
+    },
+    {
+     "request": "What do clients usually pay for Web Development work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_market_pricing",
+       "arguments": {
+        "category": "Web Development",
+        "skills": []
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 941
+    },
+    {
+     "request": "What do clients usually pay for Data Analysis work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_market_pricing",
+       "arguments": {
+        "category": "Data Analysis",
+        "skills": []
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1012
+    },
+    {
+     "request": "What do clients usually pay for Microsoft Power BI work?",
+     "expected": "get_market_pricing",
+     "calls": [
+      {
+       "name": "get_market_pricing",
+       "arguments": {
+        "category": "Business Intelligence",
+        "skills": [
+         "Power BI"
+        ]
+       }
+      }
+     ],
+     "selected": true,
+     "argument": false,
+     "tokens": 928
+    },
+    {
+     "request": "Have I ever built a FastAPI service? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_evidence",
+       "arguments": {
+        "requirement": "FastAPI service",
+        "k": 5
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 903
+    },
+    {
+     "request": "Have I ever built an Airflow DAG? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_evidence",
+       "arguments": {
+        "requirement": "built an Airflow DAG"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1197
+    },
+    {
+     "request": "Have I ever built a demand forecasting model? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_evidence",
+       "arguments": {
+        "requirement": "demand forecasting model"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1185
+    },
+    {
+     "request": "Have I ever built an NLP classifier? Find my work on it.",
+     "expected": "search_evidence",
+     "calls": [
+      {
+       "name": "search_evidence",
+       "arguments": {
+        "requirement": "built an NLP classifier"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1165
+    },
+    {
+     "request": "Open my case study cs-aiml-01 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-01"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1130
+    },
+    {
+     "request": "Open my case study cs-aiml-02 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-02"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1131
+    },
+    {
+     "request": "Open my case study cs-aiml-03 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-03"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1131
+    },
+    {
+     "request": "Open my case study cs-aiml-04 in full.",
+     "expected": "get_case_study",
+     "calls": [
+      {
+       "name": "get_case_study",
+       "arguments": {
+        "case_id": "cs-aiml-04"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1131
+    },
+    {
+     "request": "Which skills does my portfolio show?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1119
+    },
+    {
+     "request": "List my skills.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1096
+    },
+    {
+     "request": "What am I strongest at, by evidence?",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1508
+    },
+    {
+     "request": "Give me my skill list with counts.",
+     "expected": "list_skills",
+     "calls": [
+      {
+       "name": "list_skills",
+       "arguments": {}
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1101
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-16 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-16"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1158
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-17 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-17"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1158
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-18 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-18"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1158
+    },
+    {
+     "request": "Find free 30-minute slots from 2026-11-19 for an interview.",
+     "expected": "get_free_slots",
+     "calls": [
+      {
+       "name": "get_free_slots",
+       "arguments": {
+        "duration_minutes": 30,
+        "from_date": "2026-11-19"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1158
+    },
+    {
+     "request": "Draft an email to the client with subject 'Interview times' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi,\n\nI hope you\u2019re doing well. I\u2019d like to schedule a brief interview call to discuss the project details and ensure we\u2019re aligned on expectations. Could you please let me know your availability over the next few days? I\u2019m flexible and can accommodate a time that works best for you.\n\nLooking forward to speaking with you.\n\nBest regards,\n[Your Name]",
+        "idempotency_key": "email-draft-20231114-001",
+        "recipient_label": "Client",
+        "subject": "Interview times"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1263
+    },
+    {
+     "request": "Draft an email to the client with subject 'Project kickoff' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi,\n\nI hope you\u2019re doing well. I\u2019m excited to get started on the project and would like to schedule a kickoff call to discuss the scope, timelines, and any questions you might have. Please let me know your availability over the next few days, or feel free to suggest a time that works best for you.\n\nLooking forward to speaking with you soon.\n\nBest regards,\n[Your Name]",
+        "idempotency_key": "email-draft-20231114-001",
+        "recipient_label": "Client",
+        "subject": "Project kickoff"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1279
+    },
+    {
+     "request": "Draft an email to the client with subject 'Invoice question' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi [Client Name],\n\nI hope you\u2019re doing well. I have a quick question regarding the recent invoice and would like to discuss a few details to ensure everything is aligned. Could we schedule a short call at your convenience? Please let me know a time that works for you, or feel free to suggest a slot, and I\u2019ll do my best to accommodate.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]\n[Your Company/Title]\n[Contact Information]",
+        "idempotency_key": "invoice-question-20231114-001",
+        "recipient_label": "Client",
+        "subject": "Invoice question"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1337
+    },
+    {
+     "request": "Draft an email to the client with subject 'Follow-up' proposing a call.",
+     "expected": "create_email_draft",
+     "calls": [
+      {
+       "name": "create_email_draft",
+       "arguments": {
+        "body": "Hi,\n\nI hope you\u2019re doing well. I wanted to follow up on our recent discussion and see if we could schedule a brief call to go over the next steps and address any questions you might have. Please let me know a time that works for you, or feel free to suggest a few slots, and I\u2019ll do my best to accommodate.\n\nLooking forward to speaking with you.\n\nBest regards,\n[Your Name]",
+        "idempotency_key": "email-draft-followup-20231114-001",
+        "recipient_label": "Client",
+        "subject": "Follow-up"
+       }
+      }
+     ],
+     "selected": true,
+     "argument": true,
+     "tokens": 1279
+    }
+   ]
+  }
+ }
+}

@@ -10,7 +10,7 @@ import argparse
 import asyncio
 import json
 
-from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, percentile, write_result
+from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, percentile, run_parallel, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
 from evals.runners.judge import judge
 
@@ -28,7 +28,8 @@ async def evaluate(personas: list[str], per_persona: int, split: str = "dev") ->
         items = fixed_jobs(persona, per_persona, split)
         market = EvalMarketplace([i["job"] for i in items])
         install(market, persona)
-        for item in items:
+
+        async def one(item: dict, persona: str = persona, market: EvalMarketplace = market) -> tuple[dict, dict | None]:
             job = item["job"]
             result = await run_job(job, persona, approve=True)
             state = result["state"]
@@ -37,17 +38,22 @@ async def evaluate(personas: list[str], per_persona: int, split: str = "dev") ->
                    "drafted": result["drafted"], "status": state.get("status"), "seconds": result["seconds"],
                    "tokens": result["tokens"], "usd": result["usd"],
                    "revisions": state.get("revision", 0)}
-            if draft is not None and result["drafted"]:
-                score = await asyncio.to_thread(judge, job, draft.cover_letter)
-                outcome = market.outcomes.get(job["job_id"], {})
-                row.update(unsupported_before=draft.unsupported_before_verification,
-                           unsupported_after=draft.unsupported_after_verification, claims=len(draft.claims),
-                           judge_overall=score.overall, judge=score.model_dump(), replied=bool(outcome.get("replied")),
-                           hired=bool(outcome.get("hired")), interview=bool(outcome.get("interview")))
-                proposals.append({"persona": persona, "job_id": job["job_id"], "title": job["title"],
-                                  "cover_letter": draft.cover_letter, "judge": score.model_dump(),
-                                  "claims": [c.model_dump() for c in draft.claims]})
+            if draft is None or not result["drafted"]:
+                return row, None
+            score = await asyncio.to_thread(judge, job, draft.cover_letter)
+            outcome = market.outcomes.get(job["job_id"], {})
+            row.update(unsupported_before=draft.unsupported_before_verification,
+                       unsupported_after=draft.unsupported_after_verification, claims=len(draft.claims),
+                       judge_overall=score.overall, judge=score.model_dump(), replied=bool(outcome.get("replied")),
+                       hired=bool(outcome.get("hired")), interview=bool(outcome.get("interview")))
+            return row, {"persona": persona, "job_id": job["job_id"], "title": job["title"],
+                         "cover_letter": draft.cover_letter, "judge": score.model_dump(),
+                         "claims": [c.model_dump() for c in draft.claims]}
+
+        for row, proposal in await run_parallel(items, one):
             rows.append(row)
+            if proposal:
+                proposals.append(proposal)
     return summarise(rows), proposals
 
 

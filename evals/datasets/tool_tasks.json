@@ -1,0 +1,298 @@
+[
+ {
+  "request": "Find me new jobs about Airflow data pipelines.",
+  "tool": "search_jobs",
+  "arg": [
+   "query_or_skill",
+   "Airflow"
+  ]
+ },
+ {
+  "request": "Find me new jobs about React dashboards.",
+  "tool": "search_jobs",
+  "arg": [
+   "query_or_skill",
+   "React"
+  ]
+ },
+ {
+  "request": "Find me new jobs about churn prediction.",
+  "tool": "search_jobs",
+  "arg": [
+   "query_or_skill",
+   "churn"
+  ]
+ },
+ {
+  "request": "Find me new jobs about Power BI reports.",
+  "tool": "search_jobs",
+  "arg": [
+   "query_or_skill",
+   "Power"
+  ]
+ },
+ {
+  "request": "Show me the full post for job gs-0136.",
+  "tool": "get_job",
+  "arg": [
+   "job_id",
+   "gs-0136"
+  ]
+ },
+ {
+  "request": "Show me the full post for job gs-0385.",
+  "tool": "get_job",
+  "arg": [
+   "job_id",
+   "gs-0385"
+  ]
+ },
+ {
+  "request": "Show me the full post for job gs-0599.",
+  "tool": "get_job",
+  "arg": [
+   "job_id",
+   "gs-0599"
+  ]
+ },
+ {
+  "request": "Show me the full post for job gs-0611.",
+  "tool": "get_job",
+  "arg": [
+   "job_id",
+   "gs-0611"
+  ]
+ },
+ {
+  "request": "Is client cl-01008 trustworthy? Check their history.",
+  "tool": "get_client_history",
+  "arg": [
+   "client_id",
+   "cl-01008"
+  ]
+ },
+ {
+  "request": "Is client cl-01383 trustworthy? Check their history.",
+  "tool": "get_client_history",
+  "arg": [
+   "client_id",
+   "cl-01383"
+  ]
+ },
+ {
+  "request": "Is client cl-00974 trustworthy? Check their history.",
+  "tool": "get_client_history",
+  "arg": [
+   "client_id",
+   "cl-00974"
+  ]
+ },
+ {
+  "request": "Is client cl-01147 trustworthy? Check their history.",
+  "tool": "get_client_history",
+  "arg": [
+   "client_id",
+   "cl-01147"
+  ]
+ },
+ {
+  "request": "How many Connects do I have left?",
+  "tool": "get_connects_balance",
+  "arg": null
+ },
+ {
+  "request": "Can I still afford to bid this week?",
+  "tool": "get_connects_balance",
+  "arg": null
+ },
+ {
+  "request": "What's my Connects balance?",
+  "tool": "get_connects_balance",
+  "arg": null
+ },
+ {
+  "request": "Check my remaining Connects.",
+  "tool": "get_connects_balance",
+  "arg": null
+ },
+ {
+  "request": "What do clients usually pay for Machine Learning work?",
+  "tool": "get_market_pricing",
+  "arg": [
+   "category_or_skill",
+   "Machine"
+  ]
+ },
+ {
+  "request": "What do clients usually pay for Web Development work?",
+  "tool": "get_market_pricing",
+  "arg": [
+   "category_or_skill",
+   "Web"
+  ]
+ },
+ {
+  "request": "What do clients usually pay for Data Analysis work?",
+  "tool": "get_market_pricing",
+  "arg": [
+   "category_or_skill",
+   "Data"
+  ]
+ },
+ {
+  "request": "What do clients usually pay for Microsoft Power BI work?",
+  "tool": "get_market_pricing",
+  "arg": [
+   "category_or_skill",
+   "Microsoft"
+  ]
+ },
+ {
+  "request": "Have I ever built a FastAPI service? Find my work on it.",
+  "tool": "search_evidence",
+  "arg": [
+   "query_or_requirement",
+   "FastAPI"
+  ]
+ },
+ {
+  "request": "Have I ever built an Airflow DAG? Find my work on it.",
+  "tool": "search_evidence",
+  "arg": [
+   "query_or_requirement",
+   "Airflow"
+  ]
+ },
+ {
+  "request": "Have I ever built a demand forecasting model? Find my work on it.",
+  "tool": "search_evidence",
+  "arg": [
+   "query_or_requirement",
+   "forecast"
+  ]
+ },
+ {
+  "request": "Have I ever built an NLP classifier? Find my work on it.",
+  "tool": "search_evidence",
+  "arg": [
+   "query_or_requirement",
+   "NLP"
+  ]
+ },
+ {
+  "request": "Open my case study cs-aiml-01 in full.",
+  "tool": "get_case_study",
+  "arg": [
+   "case_id",
+   "cs-aiml-01"
+  ]
+ },
+ {
+  "request": "Open my case study cs-aiml-02 in full.",
+  "tool": "get_case_study",
+  "arg": [
+   "case_id",
+   "cs-aiml-02"
+  ]
+ },
+ {
+  "request": "Open my case study cs-aiml-03 in full.",
+  "tool": "get_case_study",
+  "arg": [
+   "case_id",
+   "cs-aiml-03"
+  ]
+ },
+ {
+  "request": "Open my case study cs-aiml-04 in full.",
+  "tool": "get_case_study",
+  "arg": [
+   "case_id",
+   "cs-aiml-04"
+  ]
+ },
+ {
+  "request": "Which skills does my portfolio show?",
+  "tool": "list_skills",
+  "arg": null
+ },
+ {
+  "request": "List my skills.",
+  "tool": "list_skills",
+  "arg": null
+ },
+ {
+  "request": "What am I strongest at, by evidence?",
+  "tool": "list_skills",
+  "arg": null
+ },
+ {
+  "request": "Give me my skill list with counts.",
+  "tool": "list_skills",
+  "arg": null
+ },
+ {
+  "request": "Find free 30-minute slots from 2026-11-16 for an interview.",
+  "tool": "get_free_slots",
+  "arg": [
+   "from_date",
+   "2026-11-16"
+  ]
+ },
+ {
+  "request": "Find free 30-minute slots from 2026-11-17 for an interview.",
+  "tool": "get_free_slots",
+  "arg": [
+   "from_date",
+   "2026-11-17"
+  ]
+ },
+ {
+  "request": "Find free 30-minute slots from 2026-11-18 for an interview.",
+  "tool": "get_free_slots",
+  "arg": [
+   "from_date",
+   "2026-11-18"
+  ]
+ },
+ {
+  "request": "Find free 30-minute slots from 2026-11-19 for an interview.",
+  "tool": "get_free_slots",
+  "arg": [
+   "from_date",
+   "2026-11-19"
+  ]
+ },
+ {
+  "request": "Draft an email to the client with subject 'Interview times' proposing a call.",
+  "tool": "create_email_draft",
+  "arg": [
+   "subject",
+   "Interview times"
+  ]
+ },
+ {
+  "request": "Draft an email to the client with subject 'Project kickoff' proposing a call.",
+  "tool": "create_email_draft",
+  "arg": [
+   "subject",
+   "Project kickoff"
+  ]
+ },
+ {
+  "request": "Draft an email to the client with subject 'Invoice question' proposing a call.",
+  "tool": "create_email_draft",
+  "arg": [
+   "subject",
+   "Invoice question"
+  ]
+ },
+ {
+  "request": "Draft an email to the client with subject 'Follow-up' proposing a call.",
+  "tool": "create_email_draft",
+  "arg": [
+   "subject",
+   "Follow-up"
+  ]
+ }
+]

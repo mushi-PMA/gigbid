@@ -113,7 +113,7 @@ models:
   max_output_tokens: 1800
   timeout_seconds: 90
   retries: 3
-  pool_rounds: 6                # how many times a pool call cycles through its endpoints before giving up
+  pool_wait_seconds: 600        # how long a pool call keeps waiting for a rate-limited endpoint before giving up
 embeddings:
   model: BAAI/bge-small-en-v1.5        # open, CPU (fastembed / ONNX)
   reranker: Xenova/ms-marco-MiniLM-L-6-v2

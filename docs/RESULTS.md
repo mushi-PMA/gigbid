@@ -35,7 +35,11 @@ _Not measured yet: run `make eval` (needs a model key)._
 ## tools
 
 <!-- results:tools -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Tool set | Tools | Selection accuracy | Argument accuracy | Tokens per task |
+|---|---|---|---|---|
+| fine | 18 | 95.0% | 92.5% | 692 |
+| coarse | 3 | 95.0% | 77.5% | 372 |
+| best | 10 | 100.0% | 97.5% | 1116 |
 <!-- /results:tools -->
 
 ## injection

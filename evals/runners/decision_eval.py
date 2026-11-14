@@ -14,7 +14,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.store.memory import InMemoryStore
 
 from agent.graphs.bid_graph import compile_bid_graph
-from evals.runners.common import PERSONAS, enable_cache, f1, load_set, mean_by, percentile, write_result
+from evals.runners.common import PERSONAS, enable_cache, f1, load_set, mean_by, percentile, run_parallel, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
 
 
@@ -25,9 +25,9 @@ async def evaluate(personas: list[str], limit: int | None, split: str) -> dict:
         market = EvalMarketplace([i["job"] for i in items])
         install(market, persona)
         graph = compile_bid_graph(InMemorySaver(), InMemoryStore(), interrupt_before=["writer"])
-        for item in items:
+        results = await run_parallel(items, lambda item, g=graph, p=persona: run_job(item["job"], p, graph=g))
+        for item, result in zip(items, results):
             job, gold = item["job"], item["gold"]
-            result = await run_job(job, persona, graph=graph)
             state = result["state"]
             decision = state.get("decision")
             risk = state.get("risk")

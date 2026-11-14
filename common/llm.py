@@ -110,11 +110,19 @@ def _openai_tools_call(model: str, system: str, user: str, tools: list[dict[str,
 
     client = OpenAI(base_url=base_url, api_key=api_key or "none",
                     timeout=load_config()["models"]["timeout_seconds"], max_retries=0)
-    response = client.chat.completions.create(
-        model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
-        tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
-                                                 "parameters": t["input_schema"]}} for t in tools],
-        temperature=0, max_tokens=800)
+    from openai import BadRequestError
+
+    try:
+        response = client.chat.completions.create(
+            model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
+            tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
+                                                     "parameters": t["input_schema"]}} for t in tools],
+            temperature=0, max_tokens=800)
+    except BadRequestError as error:
+        body = error.body if isinstance(error.body, dict) else {}
+        if "tool_use_failed" in json.dumps(body) or "failed_generation" in json.dumps(body):
+            return [], 0, 0        # the model wrote an invalid tool call: scored as no valid call
+        raise
     message = response.choices[0].message
     calls = [{"name": c.function.name, "arguments": json.loads(c.function.arguments or "{}")}
              for c in (message.tool_calls or [])]
@@ -133,14 +141,20 @@ _pool_resting: dict[str, float] = {}       # endpoint name -> time it may be use
 
 
 def _retry_after(error: Exception) -> float:
-    """Seconds to rest an endpoint after `error`: the provider's retry-after on a rate limit, else a short pause."""
+    """Seconds to rest an endpoint after `error`: the provider's retry-after on a rate limit (at least 2 s, since
+    per-minute token limits often say "try again in 100ms" and fail again at once), else a short pause."""
     response = getattr(error, "response", None)
     if getattr(error, "status_code", None) == 429 or "rate" in type(error).__name__.lower():
         try:
-            return min(float(response.headers.get("retry-after", 30)), 300)
+            return min(max(float(response.headers.get("retry-after", 30)), 2.0), 300)
         except (AttributeError, TypeError, ValueError):
             return 30.0
     return 5.0
+
+
+def _bad_request(error: Exception) -> bool:
+    """A 400 is about the request itself: the same request fails on every endpoint, so do not retry it."""
+    return getattr(error, "status_code", None) == 400
 
 
 def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, str]:
@@ -152,7 +166,8 @@ def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, st
     if not endpoints:
         raise LLMError(f"no pool endpoint with a key serves '{size}' (set one of the api_key_env variables)")
     last: Exception | None = None
-    for _ in range(models.get("pool_rounds", 6) * len(endpoints)):
+    deadline = time.time() + models.get("pool_wait_seconds", 600)
+    while time.time() < deadline:
         with _pool_lock:
             now = time.time()
             ready = [e for e in endpoints if _pool_resting.get(e["name"], 0) <= now]
@@ -168,10 +183,12 @@ def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, st
         try:
             return call(model, endpoint["base_url"], os.environ[endpoint["api_key_env"]]), model
         except Exception as error:  # rate limits, provider errors, timeouts
+            if _bad_request(error):
+                raise
             last = error
             with _pool_lock:
                 _pool_resting[endpoint["name"]] = time.time() + _retry_after(error)
-    raise LLMError(f"pool '{size}': every endpoint failed ({type(last).__name__}: {last})")
+    raise LLMError(f"pool '{size}': no endpoint answered in time ({type(last).__name__}: {last})")
 
 
 def _strip_reasoning(text: str) -> str:
