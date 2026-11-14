@@ -181,7 +181,8 @@ def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, st
             continue
         model = endpoint["models"][size]
         try:
-            return call(model, endpoint["base_url"], os.environ[endpoint["api_key_env"]]), model
+            base_url = endpoint["base_url"].format_map(os.environ)   # e.g. an account id in the URL
+            return call(model, base_url, os.environ[endpoint["api_key_env"]]), model
         except Exception as error:  # rate limits, provider errors, timeouts
             if _bad_request(error):
                 raise

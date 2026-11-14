@@ -42,6 +42,10 @@ models:
       base_url: https://api.sambanova.ai/v1
       api_key_env: SAMBANOVA_API_KEY
       models: {large: gpt-oss-120b}
+    - name: cloudflare          # Workers AI; {CLOUDFLARE_ACCOUNT_ID} is filled from the environment
+      base_url: https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/ai/v1
+      api_key_env: CLOUDFLARE_API_TOKEN
+      models: {small: "@cf/openai/gpt-oss-20b", large: "@cf/openai/gpt-oss-120b"}
     - name: gemini
       base_url: https://generativelanguage.googleapis.com/v1beta/openai
       api_key_env: GEMINI_API_KEY
