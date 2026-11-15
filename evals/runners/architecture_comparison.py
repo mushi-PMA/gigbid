@@ -23,7 +23,7 @@ from agent.nodes.guards import find_violations
 from agent.prompts import load_prompt
 from common.config import load_config, model_profile
 from common.llm import extract_json, price_usd
-from evals.runners.common import PERSONAS, enable_cache, load_set, percentile, write_result
+from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, percentile, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
 from rag.retriever import Retriever, get_index
 from rag.verify import unsupported_count, verify_text
@@ -119,6 +119,25 @@ async def run_supervisor(job: dict, tools: list) -> dict:
     return {**_final(state["messages"]), "seconds": time.perf_counter() - started, "tokens": tokens, "usd": usd}
 
 
+async def patient(runner, job: dict, tools: list) -> dict:
+    """Run a baseline, starting it again after a provider rate limit (a free-tier limit is not a design failure);
+    any other error, or a limit that lasts past the last wait, is raised and reported."""
+    for wait in (60, 120, 300, 600, 900, None):
+        try:
+            return await runner(job, tools)
+        except Exception as error:
+            if wait is None or ("429" not in str(error) and "RateLimit" not in type(error).__name__):
+                raise
+            await asyncio.sleep(wait)
+
+
+def previous_rows() -> dict[tuple[str, str], dict]:
+    """Rows of the last run that finished without an error, to resume a run that hit provider limits."""
+    path = RESULTS / "architecture_comparison.json"
+    rows = json.loads(path.read_text(encoding="utf-8")).get("rows", []) if path.exists() else []
+    return {(r["design"], r["job_id"]): r for r in rows if "error" not in r}
+
+
 def evidence_pool(persona: str, job: dict, cited: str) -> list:
     """Same evidence for every design: top-12 shipped retrieval for the job plus every document the text cites."""
     pool = Retriever(persona, k=12).search_text(f"{job['title']}\n{job['description']}", 12)
@@ -149,9 +168,9 @@ async def score_text(persona: str, job: dict, market: EvalMarketplace, decision:
     return out
 
 
-async def evaluate(n_jobs: int) -> dict:
+async def evaluate(n_jobs: int, resume: bool = False) -> dict:
     per = {p: n_jobs // len(PERSONAS) + (1 if i < n_jobs % len(PERSONAS) else 0) for i, p in enumerate(PERSONAS)}
-    rows = []
+    rows, done = [], previous_rows() if resume else {}
     for persona in PERSONAS:
         items = [i for i in load_set(persona, "dev") if not i["gold"].get("duplicate")][: per[persona]]
         async with AsyncExitStack() as stack:
@@ -161,6 +180,9 @@ async def evaluate(n_jobs: int) -> dict:
                 tools = await mcp_tools(stack) if design != "graph" else []
                 for item in items:
                     job, gold = item["job"], item["gold"]
+                    if (design, job["job_id"]) in done:
+                        rows.append(done[(design, job["job_id"])])
+                        continue
                     try:
                         if design == "graph":
                             result = await run_job(job, persona, approve=True)
@@ -179,7 +201,7 @@ async def evaluate(n_jobs: int) -> dict:
                                            replied=bool(market.outcomes.get(job["job_id"], {}).get("replied")))
                         else:
                             runner = run_react if design == "single_react" else run_supervisor
-                            answer = await runner(job, tools)
+                            answer = await patient(runner, job, tools)
                             row = {"seconds": answer["seconds"], "tokens": answer["tokens"], "usd": answer["usd"],
                                    "violations_caught": 0,
                                    **await score_text(persona, job, market, answer.get("decision", "skip"),
@@ -223,9 +245,10 @@ def summarise(rows: list[dict]) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs", type=int, default=50)
+    parser.add_argument("--resume", action="store_true", help="keep the last run's rows that had no error")
     args = parser.parse_args()
     enable_cache("architectures")
-    summary = asyncio.run(evaluate(args.jobs))
+    summary = asyncio.run(evaluate(args.jobs, args.resume))
     print(json.dumps(summary["designs"], indent=1))
     write_result("architecture_comparison", {"n_jobs": args.jobs, **summary})
 
