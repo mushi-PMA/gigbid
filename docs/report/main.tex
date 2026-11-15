@@ -117,9 +117,6 @@ Data Factory or Databricks; I was right, as the judge does not punish a missing 
 report job (item 24) I gave 2 because the letter seemed to invent the client's CTO and GM, but the full post does name
 them and my labelling sheet showed only its first 1,500 characters, so the judge was right. Small judge-score gaps in
 this report (3.57 against 3.63, 3.88 against 3.75) should therefore not be read as quality differences.
-The blind pairwise human panel (classmates choose between anonymised V0 and shipped proposals for the same job,
-\file{evals/runners/human\_panel.py}) is prepared on the 5 jobs both pipelines drafted, but had not been rated when
-this report was written; with 5 pairs it could only show a very large preference.
 \textbf{Ablation and breakdown.} Removing hybrid search (V2) costs 0.062 nDCG@10 and removing the outcome boost (V4)
 0.021 (\file{evals/results/ablation.json}), so both earn their place and V2 matters most. The breakdown is the honest
 part: the shipped retrieval helps the web-developer persona most (nDCG@10 0.518 to 0.630) and e-commerce and data-pipeline
