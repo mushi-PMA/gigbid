@@ -37,8 +37,11 @@ def table(header: list[str], rows: list[list[str]]) -> str:
                      ["| " + " | ".join(r) + " |" for r in rows])
 
 
+RAG_FILES = ("rag_variants_offline", "rag_variants_model", "rag_variants_model_late")
+
+
 def rag_variants() -> str:
-    parts = [load("rag_variants_offline"), load("rag_variants")]
+    parts = [load(name) for name in RAG_FILES]
     results = [r for p in parts if p for r in p["results"]]
     if not results:
         return PENDING
@@ -57,9 +60,9 @@ def rag_variants() -> str:
 
 def main_results() -> str:
     """The brief's B5 table: V0 against the shipped pipeline."""
-    rag = {r["variant"]: r for p in (load("rag_variants_offline"), load("rag_variants")) if p for r in p["results"]}
+    rag = {r["variant"]: r for p in (load(name) for name in RAG_FILES) if p for r in p["results"]}
     v0, best = load("proposals_v0"), load("proposals_best")
-    shipped = (best or {}).get("meta", {}).get("rag_variant")
+    shipped = ((best or {}).get("meta", {}).get("rag_variant") or "").replace("_", "+")
     if not (v0 and best):
         return PENDING
     rows = []
