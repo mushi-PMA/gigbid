@@ -73,6 +73,8 @@ async def analyze(job_id: str, user: dict = CurrentUser) -> Accepted:
     row = db.fetch_one("SELECT summary FROM jobs_seen WHERE user_id = %s AND job_id = %s", (user["user_id"], job_id))
     if row is None:
         raise HTTPException(404, "job not found")
+    if "job" not in (row["summary"] or {}):
+        raise HTTPException(409, "the job's details are missing; run the scout again to refresh it")
     db.execute("UPDATE jobs_seen SET status = 'queued' WHERE user_id = %s AND job_id = %s", (user["user_id"], job_id))
     await enqueue("analyze_job", user["user_id"], row["summary"]["job"], None, job_id=f"analyze:{user['user_id']}:"
                   f"{job_id}:manual")

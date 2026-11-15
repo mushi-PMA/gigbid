@@ -185,8 +185,9 @@ def _record(run_id: str, user_id: str, kind: str, job_id: str | None, seconds: f
                    "EXCLUDED.status, updated_at = now()",
                    (user_id, state.get("thread_id", ""), thread_id, state.get("job_id", ""), str(state.get("status"))))
     if kind == "bid" and job_id:
-        db.execute("UPDATE jobs_seen SET status = %s, summary = %s, thread_id = %s, updated_at = now() "
-                   "WHERE user_id = %s AND job_id = %s",
+        # merge, never replace: the scout's title, budget and full job must survive (re-analysis needs the job)
+        db.execute("UPDATE jobs_seen SET status = %s, summary = summary || %s::jsonb, thread_id = %s, "
+                   "updated_at = now() WHERE user_id = %s AND job_id = %s",
                    (str(state.get("status")), json.dumps(_summary(state), default=str), thread_id, user_id, job_id))
 
 
