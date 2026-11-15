@@ -13,7 +13,8 @@ _Not measured yet: run `make eval` (needs a model key)._
 
 ## Hand analysis (12 failed jobs)
 
-"Before" is the first full dev run (120 jobs, commit 7df0bcb, not kept in the repo because it was superseded);
+"Before" is the first full dev run (120 jobs, commit 7df0bcb, superseded and archived as
+`evals/results/archive/decisions_first_run_7df0bcb.json`);
 "after" is `evals/results/decisions.json` (30 jobs, commit dc2aa73). The 30 jobs of the second run are all inside
 the first, so the before and after numbers below are on the same 30 jobs. Thresholds: bid at fit 0.55, watch at
 0.40, client quality at least 0.20.

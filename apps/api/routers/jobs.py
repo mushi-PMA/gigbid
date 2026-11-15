@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import time
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
@@ -78,8 +79,10 @@ async def analyze(job_id: str, user: dict = CurrentUser) -> Accepted:
     if "job" not in (row["summary"] or {}):
         raise HTTPException(409, "the job's details are missing; run the scout again to refresh it")
     db.execute("UPDATE jobs_seen SET status = 'queued' WHERE user_id = %s AND job_id = %s", (user["user_id"], job_id))
+    # a fresh id each time: Arq drops a job whose id still has a stored result, so a re-analysis within the result
+    # lifetime would never run; the worker's per-job lock stops two runs of the same job at once
     await enqueue("analyze_job", user["user_id"], row["summary"]["job"], None, job_id=f"analyze:{user['user_id']}:"
-                  f"{job_id}:manual")
+                  f"{job_id}:manual:{time.time():.0f}")
     return Accepted(thread_id=runner.bid_thread_id(user["user_id"], job_id))
 
 

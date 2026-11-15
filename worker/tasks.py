@@ -217,7 +217,7 @@ async def recover_interrupted(ctx: dict) -> int:
         db.execute("UPDATE jobs_seen SET status = 'queued' WHERE user_id = %s AND job_id = %s",
                    (row["user_id"], row["job_id"]))
         await enqueue("analyze_job", row["user_id"], row["summary"]["job"], None,
-                      job_id=f"analyze:{row['user_id']}:{row['job_id']}")
+                      job_id=f"analyze:{row['user_id']}:{row['job_id']}:recover:{datetime.now().timestamp():.0f}")
     return len(rows)
 
 
