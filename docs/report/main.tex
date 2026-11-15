@@ -82,7 +82,13 @@ tokens. \textbf{Setup.} 40 tasks with known correct calls (4 per capability, ids
 \file{evals/datasets/tool\_tasks.json}); one tool-calling turn per task with native tool use, same model and system
 prompt for all three sets (\file{evals/runners/tool\_granularity.py}).
 \tablefrom{tools}{Tool-design study on 40 tasks.}
-\textbf{Conclusion.} \pending{result and explanation}
+\textbf{Conclusion.} H-A is supported on accuracy and refuted on tokens for the fine set. Our 10 tools picked the
+right tool on all 40 tasks and filled the arguments right on 39 (97.5\%); the 18-tool set scored 95\% and 92.5\%, the
+3-tool set 95\% and 77.5\%. The coarse set is the cheapest (372 tokens per task) but loses on arguments: one tool
+with an \texttt{action} field makes the model guess nested parameters (pricing category, job id, evidence filters).
+The fine set fails where two tools overlap (\texttt{get\_hourly\_rate\_stats} against market pricing, case-study
+search against skill listing). Our set costs the most tokens per task (1,116), because the rewritten descriptions
+say when to use each tool and when not to; that text is what removes the overlaps, so we keep it.
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{R\&D question B: retrieval, claim verification and what ships}
@@ -103,11 +109,11 @@ requirements (H-B1); V2 beats V0 for every persona (H-B2); claim verification ha
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{R\&D question C: single agent, prebuilt supervisor, or our graph}
-On 50 fixed dev jobs we compare (a) one ReAct agent holding all tools, (b) \texttt{langgraph-supervisor} with three
+On 9 fixed dev jobs (3 per persona; reduced from 50, see the deviation in \file{docs/HYPOTHESES.md}) we compare (a) one ReAct agent holding all tools, (b) \texttt{langgraph-supervisor} with three
 tool-using workers and (c) the hand-built graph, with the same MCP tools, model family, verifier and simulated
 clients (\file{evals/runners/architecture\_comparison.py}). Hypothesis H-C: (c) wins on accuracy, unsupported claims
 and violations; (a) is cheapest and can tie on simple, clearly relevant jobs.
-\tablefrom{architectures}{Architecture comparison on 50 dev jobs.}
+\tablefrom{architectures}{Architecture comparison on 9 dev jobs.}
 \pending{where (a) wins, why, and whether we would ship it}
 
 % ------------------------------------------------------------------------------------------------------------------
@@ -135,7 +141,21 @@ the Writer which style wins per category.
 Failed dev jobs are collected automatically into a taxonomy (\file{evals/runners/failure\_analysis.py}: missed
 evidence, wrong skip, wrong bid, mispriced, unsupported claim, generic opening, compliance miss, injection, tool
 error); each group was then read by hand.
-\pending{table: at least 10 failed jobs, cause, fix tried, whether it worked (with before/after numbers)}
+The full table of 12 jobs is in \file{docs/FAILURES.md}; the groups are below. ``Before'' is the first dev run, on
+the same 30 jobs as the final one.
+\begin{table}[h]\centering\small
+\begin{tabular}{p{2.6cm}p{4.6cm}p{4.2cm}p{3.2cm}}\toprule
+Jobs & Root cause & Fix tried & Result \\\midrule
+aiml-0003, aiml-0004, data-0007, data-0005, web-0010 & Reasoning tokens used up the Fit Matcher's output, the JSON
+was cut off and \texttt{decide} failed & Low reasoning effort, larger fit budget, JSON repair; clear dead-letter reason
+& Dead letters 5 $\to$ 0; correct 19 $\to$ 22 of 30 \\
+web-0001, aiml-0002, web-0010 & Matcher credits nearby skills (fit $\ge$ 0.60 at gold coverage $\le$ 0.33) & Not yet
+(separate core skills from named tools) & Open \\
+aiml-0001, web-0003 & Extractor makes every named tool a requirement, so fit drops & Not yet (same change) & Open \\
+data-0003, web-0005 & Client with unverified payment, no spend, no hires (quality 0.08) & Kept: a policy choice the
+gold label ignores & Label disagreement \\
+aiml-0006 & ``Easy money'' scam skipped for fit, not flagged & Not yet (pay-against-effort rule) & Open \\\bottomrule
+\end{tabular}\end{table}
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{Safety and platform respect}
@@ -148,12 +168,18 @@ injection patterns flagged before any model sees it, with an injection skip rule
 conservative live polling floor of two hours; PII masked in traces and audit logs; OAuth tokens encrypted; every
 query scoped by user.
 \tablefrom{injection}{Attack success on the planted-injection dev jobs, defences off and on.}
-\textbf{What still gets through.} \pending{the attacks that beat the defences, and why}
+\textbf{What still gets through.} No attack succeeded with or without defences on these 12 jobs: the planted
+injections sit in jobs that are also poor fits, so the decision gate skipped them before any draft existed. That
+means this set does not show what the defences add to attack success; what it shows is detection, which rose from
+17\% to 92\% (11 of 12). The one miss hides its instruction in a ``hidden requirement'' line phrased as a
+verification step that asks for secrets; it uses none of the command words our patterns look for, and the model
+check did not flag it either. A good-fit job carrying the same line is the case to test next.
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{Held-out test results against the declared budgets}
-The holdout sets (50 jobs per persona, never used for tuning) are run end to end; the instructor's hidden test runs
-against the live URL.
+The holdout sets (50 jobs per persona, never used for tuning) are run end to end on a fixed sample of 10 decisions
+and 2 proposals per persona (the free-tier token limit; see the deviation in \file{docs/HYPOTHESES.md}); the
+instructor's hidden test runs against the live URL.
 \tablefrom{holdout}{Declared budgets against measured values on the holdout set.}
 \tablefrom{decisions}{Decision quality on the dev set.}
 \pending{what was missed and the optimisation that helped most}
