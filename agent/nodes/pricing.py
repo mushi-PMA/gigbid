@@ -43,6 +43,10 @@ def decide(job: Job, risk: RiskReport, fit: FitReport, settings: dict[str, Any] 
 
 @node("decide")
 async def decide_node(state: dict, config: RunnableConfig) -> dict:
+    missing = [name for name, key in (("risk_assessor", "risk"), ("fit_matcher", "fit"), ("analyst", "job_spec"))
+               if state.get(key) is None]
+    if missing:      # a parallel branch failed: never decide on half an analysis, and say which branch it was
+        return {"status": "dead_letter", "status_reason": f"analysis incomplete: {', '.join(missing)} failed"}
     decision = decide(state["job"], state["risk"], state["fit"], ctx(config).get("settings"))
     update: dict[str, Any] = {"decision": decision}
     if decision.action == "skip":

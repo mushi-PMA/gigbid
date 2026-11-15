@@ -79,7 +79,10 @@ def current_usage() -> Usage | None:
 
 
 def price_usd(model: str, tin: int, tout: int) -> float:
-    prices = load_config()["models"].get("prices", {})
+    models = load_config()["models"]
+    prices = models.get("prices", {})
+    sizes = {s: m for e in models.get("endpoints", []) for s, m in reversed(list(e["models"].items()))}
+    model = sizes.get(model, model)                     # a pool size name ("small") prices as its weights
     weights = model.split("/")[-1].split(":")[0]       # "openai/gpt-oss-20b:free" and "gpt-oss-20b" share a price
     pin, pout = prices.get(model, prices.get(weights, [0.0, 0.0]))
     return (tin * pin + tout * pout) / 1_000_000
@@ -282,7 +285,8 @@ def complete(node: str, system: str, user: str, *, max_tokens: int | None = None
 
 
 def _meter(node: str, model: str, tin: int, tout: int, seconds: float, cached: bool = False) -> None:
-    usd = 0.0 if cached else price_usd(model, tin, tout)
+    # a call replayed from the evaluation cache still reports what it cost when it was made (list price)
+    usd = price_usd(model, tin, tout)
     usage = current_usage()
     if usage is not None:
         usage.add(node, model, tin, tout, usd, seconds)
@@ -347,6 +351,8 @@ def complete_json(node: str, system: str, user: str, schema: type[T], *, max_tok
     try:
         return schema.model_validate(extract_json(text))
     except (ValueError, ValidationError) as error:
+        # reasoning models spend output tokens on thinking, so a cut-off answer is the usual cause: double the room
         repair = load_prompt("_json_repair", request=user, error=str(error)[:300])
-        text = complete(node, instruction, repair, max_tokens=max_tokens, temperature=temperature)
+        room = 2 * (max_tokens or load_config()["models"]["max_output_tokens"])
+        text = complete(node, instruction, repair, max_tokens=room, temperature=temperature)
         return schema.model_validate(extract_json(text))

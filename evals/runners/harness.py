@@ -179,7 +179,8 @@ async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, g
         "drafted": drafted,
         "seconds": time.perf_counter() - started,
         "analysed_seconds": analysed_seconds,
-        "tokens": usage.total_tokens,
-        "usd": usage.usd,
-        "by_node": usage.by_node,
+        # each node meters its own calls into the state (the trace entries), so totals come from there
+        "tokens": int(state.get("tokens") or usage.total_tokens),
+        "usd": float(state.get("usd") or usage.usd),
+        "by_node": {e["node"]: e.get("by_model", {}) for e in state.get("trace", [])},
     }
