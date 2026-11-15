@@ -6,11 +6,13 @@ writing; **you approve every proposal and message before anything leaves the sys
 
 ![demo](docs/images/demo.gif)
 
-**Live:** <!-- live-url -->not deployed yet<!-- /live-url --> &nbsp;·&nbsp; **Video (3 min):** <!-- video-url -->not
+**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;·&nbsp; **Video (3 min):** <!-- video-url -->not
 recorded yet<!-- /video-url --> &nbsp;·&nbsp; **Write-up:** <!-- writeup-url -->not published yet<!-- /writeup-url -->
 &nbsp;·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
 
-Reviewer login: shared privately on the submission (never in this repository).
+Reviewer login (app) and a read-only trace viewer login (Phoenix, at `/phoenix/`): shared privately on the submission,
+never in this repository. The live site runs on free model tiers, so an analysis can take a few minutes when the
+quota is busy; the inbox and every finished analysis are always available.
 
 ## What it does
 
