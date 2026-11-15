@@ -92,7 +92,8 @@ def node(name: str) -> Callable[[NodeFn], NodeFn]:
             update["tokens"] = usage.total_tokens
             update["usd"] = usage.usd
             update["trace"] = [{"node": name, "seconds": seconds, "tokens": usage.total_tokens,
-                                "usd": round(usage.usd, 6), "outcome": outcome, "by_model": usage.by_node}]
+                                "usd": round(usage.usd, 6), "outcome": outcome, "by_model": usage.by_node,
+                                "cached_calls": usage.cached_calls}]
             return update
 
         return run

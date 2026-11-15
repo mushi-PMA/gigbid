@@ -1,4 +1,4 @@
-"""Decisions on the dev set (or the holdout set): bid-or-skip F1, scam and injection detection, price inside the fair
+﻿"""Decisions on the dev set (or the holdout set): bid-or-skip F1, scam and injection detection, price inside the fair
 band, latency, tokens and USD per job analysed. The graph stops before the Writer, so no proposal is drafted.
 
     python -m evals.runners.decision_eval --limit 60
@@ -14,7 +14,17 @@ from langgraph.store.memory import InMemoryStore
 
 from agent.graphs.bid_graph import compile_bid_graph
 from agent.memory.store import memory_saver
-from evals.runners.common import PERSONAS, enable_cache, f1, load_set, mean_by, percentile, run_parallel, write_result
+from evals.runners.common import (
+    PERSONAS,
+    enable_cache,
+    f1,
+    live_seconds,
+    load_set,
+    mean_by,
+    percentile,
+    run_parallel,
+    write_result,
+)
 from evals.runners.harness import EvalMarketplace, install, run_job
 
 
@@ -54,6 +64,7 @@ async def evaluate(personas: list[str], limit: int | None, split: str) -> dict:
                     "status": state.get("status"),
                     "status_reason": state.get("status_reason", ""),
                     "seconds": result["analysed_seconds"],
+                    "cached_calls": result["cached_calls"],
                     "tokens": result["tokens"],
                     "usd": result["usd"],
                 }
@@ -88,8 +99,9 @@ def summarise(rows: list[dict]) -> dict:
         "price_inside_fair_band": round(sum(r["price_in_band"] for r in priced) / len(priced), 4) if priced else None,
         "priced_jobs": len(priced),
         "per_job_analysed": {
-            "p50_seconds": percentile([r["seconds"] for r in rows], 0.5),
-            "p95_seconds": percentile([r["seconds"] for r in rows], 0.95),
+            "p50_seconds": percentile(live_seconds(rows), 0.5),
+            "p95_seconds": percentile(live_seconds(rows), 0.95),
+            "live_jobs": len(live_seconds(rows)),
             "mean_tokens": round(sum(r["tokens"] for r in rows) / max(1, len(rows))),
             "mean_usd": round(sum(r["usd"] for r in rows) / max(1, len(rows)), 6),
         },

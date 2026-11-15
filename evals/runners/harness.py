@@ -187,4 +187,6 @@ async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, g
         "tokens": int(state.get("tokens") or usage.total_tokens),
         "usd": float(state.get("usd") or usage.usd),
         "by_node": {e["node"]: e.get("by_model", {}) for e in state.get("trace", [])},
+        # calls replayed from the evaluation cache take no time, so a job with any is left out of latency numbers
+        "cached_calls": sum(e.get("cached_calls", 0) for e in state.get("trace", [])),
     }

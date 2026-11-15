@@ -44,10 +44,13 @@ class Usage:
     output_tokens: int = 0
     usd: float = 0.0
     seconds: float = 0.0
+    cached_calls: int = 0      # replayed from the evaluation cache: no real latency
     by_node: dict[str, dict[str, float]] = field(default_factory=dict)
 
-    def add(self, node: str, model: str, tin: int, tout: int, usd: float, seconds: float) -> None:
+    def add(self, node: str, model: str, tin: int, tout: int, usd: float, seconds: float,
+            cached: bool = False) -> None:
         self.calls += 1
+        self.cached_calls += int(cached)
         self.input_tokens += tin
         self.output_tokens += tout
         self.usd += usd
@@ -309,7 +312,7 @@ def _meter(node: str, model: str, tin: int, tout: int, seconds: float, cached: b
     usd = price_usd(model, tin, tout)
     usage = current_usage()
     if usage is not None:
-        usage.add(node, model, tin, tout, usd, seconds)
+        usage.add(node, model, tin, tout, usd, seconds, cached)
     record_llm_call(node=node, model=model, input_tokens=tin, output_tokens=tout, usd=usd, seconds=seconds,
                     cached=cached)
 

@@ -102,6 +102,12 @@ def mean_by(rows: list[dict[str, Any]], key: str, metrics: list[str]) -> dict[st
             | {"n": len(rs)} for g, rs in sorted(groups.items())}
 
 
+def live_seconds(rows: list[dict]) -> list[float]:
+    """Latencies of jobs whose model calls all ran live; a call replayed from the evaluation cache takes no time, so
+    such jobs say nothing about latency."""
+    return [r["seconds"] for r in rows if not r.get("cached_calls")]
+
+
 def percentile(values: list[float], q: float) -> float | None:
     if not values:
         return None

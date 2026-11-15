@@ -1,4 +1,4 @@
-"""Proposals end to end on a fixed set of dev jobs whose gold label is bid: unsupported claims before and after claim
+﻿"""Proposals end to end on a fixed set of dev jobs whose gold label is bid: unsupported claims before and after claim
 verification, judge score, GigSim reply and hire rate, latency, tokens and USD per proposal.
 
     RAG_VARIANT=v0 python -m evals.runners.proposal_eval --name proposals_v0
@@ -10,7 +10,16 @@ import argparse
 import asyncio
 import json
 
-from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, percentile, run_parallel, write_result
+from evals.runners.common import (
+    PERSONAS,
+    RESULTS,
+    enable_cache,
+    live_seconds,
+    load_set,
+    percentile,
+    run_parallel,
+    write_result,
+)
 from evals.runners.harness import EvalMarketplace, install, run_job
 from evals.runners.judge import judge
 
@@ -43,6 +52,7 @@ async def evaluate(personas: list[str], per_persona: int, split: str = "dev") ->
             row = {"persona": persona, "job_id": job["job_id"], "job_type": item["gold"].get("job_type", "other"),
                    "drafted": result["drafted"], "status": state.get("status"),
                    "status_reason": (state.get("status_reason") or "")[:300], "seconds": result["seconds"],
+                   "cached_calls": result["cached_calls"],
                    "tokens": result["tokens"], "usd": result["usd"],
                    "revisions": state.get("revision", 0)}
             if draft is None or not result["drafted"]:
@@ -75,8 +85,9 @@ def summarise(rows: list[dict]) -> dict:
                 "after": round(sum(r["unsupported_after"] for r in done) / max(1, sum(r["claims"] for r in done)), 4)},
             "judge_overall": mean("judge_overall"), "gigsim_reply_rate": mean("replied"),
             "gigsim_hire_rate": mean("hired"), "mean_revisions": mean("revisions"),
-            "per_proposal": {"p50_seconds": percentile([r["seconds"] for r in done], 0.5),
-                             "p95_seconds": percentile([r["seconds"] for r in done], 0.95),
+            "per_proposal": {"p50_seconds": percentile(live_seconds(done), 0.5),
+                             "p95_seconds": percentile(live_seconds(done), 0.95),
+                             "live_proposals": len(live_seconds(done)),
                              "mean_tokens": round(sum(r["tokens"] for r in done) / max(1, len(done))),
                              "mean_usd": round(sum(r["usd"] for r in done) / max(1, len(done)), 6)},
             "by_persona": {p: {"reply_rate": round(sum(r["replied"] for r in done if r["persona"] == p) /

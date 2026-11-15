@@ -1,4 +1,4 @@
-"""R&D question C: is the multi-agent design worth it?
+﻿"""R&D question C: is the multi-agent design worth it?
 
 On fixed dev jobs (the brief asks for 50; docs/HYPOTHESES.md records the size we ran), compare (a) one ReAct agent
 holding all tools, (b) a prebuilt supervisor (langgraph-supervisor) with three tool-using workers, and (c) GigBid's
@@ -23,7 +23,7 @@ from agent.nodes.guards import find_violations
 from agent.prompts import load_prompt
 from common.config import load_config, model_profile
 from common.llm import extract_json, price_usd
-from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, percentile, write_result
+from evals.runners.common import PERSONAS, RESULTS, enable_cache, live_seconds, load_set, percentile, write_result
 from evals.runners.harness import EvalMarketplace, install, run_job
 from rag.retriever import Retriever, get_index
 from rag.verify import unsupported_count, verify_text
@@ -190,7 +190,8 @@ async def evaluate(n_jobs: int, resume: bool = False) -> dict:
                             state = result["state"]
                             bid = bool(state.get("decision") and state["decision"].action == "bid")
                             draft = state.get("draft")
-                            row = {"pred_bid": bid, "seconds": result["seconds"], "tokens": result["tokens"],
+                            row = {"pred_bid": bid, "seconds": result["seconds"],
+                                   "cached_calls": result["cached_calls"], "tokens": result["tokens"],
                                    "usd": result["usd"],
                                    "violations_caught": len(state["compliance"].violations)
                                    if state.get("compliance") else 0}
@@ -243,8 +244,8 @@ def summarise(rows: list[dict]) -> dict:
             "gigsim_reply_rate": round(sum(r["replied"] for r in replied) / len(replied), 4) if replied else None,
             "mean_tokens": round(sum(r["tokens"] for r in rs) / len(rs)),
             "mean_usd": round(sum(r["usd"] for r in rs) / len(rs), 6),
-            "p50_seconds": percentile([r["seconds"] for r in rs], 0.5),
-            "p95_seconds": percentile([r["seconds"] for r in rs], 0.95),
+            "p50_seconds": percentile(live_seconds(rs), 0.5),
+            "p95_seconds": percentile(live_seconds(rs), 0.95), "live_jobs": len(live_seconds(rs)),
             "errors": failed, "accuracy_by_job_type": by_type}
     return {"designs": out, "rows": rows}
 
