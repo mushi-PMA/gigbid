@@ -47,6 +47,12 @@ def test_redaction_removes_contact_details_and_off_platform_payment():
     assert len(removed) >= 3
 
 
+def test_redaction_keeps_interview_times_but_not_phone_numbers():
+    text, removed = redact("Free at 2026-11-16 09:00 or 2026-11-16 11:00 (UTC+5); or call (555) 123-4567.")
+    assert "2026-11-16 09:00" in text and "2026-11-16 11:00" in text
+    assert removed == ["(555) 123-4567"]
+
+
 def test_pattern_rules_catch_guarantees_and_free_work():
     rules = {rule for rule, _ in find_violations("I guarantee first page rankings and a free sample.")}
     assert {"no_guarantees", "no_free_work"} <= rules
