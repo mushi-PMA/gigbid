@@ -1,0 +1,4095 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T02:46:22.209275+00:00",
+  "commit": "581de03",
+  "model_profile": "open",
+  "rag_variant": "v2_v4_v7",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "split": "dev",
+ "limit_per_persona": 20,
+ "results": [
+  {
+   "variant": "v2+v4",
+   "n": 60,
+   "overall": {
+    "recall@5": 0.447,
+    "recall@5_capped": 0.7125,
+    "mrr": 0.7636,
+    "ndcg@10": 0.5871,
+    "seconds": 0.097,
+    "p95_seconds": 0.2869
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "recall@5": 0.4763,
+     "recall@5_capped": 0.715,
+     "mrr": 0.7183,
+     "ndcg@10": 0.6034,
+     "seconds": 0.1362,
+     "n": 20
+    },
+    "data_analyst": {
+     "recall@5": 0.379,
+     "recall@5_capped": 0.7025,
+     "mrr": 0.8183,
+     "ndcg@10": 0.5651,
+     "seconds": 0.0858,
+     "n": 20
+    },
+    "fullstack_web_dev": {
+     "recall@5": 0.4858,
+     "recall@5_capped": 0.72,
+     "mrr": 0.7542,
+     "ndcg@10": 0.5928,
+     "seconds": 0.0691,
+     "n": 20
+    }
+   },
+   "by_job_type": {
+    "backend_api": {
+     "recall@5": 0.2525,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6881,
+     "seconds": 0.1426,
+     "n": 2
+    },
+    "cms_site": {
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 0.5833,
+     "ndcg@10": 0.6081,
+     "seconds": 0.0523,
+     "n": 7
+    },
+    "computer_vision": {
+     "recall@5": 0.2923,
+     "recall@5_capped": 0.9333,
+     "mrr": 1.0,
+     "ndcg@10": 0.6711,
+     "seconds": 0.0731,
+     "n": 3
+    },
+    "dashboard": {
+     "recall@5": 0.2582,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7696,
+     "seconds": 0.0587,
+     "n": 5
+    },
+    "data_pipeline": {
+     "recall@5": 0.5794,
+     "recall@5_capped": 0.6556,
+     "mrr": 0.6148,
+     "ndcg@10": 0.5009,
+     "seconds": 0.1965,
+     "n": 9
+    },
+    "ecommerce": {
+     "recall@5": 0.5417,
+     "recall@5_capped": 0.65,
+     "mrr": 1.0,
+     "ndcg@10": 0.7428,
+     "seconds": 0.0526,
+     "n": 4
+    },
+    "llm_app": {
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0,
+     "seconds": 0.0697,
+     "n": 1
+    },
+    "ml_model": {
+     "recall@5": 0.27,
+     "recall@5_capped": 0.84,
+     "mrr": 0.9,
+     "ndcg@10": 0.649,
+     "seconds": 0.1496,
+     "n": 5
+    },
+    "mobile_app": {
+     "recall@5": 0.5875,
+     "recall@5_capped": 0.6375,
+     "mrr": 0.7083,
+     "ndcg@10": 0.6277,
+     "seconds": 0.0813,
+     "n": 8
+    },
+    "other": {
+     "recall@5": 0.5006,
+     "recall@5_capped": 0.6875,
+     "mrr": 0.7542,
+     "ndcg@10": 0.5956,
+     "seconds": 0.0825,
+     "n": 8
+    },
+    "spreadsheet_reporting": {
+     "recall@5": 0.2821,
+     "recall@5_capped": 0.7333,
+     "mrr": 1.0,
+     "ndcg@10": 0.5387,
+     "seconds": 0.0583,
+     "n": 3
+    },
+    "web_app": {
+     "recall@5": 0.1235,
+     "recall@5_capped": 0.44,
+     "mrr": 0.6,
+     "ndcg@10": 0.3212,
+     "seconds": 0.0753,
+     "n": 5
+    }
+   },
+   "by_requirements": {
+    "1-3": {
+     "recall@5": 0.4493,
+     "recall@5_capped": 0.6645,
+     "mrr": 0.6849,
+     "ndcg@10": 0.5446,
+     "seconds": 0.1099,
+     "n": 31
+    },
+    "4+": {
+     "recall@5": 0.4446,
+     "recall@5_capped": 0.7638,
+     "mrr": 0.8477,
+     "ndcg@10": 0.6326,
+     "seconds": 0.0833,
+     "n": 29
+    }
+   },
+   "rows": [
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0001",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.9196203000028618,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0002",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.26418790000025183,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0003",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.27215049997903407,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0004",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.1009170999750495,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.2640681225725909
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0007",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.029506899998523295,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0009",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.06339810002828017,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.48247555939075504
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0010",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.02178569999523461,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8503449055347546
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0011",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.03457439999328926,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.2,
+     "mrr": 0.2,
+     "ndcg@10": 0.13120507751234178
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0012",
+     "job_type": "ml_model",
+     "requirements": "4+",
+     "seconds": 0.0300843000295572,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0013",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.28195570001844317,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9197207891481876
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0016",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.19555030000628904,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0017",
+     "job_type": "llm_app",
+     "requirements": "4+",
+     "seconds": 0.06972099997801706,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0019",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.03278400003910065,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0020",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.04280019999714568,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.4227898344066503
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0021",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.035957899992354214,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0022",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.1494432999752462,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0023",
+     "job_type": "computer_vision",
+     "requirements": "1-3",
+     "seconds": 0.03375549998600036,
+     "recall@5": 0.36363636363636365,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0027",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.038894299999810755,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0029",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.06301350001012906,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0030",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.043807099980767816,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0001",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.026760399981867522,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5706417189553201
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0002",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.06133120000595227,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0003",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.056409999961033463,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0005",
+     "job_type": "backend_api",
+     "requirements": "4+",
+     "seconds": 0.24335129995597526,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0007",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.13429339998401701,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0008",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.044540499977301806,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.6571532078621984
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0009",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.023055800003930926,
+     "recall@5": 0.19047619047619047,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0010",
+     "job_type": "cms_site",
+     "requirements": "4+",
+     "seconds": 0.05735710001317784,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0011",
+     "job_type": "backend_api",
+     "requirements": "1-3",
+     "seconds": 0.04180390003602952,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0012",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.10659969999687746,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0013",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.04226010001730174,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.5499887725471477
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0014",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.09672999999020249,
+     "recall@5": 0.6666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.8021574504628256
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0015",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.11104280001018196,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0017",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.028436799999326468,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0020",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.05166749999625608,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0021",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.08024489996023476,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0022",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.028042800026014447,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.31488013066763093
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0023",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.05478110001422465,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.25,
+     "ndcg@10": 0.43067655807339306
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0024",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.06631319998996332,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.4690000933206748
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0025",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.026718500012066215,
+     "recall@5": 0.6666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.961701088650451
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0001",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.1486542000202462,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0002",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.06864379998296499,
+     "recall@5": 0.38461538461538464,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0003",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.03441650001332164,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0004",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.05602530000032857,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.19519002499605084
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0005",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.07434360001934692,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0006",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "1-3",
+     "seconds": 0.05452269996749237,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.40002324830925196
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0007",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.38198090001242235,
+     "recall@5": 0.4,
+     "recall@5_capped": 0.4,
+     "mrr": 0.5,
+     "ndcg@10": 0.5043776700708298
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0010",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.0445843999623321,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8772153153380493
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0011",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.04165919998195022,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0013",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.05044449999695644,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0014",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.07067769998684525,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 1.0,
+     "ndcg@10": 0.3903800499921017
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0015",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.3799581999774091,
+     "recall@5": 0.3,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.4690000933206748
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0017",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.051667199993971735,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.48864468918810133
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0019",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.03376309998566285,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0020",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.05079080001451075,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6366824387328317
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0022",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.040497600042726845,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.2,
+     "ndcg@10": 0.15101961822780524
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0023",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.025897399988025427,
+     "recall@5": 0.21428571428571427,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.4690000933206748
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0025",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.031064499984495342,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5437713091520254
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0026",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.05114639998646453,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.4144299250118475
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0027",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.02619180001784116,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    }
+   ]
+  },
+  {
+   "variant": "v1+v2",
+   "n": 60,
+   "overall": {
+    "recall@5": 0.3991,
+    "recall@5_capped": 0.6722,
+    "mrr": 0.7715,
+    "ndcg@10": 0.5973,
+    "seconds": 0.0908,
+    "p95_seconds": 0.1177
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "recall@5": 0.4751,
+     "recall@5_capped": 0.7267,
+     "mrr": 0.81,
+     "ndcg@10": 0.6521,
+     "seconds": 0.0969,
+     "n": 20
+    },
+    "data_analyst": {
+     "recall@5": 0.3958,
+     "recall@5_capped": 0.725,
+     "mrr": 0.8375,
+     "ndcg@10": 0.6275,
+     "seconds": 0.0901,
+     "n": 20
+    },
+    "fullstack_web_dev": {
+     "recall@5": 0.3264,
+     "recall@5_capped": 0.565,
+     "mrr": 0.6671,
+     "ndcg@10": 0.5123,
+     "seconds": 0.0853,
+     "n": 20
+    }
+   },
+   "by_job_type": {
+    "backend_api": {
+     "recall@5": 0.2247,
+     "recall@5_capped": 0.9,
+     "mrr": 1.0,
+     "ndcg@10": 0.7928,
+     "seconds": 0.1056,
+     "n": 2
+    },
+    "cms_site": {
+     "recall@5": 0.4643,
+     "recall@5_capped": 0.4643,
+     "mrr": 0.5204,
+     "ndcg@10": 0.4792,
+     "seconds": 0.0852,
+     "n": 7
+    },
+    "computer_vision": {
+     "recall@5": 0.3226,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7257,
+     "seconds": 0.0774,
+     "n": 3
+    },
+    "dashboard": {
+     "recall@5": 0.2471,
+     "recall@5_capped": 0.96,
+     "mrr": 1.0,
+     "ndcg@10": 0.7501,
+     "seconds": 0.0851,
+     "n": 5
+    },
+    "data_pipeline": {
+     "recall@5": 0.5212,
+     "recall@5_capped": 0.6259,
+     "mrr": 0.7722,
+     "ndcg@10": 0.6056,
+     "seconds": 0.0967,
+     "n": 9
+    },
+    "ecommerce": {
+     "recall@5": 0.2917,
+     "recall@5_capped": 0.35,
+     "mrr": 0.8,
+     "ndcg@10": 0.3994,
+     "seconds": 0.0872,
+     "n": 4
+    },
+    "llm_app": {
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.1667,
+     "ndcg@10": 0.3562,
+     "seconds": 0.1047,
+     "n": 1
+    },
+    "ml_model": {
+     "recall@5": 0.28,
+     "recall@5_capped": 0.88,
+     "mrr": 0.9,
+     "ndcg@10": 0.7014,
+     "seconds": 0.1039,
+     "n": 5
+    },
+    "mobile_app": {
+     "recall@5": 0.5333,
+     "recall@5_capped": 0.6,
+     "mrr": 0.7292,
+     "ndcg@10": 0.57,
+     "seconds": 0.0966,
+     "n": 8
+    },
+    "other": {
+     "recall@5": 0.5944,
+     "recall@5_capped": 0.7812,
+     "mrr": 0.875,
+     "ndcg@10": 0.722,
+     "seconds": 0.0876,
+     "n": 8
+    },
+    "spreadsheet_reporting": {
+     "recall@5": 0.2821,
+     "recall@5_capped": 0.7333,
+     "mrr": 0.8333,
+     "ndcg@10": 0.5394,
+     "seconds": 0.0899,
+     "n": 3
+    },
+    "web_app": {
+     "recall@5": 0.1835,
+     "recall@5_capped": 0.56,
+     "mrr": 0.5,
+     "ndcg@10": 0.4209,
+     "seconds": 0.0788,
+     "n": 5
+    }
+   },
+   "by_requirements": {
+    "1-3": {
+     "recall@5": 0.4494,
+     "recall@5_capped": 0.6672,
+     "mrr": 0.7403,
+     "ndcg@10": 0.5932,
+     "seconds": 0.0927,
+     "n": 31
+    },
+    "4+": {
+     "recall@5": 0.3453,
+     "recall@5_capped": 0.6776,
+     "mrr": 0.8049,
+     "ndcg@10": 0.6017,
+     "seconds": 0.0887,
+     "n": 29
+    }
+   },
+   "rows": [
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0001",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.10452360002091154,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.3333333333333333,
+     "mrr": 0.2,
+     "ndcg@10": 0.18154179253735267
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0002",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.0903810000163503,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0003",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.08853090001503006,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0004",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.09964660002151504,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0007",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.05790439998963848,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.3065735963827292
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0009",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.09089910000329837,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.8315546295836225
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0010",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.099279000016395,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.6052602440527057
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0011",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.11603710002964363,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.2,
+     "mrr": 1.0,
+     "ndcg@10": 0.45221360703148816
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0012",
+     "job_type": "ml_model",
+     "requirements": "4+",
+     "seconds": 0.12505689996760339,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0013",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.1434305000002496,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0016",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.10840299999108538,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0017",
+     "job_type": "llm_app",
+     "requirements": "4+",
+     "seconds": 0.10473650001222268,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.3562071871080222
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0019",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.09889610001118854,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0020",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.08293839998077601,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6934264036172708
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0021",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.053435000008903444,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0022",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.08901510003488511,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0023",
+     "job_type": "computer_vision",
+     "requirements": "1-3",
+     "seconds": 0.08985779999056831,
+     "recall@5": 0.45454545454545453,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0027",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.08706460002576932,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0029",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.08978969999589026,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0030",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.11769390001427382,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0001",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.06643459998304024,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0002",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.07412080001085997,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0003",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.08350349997635931,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0005",
+     "job_type": "backend_api",
+     "requirements": "4+",
+     "seconds": 0.09637290000682697,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0007",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.09682959999190643,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0008",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.07064930000342429,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0009",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.057060399965848774,
+     "recall@5": 0.19047619047619047,
+     "recall@5_capped": 0.8,
+     "mrr": 0.5,
+     "ndcg@10": 0.5072380780124417
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0010",
+     "job_type": "cms_site",
+     "requirements": "4+",
+     "seconds": 0.09024789999239147,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.14285714285714285,
+     "ndcg@10": 0.3333333333333333
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0011",
+     "job_type": "backend_api",
+     "requirements": "1-3",
+     "seconds": 0.11483729997416958,
+     "recall@5": 0.2222222222222222,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.7849818707050382
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0012",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.09545870003057644,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0013",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.10279189998982474,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0014",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.09259869996458292,
+     "recall@5": 0.16666666666666666,
+     "recall@5_capped": 0.2,
+     "mrr": 0.2,
+     "ndcg@10": 0.11706259313796355
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0015",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.09221230004914105,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0017",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.06689879996702075,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0020",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.09568129997933283,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0021",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.07648569997400045,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0022",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.07127389998640865,
+     "recall@5": 0.5,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0023",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.09864549996564165,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0024",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.08070439996663481,
+     "recall@5": 0.26666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5100691314582919
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0025",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.08265860000392422,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0001",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.09612439997727051,
+     "recall@5": 0.2222222222222222,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0002",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.09829390002414584,
+     "recall@5": 0.3076923076923077,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.6325414799409711
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0003",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.0948740000021644,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9363792118010481
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0004",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.08719460002612323,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 1.0,
+     "ndcg@10": 0.3903800499921017
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0005",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.10363530000904575,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0006",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "1-3",
+     "seconds": 0.0895924000069499,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 0.5,
+     "ndcg@10": 0.3971921948634016
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0007",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.11808590003056452,
+     "recall@5": 0.4,
+     "recall@5_capped": 0.4,
+     "mrr": 0.5,
+     "ndcg@10": 0.6811534418271473
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0010",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.0926377999712713,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.8175295903539445
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0011",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.08113290002802387,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0013",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.09234579995973036,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0014",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.10639929998433217,
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 1.0,
+     "ndcg@10": 0.8048099750039491
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0015",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.10201560001587495,
+     "recall@5": 0.3,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.5473983622993501
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0017",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.08190320001449436,
+     "recall@5": 0.3076923076923077,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5884674004369673
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0019",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.06543859996600077,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0020",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.08349799999268726,
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 0.5,
+     "ndcg@10": 0.592512031964586
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0022",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.08628180000232533,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0023",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.05092990002594888,
+     "recall@5": 0.35714285714285715,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0025",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.10218099999474362,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.2640681225725909
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0026",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.09323679999215528,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.5,
+     "ndcg@10": 0.24630238874073
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0027",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.07681569998385385,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    }
+   ]
+  },
+  {
+   "variant": "v1+v2+v4",
+   "n": 60,
+   "overall": {
+    "recall@5": 0.4175,
+    "recall@5_capped": 0.6981,
+    "mrr": 0.7495,
+    "ndcg@10": 0.6049,
+    "seconds": 0.1061,
+    "p95_seconds": 0.2078
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "recall@5": 0.4151,
+     "recall@5_capped": 0.6667,
+     "mrr": 0.6746,
+     "ndcg@10": 0.5676,
+     "seconds": 0.1147,
+     "n": 20
+    },
+    "data_analyst": {
+     "recall@5": 0.3725,
+     "recall@5_capped": 0.7025,
+     "mrr": 0.8392,
+     "ndcg@10": 0.6363,
+     "seconds": 0.113,
+     "n": 20
+    },
+    "fullstack_web_dev": {
+     "recall@5": 0.4649,
+     "recall@5_capped": 0.725,
+     "mrr": 0.7347,
+     "ndcg@10": 0.6109,
+     "seconds": 0.0907,
+     "n": 20
+    }
+   },
+   "by_job_type": {
+    "backend_api": {
+     "recall@5": 0.2525,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8685,
+     "seconds": 0.1326,
+     "n": 2
+    },
+    "cms_site": {
+     "recall@5": 0.7857,
+     "recall@5_capped": 0.7857,
+     "mrr": 0.5119,
+     "ndcg@10": 0.5397,
+     "seconds": 0.0849,
+     "n": 7
+    },
+    "computer_vision": {
+     "recall@5": 0.3226,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7012,
+     "seconds": 0.0717,
+     "n": 3
+    },
+    "dashboard": {
+     "recall@5": 0.2582,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8124,
+     "seconds": 0.1007,
+     "n": 5
+    },
+    "data_pipeline": {
+     "recall@5": 0.491,
+     "recall@5_capped": 0.5815,
+     "mrr": 0.677,
+     "ndcg@10": 0.5798,
+     "seconds": 0.1294,
+     "n": 9
+    },
+    "ecommerce": {
+     "recall@5": 0.4583,
+     "recall@5_capped": 0.55,
+     "mrr": 1.0,
+     "ndcg@10": 0.6118,
+     "seconds": 0.1106,
+     "n": 4
+    },
+    "llm_app": {
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0,
+     "seconds": 0.1301,
+     "n": 1
+    },
+    "ml_model": {
+     "recall@5": 0.24,
+     "recall@5_capped": 0.84,
+     "mrr": 0.84,
+     "ndcg@10": 0.6593,
+     "seconds": 0.1455,
+     "n": 5
+    },
+    "mobile_app": {
+     "recall@5": 0.4083,
+     "recall@5_capped": 0.475,
+     "mrr": 0.5188,
+     "ndcg@10": 0.4363,
+     "seconds": 0.1095,
+     "n": 8
+    },
+    "other": {
+     "recall@5": 0.5319,
+     "recall@5_capped": 0.7188,
+     "mrr": 0.9375,
+     "ndcg@10": 0.7097,
+     "seconds": 0.091,
+     "n": 8
+    },
+    "spreadsheet_reporting": {
+     "recall@5": 0.2821,
+     "recall@5_capped": 0.7333,
+     "mrr": 0.7778,
+     "ndcg@10": 0.5492,
+     "seconds": 0.1036,
+     "n": 3
+    },
+    "web_app": {
+     "recall@5": 0.1931,
+     "recall@5_capped": 0.6,
+     "mrr": 0.6222,
+     "ndcg@10": 0.5678,
+     "seconds": 0.0821,
+     "n": 5
+    }
+   },
+   "by_requirements": {
+    "1-3": {
+     "recall@5": 0.4452,
+     "recall@5_capped": 0.6737,
+     "mrr": 0.7191,
+     "ndcg@10": 0.5995,
+     "seconds": 0.109,
+     "n": 31
+    },
+    "4+": {
+     "recall@5": 0.3879,
+     "recall@5_capped": 0.7241,
+     "mrr": 0.782,
+     "ndcg@10": 0.6107,
+     "seconds": 0.1032,
+     "n": 29
+    }
+   },
+   "rows": [
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0001",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.09893590002320707,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.3333333333333333,
+     "mrr": 0.2,
+     "ndcg@10": 0.18154179253735267
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0002",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.08416470000520349,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0003",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.07352080004056916,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0004",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.10705809999490157,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0007",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.0683829000336118,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.2,
+     "ndcg@10": 0.45560514958746035
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0009",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.13794780004536733,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.3065735963827292
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0010",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.21327850001398474,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.2,
+     "ndcg@10": 0.23719771276929622
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0011",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.20771079999394715,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.14285714285714285,
+     "ndcg@10": 0.11305340175787204
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0012",
+     "job_type": "ml_model",
+     "requirements": "4+",
+     "seconds": 0.10574130003806204,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0013",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.0920567000284791,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0016",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.18718040001112968,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0017",
+     "job_type": "llm_app",
+     "requirements": "4+",
+     "seconds": 0.13011069997446612,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0019",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.10366000002250075,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0020",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.06647379999049008,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.41183384043543503
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0021",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.04450150002958253,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0022",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.08412529999623075,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0023",
+     "job_type": "computer_vision",
+     "requirements": "1-3",
+     "seconds": 0.08656109997536987,
+     "recall@5": 0.45454545454545453,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0027",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.16194980003638193,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0029",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.13013479998335242,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0030",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.11140279995743185,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.2640681225725909
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0001",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.05706270004156977,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0002",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.06568619998870417,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0003",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.0695974999689497,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0005",
+     "job_type": "backend_api",
+     "requirements": "4+",
+     "seconds": 0.1612260999972932,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0007",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.15454019996104762,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.1111111111111111,
+     "ndcg@10": 0.3010299956639812
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0008",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.056663100025616586,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.6105858728157117
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0009",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.03620440000668168,
+     "recall@5": 0.23809523809523808,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0010",
+     "job_type": "cms_site",
+     "requirements": "4+",
+     "seconds": 0.09758240001974627,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0011",
+     "job_type": "backend_api",
+     "requirements": "1-3",
+     "seconds": 0.10397569998167455,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9363792118010481
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0012",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.08429879997856915,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0013",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.16278980002971366,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0014",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.14331030001631007,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.6238470455881189
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0015",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.08656899997731671,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0017",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.06911830004537478,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0020",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.09273579996079206,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0021",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.06737639999482781,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9363792118010481
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0022",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.06582689995411783,
+     "recall@5": 0.5,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0023",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.08072740002535284,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.25,
+     "ndcg@10": 0.43067655807339306
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0024",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.07964870001887903,
+     "recall@5": 0.26666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5884674004369673
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0025",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.0797883000341244,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.7193074786775863
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0001",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.10287989996140823,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0002",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.13588700001128018,
+     "recall@5": 0.38461538461538464,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0003",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.1642971999826841,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0004",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.11912160000065342,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.5855700749881525
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0005",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.10321740002837032,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0006",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "1-3",
+     "seconds": 0.09745250002015382,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.5517854393872873
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0007",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.2720425000297837,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.2,
+     "mrr": 0.2,
+     "ndcg@10": 0.2442584792702138
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0010",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.21020859997952357,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.8175295903539445
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0011",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.13424159999703988,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0013",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.10232050000922754,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0014",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.12157140002818778,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6975637657739948
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0015",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.09458360000280663,
+     "recall@5": 0.3,
+     "recall@5_capped": 0.6,
+     "mrr": 0.5,
+     "ndcg@10": 0.4220949603708207
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0017",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.07760560000315309,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.3683756341388872
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0019",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.05654679995495826,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0020",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.08904970000730827,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6366824387328317
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0022",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.08504699997138232,
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 1.0,
+     "ndcg@10": 0.787702056960637
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0023",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.04070999997202307,
+     "recall@5": 0.2857142857142857,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5884674004369673
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0025",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.09180219995323569,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.48247555939075504
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0026",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.08315489999949932,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.4144299250118475
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0027",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.07761109998682514,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9363792118010481
+    }
+   ]
+  },
+  {
+   "variant": "v1+v2+v3",
+   "n": 60,
+   "overall": {
+    "recall@5": 0.4198,
+    "recall@5_capped": 0.6892,
+    "mrr": 0.7269,
+    "ndcg@10": 0.5786,
+    "seconds": 11.5415,
+    "p95_seconds": 16.7
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "recall@5": 0.5013,
+     "recall@5_capped": 0.74,
+     "mrr": 0.7667,
+     "ndcg@10": 0.6271,
+     "seconds": 12.7316,
+     "n": 20
+    },
+    "data_analyst": {
+     "recall@5": 0.4322,
+     "recall@5_capped": 0.7625,
+     "mrr": 0.8208,
+     "ndcg@10": 0.6242,
+     "seconds": 9.4448,
+     "n": 20
+    },
+    "fullstack_web_dev": {
+     "recall@5": 0.3258,
+     "recall@5_capped": 0.565,
+     "mrr": 0.5933,
+     "ndcg@10": 0.4846,
+     "seconds": 12.4482,
+     "n": 20
+    }
+   },
+   "by_job_type": {
+    "backend_api": {
+     "recall@5": 0.2525,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.764,
+     "seconds": 13.7568,
+     "n": 2
+    },
+    "cms_site": {
+     "recall@5": 0.4643,
+     "recall@5_capped": 0.4643,
+     "mrr": 0.4524,
+     "ndcg@10": 0.4298,
+     "seconds": 10.9439,
+     "n": 7
+    },
+    "computer_vision": {
+     "recall@5": 0.2923,
+     "recall@5_capped": 0.9333,
+     "mrr": 1.0,
+     "ndcg@10": 0.7479,
+     "seconds": 13.7821,
+     "n": 3
+    },
+    "dashboard": {
+     "recall@5": 0.2471,
+     "recall@5_capped": 0.96,
+     "mrr": 1.0,
+     "ndcg@10": 0.7361,
+     "seconds": 8.933,
+     "n": 5
+    },
+    "data_pipeline": {
+     "recall@5": 0.5841,
+     "recall@5_capped": 0.6778,
+     "mrr": 0.7778,
+     "ndcg@10": 0.6098,
+     "seconds": 11.9369,
+     "n": 9
+    },
+    "ecommerce": {
+     "recall@5": 0.2917,
+     "recall@5_capped": 0.35,
+     "mrr": 0.675,
+     "ndcg@10": 0.4155,
+     "seconds": 12.0786,
+     "n": 4
+    },
+    "llm_app": {
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.1667,
+     "ndcg@10": 0.3562,
+     "seconds": 9.7764,
+     "n": 1
+    },
+    "ml_model": {
+     "recall@5": 0.27,
+     "recall@5_capped": 0.84,
+     "mrr": 0.85,
+     "ndcg@10": 0.665,
+     "seconds": 12.1701,
+     "n": 5
+    },
+    "mobile_app": {
+     "recall@5": 0.65,
+     "recall@5_capped": 0.7,
+     "mrr": 0.7083,
+     "ndcg@10": 0.5523,
+     "seconds": 11.7766,
+     "n": 8
+    },
+    "other": {
+     "recall@5": 0.5631,
+     "recall@5_capped": 0.75,
+     "mrr": 0.7708,
+     "ndcg@10": 0.6501,
+     "seconds": 10.4582,
+     "n": 8
+    },
+    "spreadsheet_reporting": {
+     "recall@5": 0.3077,
+     "recall@5_capped": 0.8,
+     "mrr": 0.6667,
+     "ndcg@10": 0.544,
+     "seconds": 10.5761,
+     "n": 3
+    },
+    "web_app": {
+     "recall@5": 0.1835,
+     "recall@5_capped": 0.56,
+     "mrr": 0.5,
+     "ndcg@10": 0.4348,
+     "seconds": 13.276,
+     "n": 5
+    }
+   },
+   "by_requirements": {
+    "1-3": {
+     "recall@5": 0.4681,
+     "recall@5_capped": 0.6823,
+     "mrr": 0.7231,
+     "ndcg@10": 0.5957,
+     "seconds": 12.2863,
+     "n": 31
+    },
+    "4+": {
+     "recall@5": 0.3681,
+     "recall@5_capped": 0.6966,
+     "mrr": 0.731,
+     "ndcg@10": 0.5604,
+     "seconds": 10.7454,
+     "n": 29
+    }
+   },
+   "rows": [
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0001",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 13.626952400023583,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.3235866969737877
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0002",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 10.421741900034249,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0003",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 11.796963099972345,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0004",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 15.063933800032828,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0007",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 6.293377999973018,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.3065735963827292
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0009",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 12.439006300002802,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8503449055347546
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0010",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 10.19067790004192,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5706417189553201
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0011",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 15.53227159997914,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.2,
+     "mrr": 1.0,
+     "ndcg@10": 0.3391602052736161
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0012",
+     "job_type": "ml_model",
+     "requirements": "4+",
+     "seconds": 14.217837499978486,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0013",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 12.261085900012404,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0016",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 20.482564600009937,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0017",
+     "job_type": "llm_app",
+     "requirements": "4+",
+     "seconds": 9.776368400023784,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.3562071871080222
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0019",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 14.278237399994396,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0020",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 12.941576800018083,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6240505200038379
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0021",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 8.472544900025241,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0022",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 17.392209100013133,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0023",
+     "job_type": "computer_vision",
+     "requirements": "1-3",
+     "seconds": 15.481596199970227,
+     "recall@5": 0.36363636363636365,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.7155506487682609
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0027",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 12.16208059998462,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0029",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 9.684655599994585,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0030",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 12.116829500009771,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0001",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 9.71519299998181,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0002",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 11.411241900001187,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0003",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 11.52199350000592,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0005",
+     "job_type": "backend_api",
+     "requirements": "4+",
+     "seconds": 12.628639500006102,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0007",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 15.662405900016893,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0008",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 8.077826399996411,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0009",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 5.768086299998686,
+     "recall@5": 0.19047619047619047,
+     "recall@5_capped": 0.8,
+     "mrr": 0.5,
+     "ndcg@10": 0.5072380780124417
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0010",
+     "job_type": "cms_site",
+     "requirements": "4+",
+     "seconds": 9.48485939996317,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.16666666666666666,
+     "ndcg@10": 0.3562071871080222
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0011",
+     "job_type": "backend_api",
+     "requirements": "1-3",
+     "seconds": 14.884933199966326,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0012",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 16.487762000004295,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0013",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 15.634323899983428,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 0.5,
+     "ndcg@10": 0.4500112274528524
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0014",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 13.067895699990913,
+     "recall@5": 0.16666666666666666,
+     "recall@5_capped": 0.2,
+     "mrr": 0.2,
+     "ndcg@10": 0.22485174766247448
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0015",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 16.70899209997151,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0017",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 7.486890600004699,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0020",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 16.699503400013782,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0021",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 12.82892840000568,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0022",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 15.411409499996807,
+     "recall@5": 0.5,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7967610662472991
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0023",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 11.041568899992853,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0024",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 12.90655750001315,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.4537425745411855
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0025",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 11.534416600014083,
+     "recall@5": 0.3333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.4935232796777482
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0001",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 10.438286999997217,
+     "recall@5": 0.2222222222222222,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0002",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 13.054452800017316,
+     "recall@5": 0.38461538461538464,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7222954974312066
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0003",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 9.211374900012743,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0004",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 8.960996599984355,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 1.0,
+     "ndcg@10": 0.3903800499921017
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0005",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 10.065430800023023,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.6131471927654584
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0006",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "1-3",
+     "seconds": 10.188024199975189,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 0.5,
+     "ndcg@10": 0.40741536676357565
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0007",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 9.770516599994153,
+     "recall@5": 0.4,
+     "recall@5_capped": 0.4,
+     "mrr": 0.25,
+     "ndcg@10": 0.5111381318124144
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0010",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 11.09593940002378,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8503449055347546
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0011",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 8.085345100029372,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0013",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 9.331215500016697,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0014",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 11.389008300029673,
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 1.0,
+     "ndcg@10": 0.7365896932159578
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0015",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 10.916490699979477,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.43735247915031
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0017",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 8.485796499997377,
+     "recall@5": 0.3076923076923077,
+     "recall@5_capped": 0.8,
+     "mrr": 0.5,
+     "ndcg@10": 0.5022037311331263
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0019",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 7.813668499991763,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0020",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 8.620853899978101,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.36331756126716835
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0022",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 8.79606209998019,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0023",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 4.5706933999899775,
+     "recall@5": 0.35714285714285715,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0025",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 11.457197199983057,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6240505200038379
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0026",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 8.774051199958194,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.19519002499605084
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0027",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 7.870635800005402,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    }
+   ]
+  },
+  {
+   "variant": "v2+v4+v7",
+   "n": 60,
+   "overall": {
+    "recall@5": 0.4892,
+    "recall@5_capped": 0.7508,
+    "mrr": 0.7936,
+    "ndcg@10": 0.6288,
+    "seconds": 0.0774,
+    "p95_seconds": 0.1712
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "recall@5": 0.5263,
+     "recall@5_capped": 0.765,
+     "mrr": 0.7642,
+     "ndcg@10": 0.6533,
+     "seconds": 0.0892,
+     "n": 20
+    },
+    "data_analyst": {
+     "recall@5": 0.4004,
+     "recall@5_capped": 0.7175,
+     "mrr": 0.8292,
+     "ndcg@10": 0.5925,
+     "seconds": 0.0715,
+     "n": 20
+    },
+    "fullstack_web_dev": {
+     "recall@5": 0.5408,
+     "recall@5_capped": 0.77,
+     "mrr": 0.7875,
+     "ndcg@10": 0.6406,
+     "seconds": 0.0716,
+     "n": 20
+    }
+   },
+   "by_job_type": {
+    "backend_api": {
+     "recall@5": 0.2525,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.764,
+     "seconds": 0.0751,
+     "n": 2
+    },
+    "cms_site": {
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 0.6071,
+     "ndcg@10": 0.6353,
+     "seconds": 0.0703,
+     "n": 7
+    },
+    "computer_vision": {
+     "recall@5": 0.2923,
+     "recall@5_capped": 0.9333,
+     "mrr": 1.0,
+     "ndcg@10": 0.6973,
+     "seconds": 0.0613,
+     "n": 3
+    },
+    "dashboard": {
+     "recall@5": 0.2582,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7999,
+     "seconds": 0.0539,
+     "n": 5
+    },
+    "data_pipeline": {
+     "recall@5": 0.5714,
+     "recall@5_capped": 0.6333,
+     "mrr": 0.6148,
+     "ndcg@10": 0.4806,
+     "seconds": 0.065,
+     "n": 9
+    },
+    "ecommerce": {
+     "recall@5": 0.5833,
+     "recall@5_capped": 0.7,
+     "mrr": 1.0,
+     "ndcg@10": 0.7017,
+     "seconds": 0.0674,
+     "n": 4
+    },
+    "llm_app": {
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0,
+     "seconds": 0.0281,
+     "n": 1
+    },
+    "ml_model": {
+     "recall@5": 0.27,
+     "recall@5_capped": 0.84,
+     "mrr": 0.9,
+     "ndcg@10": 0.649,
+     "seconds": 0.1557,
+     "n": 5
+    },
+    "mobile_app": {
+     "recall@5": 0.7042,
+     "recall@5_capped": 0.7375,
+     "mrr": 0.7604,
+     "ndcg@10": 0.7151,
+     "seconds": 0.0929,
+     "n": 8
+    },
+    "other": {
+     "recall@5": 0.5631,
+     "recall@5_capped": 0.75,
+     "mrr": 0.7812,
+     "ndcg@10": 0.6678,
+     "seconds": 0.0693,
+     "n": 8
+    },
+    "spreadsheet_reporting": {
+     "recall@5": 0.2821,
+     "recall@5_capped": 0.7333,
+     "mrr": 1.0,
+     "ndcg@10": 0.5387,
+     "seconds": 0.0681,
+     "n": 3
+    },
+    "web_app": {
+     "recall@5": 0.3235,
+     "recall@5_capped": 0.64,
+     "mrr": 0.8,
+     "ndcg@10": 0.5212,
+     "seconds": 0.0775,
+     "n": 5
+    }
+   },
+   "by_requirements": {
+    "1-3": {
+     "recall@5": 0.5192,
+     "recall@5_capped": 0.7355,
+     "mrr": 0.7538,
+     "ndcg@10": 0.6175,
+     "seconds": 0.08,
+     "n": 31
+    },
+    "4+": {
+     "recall@5": 0.4571,
+     "recall@5_capped": 0.7672,
+     "mrr": 0.8362,
+     "ndcg@10": 0.641,
+     "seconds": 0.0747,
+     "n": 29
+    }
+   },
+   "rows": [
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0001",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.1015766000491567,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0002",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.3145156999817118,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0003",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.10538069996982813,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0004",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.04204929998377338,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5249810332008933
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0007",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.07085959997493774,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0009",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.08427669998491183,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.25,
+     "ndcg@10": 0.48247555939075504
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0010",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.07286479999311268,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8503449055347546
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0011",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.051011100003961474,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.2,
+     "mrr": 0.2,
+     "ndcg@10": 0.13120507751234178
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0012",
+     "job_type": "ml_model",
+     "requirements": "4+",
+     "seconds": 0.04611289995955303,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0013",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.3107116000028327,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9197207891481876
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0016",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.08369240001775324,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0017",
+     "job_type": "llm_app",
+     "requirements": "4+",
+     "seconds": 0.02812099998118356,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0019",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.050090699980501086,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0020",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.07654929999262094,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.8175295903539445
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0021",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.053599299979396164,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0022",
+     "job_type": "computer_vision",
+     "requirements": "4+",
+     "seconds": 0.08342919999267906,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0023",
+     "job_type": "computer_vision",
+     "requirements": "1-3",
+     "seconds": 0.04694460000609979,
+     "recall@5": 0.36363636363636365,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0027",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.0551658000331372,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.6489315753318465
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0029",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.0810427000396885,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "ai_ml_engineer",
+     "job_id": "dev-aiml-0030",
+     "job_type": "mobile_app",
+     "requirements": "1-3",
+     "seconds": 0.026878200005739927,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8772153153380493
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0001",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.07188459997996688,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6240505200038379
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0002",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.08282180002424866,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0003",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.07584940001834184,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0005",
+     "job_type": "backend_api",
+     "requirements": "4+",
+     "seconds": 0.09256880002794787,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0007",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.16388390003703535,
+     "recall@5": 0.0,
+     "recall@5_capped": 0.0,
+     "mrr": 0.0,
+     "ndcg@10": 0.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0008",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.026501099986489862,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.5842273861585909
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0009",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.039472299977205694,
+     "recall@5": 0.19047619047619047,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.5637884576902256
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0010",
+     "job_type": "cms_site",
+     "requirements": "4+",
+     "seconds": 0.06037379999179393,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0011",
+     "job_type": "backend_api",
+     "requirements": "1-3",
+     "seconds": 0.057598000043071806,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0012",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.07956280000507832,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.9363792118010481
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0013",
+     "job_type": "ecommerce",
+     "requirements": "1-3",
+     "seconds": 0.060875500028487295,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.5499887725471477
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0014",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.1222070999792777,
+     "recall@5": 0.6666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.8021574504628256
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0015",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.06312399997841567,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0017",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.04860259999986738,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 1.0
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0020",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.07341349998023361,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.5,
+     "ndcg@10": 0.6309297535714575
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0021",
+     "job_type": "web_app",
+     "requirements": "1-3",
+     "seconds": 0.08016630000201985,
+     "recall@5": 0.22727272727272727,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0022",
+     "job_type": "web_app",
+     "requirements": "4+",
+     "seconds": 0.041061999974772334,
+     "recall@5": 0.2,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.31488013066763093
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0023",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.07275679998565465,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.25,
+     "ndcg@10": 0.43067655807339306
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0024",
+     "job_type": "mobile_app",
+     "requirements": "4+",
+     "seconds": 0.05897029995685443,
+     "recall@5": 0.13333333333333333,
+     "recall@5_capped": 0.4,
+     "mrr": 0.5,
+     "ndcg@10": 0.2489083270225946
+    },
+    {
+     "persona": "fullstack_web_dev",
+     "job_id": "dev-web-0025",
+     "job_type": "ecommerce",
+     "requirements": "4+",
+     "seconds": 0.05996980000054464,
+     "recall@5": 0.6666666666666666,
+     "recall@5_capped": 0.8,
+     "mrr": 1.0,
+     "ndcg@10": 0.870608685426993
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0001",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.08173969999188557,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0002",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.08807729999534786,
+     "recall@5": 0.38461538461538464,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0003",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.04954769997857511,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0004",
+     "job_type": "cms_site",
+     "requirements": "1-3",
+     "seconds": 0.07854930002940819,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.5,
+     "ndcg@10": 0.3853585682515056
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0005",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.09947970003122464,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.38685280723454163
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0006",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "1-3",
+     "seconds": 0.0746872000163421,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.40002324830925196
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0007",
+     "job_type": "ml_model",
+     "requirements": "1-3",
+     "seconds": 0.31283920002169907,
+     "recall@5": 0.4,
+     "recall@5_capped": 0.4,
+     "mrr": 0.5,
+     "ndcg@10": 0.5043776700708298
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0010",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.04391670000040904,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8772153153380493
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0011",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.04589449998456985,
+     "recall@5": 0.2777777777777778,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0013",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.043952599982731044,
+     "recall@5": 0.2631578947368421,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8006937664098819
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0014",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.046819600043818355,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 1.0,
+     "ndcg@10": 0.5585075862632192
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0015",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.06359080004040152,
+     "recall@5": 0.3,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.424926013816671
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0017",
+     "job_type": "spreadsheet_reporting",
+     "requirements": "4+",
+     "seconds": 0.04142149997642264,
+     "recall@5": 0.23076923076923078,
+     "recall@5_capped": 0.6,
+     "mrr": 1.0,
+     "ndcg@10": 0.48864468918810133
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0019",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.06030750001082197,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.8701249883466592
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0020",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.05480410001473501,
+     "recall@5": 0.75,
+     "recall@5_capped": 0.75,
+     "mrr": 1.0,
+     "ndcg@10": 0.787702056960637
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0022",
+     "job_type": "other",
+     "requirements": "1-3",
+     "seconds": 0.07094270002562553,
+     "recall@5": 0.25,
+     "recall@5_capped": 0.25,
+     "mrr": 0.25,
+     "ndcg@10": 0.16812753627111746
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0023",
+     "job_type": "data_pipeline",
+     "requirements": "4+",
+     "seconds": 0.022422899957746267,
+     "recall@5": 0.14285714285714285,
+     "recall@5_capped": 0.4,
+     "mrr": 1.0,
+     "ndcg@10": 0.33013764944712026
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0025",
+     "job_type": "data_pipeline",
+     "requirements": "1-3",
+     "seconds": 0.03861190000316128,
+     "recall@5": 1.0,
+     "recall@5_capped": 1.0,
+     "mrr": 0.3333333333333333,
+     "ndcg@10": 0.5437713091520254
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0026",
+     "job_type": "other",
+     "requirements": "4+",
+     "seconds": 0.07882749999407679,
+     "recall@5": 0.5,
+     "recall@5_capped": 0.5,
+     "mrr": 0.5,
+     "ndcg@10": 0.3973220069685352
+    },
+    {
+     "persona": "data_analyst",
+     "job_id": "dev-data-0027",
+     "job_type": "dashboard",
+     "requirements": "4+",
+     "seconds": 0.03391990001546219,
+     "recall@5": 0.25,
+     "recall@5_capped": 1.0,
+     "mrr": 1.0,
+     "ndcg@10": 0.7273298443105218
+    }
+   ]
+  }
+ ],
+ "skipped_need_model": []
+}
