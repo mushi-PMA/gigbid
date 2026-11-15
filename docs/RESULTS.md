@@ -31,6 +31,7 @@ Unit: a portfolio project (its case study, README, code and proposals). Dev set,
 | v1+v2+v4 | 0.418 | 0.698 | 0.750 | 0.605 | 0.21 | 60 |
 | v1+v2+v3 | 0.420 | 0.689 | 0.727 | 0.579 | 16.70 | 60 |
 | v2+v4+v7 | 0.489 | 0.751 | 0.794 | 0.629 | 0.17 | 60 |
+| v2+v8 | 0.373 | 0.633 | 0.711 | 0.558 | 59.66 | 30 |
 <!-- /results:rag -->
 
 ## ablation

@@ -91,7 +91,7 @@ export function RunViewer() {
       <div className="page-head">
         <h1>Agent run</h1>
         <div className="button-row">
-          {(phase === 'waiting' || info.data?.history?.some((step) => step.status === 'awaiting_approval')) && (
+          {(phase === 'waiting' || info.data?.history?.[0]?.status === 'awaiting_approval') && (
             <Link className="button primary" to={approvalLink(threadId)}>
               Review and decide
             </Link>

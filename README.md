@@ -6,8 +6,7 @@ writing; **you approve every proposal and message before anything leaves the sys
 
 ![demo](docs/images/demo.gif)
 
-**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;Â·&nbsp; **Video (3 min):** <!-- video-url -->not
-recorded yet<!-- /video-url --> &nbsp;Â·&nbsp; **Write-up:** <!-- writeup-url -->[the better retriever did not write better proposals](https://mushi-pma.github.io/gigbid/)<!-- /writeup-url -->
+**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;Â·&nbsp; **Video (2 min):** <!-- video-url -->[live walkthrough](https://mushi-pma.github.io/gigbid/demo.webm)<!-- /video-url --> &nbsp;Â·&nbsp; **Write-up:** <!-- writeup-url -->[the better retriever did not write better proposals](https://mushi-pma.github.io/gigbid/)<!-- /writeup-url -->
 &nbsp;Â·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
 
 Reviewer login (app) and a read-only trace viewer login (Phoenix, at `/phoenix/`): shared privately on the submission,
@@ -79,6 +78,7 @@ Unit: a portfolio project (its case study, README, code and proposals). Dev set,
 | v1+v2+v4 | 0.418 | 0.698 | 0.750 | 0.605 | 0.21 | 60 |
 | v1+v2+v3 | 0.420 | 0.689 | 0.727 | 0.579 | 16.70 | 60 |
 | v2+v4+v7 | 0.489 | 0.751 | 0.794 | 0.629 | 0.17 | 60 |
+| v2+v8 | 0.373 | 0.633 | 0.711 | 0.558 | 59.66 | 30 |
 <!-- /results:rag -->
 
 ### Multi-agent design against simpler designs (R&D question C)

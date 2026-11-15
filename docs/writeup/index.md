@@ -30,7 +30,8 @@ contextual chunk lines, HyDE and a corrective loop. On 150 dev jobs the picture 
 outcome boost (V2+V4) beat plain dense search on nDCG@10, 0.597 against 0.566. The ablation said both parts earn
 their place: removing hybrid search cost 0.062, removing the outcome boost 0.021. HyDE on top was better still, 0.629
 against 0.587 on the same 60 jobs, but it costs a model call per search, and on free model tiers a model call is the
-scarce thing, so we shipped V2+V4.
+scarce thing, so we shipped V2+V4. The corrective loop (V8) helped plain hybrid search a little on 30 jobs (0.558
+against 0.530) but stayed below V2+V4 (0.612 on the same jobs) and was slow.
 
 Two of our own hypotheses failed along the way, and we report them as failed. We had predicted that decomposition,
 hybrid search and reranking together would raise Recall@5 by ten points on jobs with four or more requirements; on

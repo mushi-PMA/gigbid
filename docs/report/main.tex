@@ -132,7 +132,9 @@ shipped choice rests on retrieval quality and cost, not on replies.
 \textbf{What ships.} V2+V4 (hybrid BM25 and dense search with the outcome-aware boost, \file{docs/adr/0003-rag-variant.md}).
 V2+V4+V7 retrieved better (nDCG@10 0.629 against 0.587 on the same 60 jobs, \file{evals/results/rag\_variants\_model.json}),
 but HyDE adds a model call to every search and the binding limit on our free tier is tokens per day per key, not
-dollars; V2+V4 adds no model call and gives up about 0.04 nDCG@10. The cross-encoder (V3) was dropped because it lowered nDCG@10 on every
+dollars; V2+V4 adds no model call and gives up about 0.04 nDCG@10. The corrective loop (V8) lifted plain hybrid search
+a little on 30 dev jobs (nDCG@10 0.558 against 0.530 for V2 on the same jobs) but stayed below V2+V4 (0.612) and
+took 21.7\,s per search on average (\file{rag\_variants\_model\_late.json}); V6 was not run within the token budget. The cross-encoder (V3) was dropped because it lowered nDCG@10 on every
 combination and was slow on CPU (p95 retrieval 17.7\,s for V2+V3 against 4.7\,s for V2+V4,
 \file{rag\_variants\_offline.json}). Claim verification ships on: in the shipped
 proposal study it cut unsupported claims from 2.13 to 1.00 per proposal (47\% to 22\% of claims,

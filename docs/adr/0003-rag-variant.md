@@ -23,5 +23,7 @@ first upgrade once a paid or local model is available (a one-line change). The F
 into requirements itself (V1 at the node level) and runs the searches in parallel.
 
 **Consequences.** No CPU-bound rerank and no extra model calls in retrieval, so analysis is faster and cheaper on the
-2-vCPU server; we give up about 0.04 nDCG@10. V6 (contextual chunks) and V8 (corrective loop) need many model calls
-and were not finished within the free-tier budget; see docs/RESULTS.md.
+2-vCPU server; we give up about 0.04 nDCG@10. V8 (corrective loop) was measured later on 30 dev jobs
+(`evals/results/rag_variants_model_late.json`): V2+V8 nDCG@10 0.558 against 0.530 for V2 and 0.612 for V2+V4 on the
+same 30 jobs, at 21.7 s per search on average, so it does not change the decision. V6 (contextual chunks) needs a model
+call per chunk at index time and was not run within the free-tier budget; see docs/RESULTS.md.
