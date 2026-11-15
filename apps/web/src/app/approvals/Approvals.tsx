@@ -16,7 +16,7 @@ export function Approvals() {
       {data && data.length === 0 && <EmptyState title="Nothing is waiting">When GigBid drafts a proposal or a reply, it shows up here.</EmptyState>}
       <ul className="job-list">
         {data?.map((item) => (
-          <li key={item.thread_id} className="card job-row">
+          <li key={item.thread_id} className="job-row compact">
             <div className="job-main">
               <h2>{item.title}</h2>
               <div className="meta">

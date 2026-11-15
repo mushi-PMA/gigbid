@@ -16,7 +16,7 @@ export function Messages() {
       {data && data.length === 0 && <EmptyState title="No client messages yet">When a client writes back, the thread shows up here.</EmptyState>}
       <ul className="job-list">
         {data?.map((thread) => (
-          <li key={thread.thread_id} className="card job-row">
+          <li key={thread.thread_id} className="job-row compact">
             <div className="job-main">
               <h2>
                 <Link to={`/messages/${encodeURIComponent(thread.thread_id)}`}>Client {thread.client_id || thread.thread_id}</Link>

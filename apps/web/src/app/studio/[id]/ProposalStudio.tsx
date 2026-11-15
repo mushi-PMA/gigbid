@@ -4,12 +4,12 @@ import { AnnotatedParagraph } from '../../../components/AnnotatedParagraph'
 import { ApprovalPanel } from '../../../components/ApprovalPanel'
 import { EmptyState } from '../../../components/EmptyState'
 import { ErrorState } from '../../../components/ErrorState'
-import { FitBar } from '../../../components/FitBar'
+import { Icon } from '../../../components/Icon'
 import { Loading } from '../../../components/Loading'
 import { RiskBadge } from '../../../components/RiskBadge'
 import { approvalsApi } from '../../../lib/api/endpoints'
 import { useAsync } from '../../../lib/api/hooks'
-import { label, money, runPath } from '../../../lib/format'
+import { label, money, percent, runPath } from '../../../lib/format'
 import type { Evidence, ProposalRequest } from '../../../lib/types'
 
 const splitParagraphs = (text: string) => text.split(/\n\s*\n/)
@@ -69,6 +69,7 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
   const changed = text !== originalText || answers.some((a, i) => a !== originalAnswers[i])
   const violations = request.compliance?.violations ?? []
   const unplaced = violations.filter((v) => !paragraphs.some((p) => p.includes(v.text)))
+  const supported = request.claims.filter((claim) => claim.status === 'supported').length
 
   async function regenerate(index: number) {
     setRegenerating(index)
@@ -85,9 +86,10 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
 
   return (
     <div className="page">
-      <p>
-        <Link to="/approvals">All approvals</Link> | <Link to={`/jobs/${encodeURIComponent(request.job.job_id)}`}>Job details</Link>
-      </p>
+      <div className="crumbs">
+        <Link className="back-link" to="/approvals"><Icon name="back" size={16} />All approvals</Link>
+        <Link className="back-link" to={`/jobs/${encodeURIComponent(request.job.job_id)}`}>Job details</Link>
+      </div>
       <h1>Proposal for {request.job.title}</h1>
 
       <div className="studio">
@@ -99,16 +101,18 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
                 {editing ? 'Back to evidence view' : 'Edit draft'}
               </button>
             </div>
-            <p className="muted small">Hover or focus a highlighted sentence or a [citation] to see the evidence behind it.</p>
+            <p className="hint"><Icon name="spark" size={14} />Hover a citation or an underlined claim to see its evidence.</p>
 
             {request.critique && (request.critique.issues.length > 0 || request.critique.instructions) && (
-              <div className="note" aria-label="Critic comments">
-                <strong>Critic</strong>
+              <details className="note disclosure" aria-label="Critic comments">
+                <summary>
+                  Critic notes ({request.critique.issues.length + (request.critique.instructions ? 1 : 0)})
+                </summary>
                 <ul>
                   {request.critique.issues.map((issue) => <li key={issue}>{issue}</li>)}
                   {request.critique.instructions && <li>{request.critique.instructions}</li>}
                 </ul>
-              </div>
+              </details>
             )}
 
             {editing ? (
@@ -124,7 +128,7 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
                 ))}
               </>
             ) : (
-              <>
+              <div className="draft">
                 {paragraphs.map((paragraph, index) => (
                   <div key={index} className="draft-paragraph">
                     <AnnotatedParagraph text={paragraph} claims={request.claims} evidence={pool} />
@@ -133,9 +137,10 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
                         <strong>Compliance ({label(v.rule_id)}):</strong> {v.fix || `"${v.text}" may break a marketplace rule.`}
                       </p>
                     ))}
-                    <button type="button" className="small-button" disabled={regenerating !== null} onClick={() => void regenerate(index)}>
-                      {regenerating === index ? 'Rewriting...' : 'Regenerate paragraph'}
-                      <span className="sr-only"> {index + 1}</span>
+                    <button type="button" className="icon-button regen" disabled={regenerating !== null}
+                      title="Regenerate this paragraph" onClick={() => void regenerate(index)}>
+                      {regenerating === index ? <span className="spinner" aria-hidden="true" /> : <Icon name="refresh" size={15} />}
+                      <span className="sr-only">{regenerating === index ? 'Rewriting' : 'Regenerate paragraph'} {index + 1}</span>
                     </button>
                   </div>
                 ))}
@@ -146,7 +151,7 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
                     <AnnotatedParagraph text={answers[index] ?? item.answer} claims={[]} evidence={pool} />
                   </div>
                 ))}
-              </>
+              </div>
             )}
 
             {unplaced.length > 0 && (
@@ -172,25 +177,41 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
         <aside className="stack" aria-label="Why this draft">
           <section className="card">
             <h2>Why bid</h2>
-            <FitBar score={request.fit.score} />
+            <div className="facts">
+              <div className="fact"><span>Fit</span><strong>{percent(request.fit.score)}</strong></div>
+              <div className="fact"><span>Price</span><strong>{money(request.price.amount, request.price.payment_type)}</strong></div>
+              <div className="fact"><span>Connects</span><strong>{request.price.connects_cost}</strong></div>
+            </div>
             <RiskBadge score={request.risk.score} />
-            <p>{request.decision.reasons.join(' ')}</p>
-          </section>
-          <section className="card">
-            <h2>Price</h2>
-            <p>
-              <strong>{money(request.price.amount, request.price.payment_type)}</strong> | {request.price.connects_cost} Connects
-            </p>
-            <p className="small">{request.price.rationale}</p>
+            <ul className="reasons" style={{ marginTop: 14 }}>
+              {request.decision.reasons.map((reason) => (
+                <li key={reason}><Icon name="check" size={15} /><span>{reason}</span></li>
+              ))}
+            </ul>
+            {request.price.rationale && (
+              <details className="disclosure" style={{ marginTop: 12 }}>
+                <summary>How the price was set</summary>
+                <p className="small muted">{request.price.rationale}</p>
+              </details>
+            )}
           </section>
           <section className="card">
             <h2>Claims and evidence</h2>
-            {request.claims.length === 0 && <p className="muted">No claims were recorded.</p>}
+            {request.claims.length === 0 && <p className="muted">No claims recorded.</p>}
+            {request.claims.length > 0 && (
+              <div className="claims-summary">
+                <div className="fitbar-track" aria-hidden="true">
+                  <div className="fitbar-fill" style={{ width: `${(100 * supported) / request.claims.length}%`, background: 'var(--ok)' }} />
+                </div>
+                <span><strong className="num">{supported} of {request.claims.length}</strong> supported</span>
+              </div>
+            )}
             <ul className="plain-list">
               {request.claims.map((claim) => (
-                <li key={claim.text}>
-                  <span className={`badge claim-badge-${claim.status}`}>{label(claim.status)}</span> {claim.text}
-                  {claim.reason && <div className="muted small">{claim.reason}</div>}
+                <li key={claim.text} className="claim-row">
+                  <span className={`status-dot ${claim.status}`} title={label(claim.status)} aria-hidden="true" />
+                  <span><span className="sr-only">{label(claim.status)}: </span>{claim.text}</span>
+                  {claim.reason && <details className="disclosure claim-reason"><summary>Why</summary>{claim.reason}</details>}
                 </li>
               ))}
             </ul>
