@@ -1,6 +1,6 @@
 """Ablation of the best retrieval pipeline: remove one component at a time, report by persona and job type.
 
-    python -m evals.runners.ablation --best v1+v2+v3+v5
+    python -m evals.runners.ablation --best v2+v4
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from rag.retriever import parse_variant
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--best", required=True, help="the best variant combination, e.g. v1+v2+v3+v5")
+    parser.add_argument("--best", required=True, help="the shipped variant combination, e.g. v2+v4")
     parser.add_argument("--personas", nargs="*", default=PERSONAS)
     parser.add_argument("--limit", type=int, default=None)
     args = parser.parse_args()

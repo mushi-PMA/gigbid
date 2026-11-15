@@ -12,7 +12,7 @@ import sys
 
 STEPS = [
     ["evals.runners.rag_eval"],
-    ["evals.runners.ablation", "--best", os.environ.get("RAG_BEST", "v1+v2+v3+v5")],
+    ["evals.runners.ablation", "--best", os.environ.get("RAG_BEST", "v2+v4")],
     ["evals.runners.decision_eval"],
     ["evals.runners.proposal_eval", "--name", "proposals_v0", "@RAG_VARIANT=v0"],
     ["evals.runners.proposal_eval", "--name", "proposals_best"],
