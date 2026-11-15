@@ -1,10 +1,11 @@
 """R&D question C: is the multi-agent design worth it?
 
 On fixed dev jobs (the brief asks for 50; docs/HYPOTHESES.md records the size we ran), compare (a) one ReAct agent
-holding all tools, (b) a prebuilt supervisor (langgraph-supervisor) with three tool-using workers, and (c) GigBid's hand-built graph. All three use the same MCP tools, the same models
-(node `tool_agent` for a and b) and the same simulated clients. Reported: bid-or-skip accuracy, unsupported claims
-per proposal (same verifier and evidence pool for all), policy violations left in the final text, violations the
-Compliance Guard caught, GigSim reply rate, tokens and latency.
+holding all tools, (b) a prebuilt supervisor (langgraph-supervisor) with three tool-using workers, and (c) GigBid's
+hand-built graph. All three use the same MCP tools, the same models (node `tool_agent` for a and b) and the same
+simulated clients. Reported: bid-or-skip accuracy, unsupported claims per proposal (same verifier and evidence pool
+for all), policy violations left in the final text, violations the Compliance Guard caught, GigSim reply rate, tokens
+and latency.
 
     python -m evals.runners.architecture_comparison --jobs 50
 """
