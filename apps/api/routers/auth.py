@@ -1,6 +1,8 @@
 """Sign up, sign in, sign out, current user."""
 from __future__ import annotations
 
+import os
+
 from fastapi import APIRouter, HTTPException, Response, status
 
 from apps.api.auth.users import (
@@ -20,7 +22,7 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 def _session(response: Response, user: dict) -> SessionOut:
     token = issue_session(user["user_id"])
     response.set_cookie(COOKIE, token, httponly=True, samesite="lax", max_age=SESSION_HOURS * 3600,
-                        secure=False)
+                        secure=os.environ.get("APP_ENV") == "production")   # HTTPS only on the live site
     return SessionOut(user=UserOut(**{k: user[k] for k in ("user_id", "email", "display_name", "persona")}),
                       token=token)
 

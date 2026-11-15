@@ -73,9 +73,12 @@ async def job_detail(job_id: str, user: dict = CurrentUser) -> JobDetail:
 
 @router.post("/jobs/{job_id}/analyze", response_model=Accepted, status_code=202)
 async def analyze(job_id: str, user: dict = CurrentUser) -> Accepted:
-    row = db.fetch_one("SELECT summary FROM jobs_seen WHERE user_id = %s AND job_id = %s", (user["user_id"], job_id))
+    row = db.fetch_one("SELECT summary, status FROM jobs_seen WHERE user_id = %s AND job_id = %s",
+                       (user["user_id"], job_id))
     if row is None:
         raise HTTPException(404, "job not found")
+    if row["status"] in ("awaiting_approval", "approved", "submitted", "running", "queued"):
+        raise HTTPException(409, f"this job is {row['status'].replace('_', ' ')}; it cannot be analysed again now")
     if "job" not in (row["summary"] or {}):
         raise HTTPException(409, "the job's details are missing; run the scout again to refresh it")
     db.execute("UPDATE jobs_seen SET status = 'queued' WHERE user_id = %s AND job_id = %s", (user["user_id"], job_id))

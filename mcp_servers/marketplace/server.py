@@ -12,6 +12,7 @@ Run: python -m mcp_servers.marketplace.server  (HTTP on MARKETPLACE_MCP_PORT, de
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 from pathlib import Path
@@ -116,16 +117,21 @@ async def _run(tool: str, arguments: dict[str, Any], call) -> dict[str, Any]:
         return result
 
 
+_key_locks: dict[str, asyncio.Lock] = {}
+
+
 async def _idempotent(tool: str, key: str, arguments: dict[str, Any], call) -> dict[str, Any]:
     user_id, _ = _caller()
     store_key = f"{user_id}:{tool}:{key}"
-    if store_key in _idempotency:
-        return {**_idempotency[store_key], "idempotent_replay": True}
-    result = await _run(tool, arguments, call)
-    if "error" not in result or not result.get("retryable"):
-        _idempotency[store_key] = result
-        _persist_idempotency()
-    return result
+    # one call per key at a time: two concurrent retries must not both miss the store and both reach the marketplace
+    async with _key_locks.setdefault(store_key, asyncio.Lock()):
+        if store_key in _idempotency:
+            return {**_idempotency[store_key], "idempotent_replay": True}
+        result = await _run(tool, arguments, call)
+        if "error" not in result or not result.get("retryable"):
+            _idempotency[store_key] = result
+            _persist_idempotency()
+        return result
 
 
 def _idempotency_file() -> Path:

@@ -122,8 +122,8 @@ async def submit(state: dict, config: RunnableConfig) -> dict:
                                             idempotency_key(thread_id, payload, "submit"), dry_run=False,
                                             approval_token=token)
     except ToolError as error:
-        if error.error == "approval_required":
-            return {"status": "awaiting_approval", "status_reason": f"approval no longer valid: {error.detail}"}
+        if error.error == "approval_required":   # the graph ends here, so ask for a new analysis rather than wait
+            return {"status": "needs_attention", "status_reason": f"approval no longer valid: {error.detail}"}
         return {"status": "blocked", "status_reason": f"marketplace refused the proposal: {error.detail}",
                 "submission": {"error": error.error, "detail": error.detail}}
     features = proposal_features(state["job"].category, payload["cover_letter"],

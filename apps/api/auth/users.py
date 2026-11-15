@@ -30,7 +30,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
 
 
 def _secret() -> str:
-    return os.environ.get("APP_SECRET_KEY") or "development-only-app-secret-change-me-0123"
+    secret = os.environ.get("APP_SECRET_KEY")
+    if not secret and os.environ.get("APP_ENV") == "production":   # never sign sessions with a public default
+        raise RuntimeError("APP_SECRET_KEY must be set in production")
+    return secret or "development-only-app-secret-change-me-0123"
 
 
 def hash_password(password: str) -> str:

@@ -204,15 +204,24 @@ async def test_approval_then_exactly_once_submission_after_crash(env, scripted_l
 async def test_reanalysis_starts_from_clean_counters(env, scripted_llm):
     from agent.runner import fresh_thread
 
-    scripted_llm(replies())
+    scripted_llm(replies(scam=True))
     graph = compile_bid_graph(memory_saver(), InMemoryStore())
-    await graph.ainvoke(start("j-good"), config("t-again"))
+    await graph.ainvoke(start("j-scam"), config("t-again"))
     first = (await graph.aget_state(config("t-again"))).values
-    await fresh_thread(graph, config("t-again"))
-    await graph.ainvoke(start("j-good"), config("t-again"))
+    assert await fresh_thread(graph, config("t-again"))           # a finished (skipped) analysis may be redone
+    await graph.ainvoke(start("j-scam"), config("t-again"))
     second = (await graph.aget_state(config("t-again"))).values
     assert second["steps"] == first["steps"] and second["tokens"] == first["tokens"]
-    assert len(second["critiques"]) == len(first["critiques"])
+
+
+async def test_reanalysis_never_wipes_a_draft_waiting_for_approval(env, scripted_llm):
+    from agent.runner import fresh_thread
+
+    scripted_llm(replies())
+    graph = compile_bid_graph(memory_saver(), InMemoryStore())
+    await graph.ainvoke(start("j-good"), config("t-wait"))
+    assert not await fresh_thread(graph, config("t-wait"))       # a new draft could be approved and sent twice
+    assert (await graph.aget_state(config("t-wait"))).next == ("approval",)
 
 
 async def test_critic_sends_back_at_most_twice(env, scripted_llm):

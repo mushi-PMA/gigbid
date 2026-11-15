@@ -196,18 +196,31 @@ def _record(run_id: str, user_id: str, kind: str, job_id: str | None, seconds: f
 # ---------------------------------------------------------------------------------------------------------
 
 
-async def fresh_thread(compiled, config: dict) -> None:
+LOCKED_STATUSES = ("awaiting_approval", "approved", "submitted")
+
+
+async def fresh_thread(compiled, config: dict) -> bool:
     """A new analysis of a job starts from a clean thread: the old run's step, token and revision counters and its
-    critiques would otherwise add to the new run and trip its budgets."""
-    if (await compiled.aget_state(config)).values:
+    critiques would otherwise add to the new run and trip its budgets. A thread whose draft waits for the human, or
+    was approved or sent, is never wiped (a new draft would carry a new idempotency key and could be sent twice):
+    returns False and the caller leaves it alone."""
+    snapshot = await compiled.aget_state(config)
+    if snapshot.next or snapshot.values.get("status") in LOCKED_STATUSES:
+        return False
+    if snapshot.values:
         await compiled.checkpointer.adelete_thread(config["configurable"]["thread_id"])
+    return True
 
 
 async def run_bid(user_id: str, persona: str, job: Job, settings: dict | None = None,
                   duplicate_of: str | None = None) -> dict[str, Any]:
     thread_id = bid_thread_id(user_id, job.job_id)
     config = _config(thread_id, user_id, persona, settings, {"duplicate_of": duplicate_of})
-    await fresh_thread(await graph("bid"), config)
+    compiled = await graph("bid")
+    if not await fresh_thread(compiled, config):    # a draft waits for approval or was sent: nothing to redo
+        snapshot = await compiled.aget_state(config)
+        return {"thread_id": thread_id, "state": snapshot.values, "pending": bool(snapshot.next), "trace_id": "",
+                "seconds": 0.0}
     inputs = {"user_id": user_id, "persona": persona, "job": job, "status": "running"}
     return await _drive("bid", thread_id, inputs, config, user_id, job.job_id)
 

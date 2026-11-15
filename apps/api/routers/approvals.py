@@ -90,8 +90,9 @@ async def decide(thread_id: str, body: ApprovalIn, user: dict = CurrentUser) -> 
     if thread_id.startswith("bid:"):
         db.execute("UPDATE jobs_seen SET status = 'running' WHERE user_id = %s AND thread_id = %s",
                    (user["user_id"], thread_id))
+    # one resume per pending approval: a quick approve-then-reject cannot queue two decisions for one interrupt
     await enqueue("resume_thread", thread_id, user["user_id"], decision,
-                  job_id=f"resume:{thread_id}:{payload_hash(decision)[:12]}")
+                  job_id=f"resume:{thread_id}:{payload_hash(request['payload'])[:12]}")
     return Accepted(thread_id=thread_id, detail=f"{body.action} recorded")
 
 
