@@ -25,6 +25,8 @@ def load_config() -> dict[str, Any]:
         config["rag"]["variant"] = os.environ["RAG_VARIANT"]
     if os.environ.get("WRITER_STRATEGY"):
         config["writer"]["strategy"] = os.environ["WRITER_STRATEGY"]
+    if os.environ.get("MAX_TOKENS_PER_JOB"):     # the live site on `open_large` spends more tokens per job
+        config["budgets"]["max_tokens_per_job"] = int(os.environ["MAX_TOKENS_PER_JOB"])
     return config
 
 
