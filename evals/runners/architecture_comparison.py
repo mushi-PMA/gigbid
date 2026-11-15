@@ -47,8 +47,10 @@ def chat_model():
     from langchain_openai import ChatOpenAI
 
     endpoint, model = baseline_endpoint()
-    return ChatOpenAI(model=model, base_url=endpoint["base_url"], api_key=os.environ[endpoint["api_key_env"]],
-                      temperature=0, max_tokens=2000, max_retries=8, timeout=load_config()["models"]["timeout_seconds"])
+    key = os.environ[endpoint["api_key_env"]].split(",")[0].strip()     # one key when several are listed
+    return ChatOpenAI(model=model, base_url=endpoint["base_url"].format_map(os.environ), api_key=key,
+                      temperature=0, max_tokens=2000, max_retries=8, timeout=load_config()["models"]["timeout_seconds"],
+                      extra_body=endpoint.get("extra_body") or None)       # same request settings as the graph
 
 
 async def mcp_tools(stack: AsyncExitStack) -> list:
