@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ApprovalPanel } from '../../components/ApprovalPanel'
 import { ErrorState } from '../../components/ErrorState'
+import { Icon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
 import { messagesApi } from '../../lib/api/endpoints'
 import { useAsync } from '../../lib/api/hooks'
@@ -32,7 +33,7 @@ export function MessageThread() {
   return (
     <div className="page">
       <p>
-        <Link to="/messages">All messages</Link>
+        <Link className="back-link" to="/messages"><Icon name="back" size={16} />All messages</Link>
       </p>
       <div className="page-head">
         <h1>Conversation</h1>
@@ -95,7 +96,7 @@ function ReplyApproval({ request, graphThreadId }: { request: MessageRequest; gr
         {request.reply.proposed_slots.length > 0 && (
           <>
             <h3>Interview slots offered</h3>
-            <ul>{request.reply.proposed_slots.map((slot) => <li key={slot}>{slot}</li>)}</ul>
+            <div className="meta">{request.reply.proposed_slots.map((slot) => <span key={slot} className="badge"><Icon name="clock" size={13} />{formatTime(slot)}</span>)}</div>
           </>
         )}
         {request.compliance.violations.map((v) => (

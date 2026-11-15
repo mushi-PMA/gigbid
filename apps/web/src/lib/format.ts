@@ -15,7 +15,8 @@ export const label = (text: string) => text.replace(/_/g, ' ')
 export function formatTime(iso: string | null | undefined): string {
   if (!iso) return ''
   const date = new Date(iso)
-  return Number.isNaN(date.getTime()) ? iso : date.toLocaleString()
+  if (Number.isNaN(date.getTime())) return iso
+  return date.toLocaleString(undefined, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
 /** Thread ids contain colons, so links always encode them. */

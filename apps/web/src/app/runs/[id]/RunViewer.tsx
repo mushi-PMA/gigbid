@@ -103,9 +103,12 @@ export function RunViewer() {
           )}
         </div>
       </div>
-      <p className="muted small">Thread {threadId}</p>
-      <p role="status">
-        {phaseText} <span className="badge">{connection === 'live' ? 'Live' : connection === 'connecting' ? 'Connecting' : 'Reconnecting'}</span>
+      <p role="status" className="meta">
+        <span className={`badge ${connection === 'live' ? 'risk-low' : 'risk-medium'}`}>
+          {connection === 'live' ? 'Live' : connection === 'connecting' ? 'Connecting' : 'Reconnecting'}
+        </span>
+        <span>{phaseText}</span>
+        <span className="muted small mono">{threadId}</span>
       </p>
       <div role="status">{notice && <p className="ok-text">{notice}</p>}</div>
       <div role="alert">{problem && <p className="error-text">{problem}</p>}</div>
@@ -118,8 +121,10 @@ export function RunViewer() {
         <RunTimeline events={events} lastEventAt={lastEventAt} />
       </section>
 
-      <section className="card" aria-labelledby="history-heading">
-        <h2 id="history-heading">History</h2>
+      <details className="card" aria-labelledby="history-heading">
+        <summary>
+          <span id="history-heading">Checkpoint history and replay ({info.data?.history?.length ?? 0})</span>
+        </summary>
         {info.error && !info.data && <ErrorState error={info.error} onRetry={info.reload} />}
         {info.data && (info.data.history ?? []).length === 0 && <EmptyState title="No checkpoints yet" />}
         {info.data && (info.data.history ?? []).length > 0 && (
@@ -143,7 +148,7 @@ export function RunViewer() {
                     <td>{step.status ? label(step.status) : ''}</td>
                     <td>{formatTime(step.created_at)}</td>
                     <td>
-                      <button type="button" onClick={() => void replay(step.checkpoint_id)}>
+                      <button type="button" className="small-button" onClick={() => void replay(step.checkpoint_id)}>
                         Replay<span className="sr-only"> from step {step.step}</span>
                       </button>
                     </td>
@@ -153,7 +158,7 @@ export function RunViewer() {
             </table>
           </div>
         )}
-      </section>
+      </details>
     </div>
   )
 }

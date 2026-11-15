@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useSession } from '../lib/session'
-import { applyTheme, followSystem, setThemeChoice, themeChoice, type ThemeChoice } from '../lib/theme'
 import { Icon, type IconName } from './Icon'
 
 const links: { to: string; label: string; icon: IconName; end?: boolean }[] = [
@@ -12,27 +11,6 @@ const links: { to: string; label: string; icon: IconName; end?: boolean }[] = [
   { to: '/analytics', label: 'Analytics', icon: 'analytics' },
   { to: '/settings', label: 'Settings', icon: 'settings' },
 ]
-
-const themes: { value: ThemeChoice; label: string; icon: IconName }[] = [
-  { value: 'light', label: 'Light theme', icon: 'sun' },
-  { value: 'dark', label: 'Dark theme', icon: 'moon' },
-  { value: 'system', label: 'Match system theme', icon: 'system' },
-]
-
-function ThemeSwitch() {
-  const [choice, setChoice] = useState<ThemeChoice>(themeChoice)
-  useEffect(() => (choice === 'system' ? followSystem(() => applyTheme('system')) : undefined), [choice])
-  return (
-    <div className="segmented" role="group" aria-label="Theme">
-      {themes.map((theme) => (
-        <button key={theme.value} type="button" aria-pressed={choice === theme.value} aria-label={theme.label}
-          title={theme.label} onClick={() => { setThemeChoice(theme.value); setChoice(theme.value) }}>
-          <Icon name={theme.icon} size={16} />
-        </button>
-      ))}
-    </div>
-  )
-}
 
 export function Layout() {
   const { user, signOut } = useSession()
@@ -68,7 +46,6 @@ export function Layout() {
             ))}
           </div>
           <div className="nav-foot">
-            <ThemeSwitch />
             <div className="nav-user">
               <span className="avatar" aria-hidden="true">{(user?.display_name ?? '?').slice(0, 1).toUpperCase()}</span>
               <span className="nav-name">{user?.display_name}</span>

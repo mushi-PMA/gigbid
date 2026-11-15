@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { EmptyState } from '../../components/EmptyState'
 import { ErrorState } from '../../components/ErrorState'
@@ -102,8 +102,8 @@ export function Inbox() {
       {jobs.data && all.length > 0 && visible.length === 0 && <EmptyState title="No jobs match these filters" />}
 
       <ul className="job-list">
-        {visible.map((job) => (
-          <li key={job.job_id} className="job-row">
+        {visible.map((job, index) => (
+          <li key={job.job_id} className="job-row" style={{ '--i': index } as CSSProperties}>
             <div className="job-main">
               <h2>
                 <Link to={`/jobs/${encodeURIComponent(job.job_id)}`}>{job.title}</Link>
@@ -115,7 +115,9 @@ export function Inbox() {
                 {job.status !== 'new' && <span className={`badge status-${job.status}`}>{label(job.status)}</span>}
                 <RiskBadge score={job.risk} flags={job.risk_flags} />
               </div>
-              {job.status_reason && <p className="job-reason" title={job.status_reason}>{job.status_reason}</p>}
+              {job.status_reason && ['skipped', 'needs_attention', 'dead_letter'].includes(job.status) && (
+                <p className="job-reason" title={job.status_reason}>{job.status_reason}</p>
+              )}
             </div>
             <div className="job-side">
               <FitBar score={job.fit} />
@@ -125,7 +127,7 @@ export function Inbox() {
               </div>
             </div>
             <div className="job-actions">
-              {job.status !== 'skipped' && (
+              {!['skipped', 'submitted', 'approved'].includes(job.status) && (
                 <button type="button" className="ghost" onClick={() => void skip(job)}>
                   Skip<span className="sr-only"> {job.title}</span>
                 </button>

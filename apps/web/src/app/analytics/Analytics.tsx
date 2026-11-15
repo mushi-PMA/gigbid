@@ -39,6 +39,18 @@ function Budget({ name, stats, p95Budget, usdBudget }: { name: string; stats: Co
   )
 }
 
+function Kpi({ name, value, budget, met }: { name: string; value: string; budget?: number; met?: boolean | null }) {
+  return (
+    <div className="kpi">
+      <span className="kpi-name">{name}</span>
+      <strong className="kpi-value">{value}</strong>
+      {budget != null && met != null && (
+        <span className={`badge ${met ? 'risk-low' : 'risk-high'}`}>{met ? 'Within' : 'Over'} budget {usd(budget)}</span>
+      )}
+    </div>
+  )
+}
+
 export function Analytics() {
   const { data, error, loading, reload } = useAsync(() => analyticsApi.get(), [])
   if (loading && !data) return <Loading label="Loading analytics" />
@@ -51,14 +63,23 @@ export function Analytics() {
   const reasons = data.top_rejection_reasons
   const maxReason = Math.max(0, ...reasons.map(([, n]) => n))
   const declared = data.cost_latency.declared
+  const sent = categories.reduce((sum, row) => sum + row.sent, 0)
+  const replies = categories.reduce((sum, row) => sum + row.reply_rate * row.sent, 0)
+  const perProposal = data.cost_latency.per_proposal
 
   return (
     <div className="page">
       <h1>Analytics</h1>
-      <p className="muted">{data.jobs_analysed} jobs analysed so far.</p>
+      <div className="kpis">
+        <Kpi name="Jobs analysed" value={String(data.jobs_analysed)} />
+        <Kpi name="Proposals sent" value={String(sent)} />
+        <Kpi name="Reply rate" value={sent ? percent(replies / sent) : 'n/a'} />
+        <Kpi name="Cost per proposal" value={usd(perProposal.mean_usd)}
+          budget={declared.usd_per_proposal} met={perProposal.mean_usd == null || declared.usd_per_proposal == null ? null : perProposal.mean_usd <= declared.usd_per_proposal} />
+      </div>
 
       <section className="card" aria-labelledby="rates-heading">
-        <h2 id="rates-heading">Reply and hire rate by category</h2>
+        <h2 id="rates-heading">Replies by category</h2>
         {categories.length === 0 && <EmptyState title="No sent proposals yet">Rates appear after your first proposals go out.</EmptyState>}
         {categories.map((row) => (
           <div key={row.category} className="rate-group">
@@ -70,7 +91,7 @@ export function Analytics() {
       </section>
 
       <section className="card" aria-labelledby="connects-heading">
-        <h2 id="connects-heading">Connects spent by outcome</h2>
+        <h2 id="connects-heading">Connects by outcome</h2>
         {connects.length === 0 && <p className="muted">No Connects spent yet.</p>}
         {connects.map(([stage, count]) => (
           <Bar key={stage} name={label(stage)} value={count} max={maxConnects} text={`${count} Connects`} />
@@ -78,7 +99,7 @@ export function Analytics() {
       </section>
 
       <section className="card" aria-labelledby="cost-heading">
-        <h2 id="cost-heading">Speed and cost against the declared budgets</h2>
+        <h2 id="cost-heading">Speed and cost</h2>
         <div className="table-wrap">
           <table>
             <thead>
@@ -100,8 +121,8 @@ export function Analytics() {
       </section>
 
       <section className="card" aria-labelledby="reasons-heading">
-        <h2 id="reasons-heading">Top rejection reasons</h2>
-        {reasons.length === 0 && <p className="muted">You have not rejected a draft yet.</p>}
+        <h2 id="reasons-heading">Rejection reasons</h2>
+        {reasons.length === 0 && <p className="muted">No rejections yet.</p>}
         {reasons.map(([reason, count]) => (
           <Bar key={reason} name={reason} value={count} max={maxReason} text={String(count)} />
         ))}

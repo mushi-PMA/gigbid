@@ -37,30 +37,57 @@ export function RunTimeline({ events, lastEventAt }: { events: RunEvent[]; lastE
     return () => window.clearInterval(timer)
   }, [phase])
 
+  // one group per run of the thread: the latest stays open, earlier attempts fold away
+  const runs: RunEvent[][] = []
+  for (const event of steps) {
+    if (event.type === 'run_started' || runs.length === 0) runs.push([])
+    runs[runs.length - 1].push(event)
+  }
+  const latest = runs[runs.length - 1] ?? []
+  const earlier = runs.slice(0, -1)
+
+  return (
+    <>
+      {earlier.length > 0 && (
+        <details className="disclosure earlier-runs">
+          <summary>Earlier runs ({earlier.length})</summary>
+          {earlier.map((run, index) => (
+            <Steps key={index} events={run} />
+          ))}
+        </details>
+      )}
+      <Steps events={latest} live={phase === 'running' ? (lastEventAt ? Math.max(0, Math.round((now - lastEventAt) / 1000)) : -1) : null} />
+    </>
+  )
+}
+
+const QUIET = new Set(['running', 'ok', 'done', ''])
+
+function Steps({ events, live = null }: { events: RunEvent[]; live?: number | null }) {
   return (
     <ol className="timeline" aria-label="Run progress" aria-live="polite">
-      {steps.map((event, index) => (
+      {events.map((event, index) => (
         <li key={index} className={`timeline-step step-${event.type}`}>
           <span className="timeline-dot" aria-hidden="true" />
           <span className="timeline-body">
             <strong>{describe(event)}</strong>
-            {event.type === 'node' && (
-              <span className="muted">
-                {' '}
-                {event.status ? `${label(event.status)}, ` : ''}
-                {seconds(event.seconds)}
-                {event.tokens != null ? `, ${event.tokens} tokens` : ''}
-              </span>
+            {event.type === 'node' && event.status && !QUIET.has(event.status) && (
+              <span className={`badge ${event.status === 'dead_letter' ? 'risk-high' : ''}`}>{label(event.status)}</span>
             )}
           </span>
+          {event.type === 'node' && (
+            <span className="timeline-meta">
+              {seconds(event.seconds)}
+              {event.tokens ? ` · ${event.tokens.toLocaleString()} tokens` : ''}
+            </span>
+          )}
         </li>
       ))}
-      {phase === 'running' && (
+      {live !== null && (
         <li className="timeline-step step-live">
           <span className="timeline-dot pulse" aria-hidden="true" />
           <span className="timeline-body muted">
-            Working on the next step
-            {lastEventAt ? ` (last update ${Math.max(0, Math.round((now - lastEventAt) / 1000))} s ago)` : ''}
+            Working on the next step{live >= 0 ? ` (last update ${live} s ago)` : ''}
           </span>
         </li>
       )}
