@@ -240,26 +240,27 @@ and 2 proposals per persona (the free-tier token limit; see the deviation in \fi
 instructor's hidden test runs against the live URL.
 \tablefrom{holdout}{Declared budgets against measured values on the holdout set.}
 \tablefrom{decisions}{Decision quality on the dev set.}
-\textbf{What we missed.} Three of four budgets (\file{evals/results/holdout.json}; latency from the first, fully live
-holdout run, \file{evals/results/archive/holdout\_first\_run\_console.txt}). Analysis cost is inside its budget
-(\$0.00134 against \$0.002 per job), but p95 latency per analysed job is 70.7\,s against 20\,s, p95 per proposal is
-334\,s against 90\,s, and a proposal costs \$0.0105 against \$0.010. Latency is measured as wall-clock time per job,
-which on our free tiers includes the time a call waits for a rate-limited lane; we did not separate that wait from
-model time, so we report the number as measured and do not claim the budget is met. The cost miss comes from the
-revision loop: each pass rewrites the whole letter, and the drafted holdout proposals still average 2.7 revisions.
-Stopping the Critic when length was its only complaint after claim verification cut the holdout cost per proposal
-from \$0.0118 (first run, \file{evals/results/archive/holdout\_first\_run\_console.txt}) to \$0.0105, and on the dev
-set from \$0.0102 to \$0.0092 (\file{docs/FAILURES.md}, row 13); it is not yet enough on the holdout. The latency rows
-come from the first holdout run, made before the Critic stop and the scam rules; the cost and quality rows from the
-final run.
+\textbf{What we missed.} Both latency budgets (\file{evals/results/holdout.json}, the final run with the shipped code,
+every model call live). Both cost budgets are met: \$0.0015 against \$0.002 per analysed job and \$0.0094 against
+\$0.010 per proposal. But p95 latency per analysed job is 208\,s against 20\,s (30 jobs) and the one fully live
+proposal took 185\,s against 90\,s (the other drafts reused analysis calls made earlier in the same run, so they are
+left out of latency). Latency is wall-clock time per job, which on our free tiers includes the time a call waits for
+a rate-limited lane; the first holdout run measured 70.7\,s per job
+(\file{evals/results/archive/holdout\_first\_run\_console.txt}), and the final run shared its keys with another
+evaluation, so most of this time is waiting, not model time. We did not separate the two, so we report the number as
+measured and do not claim the budget is met. The cost per proposal was over budget in the first run (\$0.0118, before
+the Critic stop of \file{docs/FAILURES.md}, row 13) and in a cached replay with the stop (\$0.0105, 2.7 revisions per
+proposal, \file{archive/holdout\_replay\_b7504a7.json}); in the final live run it is \$0.0094 with 1.8 revisions. With 5 proposals we read this as narrowly met,
+not as a firm result. Claim verification cut unsupported claims from 0.8 to 0.2 per proposal in the final run.
 \textbf{What helped most.} Low reasoning effort for gpt-oss together with a larger output budget for the Fit Matcher:
 it removed every dead letter on the same 30 dev jobs (5 to 0) and raised correct decisions from 19 to 22
 (\file{evals/results/archive/}, \file{evals/results/decisions.json}). Latency is reported only for jobs whose model
-calls all ran live: a call replayed from the evaluation cache takes no time, so the holdout latency above comes from
-the first, fully live holdout run (\file{evals/results/archive/holdout\_first\_run\_console.txt}). The cheapest
+calls all ran live, because a call replayed from the evaluation cache takes no time (\file{docs/FAILURES.md}, row 15). The cheapest
 fix with the largest effect was seven scam rules in the policy pack: scam recall on the 30 holdout jobs rose from 0.667
 to 1.000 (\file{evals/results/holdout.json}; rules alone: 12 of 12 holdout scams, 1 of 138 ordinary posts flagged,
-\file{scam\_rules.json}). Decisions held up on unseen jobs: bid F1 0.571 and injection detection 1.000.
+\file{scam\_rules.json}). On unseen jobs scam and injection detection were both 1.000, and bid accuracy matched the
+dev set (0.733), but bid recall was low: GigBid bid on 3 of the 9 jobs a freelancer should bid on (bid F1 0.429
+against 0.556 on dev).
 
 \appendix
 \section{Reproduce}

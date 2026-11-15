@@ -152,10 +152,8 @@ Paired jobs: 7; exact McNemar p = 1.0; two-proportion z-test p = 1.0.
 <!-- results:holdout -->
 | Budget | Declared | Measured (holdout) | Verdict |
 |---|---|---|---|
-| p95 latency seconds per job analysed | 20 | 70.6609 | missed |
-| p95 latency seconds per proposal | 90 | 333.5547 | missed |
-| usd per job analysed | 0.0020 | 0.0013 | met |
-| usd per proposal | 0.0100 | 0.0105 | missed |
-
-Latency rows come from the first holdout run, whose model calls were all live (`evals/results/archive/holdout_first_run_console.txt`); the other rows from `holdout.json`.
+| p95 latency seconds per job analysed | 20 | 208.0746 | missed |
+| p95 latency seconds per proposal | 90 | 184.7517 | missed |
+| usd per job analysed | 0.0020 | 0.0015 | met |
+| usd per proposal | 0.0100 | 0.0094 | met |
 <!-- /results:holdout -->

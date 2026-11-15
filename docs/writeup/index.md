@@ -89,8 +89,8 @@ We cache every model call by its prompt, so a rerun on free tiers costs nothing.
 held-out run from the cache, and it reported a p95 latency of one second per proposal: a budget of 90 seconds,
 "met". The real, live run had measured 334 seconds. A replayed call takes no time, so every rerun quietly reported a
 fantasy. Each step now counts how many of its calls were replayed, latency is computed only over jobs whose calls all
-ran live, and our held-out latency comes from the one fully live run. Three of our four budgets are missed, and we say
-so.
+ran live, and our final held-out run started from an empty cache so every call was live. It meets both cost budgets
+and misses both latency budgets (208 seconds per analysed job at p95 against 20), and we say so.
 
 The second lie looked like a weakness of one proposal strategy. In our A/B test of two writing strategies, the second
 strategy's jobs kept dying before writing anything. The cause was not the strategy. Replays from the cache
