@@ -41,7 +41,8 @@ async def evaluate(personas: list[str], per_persona: int, split: str = "dev") ->
             state = result["state"]
             draft = state.get("draft")
             row = {"persona": persona, "job_id": job["job_id"], "job_type": item["gold"].get("job_type", "other"),
-                   "drafted": result["drafted"], "status": state.get("status"), "seconds": result["seconds"],
+                   "drafted": result["drafted"], "status": state.get("status"),
+                   "status_reason": (state.get("status_reason") or "")[:300], "seconds": result["seconds"],
                    "tokens": result["tokens"], "usd": result["usd"],
                    "revisions": state.get("revision", 0)}
             if draft is None or not result["drafted"]:

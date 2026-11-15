@@ -134,6 +134,9 @@ def install(market: EvalMarketplace, persona: str) -> None:
     load_servers()
     server._adapter = lambda user_id, p: market
     server._idempotency.clear()
+    # the per-user limiter protects GigSim; the offline copy needs none, and replays from the evaluation cache call
+    # tools far faster than the live limit allows, which would fail jobs at the pricing step for no real reason
+    server.limiter.per_minute = 10**6
     os.environ["PORTFOLIO_PERSONA"] = persona
     os.environ["MCP_DEFAULT_PERSONA"] = persona
 

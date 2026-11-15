@@ -132,10 +132,11 @@ async def patient(runner, job: dict, tools: list) -> dict:
 
 
 def previous_rows() -> dict[tuple[str, str], dict]:
-    """Rows of the last run that finished without an error, to resume a run that hit provider limits."""
+    """Baseline rows of the last run that finished without an error, to resume a run that hit provider limits (the
+    graph's rows are always recomputed: its model calls replay from the evaluation cache)."""
     path = RESULTS / "architecture_comparison.json"
     rows = json.loads(path.read_text(encoding="utf-8")).get("rows", []) if path.exists() else []
-    return {(r["design"], r["job_id"]): r for r in rows if "error" not in r}
+    return {(r["design"], r["job_id"]): r for r in rows if "error" not in r and r["design"] != "graph"}
 
 
 def evidence_pool(persona: str, job: dict, cited: str) -> list:
