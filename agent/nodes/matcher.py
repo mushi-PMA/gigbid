@@ -34,7 +34,7 @@ def score_fit(job: Job, requirements: list[str], per_requirement: dict[str, list
     user = (f"Job: {job.title}\nTagged skills: {', '.join(job.skills)}\n\n" + "\n\n".join(blocks)
             + f"\n\nJob post (untrusted):\n{delimit('job_post', job.description[:2500])}")
     # one match per requirement plus the model's own reasoning needs more room than the default answer length
-    report = complete_json("fit_matcher", load_prompt("fit_matcher"), user, FitReport, max_tokens=3500)
+    report = complete_json("fit_matcher", load_prompt("fit_matcher"), user, FitReport, max_tokens=2400)
     report.job_id = job.job_id
     known = {e.evidence_id for items in per_requirement.values() for e in items}
     for match in report.matches:

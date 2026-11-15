@@ -353,6 +353,7 @@ def complete_json(node: str, system: str, user: str, schema: type[T], *, max_tok
     except (ValueError, ValidationError) as error:
         # reasoning models spend output tokens on thinking, so a cut-off answer is the usual cause: double the room
         repair = load_prompt("_json_repair", request=user, error=str(error)[:300])
-        room = 2 * (max_tokens or load_config()["models"]["max_output_tokens"])
+        # capped: free tiers count prompt plus max_tokens against a per-minute budget (8,000 on Groq)
+        room = min(2 * (max_tokens or load_config()["models"]["max_output_tokens"]), 3600)
         text = complete(node, instruction, repair, max_tokens=room, temperature=temperature)
         return schema.model_validate(extract_json(text))
