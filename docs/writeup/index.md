@@ -47,21 +47,22 @@ We ran the same twelve fixed bid jobs through two pipelines that differ only in 
 and sent every proposal to GigSim, our simulated marketplace, where each client has hidden preferences and decides
 whether to reply.
 
-Every one of V0's seven proposals got a reply. Seven of the shipped pipeline's eight did. A rubric judge scored them
+Every one of V0's seven proposals got a reply. Seven of the shipped pipeline's eight did (the two drafted overlapping
+but not identical sets of the twelve jobs). A rubric judge scored them
 3.57 and 3.63 out of 5. With seven and eight proposals, none of these differences is significant, and that is the
-point: the retriever that clearly won its own benchmark produced proposals that clients could not tell apart.
+point: the retriever that won its own benchmark overall produced proposals that clients could not tell apart.
 
-The reason turned out to be in how a reply is earned, and we could read it because we wrote the simulator. A GigSim
+The likely reason is in how a reply is earned, and we could read it because we wrote the simulator. A GigSim
 client scores a letter on whether it names the job's skills, how much of the post's own wording it reuses, the price,
 whether it opens with a generic greeting and whether it answers the screening questions. Nothing in that list asks
 which project the letter cites. Both pipelines use the same Writer, which is told to open with the client's problem in their own terms and mention
 specific details from the post, so both clear the bar.
 Better evidence can only help a letter through those channels, and here it had none left to help through.
 
-Better retrieval did change one thing, in the wrong direction. More evidence in the prompt led the Writer to make more
-claims, and more claims means more that cannot be verified: the shipped pipeline averaged 1.00 unsupported claims per
-proposal after claim verification, against 0.86 for V0. Claim verification itself worked as intended, cutting
-unsupported claims in the shipped pipeline from 2.13 to 1.00 per proposal, but it starts from a higher pile.
+Better retrieval did not make the letters safer either. After claim verification, 22% of the shipped pipeline's
+claims were still unsupported, against 16% for V0 (1.00 against 0.86 per proposal). Claim verification itself worked
+as intended, cutting unsupported claims in the shipped pipeline from 2.13 to 1.00 per proposal; we cannot say from
+seven and eight letters why the shipped letters started from a higher pile.
 
 GigSim is a simulator, and real clients may well notice which project you cite. But that is exactly the lesson. A
 retrieval metric measures the step you can measure. Whether the step matters depends on what the final judge rewards,
@@ -84,17 +85,17 @@ count, which is the retrieval lesson again.
 The part we least expected was that our own evaluation fooled us twice, and both times the number looked good.
 
 We cache every model call by its prompt, so a rerun on free tiers costs nothing. After a crash we replayed the
-held-out run from the cache, and it reported a p95 latency of about one second per proposal: a budget of 90 seconds,
+held-out run from the cache, and it reported a p95 latency of one second per proposal: a budget of 90 seconds,
 "met". The real, live run had measured 334 seconds. A replayed call takes no time, so every rerun quietly reported a
 fantasy. Each step now counts how many of its calls were replayed, latency is computed only over jobs whose calls all
 ran live, and our held-out latency comes from the one fully live run. Three of our four budgets are missed, and we say
 so.
 
-The second lie looked like a weakness of one proposal strategy. In our A/B test of two writing strategies, almost
-every job of the second strategy died before writing anything. The cause was not the strategy. Replays from the cache
+The second lie looked like a weakness of one proposal strategy. In our A/B test of two writing strategies, the second
+strategy's jobs kept dying before writing anything. The cause was not the strategy. Replays from the cache
 reached our marketplace server far faster than live calls ever do, the server's own rate limiter (there to protect the
 marketplace) refused them, and the pricing step failed. The limiter was doing its job; our test harness had made time
-run faster than the world it was testing. The fix was one line in the harness. Finding it took tracing a "dead letter"
+run faster than the world it was testing. The fix was one line in the harness (commit 5bb48aa). Finding it took tracing a "dead letter"
 back through several layers.
 
 Neither bug would have survived a reader asking "how was this number produced?" Both survived us for hours, because

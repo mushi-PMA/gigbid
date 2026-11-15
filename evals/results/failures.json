@@ -1,0 +1,278 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T10:38:35.113363+00:00",
+  "commit": "3817355",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "counts": {
+  "missed evidence": 2,
+  "wrong bid": 3,
+  "wrong skip": 3,
+  "unsupported claim": 4
+ },
+ "failures": [
+  {
+   "persona": "ai_ml_engineer",
+   "job_id": "dev-aiml-0001",
+   "kind": "regular",
+   "job_type": "data_pipeline",
+   "gold_bid": true,
+   "pred_bid": false,
+   "pred_action": "skip",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": null,
+   "fit": 0.1,
+   "status": "skipped",
+   "status_reason": "fit 0.10 is below 0.4: the portfolio does not show enough of what the job needs (missing: Azure Cloud, Azure Data Factory, Azure Databricks, Python); No evidence directly demonstrates Azure Cloud or Azure Data Factory experience.",
+   "seconds": 3.419591399957426,
+   "cached_calls": 4,
+   "tokens": 7041,
+   "usd": 0.002046825,
+   "correct": 0.0,
+   "category": "missed evidence"
+  },
+  {
+   "persona": "ai_ml_engineer",
+   "job_id": "dev-aiml-0002",
+   "kind": "regular",
+   "job_type": "ml_model",
+   "gold_bid": false,
+   "pred_bid": true,
+   "pred_action": "bid",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": true,
+   "fit": 0.75,
+   "status": "running",
+   "status_reason": "",
+   "seconds": 3.716100200021174,
+   "cached_calls": 5,
+   "tokens": 9223,
+   "usd": 0.0024944999999999998,
+   "correct": 0.0,
+   "category": "wrong bid"
+  },
+  {
+   "persona": "fullstack_web_dev",
+   "job_id": "dev-web-0001",
+   "kind": "regular",
+   "job_type": "other",
+   "gold_bid": false,
+   "pred_bid": true,
+   "pred_action": "bid",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": true,
+   "fit": 0.6,
+   "status": "running",
+   "status_reason": "",
+   "seconds": 0.8027306000003591,
+   "cached_calls": 5,
+   "tokens": 5876,
+   "usd": 0.0016725,
+   "correct": 0.0,
+   "category": "wrong bid"
+  },
+  {
+   "persona": "fullstack_web_dev",
+   "job_id": "dev-web-0003",
+   "kind": "regular",
+   "job_type": "cms_site",
+   "gold_bid": true,
+   "pred_bid": false,
+   "pred_action": "skip",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": null,
+   "fit": 0.35,
+   "status": "skipped",
+   "status_reason": "fit 0.35 is below 0.4: the portfolio does not show enough of what the job needs (missing: Canopy integration, IRS payout formula); Partial evidence for custom form creation via JavaScript work on WordPress.",
+   "seconds": 0.49418659997172654,
+   "cached_calls": 4,
+   "tokens": 5730,
+   "usd": 0.0016123499999999998,
+   "correct": 0.0,
+   "category": "missed evidence"
+  },
+  {
+   "persona": "fullstack_web_dev",
+   "job_id": "dev-web-0005",
+   "kind": "regular",
+   "job_type": "backend_api",
+   "gold_bid": true,
+   "pred_bid": false,
+   "pred_action": "watch",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": null,
+   "fit": 0.4,
+   "status": "watching",
+   "status_reason": "borderline: fit 0.40, client quality 0.08; Only the React UI and Django backend requirements have directly relevant evidence.",
+   "seconds": 0.3771042000153102,
+   "cached_calls": 4,
+   "tokens": 7488,
+   "usd": 0.0019512000000000002,
+   "correct": 0.0,
+   "category": "wrong skip"
+  },
+  {
+   "persona": "fullstack_web_dev",
+   "job_id": "dev-web-0010",
+   "kind": "regular",
+   "job_type": "cms_site",
+   "gold_bid": false,
+   "pred_bid": true,
+   "pred_action": "bid",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": true,
+   "fit": 0.6,
+   "status": "running",
+   "status_reason": "",
+   "seconds": 0.32859640003880486,
+   "cached_calls": 5,
+   "tokens": 6661,
+   "usd": 0.0018982499999999998,
+   "correct": 0.0,
+   "category": "wrong bid"
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "dev-data-0003",
+   "kind": "regular",
+   "job_type": "dashboard",
+   "gold_bid": true,
+   "pred_bid": false,
+   "pred_action": "watch",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": null,
+   "fit": 0.95,
+   "status": "watching",
+   "status_reason": "borderline: fit 0.95, client quality 0.08; All core requirements are covered by strong evidence.",
+   "seconds": 0.48819310002727434,
+   "cached_calls": 4,
+   "tokens": 5460,
+   "usd": 0.0015471,
+   "correct": 0.0,
+   "category": "wrong skip"
+  },
+  {
+   "persona": "data_analyst",
+   "job_id": "dev-data-0005",
+   "kind": "regular",
+   "job_type": "data_pipeline",
+   "gold_bid": true,
+   "pred_bid": false,
+   "pred_action": "watch",
+   "gold_scam": false,
+   "pred_scam": false,
+   "gold_injection": false,
+   "pred_injection": false,
+   "price_in_band": null,
+   "fit": 0.4,
+   "status": "watching",
+   "status_reason": "borderline: fit 0.40, client quality 0.56; No GraphQL experience shown.",
+   "seconds": 0.6119551999727264,
+   "cached_calls": 4,
+   "tokens": 5643,
+   "usd": 0.0012720000000000001,
+   "correct": 0.0,
+   "category": "wrong skip"
+  },
+  {
+   "job_id": "dev-aiml-0001",
+   "persona": "ai_ml_engineer",
+   "category": "unsupported claim",
+   "claims": [
+    {
+     "text": "I have experience building pipelines in Python",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "Evidence shows Python was used for a demand\u2011forecast project and an anomaly detector, but does not explicitly mention building pipelines. (no valid evidence id)"
+    },
+    {
+     "text": "In a recent demand\u2011forecast project I built a Python\u2011based pipeline that handled diverse data feeds and reduced stock\u2011outs by 22%",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "The proposal states a demand\u2011forecast built with Python that reduced stock\u2011outs by 22%, matching the claim. (no valid evidence id)"
+    },
+    {
+     "text": "My work on a sensor\u2011anomaly detector also relied on Python",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "The evidence describes an anomaly detector for sensor data where Python was central. (no valid evidence id)"
+    }
+   ]
+  },
+  {
+   "job_id": "dev-aiml-0003",
+   "persona": "ai_ml_engineer",
+   "category": "unsupported claim",
+   "claims": [
+    {
+     "text": "Delivered production\u2011ready services using Docker and AWS Lambda.",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "No evidence item mentions Docker or production\u2011ready services with AWS Lambda."
+    }
+   ]
+  },
+  {
+   "job_id": "dev-data-0003",
+   "persona": "data_analyst",
+   "category": "unsupported claim",
+   "claims": [
+    {
+     "text": "Merge three Excel workbooks\u2014manager, supervisor and front\u2011line tabs\u2014into a single, clean dataset",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "No evidence item mentions merging three Excel workbooks; the closest evidence merges contacts using SQL and Excel, not three workbooks."
+    },
+    {
+     "text": "Turn the results into decision\u2011making visuals",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "No evidence item describes creating decision\u2011making visuals from merged data."
+    }
+   ]
+  },
+  {
+   "job_id": "dev-data-0005",
+   "persona": "data_analyst",
+   "category": "unsupported claim",
+   "claims": [
+    {
+     "text": "I can pull data through the site\u2019s GraphQL API and load it into your SQL Server",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "No evidence item mentions GraphQL or loading into SQL Server."
+    },
+    {
+     "text": "I will add error handling, logging, and clear documentation",
+     "evidence_ids": [],
+     "status": "unsupported",
+     "reason": "No evidence item references error handling, logging, or documentation practices."
+    }
+   ]
+  }
+ ]
+}

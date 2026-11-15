@@ -1,0 +1,60 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T10:21:20.283628+00:00",
+  "commit": "4596950",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "decision_jobs_per_persona": 5,
+ "proposal_jobs_per_persona": 1,
+ "results": {
+  "open": {
+   "bid_or_skip_f1": 0.3636,
+   "scam_recall": 0.0,
+   "price_inside_fair_band": 1.0,
+   "per_job_analysed": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_jobs": 0,
+    "mean_tokens": 6261,
+    "mean_usd": 0.001639
+   },
+   "judge_overall": 3.5,
+   "unsupported_after": 2.5,
+   "gigsim_reply_rate": 1.0,
+   "per_proposal": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_proposals": 0,
+    "mean_tokens": 52164,
+    "mean_usd": 0.011781
+   },
+   "hardware": "hosted open-weight endpoints (free tiers); no local GPU"
+  },
+  "open_gemma": {
+   "bid_or_skip_f1": 0.4,
+   "scam_recall": 0.0,
+   "price_inside_fair_band": 1.0,
+   "per_job_analysed": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_jobs": 0,
+    "mean_tokens": 8071,
+    "mean_usd": 0.0
+   },
+   "judge_overall": null,
+   "unsupported_after": null,
+   "gigsim_reply_rate": null,
+   "per_proposal": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_proposals": 0,
+    "mean_tokens": 0,
+    "mean_usd": 0.0
+   },
+   "hardware": "hosted open-weight endpoints (free tiers); no local GPU"
+  }
+ }
+}

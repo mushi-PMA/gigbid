@@ -1,0 +1,7 @@
+Console output of the holdout run replayed from the evaluation cache (15 Nov 2026, about 09:14 PKT, before latency was restricted to live jobs). Copied verbatim from the run log. A replayed call takes no time, so the latency lines below are not real; this file is kept as the evidence for docs/FAILURES.md row 15.
+
+09:14:41 lane9 START holdout 10/2
+p95_latency_seconds_per_proposal: declared 90, measured 0.9978 -> met
+usd_per_job_analysed: declared 0.002, measured 0.001347 -> met
+usd_per_proposal: declared 0.01, measured 0.011781 -> MISSED
+09:14:56 lane9 END holdout 10/2

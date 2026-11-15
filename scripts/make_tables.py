@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 from common.config import ROOT
@@ -28,8 +29,13 @@ def fmt(value, digits: int = 3, pct: bool = False) -> str:
     if isinstance(value, bool):
         return "yes" if value else "no"
     if pct:
-        return f"{value * 100:.1f}%"
-    return f"{value:.{digits}f}" if isinstance(value, float) else str(value)
+        return f"{half_up(value * 100, 1)}%"
+    return half_up(value, digits) if isinstance(value, float) else str(value)
+
+
+def half_up(value: float, digits: int) -> str:
+    """2.125 -> 2.13, as people round (Python's format rounds half to even), so tables and prose agree."""
+    return str(Decimal(repr(value)).quantize(Decimal(1).scaleb(-digits), rounding=ROUND_HALF_UP))
 
 
 def table(header: list[str], rows: list[list[str]]) -> str:
@@ -60,7 +66,10 @@ def rag_variants() -> str:
 
 def main_results() -> str:
     """The brief's B5 table: V0 against the shipped pipeline."""
-    rag = {r["variant"]: r for p in (load(name) for name in RAG_FILES) if p for r in p["results"]}
+    rag: dict = {}
+    for part in (load(name) for name in RAG_FILES):   # the first file (150 offline jobs, with V0) wins: same job set
+        for r in (part or {}).get("results", []):
+            rag.setdefault(r["variant"], r)
     v0, best = load("proposals_v0"), load("proposals_best")
     shipped = ((best or {}).get("meta", {}).get("rag_variant") or "").replace("_", "+")
     if not (v0 and best):

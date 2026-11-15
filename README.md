@@ -57,7 +57,7 @@ out of sync.
 | Variant | Evidence Recall@5 | nDCG@10 | Unsupported claims per proposal | Judge score | GigSim reply rate | p95 latency (s) | Cost per proposal (USD) |
 |---|---|---|---|---|---|---|---|
 | V0 | 0.453 | 0.566 | 0.86 | 3.57 | 100.0% | n/a | 0.00924 |
-| Best (v2+v4) | 0.447 | 0.587 | 1.00 | 3.62 | 87.5% | n/a | 0.01022 |
+| Best (v2+v4) | 0.482 | 0.597 | 1.00 | 3.63 | 87.5% | n/a | 0.01022 |
 <!-- /results:main -->
 
 ### Retrieval variants (dev set)
@@ -70,13 +70,13 @@ Unit: a portfolio project (its case study, README, code and proposals). Dev set,
 | v2 | 0.455 | 0.693 | 0.748 | 0.576 | 0.66 | 150 |
 | v0+v3 | 0.460 | 0.702 | 0.734 | 0.551 | 24.05 | 150 |
 | v2+v3 | 0.432 | 0.672 | 0.717 | 0.543 | 17.69 | 150 |
-| v2+v4 | 0.481 | 0.725 | 0.760 | 0.597 | 4.67 | 150 |
+| v2+v4 | 0.482 | 0.725 | 0.760 | 0.597 | 4.67 | 150 |
 | v2+v5 | 0.365 | 0.541 | 0.712 | 0.460 | 4.27 | 150 |
 | v2+v3+v4 | 0.332 | 0.586 | 0.602 | 0.472 | 40.74 | 150 |
 | v2+v3+v5 | 0.249 | 0.434 | 0.619 | 0.362 | 10.83 | 150 |
 | v2+v3+v4+v5 | 0.244 | 0.438 | 0.575 | 0.341 | 10.64 | 150 |
-| v1+v2 | 0.399 | 0.672 | 0.771 | 0.597 | 0.12 | 60 |
-| v1+v2+v4 | 0.417 | 0.698 | 0.750 | 0.605 | 0.21 | 60 |
+| v1+v2 | 0.399 | 0.672 | 0.772 | 0.597 | 0.12 | 60 |
+| v1+v2+v4 | 0.418 | 0.698 | 0.750 | 0.605 | 0.21 | 60 |
 | v1+v2+v3 | 0.420 | 0.689 | 0.727 | 0.579 | 16.70 | 60 |
 | v2+v4+v7 | 0.489 | 0.751 | 0.794 | 0.629 | 0.17 | 60 |
 <!-- /results:rag -->
@@ -109,7 +109,7 @@ A run that crashed on a provider rate limit is left out of every number in its r
 <!-- results:claims -->
 |  | Before verification | After verification |
 |---|---|---|
-| Unsupported claims per proposal | 2.12 | 1.00 |
+| Unsupported claims per proposal | 2.13 | 1.00 |
 | Unsupported claim rate | 47.2% | 22.2% |
 <!-- /results:claims -->
 
@@ -139,7 +139,7 @@ Built GigBid, a LangGraph multi-agent freelancer copilot on three MCP servers wh
 approval; claim verification cut unsupported claims from 2.13 to 1.00 per proposal and injection detection rose from
 17% to 92% (`evals/results/proposals_best.json`, `injection.json`).
 Designed a 10-tool MCP surface that chose the right tool on 40 of 40 tasks (97.5% argument accuracy against 77.5% for a
-3-tool design), and traced a reasoning-budget bug whose fix took dead letters from 19 of 120 dev jobs to 0 of 30
+3-tool design), and traced a reasoning-budget bug whose fix took dead letters from 5 to 0 on the same 30 dev jobs (19 of 120 in the first full run)
 (`tool_granularity.json`, `decisions.json`, `archive/`).
 
 ## Run it
@@ -170,7 +170,7 @@ write is a draft you confirm on Upwork.
 |---|---|---|---|
 | `open` (deployed) | gpt-oss-20b | gpt-oss-120b | hosted open-weight endpoints used as one pool (Groq, NVIDIA, Cerebras, SambaNova free tiers) |
 | `open_large` | gpt-oss-120b | gpt-oss-120b | the live site while the small model's free daily quota is used up (evaluations use `open`) |
-| `open_gemma` | Gemma 4 31B | Gemma 4 31B | second open configuration, compared on the dev set |
+| `open_gemma` | Gemma 4 31B | Gemma 4 31B | second open configuration: 5 dev decisions per persona compared; no Gemma proposal finished on the free endpoint |
 | `open_local` | Qwen3 4B | Qwen3 8B | Ollama service in compose, no GPU needed |
 
 No paid model is used; the whole project runs on free tiers. Cost is still reported at list price for the same

@@ -83,7 +83,8 @@ tokens. \textbf{Setup.} 40 tasks with known correct calls (4 per capability, ids
 \file{evals/datasets/tool\_tasks.json}); one tool-calling turn per task with native tool use, same model and system
 prompt for all three sets (\file{evals/runners/tool\_granularity.py}).
 \tablefrom{tools}{Tool-design study on 40 tasks.}
-\textbf{Conclusion.} H-A is supported on accuracy and refuted on tokens for the fine set. Our 10 tools picked the
+\textbf{Conclusion.} H-A is supported: our set is the most accurate, and, as predicted, the coarse set uses the fewest
+tokens. Our 10 tools picked the
 right tool on all 40 tasks and filled the arguments right on 39 (97.5\%); the 18-tool set scored 95\% and 92.5\%, the
 3-tool set 95\% and 77.5\%. The coarse set is the cheapest (372 tokens per task) but loses on arguments: one tool
 with an \texttt{action} field makes the model guess nested parameters (pricing category, job id, evidence filters).
@@ -111,26 +112,29 @@ judge was compared with my own blind labels on 30 proposals (Cohen's kappa~\cite
 \textbf{Ablation and breakdown.} Removing hybrid search (V2) costs 0.062 nDCG@10 and removing the outcome boost (V4)
 0.021 (\file{evals/results/ablation.json}), so both earn their place and V2 matters most. The breakdown is the honest
 part: the shipped retrieval helps the web-developer persona most (nDCG@10 0.518 to 0.630) and e-commerce and data-pipeline
-jobs, but it is worse than V0 for the AI/ML persona (0.610 to 0.584) and much worse on LLM-app jobs (Recall@5 0.582 to
+jobs, but it is worse than V0 for the AI/ML persona (0.610 to 0.584; V2 alone 0.604) and much worse on LLM-app jobs (Recall@5 0.582 to
 0.154, only 6 jobs), which is why H-B2 (``V2 beats V0 for every persona'') is refuted. H-B1 is refuted too: on the 29 jobs with four or
 more requirements that both runs share, V1+V2+V3 reached Recall@5 0.368 against 0.432 for V0, a drop of six points
 where we predicted a gain of ten (rows of \file{rag\_variants\_model.json} and \file{rag\_variants\_offline.json}).
 \tablefrom{ablation}{The shipped retrieval with one component removed at a time (dev set, no model calls).}
 \tablefrom{breakdown}{V0 against the shipped retrieval by persona, number of requirements and job type (dev set).}
-\textbf{Where better retrieval did not raise replies.} The shipped retrieval beats V0 on nDCG@10 (0.587 against 0.566),
-yet in GigSim V0's proposals did as well: every one of V0's 7 drafted proposals got a reply, against 7 of the shipped
-pipeline's 8, with judge scores of 3.57 and 3.63 (\file{evals/results/proposals\_v0.json},
-\file{proposals\_best.json}). H-B3 holds in the direction we predicted it might fail. The reason is in how GigSim's
-clients score a letter (\file{gigsim/clients.py}): naming the job's skills, reusing the post's own words, the price,
-avoiding a generic opening and answering screening questions. Which evidence a letter cites is not scored, so better
-retrieval can only help through those, and both pipelines' Writers already name the skills and quote the post. Extra
-evidence instead shows up as more claims, and more claims means more that cannot be verified (1.00 unsupported per
-shipped proposal after verification against 0.86 for V0). With 7 and 8 proposals none of these differences is significant.
+\textbf{Where better retrieval did not raise replies.} The shipped retrieval beats V0 on nDCG@10 (0.597 against 0.566 on
+the same 150 jobs), yet in GigSim V0's proposals did as well: every one of V0's 7 drafted proposals got a reply, against
+7 of the shipped pipeline's 8, with judge scores of 3.57 and 3.63 (\file{evals/results/proposals\_v0.json},
+\file{proposals\_best.json}; the two pipelines drafted overlapping but not identical sets of the 12 jobs). H-B3 holds in
+the direction we predicted it might fail. A likely reason is in how GigSim's clients score a letter
+(\file{gigsim/clients.py}): naming the job's skills, reusing the post's own words, the price, avoiding a generic opening
+and answering screening questions. Which evidence a letter cites is not scored, so better retrieval can only help
+through those, and both pipelines use the same Writer, which is told to open with the client's problem in their own
+terms. The shipped pipeline's letters also carried a higher share of unsupported claims after verification (22\%
+against 16\%; 1.00 against 0.86 per proposal). With 7 and 8 proposals none of these differences is significant, so the
+shipped choice rests on retrieval quality and cost, not on replies.
 \textbf{What ships.} V2+V4 (hybrid BM25 and dense search with the outcome-aware boost, \file{docs/adr/0003-rag-variant.md}).
 V2+V4+V7 retrieved better (nDCG@10 0.629 against 0.587 on the same 60 jobs, \file{evals/results/rag\_variants\_model.json}),
 but HyDE adds a model call to every search and the binding limit on our free tier is tokens per day per key, not
 dollars; V2+V4 adds no model call and gives up about 0.04 nDCG@10. The cross-encoder (V3) was dropped because it lowered nDCG@10 on every
-combination and, on the two-core server, made portfolio searches time out. Claim verification ships on: in the shipped
+combination and was slow on CPU (p95 retrieval 17.7\,s for V2+V3 against 4.7\,s for V2+V4,
+\file{rag\_variants\_offline.json}). Claim verification ships on: in the shipped
 proposal study it cut unsupported claims from 2.13 to 1.00 per proposal (47\% to 22\% of claims,
 \file{evals/results/proposals\_best.json}). The cost is real: 44,238 tokens and \$0.0102 per drafted proposal, and on four
 of twelve forced weak-fit jobs verification removed so many sentences that the Critic loop ran out of token budget and
@@ -178,9 +182,9 @@ the Writer which style wins per category.
 \textbf{Result} (\file{evals/results/x2\_ab\_test.json}): no detectable difference. On the 12 fixed jobs each strategy
 drafted 8 proposals; 7 jobs have a proposal from both arms, and on those both arms got a reply 6 times out of 7. One
 job replied only to A and one only to B, so the exact McNemar test has two discordant pairs (p = 1.0). The judge
-preferred B slightly (3.75 against 3.63). With two discordant pairs the test cannot detect even a large effect: at a
-reply rate near 86\%, telling apart a ten-point difference would need on the order of a hundred paired jobs, which the
-free tiers could not pay for. What the experiment does show is that the machinery works end to end (strategy as
+scored A slightly higher (3.88 against 3.75). Arm A is the shipped Writer, so its letters replay those of
+\file{proposals\_best\_critic\_stop.json} from the evaluation cache. With two discordant pairs the test cannot detect
+even a large effect; far more paired jobs would be needed than the free tiers could pay for. What the experiment does show is that the machinery works end to end (strategy as
 configuration, paired drafts, simulated replies, an exact test) and that GigSim's clients, which score skills named,
 post words reused, price and screening answers rather than the order of the letter, are a weak judge of opening style.
 
@@ -203,7 +207,7 @@ aiml-0001, web-0003 & Extractor makes every named tool a requirement, so fit dro
 data-0003, web-0005 & Client with unverified payment, no spend, no hires (quality 0.08) & Kept: a policy choice the
 gold label ignores & Label disagreement \\
 aiml-0006 & ``Easy money'' scam skipped for fit, not flagged & Seven scam rules, a hit is decisive & Scam recall 0.5
-$\to$ 1.0 (dev), 0.667 $\to$ 1.0 (holdout) \\
+$\to$ 1.0 (dev), 0.667 $\to$ 1.0 (holdout); before: commit 361a704 \\
 4 thin-evidence proposal jobs & Verification removes sentences, the Critic loops on length, the token budget runs out
 & Critic stops when only length is left & Cost per proposal \$0.0102 $\to$ \$0.0092 (dev); the 4 still escalate \\\bottomrule
 \end{tabular}\end{table}
