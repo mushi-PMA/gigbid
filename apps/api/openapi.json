@@ -556,7 +556,7 @@
     "properties": {
      "email": {
       "maxLength": 200,
-      "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+      "minLength": 1,
       "title": "Email",
       "type": "string"
      },
