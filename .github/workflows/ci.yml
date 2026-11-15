@@ -32,7 +32,7 @@ jobs:
         run: |
           for f in infra/deploy/azure/*.sh; do bash -n "$f"; done
           cp .env.example .env.ci && echo "APP_SECRET_KEY=ci" >> .env.ci && echo "MCP_SHARED_SECRET=ci" >> .env.ci \
-            && echo "SITE_HOST=example.org" >> .env.ci
+            && echo "SITE_HOST=example.org" >> .env.ci && printf 'PHOENIX_SECRET=x\nPHOENIX_ADMIN_SECRET=x\nPHOENIX_ADMIN_PASSWORD=x\n' >> .env.ci
           docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml --env-file .env.ci config --quiet
       - name: Repository rules (no secrets, gigsim unchanged, prompts in agent/prompts, results in sync)
         run: python -m scripts.check_rules

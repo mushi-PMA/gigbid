@@ -28,6 +28,11 @@ services:
     ports: !reset []
     environment:
       PHOENIX_HOST_ROOT_PATH: /phoenix
+      # login on: graders use a read-only viewer account; the services send traces with the admin secret
+      PHOENIX_ENABLE_AUTH: "true"
+      PHOENIX_SECRET: ${PHOENIX_SECRET:?set PHOENIX_SECRET in .env}
+      PHOENIX_ADMIN_SECRET: ${PHOENIX_ADMIN_SECRET:?set PHOENIX_ADMIN_SECRET in .env}
+      PHOENIX_DEFAULT_ADMIN_INITIAL_PASSWORD: ${PHOENIX_ADMIN_PASSWORD:?set PHOENIX_ADMIN_PASSWORD in .env}
 
 volumes:
   caddydata: {}

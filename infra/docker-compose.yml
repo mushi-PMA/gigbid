@@ -26,6 +26,7 @@ x-python-env: &python-env
   WORKSPACE_MCP_URL: http://mcp-workspace:8103/mcp
   MCP_HOST: 0.0.0.0
   PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006/v1/traces
+  PHOENIX_API_KEY: ${PHOENIX_ADMIN_SECRET:-}
   PHOENIX_PUBLIC_URL: ${PHOENIX_PUBLIC_URL:-http://localhost:6006}
   API_PUBLIC_URL: ${API_PUBLIC_URL:-http://localhost:8000}
   WEB_PUBLIC_URL: ${WEB_PUBLIC_URL:-http://localhost:8080}
@@ -64,6 +65,7 @@ services:
       PHOENIX_WORKING_DIR: /phoenix
       PHOENIX_SQL_DATABASE_URL: postgresql://gigbid:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/gigbid
       PHOENIX_SQL_DATABASE_SCHEMA: phoenix   # own schema: Phoenix has a `users` table too, which would shadow ours
+      PHOENIX_ENABLE_AUTH: "false"           # local only; the production override turns login on
     volumes: [phoenixdata:/phoenix]
     ports: ["${PHOENIX_PORT:-6006}:6006"]
     depends_on:

@@ -47,7 +47,9 @@ def setup_tracing(service_name: str) -> None:
     if endpoint:
         from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 
-        provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint)))
+        key = os.environ.get("PHOENIX_API_KEY")       # Phoenix with login on (production) needs a bearer key
+        headers = {"Authorization": f"Bearer {key}"} if key else None
+        provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint, headers=headers)))
     trace.set_tracer_provider(provider)
     _configured = True
 
