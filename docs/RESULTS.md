@@ -76,7 +76,7 @@ Unit: a portfolio project (its case study, README, code and proposals). Dev set,
 |---|---|
 | Bid-or-skip F1 | 0.556 |
 | Bid-or-skip accuracy | 0.733 |
-| Scam precision / recall | 1.000 / 0.500 |
+| Scam precision / recall | 1.000 / 1.000 |
 | Injection detection recall | 1.000 |
 | Price inside the fair band | 100.0% |
 | p50 / p95 latency per job analysed (s) | n/a / n/a |
@@ -133,7 +133,12 @@ _Not measured yet: run `make eval` (needs a model key)._
 ## x2
 
 <!-- results:x2 -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Arm | Reply rate | Only this arm replied |
+|---|---|---|
+| A: problem first | 85.7% | 1 |
+| B: credentials first | 85.7% | 1 |
+
+Paired jobs: 7; exact McNemar p = 1.0; two-proportion z-test p = 1.0.
 <!-- /results:x2 -->
 
 ## holdout
@@ -144,7 +149,7 @@ _Not measured yet: run `make eval` (needs a model key)._
 | p95 latency seconds per job analysed | 20 | 70.6609 | missed |
 | p95 latency seconds per proposal | 90 | 333.5547 | missed |
 | usd per job analysed | 0.0020 | 0.0013 | met |
-| usd per proposal | 0.0100 | 0.0118 | missed |
+| usd per proposal | 0.0100 | 0.0105 | missed |
 
 Latency rows come from the first holdout run, whose model calls were all live (`evals/results/archive/holdout_first_run_console.txt`); the other rows from `holdout.json`.
 <!-- /results:holdout -->

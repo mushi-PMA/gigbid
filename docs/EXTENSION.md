@@ -26,7 +26,12 @@ one arm got a reply) is the right test; the z-test is reported for comparison.
 
 ## Result
 <!-- results:x2 -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Arm | Reply rate | Only this arm replied |
+|---|---|---|
+| A: problem first | 85.7% | 1 |
+| B: credentials first | 85.7% | 1 |
+
+Paired jobs: 7; exact McNemar p = 1.0; two-proportion z-test p = 1.0.
 <!-- /results:x2 -->
 
 Run: `python -m evals.runners.x2_ab_test --per-persona 20`

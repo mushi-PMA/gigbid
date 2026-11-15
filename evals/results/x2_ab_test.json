@@ -1,0 +1,242 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T10:07:58.114875+00:00",
+  "commit": "2bcc2ae",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "paired_jobs": 7,
+ "reply_rate_A": 0.8571,
+ "reply_rate_B": 0.8571,
+ "only_A_replied": 1,
+ "only_B_replied": 1,
+ "mcnemar_exact_p": 1.0,
+ "two_proportion_z_p": 1.0,
+ "significant_at_0_05": false,
+ "arms": {
+  "A": {
+   "n_jobs": 12,
+   "n_proposals": 8,
+   "unsupported_claims_per_proposal": {
+    "before_verification": 2.25,
+    "after_verification": 0.625
+   },
+   "unsupported_claim_rate": {
+    "before": 0.6,
+    "after": 0.1667
+   },
+   "judge_overall": 3.875,
+   "gigsim_reply_rate": 0.875,
+   "gigsim_hire_rate": 0.25,
+   "mean_revisions": 2.0,
+   "per_proposal": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_proposals": 0,
+    "mean_tokens": 40249,
+    "mean_usd": 0.009242
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "reply_rate": 0.75,
+     "judge": 3.75
+    },
+    "data_analyst": {
+     "reply_rate": 1.0,
+     "judge": 4.0
+    },
+    "fullstack_web_dev": {
+     "reply_rate": 1.0,
+     "judge": 4.0
+    }
+   },
+   "jobs": [
+    {
+     "job_id": "dev-aiml-0001",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-aiml-0003",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-aiml-0004",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-aiml-0011",
+     "status": "submitted",
+     "drafted": true,
+     "replied": false
+    },
+    {
+     "job_id": "dev-web-0003",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-web-0005",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-web-0012",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-web-0013",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0003",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0005",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0006",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0007",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    }
+   ]
+  },
+  "B": {
+   "n_jobs": 12,
+   "n_proposals": 8,
+   "unsupported_claims_per_proposal": {
+    "before_verification": 1.75,
+    "after_verification": 0.0
+   },
+   "unsupported_claim_rate": {
+    "before": 0.5385,
+    "after": 0.0
+   },
+   "judge_overall": 3.75,
+   "gigsim_reply_rate": 0.875,
+   "gigsim_hire_rate": 0.375,
+   "mean_revisions": 2.25,
+   "per_proposal": {
+    "p50_seconds": null,
+    "p95_seconds": null,
+    "live_proposals": 0,
+    "mean_tokens": 44776,
+    "mean_usd": 0.009741
+   },
+   "by_persona": {
+    "ai_ml_engineer": {
+     "reply_rate": 0.75,
+     "judge": 3.5
+    },
+    "data_analyst": {
+     "reply_rate": 1.0,
+     "judge": 4.0
+    },
+    "fullstack_web_dev": {
+     "reply_rate": 1.0,
+     "judge": 4.0
+    }
+   },
+   "jobs": [
+    {
+     "job_id": "dev-aiml-0001",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-aiml-0003",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-aiml-0004",
+     "status": "submitted",
+     "drafted": true,
+     "replied": false
+    },
+    {
+     "job_id": "dev-aiml-0011",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-web-0003",
+     "status": "dead_letter",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-web-0005",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-web-0012",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-web-0013",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0003",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0005",
+     "status": "submitted",
+     "drafted": true,
+     "replied": true
+    },
+    {
+     "job_id": "dev-data-0006",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    },
+    {
+     "job_id": "dev-data-0007",
+     "status": "needs_attention",
+     "drafted": false,
+     "replied": null
+    }
+   ]
+  }
+ }
+}

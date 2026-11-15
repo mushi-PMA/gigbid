@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_at": "2026-11-15T09:18:56.077791+00:00",
-  "commit": "eff5d62",
+  "generated_at": "2026-11-15T10:06:36.055584+00:00",
+  "commit": "2bcc2ae",
   "model_profile": "open",
   "rag_variant": "v2_v4",
   "embedding_model": "BAAI/bge-small-en-v1.5",
@@ -16,8 +16,8 @@
  "measured": {
   "p95_latency_seconds_per_job_analysed": null,
   "p95_latency_seconds_per_proposal": null,
-  "usd_per_job_analysed": 0.001347,
-  "usd_per_proposal": 0.011781
+  "usd_per_job_analysed": 0.001342,
+  "usd_per_proposal": 0.010543
  },
  "within_budget": {
   "p95_latency_seconds_per_job_analysed": false,
@@ -40,11 +40,11 @@
   "bid_accuracy": 0.8,
   "scam_detection": {
    "precision": 1.0,
-   "recall": 0.6667,
-   "f1": 0.8,
-   "tp": 2,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 3,
    "fp": 0,
-   "fn": 1
+   "fn": 0
   },
   "injection_detection": {
    "precision": 1.0,
@@ -60,8 +60,8 @@
    "p50_seconds": null,
    "p95_seconds": null,
    "live_jobs": 0,
-   "mean_tokens": 5701,
-   "mean_usd": 0.001347
+   "mean_tokens": 5699,
+   "mean_usd": 0.001342
   },
   "by_persona": {
    "ai_ml_engineer": {
@@ -93,11 +93,11 @@
     },
     "scam": {
      "precision": 1.0,
-     "recall": 0.5,
-     "f1": 0.6667,
-     "tp": 1,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 2,
      "fp": 0,
-     "fn": 1
+     "fn": 0
     }
    },
    "fullstack_web_dev": {
@@ -171,23 +171,23 @@
   "n_jobs": 6,
   "n_proposals": 3,
   "unsupported_claims_per_proposal": {
-   "before_verification": 1.0,
+   "before_verification": 0.6667,
    "after_verification": 1.0
   },
   "unsupported_claim_rate": {
-   "before": 0.2308,
-   "after": 0.2308
+   "before": 0.2,
+   "after": 0.3
   },
   "judge_overall": 4.0,
   "gigsim_reply_rate": 1.0,
   "gigsim_hire_rate": 0.3333,
-  "mean_revisions": 3.0,
+  "mean_revisions": 2.6667,
   "per_proposal": {
    "p50_seconds": null,
    "p95_seconds": null,
    "live_proposals": 0,
-   "mean_tokens": 51306,
-   "mean_usd": 0.011781
+   "mean_tokens": 46327,
+   "mean_usd": 0.010543
   },
   "by_persona": {
    "data_analyst": {

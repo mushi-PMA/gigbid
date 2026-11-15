@@ -27,7 +27,7 @@ ARMS = {"A": "writer", "B": "writer_strategy_b"}
 def two_proportion_z(x1: int, n1: int, x2: int, n2: int) -> float:
     pooled = (x1 + x2) / (n1 + n2)
     se = math.sqrt(pooled * (1 - pooled) * (1 / n1 + 1 / n2)) if 0 < pooled < 1 else 0
-    return 2 * (1 - norm.cdf(abs(x1 / n1 - x2 / n2) / se)) if se else 1.0
+    return float(2 * (1 - norm.cdf(abs(x1 / n1 - x2 / n2) / se))) if se else 1.0
 
 
 def main() -> None:
@@ -60,12 +60,12 @@ def main() -> None:
     only_a = sum(1 for j in common if replies["A"][j] and not replies["B"][j])
     only_b = sum(1 for j in common if replies["B"][j] and not replies["A"][j])
     a_hits, b_hits = sum(replies["A"][j] for j in common), sum(replies["B"][j] for j in common)
-    mcnemar = binomtest(only_a, only_a + only_b, 0.5).pvalue if only_a + only_b else 1.0
+    mcnemar = float(binomtest(only_a, only_a + only_b, 0.5).pvalue) if only_a + only_b else 1.0
     result = {"paired_jobs": len(common), "reply_rate_A": round(a_hits / len(common), 4) if common else None,
               "reply_rate_B": round(b_hits / len(common), 4) if common else None, "only_A_replied": only_a,
               "only_B_replied": only_b, "mcnemar_exact_p": round(mcnemar, 4),
               "two_proportion_z_p": round(two_proportion_z(a_hits, len(common), b_hits, len(common)), 4)
-              if common else None, "significant_at_0_05": mcnemar < 0.05, "arms": summaries}
+              if common else None, "significant_at_0_05": bool(mcnemar < 0.05), "arms": summaries}
     print({k: v for k, v in result.items() if k != "arms"})
     write_result("x2_ab_test", result)
 

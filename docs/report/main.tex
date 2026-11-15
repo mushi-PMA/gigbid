@@ -171,7 +171,14 @@ most relevant evidence; B opens with a credentials summary and a numbered plan. 
 test (\file{evals/runners/x2\_ab\_test.py}). Opening type is also stored with each outcome, so outcome memory tells
 the Writer which style wins per category.
 \tablefrom{x2}{A/B test of two proposal strategies (paired, same jobs).}
-\pending{interpretation}
+\textbf{Result} (\file{evals/results/x2\_ab\_test.json}): no detectable difference. On the 12 fixed jobs each strategy
+drafted 8 proposals; 7 jobs have a proposal from both arms, and on those both arms got a reply 6 times out of 7. One
+job replied only to A and one only to B, so the exact McNemar test has two discordant pairs (p = 1.0). The judge
+preferred B slightly (3.75 against 3.63). With two discordant pairs the test cannot detect even a large effect: at a
+reply rate near 86\%, telling apart a ten-point difference would need on the order of a hundred paired jobs, which the
+free tiers could not pay for. What the experiment does show is that the machinery works end to end (strategy as
+configuration, paired drafts, simulated replies, an exact test) and that GigSim's clients, which score skills named,
+post words reused, price and screening answers rather than the order of the letter, are a weak judge of opening style.
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{Failure analysis}
@@ -191,7 +198,10 @@ web-0001, aiml-0002, web-0010 & Matcher credits nearby skills (fit $\ge$ 0.60 at
 aiml-0001, web-0003 & Extractor makes every named tool a requirement, so fit drops & Not yet (same change) & Open \\
 data-0003, web-0005 & Client with unverified payment, no spend, no hires (quality 0.08) & Kept: a policy choice the
 gold label ignores & Label disagreement \\
-aiml-0006 & ``Easy money'' scam skipped for fit, not flagged & Not yet (pay-against-effort rule) & Open \\\bottomrule
+aiml-0006 & ``Easy money'' scam skipped for fit, not flagged & Seven scam rules, a hit is decisive & Scam recall 0.5
+$\to$ 1.0 (dev), 0.667 $\to$ 1.0 (holdout) \\
+4 thin-evidence proposal jobs & Verification removes sentences, the Critic loops on length, the token budget runs out
+& Critic stops when only length is left & Cost per proposal \$0.0102 $\to$ \$0.0092 (dev); the 4 still escalate \\\bottomrule
 \end{tabular}\end{table}
 
 % ------------------------------------------------------------------------------------------------------------------
@@ -221,19 +231,24 @@ instructor's hidden test runs against the live URL.
 \tablefrom{decisions}{Decision quality on the dev set.}
 \textbf{What we missed.} Three of four budgets (\file{evals/results/holdout.json}; latency from the first, fully live
 holdout run, \file{evals/results/archive/holdout\_first\_run\_console.txt}). Analysis cost is inside its budget
-(\$0.00135 against \$0.002 per job), but p95 latency per analysed job is 70.7\,s against 20\,s, p95 per proposal is
-334\,s against 90\,s, and a proposal costs \$0.0118 against \$0.010. Latency is measured as wall-clock time per job,
+(\$0.00134 against \$0.002 per job), but p95 latency per analysed job is 70.7\,s against 20\,s, p95 per proposal is
+334\,s against 90\,s, and a proposal costs \$0.0105 against \$0.010. Latency is measured as wall-clock time per job,
 which on our free tiers includes the time a call waits for a rate-limited lane; we did not separate that wait from
 model time, so we report the number as measured and do not claim the budget is met. The cost miss comes from the
-revision loop: the drafted holdout proposals have a mean revision count of 3.0, and each pass rewrites the whole
-letter; on the dev set the same loop was driven by length after claim verification (\file{docs/FAILURES.md}, row 13).
+revision loop: each pass rewrites the whole letter, and the drafted holdout proposals still average 2.7 revisions.
+Stopping the Critic when length was its only complaint after claim verification cut the holdout cost per proposal
+from \$0.0118 (first run, \file{evals/results/archive/holdout\_first\_run\_console.txt}) to \$0.0105, and on the dev
+set from \$0.0102 to \$0.0092 (\file{docs/FAILURES.md}, row 13); it is not yet enough on the holdout. The latency rows
+come from the first holdout run, made before the Critic stop and the scam rules; the cost and quality rows from the
+final run.
 \textbf{What helped most.} Low reasoning effort for gpt-oss together with a larger output budget for the Fit Matcher:
 it removed every dead letter on the same 30 dev jobs (5 to 0) and raised correct decisions from 19 to 22
 (\file{evals/results/archive/}, \file{evals/results/decisions.json}). Latency is reported only for jobs whose model
 calls all ran live: a call replayed from the evaluation cache takes no time, so the holdout latency above comes from
-the first, fully live holdout run (\file{evals/results/archive/holdout\_first\_run\_console.txt}). The next change
-with the biggest expected gain is to stop the Critic loop when length is its only complaint after verification.
-Decisions held up on unseen jobs: bid F1 0.571, scam recall 0.667 and injection detection 1.000 on the 30 holdout jobs.
+the first, fully live holdout run (\file{evals/results/archive/holdout\_first\_run\_console.txt}). The cheapest
+fix with the largest effect was seven scam rules in the policy pack: scam recall on the 30 holdout jobs rose from 0.667
+to 1.000 (\file{evals/results/holdout.json}; rules alone: 12 of 12 holdout scams, 1 of 138 ordinary posts flagged,
+\file{scam\_rules.json}). Decisions held up on unseen jobs: bid F1 0.571 and injection detection 1.000.
 
 \appendix
 \section{Reproduce}
