@@ -38,11 +38,14 @@ def export() -> None:
     texts = []
     for path in sorted(RESULTS.glob("proposals_*_texts.jsonl")):
         texts += [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    texts = list({t["cover_letter"].strip(): t for t in texts}.values())   # the same letter can appear in two runs
     random.Random(2026).shuffle(texts)
     jobs = {}
     for persona in ("ai_ml_engineer", "fullstack_web_dev", "data_analyst"):
-        for item in json.loads((ROOT / "evals" / "datasets" / f"dev_{persona}.json").read_text(encoding="utf-8")):
-            jobs[item["job"]["job_id"]] = item["job"]
+        for split in ("dev", "holdout"):
+            path = ROOT / "evals" / "datasets" / f"{split}_{persona}.json"
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                jobs[item["job"]["job_id"]] = item["job"]
     with open(LABELS, "w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
         writer.writerow(["item", "job_id", "job_title", "job_post", "proposal", "human_overall"])

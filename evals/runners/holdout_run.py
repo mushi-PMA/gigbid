@@ -11,10 +11,11 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 
 from common.config import load_config
 from evals.runners import decision_eval, proposal_eval
-from evals.runners.common import PERSONAS, enable_cache, write_result
+from evals.runners.common import PERSONAS, RESULTS, enable_cache, write_result
 
 
 def main() -> None:
@@ -25,7 +26,9 @@ def main() -> None:
     enable_cache("holdout")
     declared = load_config()["budgets"]["declared"]
     decisions = asyncio.run(decision_eval.evaluate(PERSONAS, args.decisions, "holdout"))
-    proposals, _ = asyncio.run(proposal_eval.evaluate(PERSONAS, args.proposals, "holdout"))
+    proposals, texts = asyncio.run(proposal_eval.evaluate(PERSONAS, args.proposals, "holdout"))
+    with open(RESULTS / "proposals_holdout_texts.jsonl", "w", encoding="utf-8") as handle:   # judge calibration pool
+        handle.writelines(json.dumps(t) + "\n" for t in texts)
     measured = {"p95_latency_seconds_per_job_analysed": decisions["per_job_analysed"]["p95_seconds"],
                 "p95_latency_seconds_per_proposal": proposals["per_proposal"]["p95_seconds"],
                 "usd_per_job_analysed": decisions["per_job_analysed"]["mean_usd"],
