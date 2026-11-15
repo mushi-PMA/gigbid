@@ -169,6 +169,7 @@ write is a draft you confirm on Upwork.
 | Profile | Frequent nodes | Writer, Critic, Liaison | Where |
 |---|---|---|---|
 | `open` (deployed) | gpt-oss-20b | gpt-oss-120b | hosted open-weight endpoints used as one pool (Groq, NVIDIA, Cerebras, SambaNova free tiers) |
+| `open_large` | gpt-oss-120b | gpt-oss-120b | the live site while the small model's free daily quota is used up (evaluations use `open`) |
 | `open_gemma` | Gemma 4 31B | Gemma 4 31B | second open configuration, compared on the dev set |
 | `open_local` | Qwen3 4B | Qwen3 8B | Ollama service in compose, no GPU needed |
 

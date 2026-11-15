@@ -72,6 +72,24 @@ models:
         gigsim_client: large
         tool_agent: large       # R&D question A and the single-agent baselines
       fallback: large           # a cheap node whose model keeps failing moves up to the large model
+    open_large:                 # live site when the small model's free daily quota is used up: every node on gpt-oss-120b
+      provider: pool            # (same prompts and graph; costs more per call; the evaluations use `open`)
+      nodes:
+        scout: large
+        analyst: large
+        risk_assessor: large
+        fit_matcher: large
+        pricing: large
+        writer: large
+        verifier: large
+        critic: large
+        compliance: large
+        client_liaison: large
+        intent: large
+        rag_helper: large
+        judge: large
+        gigsim_client: large
+        tool_agent: large
     open_gemma:                 # second open configuration compared on the dev set (evals/runners/model_comparison.py)
       provider: pool
       nodes:
