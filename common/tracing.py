@@ -60,12 +60,21 @@ def tracer() -> trace.Tracer:
 
 @contextmanager
 def span(name: str, kind: str = "CHAIN", **attributes: Any) -> Iterator[trace.Span]:
-    with tracer().start_as_current_span(name) as current:
+    with tracer().start_as_current_span(name, record_exception=False, set_status_on_exception=False) as current:
         current.set_attribute("openinference.span.kind", kind)
         for key, value in attributes.items():
             if value is not None:
                 current.set_attribute(key, mask_pii(value) if isinstance(value, str) else value)
-        yield current
+        try:
+            yield current
+        except BaseException as error:
+            # a LangGraph interrupt is the graph pausing for a human, not a failure: no red error span for it
+            if any(k.__name__ == "GraphBubbleUp" for k in type(error).__mro__):
+                current.add_event("paused for human approval")
+            else:
+                current.record_exception(error)
+                current.set_status(trace.Status(trace.StatusCode.ERROR, f"{type(error).__name__}: {error}"[:300]))
+            raise
 
 
 def record_llm_call(*, node: str, model: str, input_tokens: int, output_tokens: int, usd: float, seconds: float,
