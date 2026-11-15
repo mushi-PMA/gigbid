@@ -196,10 +196,18 @@ def _record(run_id: str, user_id: str, kind: str, job_id: str | None, seconds: f
 # ---------------------------------------------------------------------------------------------------------
 
 
+async def fresh_thread(compiled, config: dict) -> None:
+    """A new analysis of a job starts from a clean thread: the old run's step, token and revision counters and its
+    critiques would otherwise add to the new run and trip its budgets."""
+    if (await compiled.aget_state(config)).values:
+        await compiled.checkpointer.adelete_thread(config["configurable"]["thread_id"])
+
+
 async def run_bid(user_id: str, persona: str, job: Job, settings: dict | None = None,
                   duplicate_of: str | None = None) -> dict[str, Any]:
     thread_id = bid_thread_id(user_id, job.job_id)
     config = _config(thread_id, user_id, persona, settings, {"duplicate_of": duplicate_of})
+    await fresh_thread(await graph("bid"), config)
     inputs = {"user_id": user_id, "persona": persona, "job": job, "status": "running"}
     return await _drive("bid", thread_id, inputs, config, user_id, job.job_id)
 
