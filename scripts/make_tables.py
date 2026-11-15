@@ -171,9 +171,22 @@ def holdout() -> str:
     h = load("holdout")
     if not h:
         return PENDING
-    rows = [[k.replace("_", " "), fmt(h["declared"][k], 4), fmt(h["measured"][k], 4),
-             "met" if h["within_budget"][k] else "missed"] for k in h["declared"]]
-    return table(["Budget", "Declared", "Measured (holdout)", "Verdict"], rows)
+    # latency needs live model calls: when the result file comes from a replay of the cache, the latency of the
+    # first, fully live holdout run is read from its archived console output
+    console = RESULTS / "archive" / "holdout_first_run_console.txt"
+    live = dict(re.findall(r"^(\w+): declared [\d.]+, measured ([\d.]+)", console.read_text(encoding="utf-8"), re.M)) \
+        if console.exists() else {}
+    rows, from_archive = [], False
+    for k in h["declared"]:
+        measured = h["measured"][k]
+        if measured is None and k in live:
+            measured, from_archive = float(live[k]), True
+        verdict = "not measured" if measured is None else "met" if measured <= h["declared"][k] else "missed"
+        rows.append([k.replace("_", " "), fmt(h["declared"][k], 4), fmt(measured, 4), verdict])
+    note = ("\n\nLatency rows come from the first holdout run, whose model calls were all live "
+            "(`evals/results/archive/holdout_first_run_console.txt`); the other rows from `holdout.json`."
+            if from_archive else "")
+    return table(["Budget", "Declared", "Measured (holdout)", "Verdict"], rows) + note
 
 
 def ablation() -> str:
