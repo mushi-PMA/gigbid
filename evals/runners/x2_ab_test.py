@@ -45,9 +45,8 @@ def main() -> None:
             os.environ["WRITER_STRATEGY"] = strategy
             load_config.cache_clear()
             summary, proposals = await proposal_eval.evaluate(PERSONAS, args.per_persona, "dev")
-            if arm == "B":  # arm A writes the same letters as proposals_best; B's join the judge calibration pool
-                with open(RESULTS / "proposals_x2_B_texts.jsonl", "w", encoding="utf-8") as handle:
-                    handle.writelines(json.dumps(p) + "\n" for p in proposals)
+            with open(RESULTS / f"proposals_x2_{arm}_texts.jsonl", "w", encoding="utf-8") as handle:  # judge pool
+                handle.writelines(json.dumps(p) + "\n" for p in proposals)
             summaries[arm] = {**{k: v for k, v in summary.items() if k != "rows"},
                               "jobs": [{k: r.get(k) for k in ("job_id", "status", "drafted", "replied")}
                                        for r in summary["rows"]]}

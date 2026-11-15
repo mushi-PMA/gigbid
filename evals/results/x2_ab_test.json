@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_at": "2026-11-15T10:07:58.114875+00:00",
-  "commit": "2bcc2ae",
+  "generated_at": "2026-11-15T10:09:37.529811+00:00",
+  "commit": "0b420dc",
   "model_profile": "open",
   "rag_variant": "v2_v4",
   "embedding_model": "BAAI/bge-small-en-v1.5",

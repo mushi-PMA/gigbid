@@ -10,11 +10,12 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import os
 
 from common.config import load_config
 from evals.runners import decision_eval, proposal_eval
-from evals.runners.common import PERSONAS, enable_cache, write_result
+from evals.runners.common import PERSONAS, RESULTS, enable_cache, write_result
 
 PROFILES = ["open", "open_gemma"]
 
@@ -30,7 +31,9 @@ def main() -> None:
         os.environ["MODEL_PROFILE"] = profile
         load_config.cache_clear()
         decisions = asyncio.run(decision_eval.evaluate(PERSONAS, args.decisions, "dev"))
-        proposals, _ = asyncio.run(proposal_eval.evaluate(PERSONAS, args.proposals, "dev"))
+        proposals, texts = asyncio.run(proposal_eval.evaluate(PERSONAS, args.proposals, "dev"))
+        with open(RESULTS / f"proposals_model_{profile}_texts.jsonl", "w", encoding="utf-8") as handle:  # judge pool
+            handle.writelines(json.dumps(t) + "\n" for t in texts)
         results[profile] = {
             "bid_or_skip_f1": decisions["bid_or_skip"]["f1"], "scam_recall": decisions["scam_detection"]["recall"],
             "price_inside_fair_band": decisions["price_inside_fair_band"],
