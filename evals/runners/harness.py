@@ -14,13 +14,13 @@ import os
 import time
 from typing import Any
 
-from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.store.memory import InMemoryStore
 from langgraph.types import Command
 
 from agent.graphs.bid_graph import compile_bid_graph
 from agent.handoffs import Job
 from agent.inmemory import tools_factory
+from agent.memory.store import memory_saver
 from common.config import ROOT
 from common.llm import start_usage
 from common.security import mint_approval_token, payload_hash
@@ -140,7 +140,7 @@ def install(market: EvalMarketplace, persona: str) -> None:
 
 async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, graph=None) -> dict[str, Any]:
     """Run one job through the bid graph; optionally approve the draft unchanged (simulated human)."""
-    graph = graph or compile_bid_graph(InMemorySaver(), InMemoryStore())
+    graph = graph or compile_bid_graph(memory_saver(), InMemoryStore())
     thread = f"eval:{persona}:{job['job_id']}"
     config = {
         "configurable": {

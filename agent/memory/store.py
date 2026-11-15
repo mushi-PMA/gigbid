@@ -27,19 +27,37 @@ def get_store() -> BaseStore:
     return store
 
 
+@lru_cache(maxsize=1)
+def serde():
+    """Checkpoint serializer that may load exactly GigBid's own state types. LangGraph is moving to a strict
+    allow-list for objects restored from checkpoints; without this, resuming a saved thread would break."""
+    from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+    from pydantic import BaseModel
+
+    from agent import handoffs
+
+    allowed = [("agent.handoffs", name) for name, value in vars(handoffs).items()
+               if isinstance(value, type) and issubclass(value, BaseModel) and value.__module__ == "agent.handoffs"]
+    return JsonPlusSerializer(allowed_msgpack_modules=allowed)
+
+
+def memory_saver():
+    from langgraph.checkpoint.memory import InMemorySaver
+
+    return InMemorySaver(serde=serde())
+
+
 async def get_checkpointer():
     """Async Postgres checkpointer (durable threads); in-memory saver without a database."""
     url = os.environ.get("DATABASE_URL")
     if not url or os.environ.get("CHECKPOINTER") == "memory":
-        from langgraph.checkpoint.memory import InMemorySaver
-
-        return InMemorySaver()
+        return memory_saver()
     from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
     from psycopg import AsyncConnection
     from psycopg.rows import dict_row
 
     conn = await AsyncConnection.connect(url.replace("+psycopg", ""), autocommit=True, prepare_threshold=0,
                                          row_factory=dict_row)
-    saver = AsyncPostgresSaver(conn)
+    saver = AsyncPostgresSaver(conn, serde=serde())
     await saver.setup()
     return saver

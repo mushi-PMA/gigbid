@@ -5,12 +5,12 @@ from __future__ import annotations
 import json
 
 import pytest
-from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.store.memory import InMemoryStore
 from langgraph.types import Command
 
 from agent.graphs.bid_graph import compile_bid_graph
 from agent.handoffs import Job
+from agent.memory.store import memory_saver
 from common.payloads import edited_payload
 from common.security import mint_approval_token, payload_hash
 from tests.harness import FakeMarketplace, tools_factory
@@ -174,7 +174,7 @@ def approve(request: dict, action="approve", **edit) -> dict:
 
 async def test_scam_is_skipped_without_writing(env, scripted_llm):
     scripted_llm(replies(scam=True))
-    graph = compile_bid_graph(InMemorySaver(), InMemoryStore())
+    graph = compile_bid_graph(memory_saver(), InMemoryStore())
     state = await graph.ainvoke(start("j-scam"), config("t-scam"))
     assert state["status"] == "skipped" and state["decision"].action == "skip"
     assert "draft" not in state and not env.proposals
@@ -182,7 +182,7 @@ async def test_scam_is_skipped_without_writing(env, scripted_llm):
 
 async def test_approval_then_exactly_once_submission_after_crash(env, scripted_llm):
     scripted_llm(replies())
-    saver, store = InMemorySaver(), InMemoryStore()
+    saver, store = memory_saver(), InMemoryStore()
     graph = compile_bid_graph(saver, store)
     await graph.ainvoke(start("j-good"), config("t-good"))
     snapshot = await graph.aget_state(config("t-good"))
@@ -203,7 +203,7 @@ async def test_approval_then_exactly_once_submission_after_crash(env, scripted_l
 
 async def test_critic_sends_back_at_most_twice(env, scripted_llm):
     scripted_llm(replies(critic_approves=False))
-    graph = compile_bid_graph(InMemorySaver(), InMemoryStore())
+    graph = compile_bid_graph(memory_saver(), InMemoryStore())
     await graph.ainvoke(start("j-good"), config("t-critic"))
     state = (await graph.aget_state(config("t-critic"))).values
     writer_runs = [t for t in state["trace"] if t["node"] == "writer"]
@@ -213,7 +213,7 @@ async def test_critic_sends_back_at_most_twice(env, scripted_llm):
 
 async def test_compliance_can_block(env, scripted_llm):
     scripted_llm(replies(compliance_allowed=False))
-    graph = compile_bid_graph(InMemorySaver(), InMemoryStore())
+    graph = compile_bid_graph(memory_saver(), InMemoryStore())
     state = await graph.ainvoke(start("j-good"), config("t-block"))
     assert state["status"] == "blocked" and "no_free_work" in state["status_reason"]
 
@@ -221,7 +221,7 @@ async def test_compliance_can_block(env, scripted_llm):
 async def test_marketplace_down_moves_job_to_needs_attention(env, scripted_llm):
     scripted_llm(replies())
     env.down = True
-    graph = compile_bid_graph(InMemorySaver(), InMemoryStore())
+    graph = compile_bid_graph(memory_saver(), InMemoryStore())
     job = Job(job_id="j-good", title="", description="")  # intake must fetch the full job, and the marketplace is down
     state = await graph.ainvoke({**start("j-good"), "job": job}, config("t-down"))
     assert state["status"] == "needs_attention" and "marketplace_unavailable" in state["status_reason"]
@@ -230,7 +230,7 @@ async def test_marketplace_down_moves_job_to_needs_attention(env, scripted_llm):
 async def test_edit_is_rechecked_learned_and_submitted(env, scripted_llm):
     scripted_llm(replies())
     store = InMemoryStore()
-    graph = compile_bid_graph(InMemorySaver(), store)
+    graph = compile_bid_graph(memory_saver(), store)
     await graph.ainvoke(start("j-good"), config("t-edit"))
     request = (await graph.aget_state(config("t-edit"))).tasks[0].interrupts[0].value
     edited = LETTER.split(". ", 1)[1]  # the freelancer cuts the opening sentence
