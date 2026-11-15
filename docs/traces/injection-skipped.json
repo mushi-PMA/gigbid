@@ -1,0 +1,326 @@
+[
+ {
+  "id": "U3Bhbjo2OTEx",
+  "name": "run.bid",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "fe64dd41058272f3"
+  },
+  "span_kind": "CHAIN",
+  "parent_id": null,
+  "start_time": "2026-11-15T10:44:26.965125+00:00",
+  "end_time": "2026-11-15T10:44:28.418836+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "gigbid.status": "skipped",
+   "user_id": "u-9e5ad7d2f0",
+   "thread_id": "bid:u-9e5ad7d2f0:gs-0746"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2ODk2",
+  "name": "node.scout",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "5fa7f67a6f7cb4b3"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "fe64dd41058272f3",
+  "start_time": "2026-11-15T10:44:26.967866+00:00",
+  "end_time": "2026-11-15T10:44:26.967901+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "scout"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA5",
+  "name": "node.analyst",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "2d23374a5d3212ae"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "fe64dd41058272f3",
+  "start_time": "2026-11-15T10:44:26.971220+00:00",
+  "end_time": "2026-11-15T10:44:28.404194+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "analyst"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2ODk5",
+  "name": "node.risk_assessor",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "1e9232e4f646b44d"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "fe64dd41058272f3",
+  "start_time": "2026-11-15T10:44:26.971355+00:00",
+  "end_time": "2026-11-15T10:44:27.329714+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "risk_assessor"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2ODk3",
+  "name": "tool.get_client_history",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "7fa567030ff71054"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "1e9232e4f646b44d",
+  "start_time": "2026-11-15T10:44:26.971773+00:00",
+  "end_time": "2026-11-15T10:44:27.047457+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "get_client_history",
+   "agent": "risk_assessor"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA3",
+  "name": "node.fit_matcher",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "82b3f81bc4f18621"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "fe64dd41058272f3",
+  "start_time": "2026-11-15T10:44:26.983611+00:00",
+  "end_time": "2026-11-15T10:44:28.131034+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2ODk4",
+  "name": "llm.risk_assessor",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "1a36bb4f861df96b"
+  },
+  "span_kind": "LLM",
+  "parent_id": "1e9232e4f646b44d",
+  "start_time": "2026-11-15T10:44:27.329305+00:00",
+  "end_time": "2026-11-15T10:44:27.329335+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "llm.cost.total": 0.00029115,
+   "llm.model_name": "gpt-oss-120b",
+   "llm.token_count.total": 1176,
+   "llm.token_count.prompt": 921,
+   "llm.token_count.completion": 255,
+   "gigbid.node": "risk_assessor",
+   "gigbid.cached": false,
+   "gigbid.latency_seconds": 0.2694041319991811
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTAw",
+  "name": "llm.rag_helper",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "3154c1827da09691"
+  },
+  "span_kind": "LLM",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.410085+00:00",
+  "end_time": "2026-11-15T10:44:27.410114+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "llm.cost.total": 0.0001608,
+   "llm.model_name": "gpt-oss-120b",
+   "llm.token_count.total": 538,
+   "llm.token_count.prompt": 360,
+   "llm.token_count.completion": 178,
+   "gigbid.node": "rag_helper",
+   "gigbid.cached": false,
+   "gigbid.latency_seconds": 0.4258046460017795
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA0",
+  "name": "tool.search_evidence",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "c6f491f2d2b82afd"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.410372+00:00",
+  "end_time": "2026-11-15T10:44:27.719773+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "search_evidence",
+   "agent": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTAz",
+  "name": "tool.search_evidence",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "5d734b023dc64b16"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.416957+00:00",
+  "end_time": "2026-11-15T10:44:27.719653+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "search_evidence",
+   "agent": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA1",
+  "name": "tool.search_evidence",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "19bc2fa7e3c6c3d5"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.422913+00:00",
+  "end_time": "2026-11-15T10:44:27.719855+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "search_evidence",
+   "agent": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTAx",
+  "name": "tool.search_evidence",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "60edfd0aa31932db"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.428770+00:00",
+  "end_time": "2026-11-15T10:44:27.692866+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "search_evidence",
+   "agent": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTAy",
+  "name": "tool.search_evidence",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "c3e8671b73d6bbec"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:27.434917+00:00",
+  "end_time": "2026-11-15T10:44:27.719564+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "search_evidence",
+   "agent": "fit_matcher"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA2",
+  "name": "llm.fit_matcher",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "5fab68b99fad5964"
+  },
+  "span_kind": "LLM",
+  "parent_id": "82b3f81bc4f18621",
+  "start_time": "2026-11-15T10:44:28.130795+00:00",
+  "end_time": "2026-11-15T10:44:28.130823+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "llm.cost.total": 0.0006387000000000001,
+   "llm.model_name": "gpt-oss-120b",
+   "llm.token_count.total": 2584,
+   "llm.token_count.prompt": 2026,
+   "llm.token_count.completion": 558,
+   "gigbid.node": "fit_matcher",
+   "gigbid.cached": false,
+   "gigbid.latency_seconds": 0.4093093300034525
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTA4",
+  "name": "llm.analyst",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "27285a6b8d8222a3"
+  },
+  "span_kind": "LLM",
+  "parent_id": "2d23374a5d3212ae",
+  "start_time": "2026-11-15T10:44:28.403964+00:00",
+  "end_time": "2026-11-15T10:44:28.403993+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "llm.cost.total": 0.0004356,
+   "llm.model_name": "openai/gpt-oss-120b",
+   "llm.token_count.total": 1398,
+   "llm.token_count.prompt": 896,
+   "llm.token_count.completion": 502,
+   "gigbid.node": "analyst",
+   "gigbid.cached": false,
+   "gigbid.latency_seconds": 1.430269156997383
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo2OTEw",
+  "name": "node.decide",
+  "context": {
+   "trace_id": "b6e9bc11e285b9ffd5b9881dec2445fc",
+   "span_id": "bcfa150fad765a58"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "fe64dd41058272f3",
+  "start_time": "2026-11-15T10:44:28.406840+00:00",
+  "end_time": "2026-11-15T10:44:28.406900+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "decide"
+  },
+  "events": []
+ }
+]

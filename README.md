@@ -129,7 +129,7 @@ A run that crashed on a provider rate limit is left out of every number in its r
 | usd per proposal | 0.0100 | 0.0094 | met |
 <!-- /results:holdout -->
 
-Full results: [docs/RESULTS.md](docs/RESULTS.md). Public traces: <!-- traces -->added at deployment<!-- /traces -->
+Full results: [docs/RESULTS.md](docs/RESULTS.md). Public traces: <!-- traces -->[approved proposal](docs/traces/README.md#one-job-from-analysis-to-a-draft-waiting-for-approval), [Critic loop](docs/traces/README.md#the-critic-sends-a-draft-back-twice), [scam caught](docs/traces/README.md#a-scam-caught-and-skipped), [injection ignored](docs/traces/README.md#an-injected-instruction-ignored), [client reply](docs/traces/README.md#a-client-reply-handled) (exported from Phoenix on the live site)<!-- /traces -->
 
 ### RÃ©sumÃ© line
 

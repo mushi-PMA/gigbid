@@ -229,7 +229,17 @@ def fit_summary(job_post: str) -> str:
 def main() -> None:
     import sys
 
-    mcp.run(transport="stdio" if "--stdio" in sys.argv or not AUTH else "streamable-http")
+    stdio = "--stdio" in sys.argv or not AUTH
+    if stdio:
+        # Load the retriever (model, index) before stdio starts: on Windows the first load inside a worker thread
+        # hangs while the transport blocks on stdin, and it also keeps the first search from timing out the host.
+        from rag.retriever import Retriever
+
+        try:
+            Retriever(_persona()[1]).search_text("warm up", 1)
+        except Exception as error:  # a missing persona folder is reported by the tools themselves
+            print(f"portfolio: retriever not ready ({error})", file=sys.stderr)
+    mcp.run(transport="stdio" if stdio else "streamable-http")
 
 
 if __name__ == "__main__":

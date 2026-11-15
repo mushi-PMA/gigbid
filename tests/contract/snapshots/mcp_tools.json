@@ -112,7 +112,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -168,7 +195,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -214,7 +268,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -270,7 +351,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -332,7 +440,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -378,7 +513,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -438,7 +600,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -494,7 +683,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -540,7 +756,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -586,7 +829,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -676,7 +946,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -763,7 +1060,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {
@@ -857,7 +1181,34 @@
       "type": "object"
      },
      "detail": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "items": {
+         "anyOf": [
+          {
+           "additionalProperties": true,
+           "type": "object"
+          },
+          {
+           "type": "string"
+          }
+         ]
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
       "default": null,
+      "description": "Why it failed: a message, or the marketplace's own error body",
       "title": "Detail"
      },
      "error": {

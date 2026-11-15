@@ -170,7 +170,8 @@ class ToolResult(BaseModel):
     ok: bool
     data: dict[str, Any] = Field(default_factory=dict)
     error: str = ""
-    detail: Any = None
+    detail: str | dict[str, Any] | list[dict[str, Any] | str] | None = Field(
+        None, description="Why it failed: a message, or the marketplace's own error body")
     retryable: bool = False
 
 

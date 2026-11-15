@@ -1,0 +1,96 @@
+[
+ {
+  "id": "U3Bhbjo3NDM0",
+  "name": "run.bid",
+  "context": {
+   "trace_id": "02d4cd5e5d9d91a2cdb5a65eb5859a67",
+   "span_id": "cf477165648362bf"
+  },
+  "span_kind": "CHAIN",
+  "parent_id": null,
+  "start_time": "2026-11-15T11:11:27.220729+00:00",
+  "end_time": "2026-11-15T11:11:27.373513+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "gigbid.status": "submitted",
+   "user_id": "u-9e5ad7d2f0",
+   "thread_id": "bid:u-9e5ad7d2f0:gs-0654"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo3NDMw",
+  "name": "node.approval",
+  "context": {
+   "trace_id": "02d4cd5e5d9d91a2cdb5a65eb5859a67",
+   "span_id": "17113dd6f4f2acdf"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "cf477165648362bf",
+  "start_time": "2026-11-15T11:11:27.226120+00:00",
+  "end_time": "2026-11-15T11:11:27.226302+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "approval"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo3NDMz",
+  "name": "node.submit",
+  "context": {
+   "trace_id": "02d4cd5e5d9d91a2cdb5a65eb5859a67",
+   "span_id": "a50be3de89c3af5d"
+  },
+  "span_kind": "AGENT",
+  "parent_id": "cf477165648362bf",
+  "start_time": "2026-11-15T11:11:27.228920+00:00",
+  "end_time": "2026-11-15T11:11:27.364198+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "node": "submit"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo3NDMx",
+  "name": "tool.create_proposal_draft",
+  "context": {
+   "trace_id": "02d4cd5e5d9d91a2cdb5a65eb5859a67",
+   "span_id": "596eece454ebd3a4"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "a50be3de89c3af5d",
+  "start_time": "2026-11-15T11:11:27.229130+00:00",
+  "end_time": "2026-11-15T11:11:27.293871+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "create_proposal_draft",
+   "agent": "submitter"
+  },
+  "events": []
+ },
+ {
+  "id": "U3Bhbjo3NDMy",
+  "name": "tool.submit_proposal",
+  "context": {
+   "trace_id": "02d4cd5e5d9d91a2cdb5a65eb5859a67",
+   "span_id": "8ff70a6d67dce54b"
+  },
+  "span_kind": "TOOL",
+  "parent_id": "a50be3de89c3af5d",
+  "start_time": "2026-11-15T11:11:27.294067+00:00",
+  "end_time": "2026-11-15T11:11:27.358930+00:00",
+  "status_code": "UNSET",
+  "status_message": "",
+  "attributes": {
+   "tool": "submit_proposal",
+   "agent": "submitter"
+  },
+  "events": []
+ }
+]
