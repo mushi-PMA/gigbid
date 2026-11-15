@@ -58,7 +58,9 @@ export function JobDetail() {
       <div role="alert">{problem && <p className="error-text">{problem}</p>}</div>
       <p className="meta">
         <span className={`badge status-${data.status ?? 'new'}`}>{label(data.status ?? 'new')}</span>
-        {data.status_reason && <span className="job-reason" title={data.status_reason}>{data.status_reason}</span>}
+        {data.status_reason && !data.status_reason.startsWith(label(data.status ?? '')) && (
+          <span className="job-reason" title={data.status_reason}>{data.status_reason}</span>
+        )}
       </p>
 
       {!spec && !fit && <EmptyState title="Not analysed yet">Analyze to check risks and score your fit.</EmptyState>}

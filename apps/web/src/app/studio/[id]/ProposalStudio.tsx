@@ -208,10 +208,9 @@ function StudioEditor({ threadId, request }: { threadId: string; request: Propos
             )}
             <ul className="plain-list">
               {request.claims.map((claim) => (
-                <li key={claim.text} className="claim-row">
-                  <span className={`status-dot ${claim.status}`} title={label(claim.status)} aria-hidden="true" />
+                <li key={claim.text} className="claim-row" title={claim.reason || label(claim.status)}>
+                  <span className={`status-dot ${claim.status}`} aria-hidden="true" />
                   <span><span className="sr-only">{label(claim.status)}: </span>{claim.text}</span>
-                  {claim.reason && <details className="disclosure claim-reason"><summary>Why</summary>{claim.reason}</details>}
                 </li>
               ))}
             </ul>

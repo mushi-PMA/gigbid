@@ -11,6 +11,9 @@ interface Props {
 
 const CITATION = /\[([A-Za-z0-9_.:-]+)\]/g
 
+/** The readable end of an evidence id: ai_ml_engineer:proposal:prop-aiml-025 shows as prop-aiml-025. */
+const shortId = (id: string) => id.split(':').pop() ?? id
+
 /** Text with each citation shown as a chip that reveals its evidence. Inside a claim the chip is plain text. */
 function withCitations(text: string, evidence: Map<string, Evidence>, interactive: boolean): ReactNode[] {
   const parts: ReactNode[] = []
@@ -24,11 +27,11 @@ function withCitations(text: string, evidence: Map<string, Evidence>, interactiv
         match[0]
       ) : interactive ? (
         <EvidenceHover key={start} className="chip citation" evidence={[found]}>
-          {match[0]}
+          {shortId(match[1])}
         </EvidenceHover>
       ) : (
         <span key={start} className="chip citation">
-          {match[0]}
+          {shortId(match[1])}
         </span>
       ),
     )

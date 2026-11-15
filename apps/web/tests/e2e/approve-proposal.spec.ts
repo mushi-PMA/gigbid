@@ -11,7 +11,7 @@ test('approving a proposal shows evidence on hover and sends action=approve', as
   await expect(page.getByRole('heading', { name: /Proposal for Churn prediction/ })).toBeVisible()
 
   // Hover on a citation shows the evidence behind it.
-  await page.getByText('[persona:cs:cs-aiml-03]').hover()
+  await page.getByText('cs-aiml-03', { exact: true }).hover()
   const tooltip = page.getByRole('tooltip')
   await expect(tooltip).toBeVisible()
   await expect(tooltip).toContainText('Churn model for a retailer')

@@ -6,7 +6,7 @@ interface Props {
   evidence: Evidence[]
 }
 
-const strengthText = { strong: 'Strong match', partial: 'Partial match', none: 'No match' }
+const strengthText = { strong: 'Strong', partial: 'Partial', none: 'None' }
 
 /** Each job requirement next to the portfolio evidence that answers it. Hover or focus an id to read it. */
 export function RequirementMatrix({ matches, evidence }: Props) {
@@ -25,10 +25,10 @@ export function RequirementMatrix({ matches, evidence }: Props) {
         </thead>
         <tbody>
           {matches.map((match) => (
-            <tr key={match.requirement_id}>
+            <tr key={match.requirement_id} title={match.reason || undefined}>
               <td>
                 {match.requirement}
-                {match.reason && <div className="muted small">{match.reason}</div>}
+                {match.reason && <span className="sr-only">. {match.reason}</span>}
               </td>
               <td>
                 <span className={`badge strength-${match.strength}`}>{strengthText[match.strength]}</span>
@@ -39,7 +39,7 @@ export function RequirementMatrix({ matches, evidence }: Props) {
                   const item = byId.get(id)
                   return (
                     <EvidenceHover key={id} className="chip" evidence={item ? [item] : []}>
-                      {id}
+                      {id.split(':').pop()}
                     </EvidenceHover>
                   )
                 })}

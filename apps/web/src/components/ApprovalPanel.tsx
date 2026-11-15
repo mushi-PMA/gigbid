@@ -63,20 +63,22 @@ export function ApprovalPanel({ threadId, dryRun, editedText, editedAnswers = nu
       <h2 id="approval-heading">Your decision</h2>
       {dryRun && (
         <div className="dry-run">
-          <h3>Preview of exactly what will be sent</h3>
           <p>
             Connects cost: <strong>{typeof connects === 'number' ? connects : (connects ?? 'unknown')}</strong>
           </p>
-          <pre className="preview" aria-label="Message preview">
-            {editedText ?? previewText(dryRun)}
-          </pre>
-          <details>
-            <summary>Full marketplace preview</summary>
-            <pre>{JSON.stringify(dryRun.marketplace ?? dryRun.payload ?? dryRun.would_send, null, 2)}</pre>
+          <details className="disclosure">
+            <summary>Preview exactly what will be sent</summary>
+            <pre className="preview" aria-label="Message preview">
+              {editedText ?? previewText(dryRun)}
+            </pre>
+            <details className="disclosure" style={{ marginTop: 10 }}>
+              <summary>Marketplace payload</summary>
+              <pre className="preview">{JSON.stringify(dryRun.marketplace ?? dryRun.payload ?? dryRun.would_send, null, 2)}</pre>
+            </details>
           </details>
         </div>
       )}
-      <p className="muted small">Nothing is sent until you approve. GigBid never sends on its own.</p>
+      <p className="muted small">Nothing is sent until you approve.</p>
       {edited && <p className="note">You changed the text. Approving will send your edited version.</p>}
       <div className="button-row">
         <button type="button" className="primary" disabled={busy} onClick={approve}>
