@@ -37,6 +37,20 @@ exact payload.
 Every call to the marketplace server is written to the append-only audit log (user, tool, PII-masked arguments,
 result, trace id); the Postgres table rejects UPDATE and DELETE with a trigger.
 
+## MCP Inspector screenshots
+
+Each server run over stdio in the official MCP Inspector (v2.13.0), against a local GigSim:
+
+| Server | Tools and annotations | A real call |
+|---|---|---|
+| Portfolio | [tools](images/inspector/portfolio-tools.png) (all read-only and idempotent) | [search_evidence result](images/inspector/portfolio-call.png), [portfolio://cv resource](images/inspector/portfolio-resource.png) |
+| Marketplace | [submit_proposal](images/inspector/marketplace-submit.png) (destructive, idempotent, open world; needs the approved payload and an approval token) | [search_jobs result](images/inspector/marketplace-call.png) |
+| Workspace | [tools](images/inspector/workspace-tools.png) | [call result](images/inspector/workspace-call.png) |
+
+Running them this way found two real problems, both fixed: the first `search_evidence` over stdio never answered on
+Windows (`docs/FAILURES.md`, row 16), and the Inspector's schema check flagged the untyped `detail` field in every
+marketplace result, which some MCP clients mishandle.
+
 ## Third-party servers
 
 | Server | Used for | Tools we call | Trust rationale |
