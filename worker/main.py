@@ -13,6 +13,7 @@ from worker import tasks
 
 async def startup(ctx: dict) -> None:
     setup_tracing("worker")
+    await tasks.recover_interrupted(ctx)
 
 
 class WorkerSettings:

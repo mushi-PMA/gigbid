@@ -186,6 +186,29 @@ def _expire_silent(user_id: str, store) -> None:
             record_outcome(store, user_id, row["proposal_id"], features.value, "no_reply")
 
 
+async def recover_interrupted(ctx: dict) -> int:
+    """On worker start: clear the locks a stopped worker process left behind and queue its unfinished analyses
+    again (one worker per deployment; analysis is idempotent and submission has its own idempotency keys). Without
+    this, a redeploy in the middle of an analysis leaves jobs waiting until the old locks expire."""
+    from apps.api.tasks import enqueue
+
+    redis = ctx.get("redis")
+    if redis is not None:
+        async for key in redis.scan_iter(match="arq:in-progress:*"):
+            await redis.delete(key)
+    if not os.environ.get("DATABASE_URL"):
+        return 0
+    rows = db.fetch_all("SELECT user_id, job_id, summary FROM jobs_seen WHERE status = 'running'")
+    for row in rows:
+        if "job" not in (row["summary"] or {}):
+            continue
+        db.execute("UPDATE jobs_seen SET status = 'queued' WHERE user_id = %s AND job_id = %s",
+                   (row["user_id"], row["job_id"]))
+        await enqueue("analyze_job", row["user_id"], row["summary"]["job"], None,
+                      job_id=f"analyze:{row['user_id']}:{row['job_id']}")
+    return len(rows)
+
+
 async def requeue_degraded(ctx: dict) -> int:
     """Jobs stopped by an unavailable marketplace are retried once it answers again (degraded-mode recovery)."""
     from agent.mcp_client import server_health
