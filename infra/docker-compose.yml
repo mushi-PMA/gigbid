@@ -82,6 +82,8 @@ services:
     environment:
       GIGSIM_DB: /data/gigsim.db
       GIGSIM_ERROR_RATE: ${GIGSIM_ERROR_RATE:-0.02}
+      # simulated clock: 8 Nov shows about half the live jobs (policy v2 already in force); the rest arrive in real time
+      GIGSIM_START: ${GIGSIM_START:-2026-11-08T00:00:00Z}
       GIGSIM_ADMIN_TOKEN: ${GIGSIM_ADMIN_TOKEN:-}
       GIGSIM_LLM: ${GIGSIM_LLM:-on}
       MODEL_PROFILE: ${MODEL_PROFILE:-open}

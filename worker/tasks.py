@@ -67,7 +67,9 @@ async def scout_user(ctx: dict, user_id: str, force: bool = False) -> dict[str, 
               for r in db.fetch_all("SELECT job_id, content_hash, summary FROM jobs_seen WHERE user_id = %s "
                                     "ORDER BY first_seen DESC LIMIT 500", (user_id,))]
     try:
-        new, duplicates = await scout_search(port, due, settings.get("last_scout_time"), known, recent)
+        # no `since` filter: our clock and the marketplace's can differ (GigSim runs a simulated clock), and jobs
+        # already seen are skipped by id and content anyway; each search returns the newest jobs first
+        new, duplicates = await scout_search(port, due, None, known, recent)
     except ServerUnavailable as error:
         return {"error": f"marketplace unavailable: {error}"}
     from apps.api.tasks import enqueue
