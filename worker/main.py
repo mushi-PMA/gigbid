@@ -4,6 +4,8 @@ Run: arq worker.main.WorkerSettings
 """
 from __future__ import annotations
 
+import os
+
 from arq import cron
 from arq.connections import RedisSettings
 
@@ -25,6 +27,6 @@ class WorkerSettings:
     ]
     on_startup = startup
     redis_settings = RedisSettings.from_dsn(tasks.worker_redis_url())
-    max_jobs = 4
+    max_jobs = int(os.environ.get("WORKER_MAX_JOBS", "4"))   # lower on free model tiers: fewer runs share the quota
     job_timeout = 900
     keep_result = 3600
