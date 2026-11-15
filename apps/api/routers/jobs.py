@@ -59,8 +59,10 @@ async def job_detail(job_id: str, user: dict = CurrentUser) -> JobDetail:
     thread = await runner.get_thread(thread_id, user["user_id"], user["persona"])
     values = thread["values"]
     job = values.get("job")
+    fresh = row["status"] in ("queued", "running")      # a new run is on its way: the thread still holds the old one
     return JobDetail(job=_dump(job) if job else row["summary"].get("job", {}), thread_id=thread_id,
-                     status=values.get("status", row["status"]), status_reason=values.get("status_reason", ""),
+                     status=row["status"] if fresh else values.get("status", row["status"]),
+                     status_reason="" if fresh else values.get("status_reason", ""),
                      **{k: _dump(values.get(k)) for k in ("job_spec", "risk", "fit", "decision", "price", "draft",
                                                           "compliance", "submission")},
                      evidence=_dump(values.get("evidence", [])), critiques=_dump(values.get("critiques", [])),
