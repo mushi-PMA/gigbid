@@ -18,5 +18,5 @@ ssh "${SSH_OPTS[@]}" "$TARGET" "cloud-init status --wait >/dev/null; cd /opt/gig
 scp "${SSH_OPTS[@]}" "$ENV_FILE" "$TARGET:/opt/gigbid/.env"
 ssh "${SSH_OPTS[@]}" "$TARGET" "cd /opt/gigbid && { grep -q '^SITE_HOST=' .env || echo 'SITE_HOST=$SITE_HOST' >> .env; } && \
   docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml --env-file .env up -d --build && \
-  docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml ps"
+  docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml --env-file .env ps"
 echo "Live at https://$SITE_HOST (the first certificate takes a minute)"
