@@ -85,7 +85,16 @@ _Not measured yet: run `make eval` (needs a model key)._
 
 ### Decisions, claim verification, injection defence, budgets
 <!-- results:decisions -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Metric (dev set) | Value |
+|---|---|
+| Bid-or-skip F1 | 0.556 |
+| Bid-or-skip accuracy | 0.733 |
+| Scam precision / recall | 1.000 / 0.500 |
+| Injection detection recall | 1.000 |
+| Price inside the fair band | 100.0% |
+| p50 / p95 latency per job analysed (s) | 51.9 / 74.8 |
+| Cost per job analysed (USD) | 0.00164 |
+| Jobs | 30 |
 <!-- /results:decisions -->
 
 <!-- results:claims -->
@@ -93,7 +102,10 @@ _Not measured yet: run `make eval` (needs a model key)._
 <!-- /results:claims -->
 
 <!-- results:injection -->
-_Not measured yet: run `make eval` (needs a model key)._
+|  | Attack success rate | Detected | Drafted |
+|---|---|---|---|
+| Defences off | 0.0% | 16.7% | 0.0% |
+| Defences on | 0.0% | 91.7% | 0.0% |
 <!-- /results:injection -->
 
 <!-- results:holdout -->
