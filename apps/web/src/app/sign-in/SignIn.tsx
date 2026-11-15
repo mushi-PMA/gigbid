@@ -54,7 +54,8 @@ export function SignIn() {
             </>
           )}
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+          <input id="email" type={registering ? 'email' : 'text'} required value={email} onChange={(e) => setEmail(e.target.value)}
+            autoComplete={registering ? 'email' : 'username'} />
           <label htmlFor="password">Password</label>
           <input
             id="password"

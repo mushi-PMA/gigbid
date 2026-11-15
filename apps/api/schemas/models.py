@@ -16,7 +16,7 @@ class RegisterIn(BaseModel):
 
 
 class LoginIn(BaseModel):
-    email: str = Field(pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$", max_length=200)
+    email: str = Field(min_length=1, max_length=200)  # an email, or a short demo username such as "admin"
     password: str = Field(min_length=1, max_length=128)
 
 
