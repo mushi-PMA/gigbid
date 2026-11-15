@@ -112,12 +112,14 @@ def architectures() -> str:
     for name, label in (("single_react", "(a) one ReAct agent"), ("supervisor", "(b) prebuilt supervisor"),
                         ("graph", "(c) GigBid graph")):
         d = a["designs"][name]
-        rows.append([label, fmt(d["bid_or_skip_accuracy"]), fmt(d["unsupported_claims_per_proposal"], 2),
+        rows.append([label, f"{d['n']} of {d['n'] + d['errors']}", fmt(d["bid_or_skip_accuracy"]),
+                     fmt(d["unsupported_claims_per_proposal"], 2),
                      str(d["violations_caught"]), str(d["violations_left_in_output"]),
                      f"{d['scams_bid_on']} / {d['injections_bid_on']}", fmt(d["gigsim_reply_rate"], pct=True),
                      str(d["mean_tokens"]), fmt(d["p95_seconds"], 1)])
-    return table(["Design", "Bid-or-skip accuracy", "Unsupported claims", "Violations caught", "Violations left",
-                  "Scams / injections bid on", "Reply rate", "Tokens per job", "p95 latency (s)"], rows)
+    return table(["Design", "Jobs finished", "Bid-or-skip accuracy", "Unsupported claims", "Violations caught",
+                  "Violations left", "Scams / injections bid on", "Reply rate", "Tokens per job", "p95 latency (s)"],
+                 rows) + "\n\nA run that crashed on a provider rate limit is left out of every number in its row."
 
 
 def tools() -> str:
@@ -145,9 +147,13 @@ def models() -> str:
         return PENDING
     rows = [[p, fmt(r["bid_or_skip_f1"]), fmt(r["judge_overall"], 2), fmt(r["unsupported_after"], 2),
              fmt(r["gigsim_reply_rate"], pct=True), fmt(r["per_proposal"]["p95_seconds"], 1),
-             fmt(r["per_proposal"]["mean_usd"], 5)] for p, r in m["results"].items()]
+             fmt(r["per_proposal"]["mean_usd"], 5) if r["judge_overall"] is not None and r["per_proposal"]["mean_usd"]
+             else "n/a"] for p, r in m["results"].items()]
     return table(["Profile", "Bid F1", "Judge", "Unsupported", "Reply rate", "p95 per proposal (s)",
-                  "USD per proposal"], rows)
+                  "USD per proposal"], rows) + \
+        "\n\nn/a in the proposal columns: no proposal finished for that profile (the free Gemini endpoint " \
+        "returned many server errors during the run). Gemma has no list price in `agent/config.yaml`, so its " \
+        "cost is n/a, not zero."
 
 
 def x2() -> str:
@@ -170,6 +176,38 @@ def holdout() -> str:
     return table(["Budget", "Declared", "Measured (holdout)", "Verdict"], rows)
 
 
+def ablation() -> str:
+    """The shipped retrieval with one component removed at a time (no model calls, dev set)."""
+    a = load("ablation")
+    if not a:
+        return PENDING
+    full = a["results"]["full"]["overall"]
+    rows = [[label, fmt(r["overall"]["recall@5"]), fmt(r["overall"]["ndcg@10"]),
+             fmt(r["overall"]["ndcg@10"] - full["ndcg@10"], 3) if label != "full" else "",
+             str(r["n"])] for label, r in a["results"].items()]
+    return table([f"Shipped ({a['best']})", "Recall@5", "nDCG@10", "Change in nDCG@10", "Jobs"], rows)
+
+
+def breakdown() -> str:
+    """V0 against the shipped retrieval by persona, job type and number of requirements (dev set)."""
+    offline = load("rag_variants_offline")
+    best = (load("proposals_best") or {}).get("meta", {}).get("rag_variant", "v2_v4").replace("_", "+")
+    if not offline:
+        return PENDING
+    by_variant = {r["variant"]: r for r in offline["results"]}
+    if "v0" not in by_variant or best not in by_variant:
+        return PENDING
+    v0, shipped = by_variant["v0"], by_variant[best]
+    rows = []
+    for group, label in (("by_persona", "persona"), ("by_requirements", "requirements"), ("by_job_type", "job type")):
+        for name, metrics in sorted(shipped[group].items()):
+            base = v0[group].get(name)
+            if base:
+                rows.append([f"{label}: {name}", str(metrics["n"]), fmt(base["recall@5"]), fmt(metrics["recall@5"]),
+                             fmt(base["ndcg@10"]), fmt(metrics["ndcg@10"])])
+    return table(["Group", "Jobs", "V0 Recall@5", f"{best} Recall@5", "V0 nDCG@10", f"{best} nDCG@10"], rows)
+
+
 def failures() -> str:
     f = load("failures")
     if not f:
@@ -180,7 +218,7 @@ def failures() -> str:
 
 SECTIONS = {"main": main_results, "rag": rag_variants, "decisions": decisions, "claims": claims,
             "architectures": architectures, "tools": tools, "injection": injection, "models": models, "x2": x2,
-            "holdout": holdout, "failures": failures}
+            "holdout": holdout, "failures": failures, "ablation": ablation, "breakdown": breakdown}
 
 
 def fill(path: Path) -> None:

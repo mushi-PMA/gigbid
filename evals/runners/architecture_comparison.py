@@ -206,7 +206,7 @@ async def evaluate(n_jobs: int, resume: bool = False) -> dict:
                                    "violations_caught": 0,
                                    **await score_text(persona, job, market, answer.get("decision", "skip"),
                                                       answer.get("proposal"), answer.get("price"))}
-                    except Exception as error:  # a crashed run counts as a wrong skip, and is reported
+                    except Exception as error:  # reported, and left out of the quality numbers
                         row = {"pred_bid": False, "error": f"{type(error).__name__}: {str(error)[:200]}",
                                "seconds": 0, "tokens": 0, "usd": 0}
                     rows.append({"design": design, "persona": persona, "job_id": job["job_id"],
@@ -218,13 +218,19 @@ async def evaluate(n_jobs: int, resume: bool = False) -> dict:
 def summarise(rows: list[dict]) -> dict:
     out = {}
     for design in ("single_react", "supervisor", "graph"):
-        rs = [r for r in rows if r["design"] == design]
+        # a run that crashed on a provider limit says nothing about the design: it is counted in `errors` and left
+        # out of every quality number
+        rs = [r for r in rows if r["design"] == design and "error" not in r]
+        failed = sum(1 for r in rows if r["design"] == design and "error" in r)
         written = [r for r in rs if r.get("unsupported") is not None]
         replied = [r for r in rs if r.get("replied") is not None]
         by_type = {}
         for job_type in sorted({r["job_type"] for r in rs if r["job_type"]}):
             group = [r for r in rs if r["job_type"] == job_type]
             by_type[job_type] = round(sum(r["pred_bid"] == r["gold_bid"] for r in group) / len(group), 3)
+        if not rs:
+            out[design] = {"n": 0, "errors": failed}
+            continue
         out[design] = {
             "n": len(rs), "bid_or_skip_accuracy": round(sum(r["pred_bid"] == r["gold_bid"] for r in rs) / len(rs), 4),
             "unsupported_claims_per_proposal": round(sum(r["unsupported"] for r in written) / len(written), 3)
@@ -238,7 +244,7 @@ def summarise(rows: list[dict]) -> dict:
             "mean_usd": round(sum(r["usd"] for r in rs) / len(rs), 6),
             "p50_seconds": percentile([r["seconds"] for r in rs], 0.5),
             "p95_seconds": percentile([r["seconds"] for r in rs], 0.95),
-            "errors": sum(1 for r in rs if "error" in r), "accuracy_by_job_type": by_type}
+            "errors": failed, "accuracy_by_job_type": by_type}
     return {"designs": out, "rows": rows}
 
 
