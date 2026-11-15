@@ -94,6 +94,8 @@ class AgentTools:
                     async with self._open(server) as session:
                         result = await session.call_tool(tool, arguments)
                 except Exception as error:  # connection refused, timeout, protocol error
+                    while isinstance(error, BaseExceptionGroup) and error.exceptions:  # show the real cause
+                        error = error.exceptions[0]
                     last = f"{type(error).__name__}: {error}"
                     await asyncio.sleep(min(6.0, 0.5 * 2 ** attempt))
                     continue
