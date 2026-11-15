@@ -39,8 +39,10 @@ async def run_parallel(items: list[Any], worker: Any) -> list[Any]:
 
 
 def enable_cache(name: str = "eval") -> None:
-    """Cache model calls so reruns are free and repeatable (folder is git-ignored except the smoke cache)."""
-    os.environ.setdefault("GIGBID_LLM_CACHE", str(ROOT / "evals" / "cache" / name))
+    """Cache model calls so reruns are free and repeatable (folder is git-ignored except the smoke cache). One folder
+    for all evaluations: the key is the whole request, so an identical call in two studies is made once. `name` is
+    kept for callers; GIGBID_LLM_CACHE overrides the folder (CI points it at evals/smoke_cache)."""
+    os.environ.setdefault("GIGBID_LLM_CACHE", str(ROOT / "evals" / "cache" / "shared"))
 
 
 def load_set(persona: str, split: str = "dev") -> list[dict[str, Any]]:

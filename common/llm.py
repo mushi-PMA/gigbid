@@ -233,6 +233,11 @@ def _cache_path(key: str) -> Path | None:
         return None
     path = Path(folder) / key[:2] / f"{key}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
+    # read-through: a call already made in another cache (GIGBID_LLM_CACHE_FROM) is copied, not repeated; this is how
+    # the small CI smoke cache is built from the full evaluation cache
+    source = os.environ.get("GIGBID_LLM_CACHE_FROM")
+    if source and not path.exists() and (Path(source) / key[:2] / f"{key}.json").exists():
+        path.write_bytes((Path(source) / key[:2] / f"{key}.json").read_bytes())
     return path
 
 
