@@ -54,6 +54,22 @@ file order (the sets were shuffled when built). Sizes were chosen from measured 
 Latency is measured with several jobs in parallel on shared free-tier endpoints, so it includes waiting for rate
 limits; the parallelism used is stored with each result.
 
+### Deviation (15 Nov 2026, 03:10 PKT, before any of the runs below)
+During the first dev decision run we found that Groq's free tier also limits **tokens per day: 200,000 per model per
+key**. One analysed job costs about 10,000 to 20,000 tokens, so the sizes above (about 15 million tokens in total)
+could not be run on free tiers in one night. We cut tokens per job (low reasoning effort for gpt-oss, a shorter Fit
+Matcher prompt, retrieval without a model step) and reduced the sizes as follows, before running any of them:
+- Decisions (dev): 10 jobs per persona (30). Proposals (V0 vs shipped): 4 bid jobs per persona (12 pairs).
+- Injection: up to 4 planted-injection jobs per persona, defences off and on.
+- X2 A/B: 4 bid jobs per persona (12 paired proposals per arm).
+- Architecture comparison: 9 dev jobs (3 per persona).
+- Model comparison (open vs open_gemma, Gemma on the Gemini free tier): 5 decisions and 1 proposal per persona.
+- Holdout: 10 jobs per persona for decisions; 2 per persona for proposals.
+When the small model's daily quota is used up, frequent nodes fall back to gpt-oss-120b (`fallback` in the config);
+every call records the model that answered, and the results report the share. These samples are small: confidence
+intervals are reported, and tests that need more pairs (McNemar for X2) are marked underpowered rather than read as
+evidence. `make eval` reruns everything at the original sizes when a larger budget is available.
+
 ## Budgets (declared in agent/config.yaml before the holdout run)
 p95 latency per job analysed at most 20 s; p95 latency per proposal at most 90 s; cost per job analysed at most
 US$0.002; cost per proposal at most US$0.01 (open profile).

@@ -30,6 +30,7 @@ models:
       base_url: https://api.groq.com/openai/v1
       api_key_env: GROQ_API_KEY
       models: {small: openai/gpt-oss-20b, large: openai/gpt-oss-120b}
+      extra_body: {reasoning_effort: low}     # gpt-oss: short hidden reasoning (cheaper, faster)
     - name: nvidia
       base_url: https://integrate.api.nvidia.com/v1
       api_key_env: NVIDIA_API_KEY
@@ -38,6 +39,7 @@ models:
       base_url: https://api.cerebras.ai/v1
       api_key_env: CEREBRAS_API_KEY
       models: {large: gpt-oss-120b}
+      extra_body: {reasoning_effort: low}
     - name: sambanova
       base_url: https://api.sambanova.ai/v1
       api_key_env: SAMBANOVA_API_KEY
@@ -118,13 +120,15 @@ models:
   timeout_seconds: 90
   retries: 3
   pool_wait_seconds: 600        # how long a pool call keeps waiting for a rate-limited endpoint before giving up
+  fallback_after_seconds: 30    # a frequent node whose model rests longer (e.g. a daily quota) uses the fallback model
+  cache_tag: effort-low         # part of the evaluation cache key; change it when request settings change
 embeddings:
   model: BAAI/bge-small-en-v1.5        # open, CPU (fastembed / ONNX)
   reranker: Xenova/ms-marco-MiniLM-L-6-v2
   dim: 384
 
 rag:
-  variant: v2_v4_v7                     # chosen on the dev set (evals/results/rag_variants_*.json); see docs/adr/0003-rag-variant.md
+  variant: v2_v4                        # chosen on the dev set (evals/results/rag_variants_*.json); see docs/adr/0003-rag-variant.md
   top_k: 8
   chunk_tokens: 220
   chunk_overlap: 40

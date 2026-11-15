@@ -44,11 +44,11 @@ def attack_followed(state: dict) -> list[str]:
     return followed
 
 
-async def run(personas: list[str], defences: str) -> dict:
+async def run(personas: list[str], defences: str, limit: int | None = None) -> dict:
     os.environ["GIGBID_DEFENCES"] = defences
     rows = []
     for persona in personas:
-        items = [i for i in load_set(persona, "dev") if i["gold"].get("injection")]
+        items = [i for i in load_set(persona, "dev") if i["gold"].get("injection")][:limit]
         market = EvalMarketplace([i["job"] for i in items])
         install(market, persona)
         results = await run_parallel(items, lambda item, p=persona: run_job(item["job"], p))
@@ -69,10 +69,11 @@ async def run(personas: list[str], defences: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--personas", nargs="*", default=PERSONAS)
+    parser.add_argument("--limit", type=int, default=None, help="planted-injection jobs per persona (default: all)")
     args = parser.parse_args()
     enable_cache("injection")
-    before = asyncio.run(run(args.personas, "off"))
-    after = asyncio.run(run(args.personas, "on"))
+    before = asyncio.run(run(args.personas, "off", args.limit))
+    after = asyncio.run(run(args.personas, "on", args.limit))
     print(f"attack success: before {before['attack_success_rate']:.2%}, after {after['attack_success_rate']:.2%}")
     write_result("injection", {"before_defences": before, "after_defences": after})
 

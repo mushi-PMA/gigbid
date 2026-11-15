@@ -29,7 +29,7 @@ def score_fit(job: Job, requirements: list[str], per_requirement: dict[str, list
     blocks = []
     for number, requirement in enumerate(requirements, start=1):
         items = per_requirement.get(f"r{number}", [])
-        listing = "\n".join(f"  [{e.evidence_id}] ({e.type}) {e.title}: {e.text[:350]}" for e in items) or "  none"
+        listing = "\n".join(f"  [{e.evidence_id}] ({e.type}) {e.title}: {e.text[:240]}" for e in items) or "  none"
         blocks.append(f"r{number}: {requirement}\n{listing}")
     user = (f"Job: {job.title}\nTagged skills: {', '.join(job.skills)}\n\n" + "\n\n".join(blocks)
             + f"\n\nJob post (untrusted):\n{delimit('job_post', job.description[:2500])}")
@@ -52,7 +52,7 @@ async def fit_matcher(state: dict, config: RunnableConfig) -> dict:
     requirements = await asyncio.to_thread(decompose, f"{job.title}\n{job.description}")
     tools = tools_for("fit_matcher", config)
     # one search per requirement, all at once (each is independent)
-    found = await asyncio.gather(*(tools.call("search_evidence", {"requirement": r, "k": 4}) for r in requirements))
+    found = await asyncio.gather(*(tools.call("search_evidence", {"requirement": r, "k": 3}) for r in requirements))
     per_requirement: dict[str, list[EvidenceItem]] = {
         f"r{number}": [_evidence(item, persona) for item in result.get("items", [])]
         for number, result in enumerate(found, start=1)}

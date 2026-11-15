@@ -15,10 +15,13 @@ Status: accepted (14 to 15 Nov 2026, from the dev-set runs below)
 - Outcome-aware boosting (V4) helped (V2+V4 0.597 on 150 jobs) and HyDE (V7) helped more (V2+V4+V7 0.629 on 60 jobs,
   Recall@5 0.489).
 
-**Decision.** `rag.variant: v2_v4_v7`: hybrid BM25 + dense retrieval, outcome-aware boost, and a hypothetical-answer
-query (one small-model call per search, about US$0.0001 per job at list price). The Fit Matcher still decomposes
-each post into requirements itself (V1 at the node level) and runs the searches in parallel.
+**Decision.** `rag.variant: v2_v4`: hybrid BM25 + dense retrieval with the outcome-aware boost. V2+V4+V7 retrieves
+better (nDCG@10 0.629 against 0.587 on the same 60 jobs), but HyDE adds one model call per search, about 40% of the
+tokens of a whole job analysis. The binding constraint for this project turned out to be free-tier tokens per day
+(Groq: 200,000 per model per key), not dollars, so we ship the variant without a model step and keep V7 as the
+first upgrade once a paid or local model is available (a one-line change). The Fit Matcher still decomposes each post
+into requirements itself (V1 at the node level) and runs the searches in parallel.
 
-**Consequences.** Better evidence and no CPU-bound rerank on the server, at the cost of one model call per search.
-Changing the variant is a one-line config change. V6 and V8 finish later on the same 60 jobs; if either beats V7 by a
-clear margin, this record is revised.
+**Consequences.** No CPU-bound rerank and no extra model calls in retrieval, so analysis is faster and cheaper on the
+2-vCPU server; we give up about 0.04 nDCG@10. V6 (contextual chunks) and V8 (corrective loop) need many model calls
+and were not finished within the free-tier budget; see docs/RESULTS.md.

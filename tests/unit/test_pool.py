@@ -25,7 +25,7 @@ def two_groq_keys(monkeypatch):
 def test_rate_limited_key_rests_and_next_key_answers():
     used = []
 
-    def call(model, base_url, key):
+    def call(model, base_url, key, extra):
         used.append(key)
         if key == "key-a":
             raise RateLimited()
@@ -39,7 +39,7 @@ def test_rate_limited_key_rests_and_next_key_answers():
 
 
 def test_sizes_rest_separately():
-    def call(model, base_url, key):
+    def call(model, base_url, key, extra):
         if model.endswith("-20b"):
             raise RateLimited()
         return "ok"
@@ -56,10 +56,27 @@ def test_sizes_rest_separately():
 def test_bad_request_is_not_retried():
     calls = []
 
-    def call(model, base_url, key):
+    def call(model, base_url, key, extra):
         calls.append(key)
         raise BadRequest()
 
     with pytest.raises(BadRequest):
         llm._pool_call("small", call)
     assert len(calls) == 1
+
+
+def test_impatient_call_falls_back_when_every_lane_rests_long():
+    import time
+
+    for name in ("groq#0:small", "groq#1:small"):
+        llm._pool_resting[name] = time.time() + 900          # e.g. a daily token limit
+    started = time.time()
+    with pytest.raises(llm.LanesResting):
+        llm._pool_call("small", lambda *args: "never", patient=False)
+    assert time.time() - started < 2                          # no waiting: the caller uses its fallback model
+
+
+def test_provider_extra_settings_are_sent():
+    seen = []
+    llm._pool_call("small", lambda model, url, key, extra: seen.append(extra) or "ok")
+    assert seen == [{"reasoning_effort": "low"}]               # gpt-oss on Groq: short hidden reasoning

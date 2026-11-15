@@ -94,21 +94,21 @@ def price_usd(model: str, tin: int, tout: int) -> float:
 
 
 def _openai_call(model: str, system: str, user: str, max_tokens: int, temperature: float,
-                 base_url: str, api_key: str) -> tuple[str, int, int]:
+                 base_url: str, api_key: str, extra: dict | None = None) -> tuple[str, int, int]:
     from openai import OpenAI
 
     client = OpenAI(base_url=base_url, api_key=api_key or "none",
                     timeout=load_config()["models"]["timeout_seconds"], max_retries=0)
     messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": user}]
     response = client.chat.completions.create(model=model, messages=messages, max_tokens=max_tokens,
-                                              temperature=temperature)
+                                              temperature=temperature, extra_body=extra or None)
     text = response.choices[0].message.content or ""
     usage = response.usage
     return text, int(getattr(usage, "prompt_tokens", 0) or 0), int(getattr(usage, "completion_tokens", 0) or 0)
 
 
 def _openai_tools_call(model: str, system: str, user: str, tools: list[dict[str, Any]], base_url: str,
-                       api_key: str) -> tuple[list[dict[str, Any]], int, int]:
+                       api_key: str, extra: dict | None = None) -> tuple[list[dict[str, Any]], int, int]:
     from openai import OpenAI
 
     client = OpenAI(base_url=base_url, api_key=api_key or "none",
@@ -120,7 +120,7 @@ def _openai_tools_call(model: str, system: str, user: str, tools: list[dict[str,
             model=model, messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
             tools=[{"type": "function", "function": {"name": t["name"], "description": t["description"],
                                                      "parameters": t["input_schema"]}} for t in tools],
-            temperature=0, max_tokens=800)
+            temperature=0, max_tokens=800, extra_body=extra or None)
     except BadRequestError as error:
         body = error.body if isinstance(error.body, dict) else {}
         if "tool_use_failed" in json.dumps(body) or "failed_generation" in json.dumps(body):
@@ -160,9 +160,15 @@ def _bad_request(error: Exception) -> bool:
     return getattr(error, "status_code", None) == 400
 
 
-def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, str]:
-    """Run `call(model, base_url, api_key)` on the next endpoint that serves `size` and is not resting.
-    Returns the result and the model id that answered. Waits for the first endpoint to wake when all rest."""
+class LanesResting(LLMError):
+    """Every lane for a size rests for a while (for example a daily token limit): a caller with a fallback model
+    should use it now instead of waiting."""
+
+
+def _pool_call(size: str, call: Callable[[str, str, str, dict], Any], patient: bool = True) -> tuple[Any, str]:
+    """Run `call(model, base_url, api_key, extra_body)` on the next endpoint that serves `size` and is not resting.
+    Returns the result and the model id that answered. Waits for the first endpoint to wake when all rest, unless
+    `patient` is False and the wait is long (then raises LanesResting so the caller can fall back)."""
     global _pool_turn
     models = load_config()["models"]
     # one lane per (endpoint, key, size): providers limit each key and each model separately. An api_key_env
@@ -184,13 +190,15 @@ def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, st
             else:
                 lane, wait = None, min(_pool_resting[name] for name, _, _ in lanes) - now
         if lane is None:
+            if not patient and wait > models.get("fallback_after_seconds", 30):
+                raise LanesResting(f"every '{size}' lane rests for {wait:.0f}s ({type(last).__name__}: {last})")
             time.sleep(max(wait, 0.5))
             continue
         name, endpoint, key = lane
         model = endpoint["models"][size]
         try:
             base_url = endpoint["base_url"].format_map(os.environ)   # e.g. an account id in the URL
-            return call(model, base_url, key), model
+            return call(model, base_url, key, endpoint.get("extra_body") or {}), model
         except Exception as error:  # rate limits, provider errors, timeouts
             if _bad_request(error):
                 raise
@@ -248,28 +256,34 @@ def complete(node: str, system: str, user: str, *, max_tokens: int | None = None
     config = load_config()
     model = model or model_for(node)
     max_tokens = max_tokens or config["models"]["max_output_tokens"]
-    key = hashlib.sha256(json.dumps([model, system, user, max_tokens, temperature]).encode()).hexdigest()
+    tag = config["models"].get("cache_tag", "")       # changes when request settings change (e.g. reasoning effort)
+    key = hashlib.sha256(json.dumps([model, system, user, max_tokens, temperature, tag]).encode()).hexdigest()
     cache = _cache_path(key)
     if cache and cache.exists():
         cached = json.loads(cache.read_text(encoding="utf-8"))
-        _meter(node, model, cached["input_tokens"], cached["output_tokens"], 0.0, cached=True)
+        _meter(node, cached.get("model", model), cached["input_tokens"], cached["output_tokens"], 0.0, cached=True)
         return cached["text"]
 
     models = [model]
     if node in CHEAP_NODES and profile.get("fallback") and profile["fallback"] != model:
         models.append(profile["fallback"])
     last_error: Exception | None = None
-    for candidate in models:
+    for position, candidate in enumerate(models):
+        has_fallback = position < len(models) - 1
         for attempt in range(config["models"]["retries"]):
             started = time.perf_counter()
             try:
                 if profile["provider"] == "pool":
                     (text, tin, tout), served_by = _pool_call(
-                        candidate, lambda m, url, key: _openai_call(m, system, user, max_tokens,
-                                                                             temperature, url, key))
+                        candidate, lambda m, url, key, extra: _openai_call(m, system, user, max_tokens,
+                                                                           temperature, url, key, extra),
+                        patient=not has_fallback)
                 else:
                     text, tin, tout = _openai_call(candidate, system, user, max_tokens, temperature,
                                                    *_openai_endpoint(profile))
+            except LanesResting as error:     # e.g. the small model's daily quota is used up: fall back now
+                last_error = error
+                break
             except Exception as error:  # provider errors, throttling, timeouts
                 last_error = error
                 time.sleep(min(2 ** attempt + 0.5, 20))
@@ -278,8 +292,9 @@ def complete(node: str, system: str, user: str, *, max_tokens: int | None = None
             text = _strip_reasoning(text)
             _meter(node, served_by if profile["provider"] == "pool" else candidate, tin, tout, seconds)
             if cache:
-                cache.write_text(json.dumps({"text": text, "input_tokens": tin, "output_tokens": tout}),
-                                 encoding="utf-8")
+                served = served_by if profile["provider"] == "pool" else candidate
+                cache.write_text(json.dumps({"text": text, "input_tokens": tin, "output_tokens": tout,
+                                             "model": served}), encoding="utf-8")
             return text
     raise LLMError(f"{node}: all models failed ({type(last_error).__name__}: {last_error})")
 
@@ -311,7 +326,7 @@ def complete_tools(node: str, system: str, user: str, tools: list[dict[str, Any]
         try:
             if profile["provider"] == "pool":
                 (calls, tin, tout), served_by = _pool_call(
-                    model, lambda m, url, key: _openai_tools_call(m, system, user, tools, url, key))
+                    model, lambda m, url, key, extra: _openai_tools_call(m, system, user, tools, url, key, extra))
             else:
                 calls, tin, tout = _openai_tools_call(model, system, user, tools, *_openai_endpoint(profile))
             break
