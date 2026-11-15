@@ -15,6 +15,9 @@ services:
     depends_on: [web, api, phoenix]
     restart: unless-stopped
 
+  ollama:                      # the deployed open profile uses hosted endpoints; local models only on request
+    profiles: ["local-models"]
+
   web:
     ports: !reset []
   api:

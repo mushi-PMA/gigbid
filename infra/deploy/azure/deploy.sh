@@ -6,7 +6,7 @@
 set -euo pipefail
 
 TARGET="${1:?usage: deploy.sh user@host}"
-SITE_HOST="${SITE_HOST:?set SITE_HOST to the VM's public name}"
+SITE_HOST="${SITE_HOST:?set SITE_HOST to the public name of the VM}"
 ENV_FILE="${ENV_FILE:-.env.production}"
 REPO_URL="${REPO_URL:-https://github.com/mushi-PMA/gigbid.git}"
 REF="${REF:-origin/main}"

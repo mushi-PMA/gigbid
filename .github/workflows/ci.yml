@@ -28,6 +28,8 @@ jobs:
           key: fastembed-${{ hashFiles('agent/config.yaml') }}
       - name: Lint
         run: ruff check .
+      - name: Shell scripts parse
+        run: for f in infra/deploy/azure/*.sh; do bash -n "$f"; done
       - name: Repository rules (no secrets, gigsim unchanged, prompts in agent/prompts, results in sync)
         run: python -m scripts.check_rules
       - name: Tests (offline, no API key)
