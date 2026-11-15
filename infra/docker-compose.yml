@@ -63,6 +63,7 @@ services:
     environment:
       PHOENIX_WORKING_DIR: /phoenix
       PHOENIX_SQL_DATABASE_URL: postgresql://gigbid:${POSTGRES_PASSWORD:-gigbid}@postgres:5432/gigbid
+      PHOENIX_SQL_DATABASE_SCHEMA: phoenix   # own schema: Phoenix has a `users` table too, which would shadow ours
     volumes: [phoenixdata:/phoenix]
     ports: ["${PHOENIX_PORT:-6006}:6006"]
     depends_on:
