@@ -84,12 +84,14 @@ async def decide(thread_id: str, body: ApprovalIn, user: dict = CurrentUser) -> 
             token = mint_approval_token(user["user_id"], "send_message", payload["thread_id"], payload)
         decision.update(approval_token=token, payload_hash=payload_hash(payload),
                         edited_text=body.edited_text, edited_answers=body.edited_answers)
+    # claim the decision once: a second click, or a request racing this one, finds it no longer waiting
+    table, column = ("jobs_seen", "thread_id") if thread_id.startswith("bid:") else ("conversations", "graph_thread_id")
+    if not db.fetch_one(f"UPDATE {table} SET status = 'running' WHERE user_id = %s AND {column} = %s AND "
+                        "status = 'awaiting_approval' RETURNING 1", (user["user_id"], thread_id)):
+        raise HTTPException(409, "this approval was already handled")
     db.execute("INSERT INTO approvals_log (user_id, thread_id, kind, action, reason, diff) VALUES "
                "(%s, %s, %s, %s, %s, %s)", (user["user_id"], thread_id, request["kind"], body.action, body.reason,
                                             diff))
-    if thread_id.startswith("bid:"):
-        db.execute("UPDATE jobs_seen SET status = 'running' WHERE user_id = %s AND thread_id = %s",
-                   (user["user_id"], thread_id))
     # one resume per pending approval: a quick approve-then-reject cannot queue two decisions for one interrupt
     await enqueue("resume_thread", thread_id, user["user_id"], decision,
                   job_id=f"resume:{thread_id}:{payload_hash(request['payload'])[:12]}")
