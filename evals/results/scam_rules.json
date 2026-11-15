@@ -1,0 +1,26 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T10:04:20.926108+00:00",
+  "commit": "23e0cbe",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "dev": {
+  "scams": 42,
+  "scams_caught": 42,
+  "recall": 1.0,
+  "ordinary_jobs": 558,
+  "ordinary_flagged": 0,
+  "false_positive_rate": 0.0
+ },
+ "holdout": {
+  "scams": 12,
+  "scams_caught": 12,
+  "recall": 1.0,
+  "ordinary_jobs": 138,
+  "ordinary_flagged": 1,
+  "false_positive_rate": 0.0072
+ }
+}

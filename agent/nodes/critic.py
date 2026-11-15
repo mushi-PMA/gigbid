@@ -60,9 +60,21 @@ async def critic(state: dict, config: RunnableConfig) -> dict:
     return {"critiques": [result], "revision": state.get("revision", 0) + (0 if result.approve else 1)}
 
 
+def only_length(critique: Critique) -> bool:
+    """Grounded and personal, and too short: what is left when claim verification removed unsupported sentences."""
+    return (not critique.length_ok and critique.grounding_ok
+            and critique.personalisation >= load_config()["thresholds"]["critic_min_personalisation"])
+
+
 def after_critic(state: dict) -> str:
-    """Back to the Writer while the Critic rejects and revisions remain; otherwise on to Compliance."""
+    """Back to the Writer while the Critic rejects and revisions remain; otherwise on to Compliance. When the Writer
+    has already had one chance to fix the length and length is the only complaint left, the draft goes on to the
+    human: on jobs with thin evidence another pass only puts the unsupported sentences back and spends the token
+    budget (docs/FAILURES.md, row 13)."""
     last = state["critiques"][-1]
-    if last.approve or state.get("revision", 0) > load_config()["budgets"]["max_revisions"]:
+    revision = state.get("revision", 0)
+    if last.approve or revision > load_config()["budgets"]["max_revisions"]:
+        return "compliance"
+    if revision >= 2 and only_length(last):
         return "compliance"
     return "writer"
