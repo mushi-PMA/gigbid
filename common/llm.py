@@ -162,33 +162,38 @@ def _pool_call(size: str, call: Callable[[str, str, str], Any]) -> tuple[Any, st
     Returns the result and the model id that answered. Waits for the first endpoint to wake when all rest."""
     global _pool_turn
     models = load_config()["models"]
-    endpoints = [e for e in models["endpoints"] if size in e["models"] and os.environ.get(e["api_key_env"])]
-    if not endpoints:
+    # one lane per (endpoint, key, size): providers limit each key and each model separately. An api_key_env
+    # variable may hold several comma-separated keys.
+    lanes = [(f"{e['name']}#{i}:{size}", e, key.strip())
+             for e in models["endpoints"] if size in e["models"]
+             for i, key in enumerate(os.environ.get(e["api_key_env"], "").split(",")) if key.strip()]
+    if not lanes:
         raise LLMError(f"no pool endpoint with a key serves '{size}' (set one of the api_key_env variables)")
     last: Exception | None = None
     deadline = time.time() + models.get("pool_wait_seconds", 600)
     while time.time() < deadline:
         with _pool_lock:
             now = time.time()
-            ready = [e for e in endpoints if _pool_resting.get(e["name"], 0) <= now]
+            ready = [lane for lane in lanes if _pool_resting.get(lane[0], 0) <= now]
             if ready:
-                endpoint = ready[_pool_turn % len(ready)]
+                lane = ready[_pool_turn % len(ready)]
                 _pool_turn += 1
             else:
-                endpoint, wait = None, min(_pool_resting[e["name"]] for e in endpoints) - now
-        if endpoint is None:
+                lane, wait = None, min(_pool_resting[name] for name, _, _ in lanes) - now
+        if lane is None:
             time.sleep(max(wait, 0.5))
             continue
+        name, endpoint, key = lane
         model = endpoint["models"][size]
         try:
             base_url = endpoint["base_url"].format_map(os.environ)   # e.g. an account id in the URL
-            return call(model, base_url, os.environ[endpoint["api_key_env"]]), model
+            return call(model, base_url, key), model
         except Exception as error:  # rate limits, provider errors, timeouts
             if _bad_request(error):
                 raise
             last = error
             with _pool_lock:
-                _pool_resting[endpoint["name"]] = time.time() + _retry_after(error)
+                _pool_resting[name] = time.time() + _retry_after(error)
     raise LLMError(f"pool '{size}': no endpoint answered in time ({type(last).__name__}: {last})")
 
 
