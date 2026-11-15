@@ -104,6 +104,8 @@ async def pricing(state: dict, config: RunnableConfig) -> dict:
                                             settings["weekly_connects_budget"] - settings.get("connects_spent_week", 0))
     price = await asyncio.to_thread(quote, job, state["fit"], state["risk"], market, profile, balance, 0.0)
     update: dict[str, Any] = {"price": price}
-    if not price.connects_worth_it:
+    # `skip_connects_gate` is only set by the proposal study, which drafts every fixed job to measure writing alone;
+    # the judgement is still recorded in the price
+    if not price.connects_worth_it and not settings.get("skip_connects_gate"):
         update.update(status="watching", status_reason=f"Connects not worth it: {price.rationale[:200]}")
     return update

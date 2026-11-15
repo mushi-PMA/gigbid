@@ -14,10 +14,11 @@ from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, perc
 from evals.runners.harness import EvalMarketplace, install, run_job
 from evals.runners.judge import judge
 
-# The proposal study measures writing, so every fixed job is drafted: the decision gate is opened here (decisions are
-# measured on their own in decision_eval). Scam and injection jobs are excluded by `fixed_jobs`.
+# The proposal study measures writing, so every fixed job is drafted: the decision thresholds and the Connects gate
+# are opened here (decisions are measured on their own in decision_eval). Scam and injection jobs are excluded by
+# `fixed_jobs`.
 DRAFT_EVERY_JOB = {"thresholds": {"bid_min_fit": 0.0, "watch_min_fit": 0.0, "max_risk": 1.0,
-                                  "min_client_quality": 0.0}}
+                                  "min_client_quality": 0.0}, "skip_connects_gate": True}
 
 
 def fixed_jobs(persona: str, per_persona: int, split: str = "dev") -> list[dict]:
