@@ -20,8 +20,9 @@
 \begin{document}
 \maketitle
 \vspace{-1em}
-\noindent Every number in this report is read from a file in \file{evals/results/} and every claim points to a file,
-a trace or a commit in the repository (\url{https://github.com/mushi-PMA/gigbid}).
+\noindent Every measured result in this report is read from a file in \file{evals/results/} (or an archived run or
+commit named next to it), and every claim points to a file, a trace or a commit in the repository
+(\url{https://github.com/mushi-PMA/gigbid}). Most samples are small; we give $n$ wherever it matters.
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{Problem and constraints}
@@ -102,13 +103,16 @@ dense retrieval as in RAG~\cite{lewis2020rag}, BM25 and dense lists merged by re
 retrieval~\cite{yan2024crag} (V8); the retriever composes them from a string such as \texttt{v1+v2+v3+v5}. Claim
 verification checks each atomic claim against the evidence, in the spirit of FActScore~\cite{min2023factscore}. An evidence item is a portfolio project: retrieving its case study, README,
 code or proposal counts as finding it. Hypotheses: V1+V2+V3 raises Recall@5 by 10 points on jobs with four or more
-requirements (H-B1); V2 beats V0 for every persona (H-B2); claim verification halves unsupported claims (H-B4).
+requirements (H-B1); V2 beats V0 for every persona (H-B2); claim verification halves unsupported claims (H-B4: met narrowly, 2.13 to 1.00 per proposal on 8 letters).
 \tablefrom{rag}{Retrieval variants on the dev set.}
 \tablefrom{main}{Baseline V0 against the shipped pipeline.}
 \tablefrom{claims}{Unsupported claims before and after claim verification (shipped pipeline).}
 \textbf{Judge calibration.} A model judge can be biased toward length and style~\cite{zheng2023judge}, so the rubric
 judge was compared with my own blind labels on 30 proposals (Cohen's kappa~\cite{cohen1960kappa}):
 \pending{Cohen's kappa, quadratic-weighted kappa and two disagreements with who was right}.
+The blind pairwise human panel (classmates choose between anonymised V0 and shipped proposals for the same job,
+\file{evals/runners/human\_panel.py}) is prepared on the 5 jobs both pipelines drafted, but had not been rated when
+this report was written; with 5 pairs it could only show a very large preference.
 \textbf{Ablation and breakdown.} Removing hybrid search (V2) costs 0.062 nDCG@10 and removing the outcome boost (V4)
 0.021 (\file{evals/results/ablation.json}), so both earn their place and V2 matters most. The breakdown is the honest
 part: the shipped retrieval helps the web-developer persona most (nDCG@10 0.518 to 0.630) and e-commerce and data-pipeline
@@ -121,13 +125,14 @@ where we predicted a gain of ten (rows of \file{rag\_variants\_model.json} and \
 \textbf{Where better retrieval did not raise replies.} The shipped retrieval beats V0 on nDCG@10 (0.597 against 0.566 on
 the same 150 jobs), yet in GigSim V0's proposals did as well: every one of V0's 7 drafted proposals got a reply, against
 7 of the shipped pipeline's 8, with judge scores of 3.57 and 3.63 (\file{evals/results/proposals\_v0.json},
-\file{proposals\_best.json}; the two pipelines drafted overlapping but not identical sets of the 12 jobs). H-B3 holds in
-the direction we predicted it might fail. A likely reason is in how GigSim's clients score a letter
+\file{proposals\_best.json}; the two pipelines drafted overlapping but not identical sets of the 12 jobs, so these
+rates are not paired). H-B3 (better retrieval raises the reply rate) is not supported. A likely reason is in how GigSim's clients score a letter
 (\file{gigsim/clients.py}): naming the job's skills, reusing the post's own words, the price, avoiding a generic opening
 and answering screening questions. Which evidence a letter cites is not scored, so better retrieval can only help
 through those, and both pipelines use the same Writer, which is told to open with the client's problem in their own
 terms. The shipped pipeline's letters also carried a higher share of unsupported claims after verification (22\%
-against 16\%; 1.00 against 0.86 per proposal). With 7 and 8 proposals none of these differences is significant, so the
+against 16\%; 1.00 against 0.86 per proposal); the verifier flagged fewer claims in V0's letters to begin with and
+removed none of them (0.86 before and after), which we did not investigate further. With 7 and 8 proposals none of these differences is significant, so the
 shipped choice rests on retrieval quality and cost, not on replies.
 \textbf{What ships.} V2+V4 (hybrid BM25 and dense search with the outcome-aware boost, \file{docs/adr/0003-rag-variant.md}).
 V2+V4+V7 retrieved better (nDCG@10 0.629 against 0.587 on the same 60 jobs, \file{evals/results/rag\_variants\_model.json}),
@@ -138,7 +143,9 @@ took 21.7\,s per search on average (\file{rag\_variants\_model\_late.json}); V6 
 combination and was slow on CPU (p95 retrieval 17.7\,s for V2+V3 against 4.7\,s for V2+V4,
 \file{rag\_variants\_offline.json}). Claim verification ships on: in the shipped
 proposal study it cut unsupported claims from 2.13 to 1.00 per proposal (47\% to 22\% of claims,
-\file{evals/results/proposals\_best.json}). The cost is real: 44,238 tokens and \$0.0102 per drafted proposal, and on four
+\file{evals/results/proposals\_best.json}). The cost is real: 44,238 tokens and \$0.0102 per drafted proposal (with the
+Critic stop that ships, the same 8 drafts cost \$0.0092 and kept 0.63 unsupported claims each,
+\file{proposals\_best\_critic\_stop.json}), and on four
 of twelve forced weak-fit jobs verification removed so many sentences that the Critic loop ran out of token budget and
 the job went to a human instead (\file{docs/FAILURES.md}, row 13).
 
@@ -149,10 +156,13 @@ tool-using workers and (c) the hand-built graph, with the same MCP tools, model 
 clients (\file{evals/runners/architecture\_comparison.py}). Hypothesis H-C: (c) wins on accuracy, unsupported claims
 and violations; (a) is cheapest and can tie on simple, clearly relevant jobs.
 \tablefrom{architectures}{Architecture comparison on 9 dev jobs.}
-\textbf{Result} (\file{evals/results/architecture\_comparison.json}). H-C is refuted on decisions and supported on
-grounding. The prebuilt supervisor had the best bid-or-skip accuracy (0.667, against 0.556 for one agent and 0.444 for
-our graph), but its proposals carried 6.0 unsupported claims each and one policy violation reached its final text; the
-single agent's carried 2.0; ours 0.5, with no violation. Our graph is also the most expensive: 23,651 tokens per job
+\textbf{Result} (\file{evals/results/architecture\_comparison.json}). H-C is refuted on decisions and only weakly
+supported on grounding. The prebuilt supervisor had the best bid-or-skip accuracy (0.667, against 0.556 for one agent
+and 0.444 for our graph), but its proposals carried 6.0 unsupported claims each and one policy violation reached its
+final text; the single agent's carried 2.0; ours 0.5, with no violation. These grounding numbers rest on 3, 2 and 2
+letters, each design drafting only the jobs it chose to bid on; where two designs drafted the same job the order holds
+(dev-aiml-0003: supervisor 7, graph 1; dev-web-0003: supervisor 5, single agent 3), but this is a direction, not a
+measured gap. The graph's calls were replayed from the cache while the baselines ran live. Our graph is also the most expensive: 23,651 tokens per job
 against 8,446 and 7,448, because three agents read every job in parallel and the Writer, verifier and Critic loop over
 each draft. Its lower accuracy has the causes found in the failure analysis: three gold bids were not bid on (the extractor
 splitting named tools into extra requirements, rows 8 and 9, and the unverified-client rule, row 10) and two posts with
@@ -184,8 +194,10 @@ the Writer which style wins per category.
 \textbf{Result} (\file{evals/results/x2\_ab\_test.json}): no detectable difference. On the 12 fixed jobs each strategy
 drafted 8 proposals; 7 jobs have a proposal from both arms, and on those both arms got a reply 6 times out of 7. One
 job replied only to A and one only to B, so the exact McNemar test has two discordant pairs (p = 1.0). The judge
-scored A slightly higher (3.88 against 3.75). Arm A is the shipped Writer, so its letters replay those of
-\file{proposals\_best\_critic\_stop.json} from the evaluation cache. With two discordant pairs the test cannot detect
+scored A slightly higher (3.88 against 3.75), while B's letters kept fewer unsupported claims after verification (0.00
+against 0.63) and got more simulated hires (3 against 2 of 8). Arm A is the shipped Writer, so its letters replay those
+of \file{proposals\_best\_critic\_stop.json} from the evaluation cache, while arm B ran live; none of these differences
+is significant at this size. With two discordant pairs the test cannot detect
 even a large effect; far more paired jobs would be needed than the free tiers could pay for. What the experiment does show is that the machinery works end to end (strategy as
 configuration, paired drafts, simulated replies, an exact test) and that GigSim's clients, which score skills named,
 post words reused, price and screening answers rather than the order of the letter, are a weak judge of opening style.
@@ -228,16 +240,21 @@ query scoped by user.
 \tablefrom{injection}{Attack success on the planted-injection dev jobs, defences off and on.}
 \textbf{What still gets through.} No attack succeeded with or without defences on these 12 jobs: the planted
 injections sit in jobs that are also poor fits, so the decision gate skipped them before any draft existed. That
-means this set does not show what the defences add to attack success; what it shows is detection, which rose from
+means this set does not show what the defences add to attack success: H-S's first part (at most 5\% with defences) holds,
+but its second part (three times lower than without) cannot be tested at 0\% against 0\%. What the set shows is detection, which rose from
 17\% to 92\% (11 of 12). The one miss hides its instruction in a ``hidden requirement'' line phrased as a
 verification step that asks for secrets; it uses none of the command words our patterns look for, and the model
 check did not flag it either. A good-fit job carrying the same line is the case to test next.
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{Held-out test results against the declared budgets}\label{sec:holdout}
-The holdout sets (50 jobs per persona, never used for tuning) are run end to end on a fixed sample of 10 decisions
-and 2 proposals per persona (the free-tier token limit; see the deviation in \file{docs/HYPOTHESES.md}); the
-instructor's hidden test runs against the live URL.
+The holdout sets (50 jobs per persona) are run end to end on a fixed sample of 10 decisions and 2 proposals per persona
+(the free-tier token limit; see the deviation in \file{docs/HYPOTHESES.md}); the instructor's hidden test runs against
+the live URL. No model, prompt or threshold was chosen on the holdout, but it was not untouched: we ran it three times
+(first run, a cached replay, and the final live run reported here), and two fixes landed after we had seen the first
+run, which had missed one of its three scams and the cost budget. The scam rules (commit 23e0cbe) were written from the
+dev failure analysis and the Critic stop (e306eb3) from dev row 13, but the holdout scores after those fixes are not a
+clean test of them, and we read the holdout scam numbers as a check, not as proof.
 \tablefrom{holdout}{Declared budgets against measured values on the holdout set.}
 \tablefrom{decisions}{Decision quality on the dev set.}
 \textbf{What we missed.} Both latency budgets (\file{evals/results/holdout.json}, the final run with the shipped code,
@@ -247,20 +264,22 @@ proposal took 185\,s against 90\,s (the other drafts reused analysis calls made 
 left out of latency). Latency is wall-clock time per job, which on our free tiers includes the time a call waits for
 a rate-limited lane; the first holdout run measured 70.7\,s per job
 (\file{evals/results/archive/holdout\_first\_run\_console.txt}), and the final run shared its keys with another
-evaluation, so most of this time is waiting, not model time. We did not separate the two, so we report the number as
-measured and do not claim the budget is met. The cost per proposal was over budget in the first run (\$0.0118, before
+evaluation, so we expect much of this time is waiting rather than model time. We did not separate the two, so we report
+the number as measured and do not claim the budget is met. The cost per proposal was over budget in the first run (\$0.0118, before
 the Critic stop of \file{docs/FAILURES.md}, row 13) and in a cached replay with the stop (\$0.0105, 2.7 revisions per
 proposal, \file{archive/holdout\_replay\_b7504a7.json}); in the final live run it is \$0.0094 with 1.8 revisions. With 5 proposals we read this as narrowly met,
 not as a firm result. Claim verification cut unsupported claims from 0.8 to 0.2 per proposal in the final run.
 \textbf{What helped most.} Low reasoning effort for gpt-oss together with a larger output budget for the Fit Matcher:
-it removed every dead letter on the same 30 dev jobs (5 to 0) and raised correct decisions from 19 to 22
-(\file{evals/results/archive/}, \file{evals/results/decisions.json}). Latency is reported only for jobs whose model
+between the first and the final dev run, dead letters on the same 30 jobs fell from 5 to 0 and correct decisions rose
+from 19 to 22 (\file{evals/results/archive/}, \file{evals/results/decisions.json}); the traces of all five dead letters
+show the cut-off Fit Matcher output this fix targets, but the two runs also differ in retrieval variant and other fixes,
+so the gain in correct decisions is not attributable to it alone. Latency is reported only for jobs whose model
 calls all ran live, because a call replayed from the evaluation cache takes no time (\file{docs/FAILURES.md}, row 15). The cheapest
-fix with the largest effect was seven scam rules in the policy pack: scam recall on the 30 holdout jobs rose from 0.667
-to 1.000 (\file{evals/results/holdout.json}; rules alone: 12 of 12 holdout scams, 1 of 138 ordinary posts flagged,
-\file{scam\_rules.json}). On unseen jobs scam and injection detection were both 1.000, and bid accuracy matched the
-dev set (0.733), but bid recall was low: GigBid bid on 3 of the 9 jobs a freelancer should bid on (bid F1 0.429
-against 0.556 on dev).
+fix was seven scam rules in the policy pack: on their own they catch 42 of 42 dev scams (in-sample: they were written
+from dev) and 12 of 12 holdout scams, flagging 1 of 138 ordinary holdout posts (\file{scam\_rules.json}). On the 30
+holdout jobs scam detection was 3 of 3 and injection detection 2 of 2, and bid accuracy matched the dev set (0.733),
+but bid recall was low: GigBid bid on 3 of the 9 jobs a freelancer should bid on (bid F1 0.429 against 0.556 on dev),
+and 2 of 3 priced jobs fell inside the fair price band.
 
 \appendix
 \section{Reproduce}

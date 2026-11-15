@@ -76,8 +76,10 @@ tool, a prebuilt `langgraph-supervisor` with three workers, and our hand-built g
 verifier and a bounded critique loop. On the obvious score, the graph lost: it made the right bid-or-skip call on 4 of
 9 jobs, against 5 for the single agent and 6 for the supervisor, at three times the tokens.
 
-On the score that protects the freelancer, it won clearly: 0.5 unsupported claims per proposal against 2.0 and 6.0,
-and no policy violation in its final text, where the supervisor let one through. A wrong "watch" costs a missed job. A
+On the score that protects the freelancer, it came out ahead: 0.5 unsupported claims per proposal against 2.0 and 6.0,
+and no policy violation in its final text, where the supervisor let one through. That rests on only two or three
+letters per design, each drafting the jobs it chose to bid on, so it is a direction rather than a measured gap: on the
+one job both drafted, the supervisor's letter had 7 unsupported claims and ours 1. A wrong "watch" costs a missed job. A
 made-up claim sent to a client costs a reputation. Which architecture is better depends entirely on which of those you
 count, which is the retrieval lesson again.
 

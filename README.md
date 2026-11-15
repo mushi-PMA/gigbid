@@ -6,8 +6,8 @@ writing; **you approve every proposal and message before anything leaves the sys
 
 ![demo](docs/images/demo.gif)
 
-**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;Â·&nbsp; **Video (2 min):** <!-- video-url -->[live walkthrough](https://mushi-pma.github.io/gigbid/demo.webm)<!-- /video-url --> &nbsp;Â·&nbsp; **Write-up:** <!-- writeup-url -->[the better retriever did not write better proposals](https://mushi-pma.github.io/gigbid/)<!-- /writeup-url -->
-&nbsp;Â·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
+**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;·&nbsp; **Video (2.5 min):** <!-- video-url -->[live walkthrough](https://mushi-pma.github.io/gigbid/demo.webm)<!-- /video-url --> &nbsp;·&nbsp; **Write-up:** <!-- writeup-url -->[the better retriever did not write better proposals](https://mushi-pma.github.io/gigbid/)<!-- /writeup-url -->
+&nbsp;·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
 
 Reviewer login (app) and a read-only trace viewer login (Phoenix, at `/phoenix/`): shared privately on the submission,
 never in this repository. The live site runs on free model tiers, so an analysis can take a few minutes when the
@@ -131,13 +131,13 @@ A run that crashed on a provider rate limit is left out of every number in its r
 
 Full results: [docs/RESULTS.md](docs/RESULTS.md). Public traces: <!-- traces -->[approved proposal](docs/traces/README.md#one-job-from-analysis-to-a-draft-waiting-for-approval), [Critic loop](docs/traces/README.md#the-critic-sends-a-draft-back-twice), [scam caught](docs/traces/README.md#a-scam-caught-and-skipped), [injection ignored](docs/traces/README.md#an-injected-instruction-ignored), [client reply](docs/traces/README.md#a-client-reply-handled) (exported from Phoenix on the live site)<!-- /traces -->
 
-### RÃ©sumÃ© line
+### Résumé line
 
 Built GigBid, a LangGraph multi-agent freelancer copilot on three MCP servers where nothing is sent without human
 approval; claim verification cut unsupported claims from 2.13 to 1.00 per proposal and injection detection rose from
 17% to 92% (`evals/results/proposals_best.json`, `injection.json`).
-Designed a 10-tool MCP surface that chose the right tool on 40 of 40 tasks (97.5% argument accuracy against 77.5% for a
-3-tool design), and traced a reasoning-budget bug whose fix took dead letters from 5 to 0 on the same 30 dev jobs (19 of 120 in the first full run)
+Designed an MCP tool surface (10 tools in the selection study) that chose the right tool on 40 of 40 tasks (97.5% argument accuracy against 77.5% for a
+3-tool design), and traced a reasoning-budget bug whose fix, with other changes between the runs, took dead letters from 5 to 0 on the same 30 dev jobs (19 of 120 in the first full run)
 (`tool_granularity.json`, `decisions.json`, `archive/`).
 
 ## Run it
@@ -184,9 +184,9 @@ posts, conversations). Sources, licenses, preprocessing and limitations: [docs/D
 
 ## Repository
 
-`apps/web` React + TypeScript Â· `apps/api` FastAPI Â· `agent/` graphs, nodes, prompts, memory Â· `rag/` ingestion,
-variants V0 to V8, claim verification Â· `mcp_servers/` portfolio, marketplace, workspace Â· `worker/` Arq schedules Â·
-`gigsim/` marketplace simulator Â· `evals/` datasets, runners, results Â· `infra/` Docker and deployment Â· `docs/`.
+`apps/web` React + TypeScript · `apps/api` FastAPI · `agent/` graphs, nodes, prompts, memory · `rag/` ingestion,
+variants V0 to V8, claim verification · `mcp_servers/` portfolio, marketplace, workspace · `worker/` Arq schedules ·
+`gigsim/` marketplace simulator · `evals/` datasets, runners, results · `infra/` Docker and deployment · `docs/`.
 
 Pinned versions: Python 3.12, LangGraph 1.2.21, MCP SDK 1.30.0, langchain-mcp-adapters 0.3.2, FastAPI 0.162.5,
 React 19, Vite, Playwright; exact pins in `pyproject.toml` and `apps/web/package.json`.

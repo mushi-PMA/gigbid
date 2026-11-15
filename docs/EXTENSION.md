@@ -34,4 +34,4 @@ one arm got a reply) is the right test; the z-test is reported for comparison.
 Paired jobs: 7; exact McNemar p = 1.0; two-proportion z-test p = 1.0.
 <!-- /results:x2 -->
 
-Run: `python -m evals.runners.x2_ab_test --per-persona 20`
+Run: `python -m evals.runners.x2_ab_test --per-persona 4` (the run reported here; 4 paired jobs per persona is far too few for significance, so the result is read as underpowered)
