@@ -13,6 +13,39 @@ make down
 Web on `:8080`, API on `:8000`, Phoenix traces on `:6006`. The `init` service builds the evidence indexes once and
 exits; the API and the MCP servers wait for it.
 
+## Deploy (Azure VM)
+
+```bash
+bash infra/deploy/azure/provision.sh                                    # once: VM, ports 80/443, public name
+SITE_HOST=<name>.<region>.cloudapp.azure.com bash infra/deploy/azure/deploy.sh gigbid@<name>.<region>.cloudapp.azure.com
+```
+
+`deploy.sh` checks out the public repository on the VM, copies the local `.env.production` (never committed) to
+`.env`, and starts the stack with Caddy in front (automatic HTTPS). On the VM, every compose command needs
+`--env-file .env`, because compose reads the env file next to the first compose file (`infra/`) by default:
+
+```bash
+dc() { docker compose -f infra/docker-compose.yml -f infra/deploy/docker-compose.prod.yml --env-file .env "$@"; }
+dc ps; dc logs --tail 50 worker
+```
+
+## Model providers and quotas
+
+The `open` profile uses a pool of free hosted endpoints (`models.endpoints` in `agent/config.yaml`). Each key and
+each model is its own lane; a lane that returns a rate limit rests until its `retry-after`. Free tiers have daily
+limits as well (Groq: 200,000 tokens per model per key per day), so:
+- the live site and the evaluations use **different keys**, so an evaluation run can never use up the site's quota;
+- when the small model's lanes all rest for long (a daily limit), frequent nodes fall back to the large model at once
+  (`fallback`, `fallback_after_seconds`); every call records the model that answered;
+- the scout analyses at most `auto_analyze_per_scout` (default 5) new jobs automatically; the rest wait for a click,
+  so the quota serves the jobs people actually open.
+
+## Simulated marketplace clock
+
+GigSim runs a simulated clock (`GIGSIM_START`, default `2026-11-08T00:00:00Z` on the server, speed 1). Jobs appear
+when their posting time is not after the simulated now, so the inbox fills like a live feed. Restarting GigSim starts
+the clock again from `GIGSIM_START`. Move it by hand with `POST /admin/clock` (needs `GIGSIM_ADMIN_TOKEN`).
+
 ## Schedules
 
 | What | Where | Interval | Why |
@@ -50,8 +83,13 @@ marketplace server's adapter changes; the graph, prompts and tools are the same.
 
 ## Traces
 
-Open Phoenix (`:6006`), project `gigbid`. Every API request carries one trace id through the graph, the MCP servers
-and the audit log (`X-Trace-Id` response header). Each LLM span shows tokens and cost.
+Open Phoenix (`:6006` locally, `/phoenix/` on the server), project `gigbid`. Every API request carries one trace id
+through the graph, the MCP servers and the audit log (`X-Trace-Id` response header). Each LLM span shows tokens and
+cost. A pause for human approval shows as an event on the node span, not as an error.
+
+On the server Phoenix has login on (its own secrets in `.env`); the services send traces with the admin secret as a
+bearer key, and graders get a read-only viewer account. Phoenix keeps its tables in its own Postgres schema
+(`phoenix`), because it has a `users` table of its own.
 
 ## Secrets
 
