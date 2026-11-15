@@ -14,6 +14,11 @@ from evals.runners.common import PERSONAS, RESULTS, enable_cache, load_set, perc
 from evals.runners.harness import EvalMarketplace, install, run_job
 from evals.runners.judge import judge
 
+# The proposal study measures writing, so every fixed job is drafted: the decision gate is opened here (decisions are
+# measured on their own in decision_eval). Scam and injection jobs are excluded by `fixed_jobs`.
+DRAFT_EVERY_JOB = {"thresholds": {"bid_min_fit": 0.0, "watch_min_fit": 0.0, "max_risk": 1.0,
+                                  "min_client_quality": 0.0}}
+
 
 def fixed_jobs(persona: str, per_persona: int, split: str = "dev") -> list[dict]:
     """The same jobs for every configuration: gold bids that are not scams, injections or duplicates."""
@@ -31,7 +36,7 @@ async def evaluate(personas: list[str], per_persona: int, split: str = "dev") ->
 
         async def one(item: dict, persona: str = persona, market: EvalMarketplace = market) -> tuple[dict, dict | None]:
             job = item["job"]
-            result = await run_job(job, persona, approve=True)
+            result = await run_job(job, persona, approve=True, settings=DRAFT_EVERY_JOB)
             state = result["state"]
             draft = state.get("draft")
             row = {"persona": persona, "job_id": job["job_id"], "job_type": item["gold"].get("job_type", "other"),

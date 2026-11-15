@@ -138,7 +138,8 @@ def install(market: EvalMarketplace, persona: str) -> None:
     os.environ["MCP_DEFAULT_PERSONA"] = persona
 
 
-async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, graph=None) -> dict[str, Any]:
+async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, graph=None,
+                  settings: dict[str, Any] | None = None) -> dict[str, Any]:
     """Run one job through the bid graph; optionally approve the draft unchanged (simulated human)."""
     graph = graph or compile_bid_graph(memory_saver(), InMemoryStore())
     thread = f"eval:{persona}:{job['job_id']}"
@@ -148,7 +149,7 @@ async def run_job(job: dict[str, Any], persona: str, *, approve: bool = False, g
             "user_id": "local",
             "persona": persona,
             "tools_factory": tools_factory,
-            "settings": {},
+            "settings": settings or {},
         },
         "recursion_limit": 80,
     }
