@@ -6,9 +6,9 @@ writing; **you approve every proposal and message before anything leaves the sys
 
 ![demo](docs/images/demo.gif)
 
-**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;·&nbsp; **Video (3 min):** <!-- video-url -->not
-recorded yet<!-- /video-url --> &nbsp;·&nbsp; **Write-up:** <!-- writeup-url -->not published yet<!-- /writeup-url -->
-&nbsp;·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
+**Live:** <!-- live-url -->[gigbid-9305.westus2.cloudapp.azure.com](https://gigbid-9305.westus2.cloudapp.azure.com)<!-- /live-url --> &nbsp;Â·&nbsp; **Video (3 min):** <!-- video-url -->not
+recorded yet<!-- /video-url --> &nbsp;Â·&nbsp; **Write-up:** <!-- writeup-url -->[the better retriever did not write better proposals](https://mushi-pma.github.io/gigbid/)<!-- /writeup-url -->
+&nbsp;Â·&nbsp; **Portfolio MCP server:** [install](mcp_servers/portfolio/README.md)
 
 Reviewer login (app) and a read-only trace viewer login (Phoenix, at `/phoenix/`): shared privately on the submission,
 never in this repository. The live site runs on free model tiers, so an analysis can take a few minutes when the
@@ -133,7 +133,7 @@ Latency rows come from the first holdout run, whose model calls were all live (`
 
 Full results: [docs/RESULTS.md](docs/RESULTS.md). Public traces: <!-- traces -->added at deployment<!-- /traces -->
 
-### Résumé line
+### RÃ©sumÃ© line
 
 Built GigBid, a LangGraph multi-agent freelancer copilot on three MCP servers where nothing is sent without human
 approval; claim verification cut unsupported claims from 2.13 to 1.00 per proposal and injection detection rose from
@@ -169,7 +169,7 @@ write is a draft you confirm on Upwork.
 | Profile | Frequent nodes | Writer, Critic, Liaison | Where |
 |---|---|---|---|
 | `open` (deployed) | gpt-oss-20b | gpt-oss-120b | hosted open-weight endpoints used as one pool (Groq, NVIDIA, Cerebras, SambaNova free tiers) |
-| `open_gemma` | Gemma 4 26B-A4B | Gemma 4 31B | second open configuration, compared on the dev set |
+| `open_gemma` | Gemma 4 31B | Gemma 4 31B | second open configuration, compared on the dev set |
 | `open_local` | Qwen3 4B | Qwen3 8B | Ollama service in compose, no GPU needed |
 
 No paid model is used; the whole project runs on free tiers. Cost is still reported at list price for the same
@@ -185,9 +185,9 @@ posts, conversations). Sources, licenses, preprocessing and limitations: [docs/D
 
 ## Repository
 
-`apps/web` React + TypeScript · `apps/api` FastAPI · `agent/` graphs, nodes, prompts, memory · `rag/` ingestion,
-variants V0 to V8, claim verification · `mcp_servers/` portfolio, marketplace, workspace · `worker/` Arq schedules ·
-`gigsim/` marketplace simulator · `evals/` datasets, runners, results · `infra/` Docker and deployment · `docs/`.
+`apps/web` React + TypeScript Â· `apps/api` FastAPI Â· `agent/` graphs, nodes, prompts, memory Â· `rag/` ingestion,
+variants V0 to V8, claim verification Â· `mcp_servers/` portfolio, marketplace, workspace Â· `worker/` Arq schedules Â·
+`gigsim/` marketplace simulator Â· `evals/` datasets, runners, results Â· `infra/` Docker and deployment Â· `docs/`.
 
 Pinned versions: Python 3.12, LangGraph 1.2.21, MCP SDK 1.30.0, langchain-mcp-adapters 0.3.2, FastAPI 0.162.5,
 React 19, Vite, Playwright; exact pins in `pyproject.toml` and `apps/web/package.json`.

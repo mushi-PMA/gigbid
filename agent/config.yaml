@@ -51,7 +51,7 @@ models:
     - name: gemini
       base_url: https://generativelanguage.googleapis.com/v1beta/openai
       api_key_env: GEMINI_API_KEY
-      models: {gemma_small: gemma-4-26b-a4b-it, gemma_large: gemma-4-31b-it}
+      models: {gemma_small: gemma-4-31b-it, gemma_large: gemma-4-31b-it}   # 26B-A4B returned 500 on every call (15 Nov)
   profiles:
     open:                       # deployed profile: gpt-oss-20b for cheap, frequent nodes; gpt-oss-120b where quality matters
       provider: pool

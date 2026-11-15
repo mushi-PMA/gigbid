@@ -77,6 +77,11 @@ token allowance was used up. X2 is therefore cut to **2 bid jobs per persona (6 
 architecture baseline rows that never finished run on gpt-oss-120b served by Groq instead of Cerebras (same weights).
 X2 at this size cannot reach significance; it is reported as underpowered.
 
+### Third deviation (15 Nov 2026, 10:05 PKT, before the model comparison was read)
+On the Gemini free tier, Gemma 4 26B-A4B returned HTTP 500 on every call while Gemma 4 31B answered. The `open_gemma`
+profile therefore uses Gemma 4 31B for both its small and large roles; the comparison is gpt-oss (20B and 120B)
+against Gemma 4 31B. X2 went back to the pre-registered 4 bid jobs per persona once friends' Cerebras keys were added.
+
 ## Budgets (declared in agent/config.yaml before the holdout run)
 p95 latency per job analysed at most 20 s; p95 latency per proposal at most 90 s; cost per job analysed at most
 US$0.002; cost per proposal at most US$0.01 (open profile).

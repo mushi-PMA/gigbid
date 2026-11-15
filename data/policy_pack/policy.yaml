@@ -53,6 +53,15 @@ risk:
     - '(?i)\bpay(ment)? (outside|off) (the )?(platform|upwork|gigsim)\b'
     - '(?i)\b(send|share) (your )?(bank|card|id|passport|login) (details|number)\b'
     - '(?i)\b(registration|training|equipment) fee\b'
+    # added after the dev failure analysis (docs/FAILURES.md, row 12): pay too good for the effort, all work before
+    # escrow, equipment-cheque fraud, CV harvesting, pressure to act now, credential phishing
+    - '(?i)\bearn \$\s?\d[\d,]*\b.{0,60}\bno (prior )?experience\b'
+    - '(?i)\beasy money\b'
+    - '(?i)\bpay(ment)? only (on|after|upon) (the )?final delivery\b'
+    - '(?i)\bequipment (is )?provided\b'
+    - '(?i)\brecruiter for\b.{0,60}\bsend (me )?your (cv|resume)\b'
+    - '(?i)\bhelp in the next hour\b'
+    - '(?i)\bdata access setup\b'
   injection_signals:
     - '(?i)ignore (all |any )?(previous|prior|above) (instructions|rules)'
     - '(?i)\b(system prompt|developer message|you are now|new instructions)\b'

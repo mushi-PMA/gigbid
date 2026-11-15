@@ -46,6 +46,11 @@ def assess(job: Job, history: ClientHistory | None) -> RiskReport:
     if injection_hits and not report.injection_detected:
         report.injection_detected = True
         report.flags.append(RiskFlag(kind="injection", evidence=injection_hits[0]))
+    if scam_hits and not report.is_scam:     # a scam pattern is decisive, like an injection pattern
+        report.is_scam = True
+        report.flags.append(RiskFlag(kind="scam", evidence=scam_hits[0]))
+    if report.is_scam:
+        report.score = max(report.score, 0.8)
     if history is not None and not history.payment_verified and \
             not any(f.kind == "payment_unverified" for f in report.flags):
         report.flags.append(RiskFlag(kind="payment_unverified", evidence="client payment method not verified"))
