@@ -1,0 +1,333 @@
+"item","job_id","job_title","job_post","proposal","human_overall"
+"1","dev-aiml-0003","Senior Rust Engineer","Digis is looking for a decisive, insightful, and self-driven Senior Rust Engineer to join a wonderful American healthcare project!
+
+You will be working with an English-speaking team, so an Intermediate level of English is a must.
+There is no time trackers, full-time job with flexible hours.
+
+💡About the project:
+iRemedy — is a healthcare products marketplace that hosts the nation’s largest online catalog of health and medical products.
+With 15 years in healthcare supply, iRemedy is a trusted and reliable partner for acquiring medical supplies and Personal Protective Equipment.
+
+Project country and TimeZone: USA, work in Kyiv timezone with a flexible schedule.
+Methodology: Scrum
+Age and stage of the project: 15 years, active development
+Team: PM, 1 Front-End developer, 1 Full-Stack developer, a DevOps engineer, and a CTO.
+Tech Stack: AWS, Docker, Kubernetes and Helm, Rust, Typescript/Javascript/NodeJS, Python, Elasticsearch/Amazon, OpenSearch, GraphQL, SQS queues, Amazon OpenSearch.
+
+📌Requirements:
+— At least 2+ years of experience with Rust
+— 1+ year of experience with AWS and Kubernetes
+— 5+ years of experience in software development overall OR 3,5 years of experience with Rust.
+— Good communication skills and ability to work in English speaking team
+— Intermediate+ English proficiency
+
+📌Responsibilities:
+— Participate in proposing, designing, and planning projects.
+— Take ownership by consistently writing production-ready and testable code.
+— Consistently create optimal des","You need a Senior Rust Engineer to help scale iRemedy, the healthcare marketplace that powers the nation’s largest catalog of medical products. I have daily experience with Kubernetes and have delivered production‑ready services using Docker and AWS Lambda, and I have worked on GraphQL APIs in past projects [ai_ml_engineer:proposal:prop-aiml-084]. My past work includes cutting model release time from two weeks to one day, demonstrating the ability to deliver quickly under tight timelines [ai_ml_engineer:proposal:prop-aiml-084]. Clients have noted my clear communication and thorough documentation, which supports smooth hand‑offs and collaboration [ai_ml_engineer:review:15][ai_ml_engineer:review:20][ai_ml_engineer:review:26]. I look forward to contributing to iRemedy’s continued success.","1"
+"2","dev-data-0005","Robust efficient system to extract data and insert into database","Ignore the budget. The job is to build a robust and efficient (i.e. performance is satisfactory) application that will retrieve data from a website and insert into a sql server database. The website has a GraphQL api layer and I anticipate retrieving the data through this would be the best solution. There is a detailed spec document, with a test data pack to aid development and testing. I would like a solution that is not going to break as soon as there is a tiny change on the web site. SQL to create the database tables and the procedures to execute for populating them is provided. Please take a look at the spec document for further details on the job, will provide the test data and db scripts etc when needed. Thanks for taking the time to read this job listing.","You need a tool that pulls data through the site’s GraphQL API and loads it into your SQL Server using the scripts you provide, while staying stable when the site changes. I have experience with data‑scraping projects and working with SQL tables [data_analyst:proposal:prop-data-022]. I have also used Python for data‑scraping work in the past [data_analyst:proposal:prop-data-009]. I will start by reviewing the spec document and test data pack, then deliver a minimal viable version that you can test immediately. From there we’ll iterate, adding clear documentation and logging so future maintenance is straightforward. Let’s schedule a short call to confirm the exact data points and success criteria, then I can have a working prototype ready soon.","2"
+"3","hold-data-0010","Excel Pivot Like functionality with Open source with change option with full stack developer","Ability to load heavy data on browser Ability to analyze loaded data like pivot functions in Excel. Ability to edit the data and use add, multiply function on range of cells. Ability to save the edited data back to database.. Ability to edit data at any level.. Like if data stored a,b,c level. user can change data any any level aggregated like all A level, all b level, or a, b level etc..","You need a web app that can pull huge tables into the browser, let users slice and dice them like Excel pivots, edit any aggregation level and push those changes back to the database. I have built full‑stack applications that let users explore data [data_analyst:proposal:prop-data-099]. My recent data‑visualisation work delivered dashboards where users could filter and group data on the fly [data_analyst:proposal:prop-data-079]. I also have extensive experience automating Excel‑style calculations and persisting results via SQL back‑ends, as shown in a risk‑metrics system built with Excel, VBA and SQL [data_analyst:proposal:prop-data-144]. For this project I would start by profiling the data size, choose a virtual‑scroll grid and a client‑side aggregation library, then implement editable cells that trigger API calls to update the database at any hierarchy level. I’ll provide clear documentation and performance tuning to keep the UI snappy even with millions of rows.","4"
+"4","dev-aiml-0003","Senior Rust Engineer","Digis is looking for a decisive, insightful, and self-driven Senior Rust Engineer to join a wonderful American healthcare project!
+
+You will be working with an English-speaking team, so an Intermediate level of English is a must.
+There is no time trackers, full-time job with flexible hours.
+
+💡About the project:
+iRemedy — is a healthcare products marketplace that hosts the nation’s largest online catalog of health and medical products.
+With 15 years in healthcare supply, iRemedy is a trusted and reliable partner for acquiring medical supplies and Personal Protective Equipment.
+
+Project country and TimeZone: USA, work in Kyiv timezone with a flexible schedule.
+Methodology: Scrum
+Age and stage of the project: 15 years, active development
+Team: PM, 1 Front-End developer, 1 Full-Stack developer, a DevOps engineer, and a CTO.
+Tech Stack: AWS, Docker, Kubernetes and Helm, Rust, Typescript/Javascript/NodeJS, Python, Elasticsearch/Amazon, OpenSearch, GraphQL, SQS queues, Amazon OpenSearch.
+
+📌Requirements:
+— At least 2+ years of experience with Rust
+— 1+ year of experience with AWS and Kubernetes
+— 5+ years of experience in software development overall OR 3,5 years of experience with Rust.
+— Good communication skills and ability to work in English speaking team
+— Intermediate+ English proficiency
+
+📌Responsibilities:
+— Participate in proposing, designing, and planning projects.
+— Take ownership by consistently writing production-ready and testable code.
+— Consistently create optimal des","I’m excited about contributing to iRemedy’s healthcare marketplace, where reliable, high‑performance services are critical. I have built GraphQL authorization and cost‑analysis features with Rust and Apollo, ensuring robust API performance and security [ai_ml_engineer:proposal:prop-aiml-084]. I have daily work with Kubernetes and I can use it to support your stack [ai_ml_engineer:proposal:prop-aiml-084]. I understand the importance of compliance and data integrity in healthcare, and I consistently write testable, production‑grade code while conducting thorough code reviews.
+
+Plan:
+1. Review the existing codebase and architecture, focusing on Rust modules, AWS resources, and Kubernetes deployments.
+2. Identify reliability and performance bottlenecks; propose design improvements and add comprehensive tests.
+3. Implement enhancements in short, reviewable increments, leveraging Helm for seamless deployment.
+4. Conduct knowledge‑transfer sessions and document compliance‑related considerations for the team.
+
+I look forward to a brief call to align on priorities and deliver value quickly.","4"
+"5","hold-web-0008","Looking for Ongoing React Developer","We are looking for a dynamic and results-driven individual to join our team as a React Developer.
+We are looking for a dedicated individual who can assist us in various projects.
+You will need to be confident, persuasive, and able to think on your feet to overcome problems.
+Your availability (hours per week) and preferred working hours.
+Willing to discuss making this a fixed price or an hourly job.
+We are a small but collaborative team and would hope to work with someone who enjoys collaboration and consistent work.
+Before sending proposals, please Must Read carefully detailed job description by clicking job description section at the web page given below:
+https://t.ly/KTVV
+Click at Job description Section.","You need a React developer who can both build new features and keep the front‑end stable for your small, collaborative team. I have delivered several React‑centric projects, including a job board and an event ticketing site, where I built and maintained the UI layer on a daily basis [fullstack_web_dev:proposal:prop-web-013]. My past clients note that I provide clear documentation and hand over work that their teams can pick up without extra calls [fullstack_web_dev:review:20]. For any new feature I’ll start with a short call to confirm scope, then deliver small, demo‑ready increments every few days, ensuring the code stays clean and well‑documented. Let’s discuss how I can fit into your workflow and start adding value right away.","2"
+"6","dev-aiml-0004","Developer to create an AI-powered virtual assistant for online coaches and entrepreneurs","I am an online business coach and I am looking for a developer to help me create an AI-powered virtual assistant for my business. The virtual assistant will assist my clients with tasks such as scheduling appointments, managing emails, and answering common questions. The virtual assistant will be accessible through a website or mobile application, and will utilize natural language processing (NLP) to understand and respond to user input.
+
+The ideal candidate for this project will have experience in the following areas:
+
+AI/ML Development
+Natural Language Processing (NLP)
+Web/Mobile App Development
+Experience with virtual assistants or chatbots
+The project will include the following tasks:
+
+Design and development of the virtual assistant
+Integration of natural language processing (NLP) technology
+Testing and debugging
+
+Looking for a developer who can work independently, is proactive and can communicate effectively with me.
+
+Please mention your availability and your hourly rate or total project budget.
+
+Thank you for your time and consideration!
+
+Regenerate response
+line coaches and entrepreneurs","You need an AI‑powered virtual assistant that can schedule appointments, manage emails, and answer client questions, all delivered through a web or mobile interface. My recent full‑stack project integrated OpenAI chat capabilities into a responsive web portal, using Python endpoints and interactive docs to ensure smooth user interaction. I also delivered a chatbot solution that leveraged natural language processing to improve routing accuracy from 71% to 93%, demonstrating the ability to fine‑tune models for precise, context‑aware responses. I will start with a short call to define scope, then deliver incremental demos every few days, keeping documentation up‑to‑date for easy handover. My proactive communication style and independent work ethic align with your need for reliable, scalable support. I am available to begin this week and can work flexibly to match your coaching schedule.","3"
+"7","dev-data-0003","Learning Needs Assessment Data Merge and Results Report","We conducted a in person learning needs assessment:
+That have resulted in 3 separate excel documents containing recorded data from 
+
+Manager 9 tabs 
+Supervisors 13 tabs
+Front Line Employees 26 tabs 
+
+I need help compiling and organizing the data with the goal of creating reports that can generate visuals of the results that will allow us to make decisions.","You need to merge three Excel workbooks—manager, supervisor and front‑line tabs—into a single, clean dataset and then turn the results into decision‑making visuals. In a recent CRM audit I merged 31,000 duplicate contacts and aligned ownership using SQL and Excel, delivering a clear, consolidated view for the client [data_analyst:proposal:prop-data-144]. I also delivered a full Excel/Google Sheet dashboard in under a week, confirming inputs on day one and iterating with demos every few days to ensure the visualizations match the decision needs [data_analyst:proposal:prop-data-147].","3"
+"8","dev-data-0006","Data Analyst to help analyze and automate the cleaning of Business Location Data","We are looking for an analyst to help clean business location data. 
+
+The data has some bad data that needs to be identified and cleaned. 
+
+There are also a significant number of ""Stealth"" Duplicate results. Businesses with a single location that shows up multiple times in the data with slightly varying information. These need to be identified programmatically and consolidated. We would like to have Python Scripts written to make this a repeatable process in the future.
+
+Candidates in the USA Only. The position will require a high familiarity with the US economy and retail businesses.","You need to clean bad business location data, detect stealth duplicates, and build repeatable Python scripts. I recently automated month‑end reporting for a mid‑size finance firm, picking Python for short, testable code and using SQL for most data work, which cut manual effort dramatically [data_analyst:cs:cs-data-04]. In a competitor price tracker project I removed duplicates, fixed formats, and handled missing values before analysis, delivering a scheduled Python script that runs unattended each morning [data_analyst:cs:cs-data-13]. Another project involved cleaning a large customer dataset where I dropped duplicates, standardized fields, and used Pandas to keep the code concise, ensuring the data was ready for downstream analysis [data_analyst:cs:cs-data-03]. I also built a retail sales dashboard with SQL doing the heavy lifting and Power BI as the BI tool, demonstrating my ability to work with US retail data structures [data_analyst:cs:cs-data-01]. My approach will start with a quick data audit, define rules for “stealth” duplicates, and deliver well‑documented, repeatable scripts that anyone can run without developer help.","4"
+"9","dev-aiml-0011","Flumine betfair api customisation","Seeking someone with expertise with Betfair API, betfairlightweight and Flumine to assist with the development and customisation of an efficient automated bot to be used on a virtual machine (AWS or Azure). The bots/apps will have to efficiently manage streaming data between the betfair api and database.","I have extensive experience building Python‑based bots and integrating REST APIs, with recent projects deploying services on AWS Lambda [ai_ml_engineer:proposal:prop-aiml-031]. I also specialize in customizing Python bots for specific workflows, ensuring stable builds and version control [ai_ml_engineer:proposal:prop-aiml-025].
+
+**Plan**
+1. Review your current Flumine and betfairlightweight setup, identify integration points, and define data schemas for the target database.
+2. Implement a streaming layer using async Python to pull live market data from Betfair and write efficiently to the chosen database, applying back‑pressure handling for high‑frequency updates.
+3. Containerize the bot with a pinned dependency file, then deploy and configure it on a virtual machine in AWS, providing step‑by‑step deployment instructions.
+4. Conduct performance testing of the streaming pipeline, document the results, and deliver comprehensive maintenance documentation.
+
+I look forward to a short call to align on details and start delivering value.","2"
+"10","dev-web-0012","HTML5/CSS developer","My current B2B solution with existing customers needs a complete user interface design make over. I am looking for someone to design a new look and feel built either from scratch or using an existing template (which I will purchase.) This must be HTML5, latest CSS, responsive, work on mobile devices as well, work on all major browsers, has modal windows if, as necessary, etc. It must have all the client side capabilities using javascript or jquery or the like for validation, etc. I need this to be delivered as the pure code only, not being delivered via a platform like WordPress. I will take what you deliver as the presentation and then place my programming code around to dynamically generate the ultimate web page.
+
+I am looking for someone with new web design and user interface experience that can help me take my existing business website to the next level visually.
+
+If you are interested, let me know and I can provide a document that shows the current user interface for my website and you can provide examples of work you have done and together we can collaborate and determine the look and feel we are going for.","I have extensive experience delivering fast, responsive UI overhauls using modern CSS and JavaScript, including a headless Shopify storefront that cut load time from 4.8 s to 1.6 s and boosted conversion by 11% [fullstack_web_dev:proposal:prop-web-002]. I also performed a performance and accessibility overhaul for a media company, hand‑tuning CSS and JavaScript to work comfortably on small screens and across browsers [fullstack_web_dev:cs:cs-web-22].
+
+1. Review your current B2B interface and any design specifications you provide, then create a style guide and component library using pure HTML and the latest CSS.
+2. Build the layout with responsive grid and utility classes, ensuring mobile‑first breakpoints and cross‑browser compatibility.
+3. Add client‑side validation and interactive elements with vanilla JavaScript, testing all forms and modals.
+4. Deliver the complete code package (HTML, CSS, JS) without any CMS integration, and provide brief documentation for future maintenance.","4"
+"11","hold-data-0011","Responsible and certified data analyst needed","We are looking for a passionate certified Data Analyst. The successful candidate will turn data into information, information into insight and insight into business decisions.
+
+Responsibilities
+1.Interpret data, analyze results using statistical techniques and provide ongoing reports.
+
+2.Develop and implement databases, data collection systems, data analytics and other strategies that optimize statistical efficiency and quality.
+
+3.Acquire data from primary or secondary data sources and maintain databases/data systems.
+
+4.Identify, analyze, and interpret trends or patterns in complex data sets","You need a data analyst who can turn raw data into actionable business decisions. My recent supply‑chain KPI dashboard built in Microsoft Excel improved on‑time delivery tracking from a monthly to a daily cadence, giving managers instant insight into delivery performance [data_analyst:proposal:prop-data-131]. I have cleaned and reshaped large data sets using SQL, and in a separate project I used Google Sheets to create audit logs that saved coordinators about six hours each week while ensuring data integrity for reliable analysis [data_analyst:proposal:prop-data-105]. A CRM data audit I delivered merged 31,000 duplicate contacts and standardized ownership mapping, providing a single source of truth that streamlined reporting and improved strategic planning [data_analyst:proposal:prop-data-144]. I will interpret your data with statistical techniques, develop efficient collection systems, and maintain clean databases to optimize statistical efficiency as you described. My approach starts with reviewing your current data sources, then building a minimal viable reporting layer that delivers clear trends and patterns, ready for immediate business use.","3"
+"12","dev-web-0013","Import products to Shopify with script","Shopify has a product import limit after reaching 50.000 skus. We have around 100.000 skus. The remaining 50.000 products should be imported daily by 1000sku batches. We want a developer to import the first 50k and then setup a fully automated script to import the remaining 50k items 1000 daily over the next 50 days. The script should run on your server or webserver you may choose.","You need to get the first 50,000 SKUs into Shopify now and then run a daily batch of 1,000 SKUs for the next 50,000 items, all while respecting Shopify’s import limit. I have delivered Shopify projects before, building the smallest useful version, testing it thoroughly and handing over with clear notes [fullstack_web_dev:proposal:prop-web-085]. My CV also shows a headless Shopify storefront that cut page load from 4.8 to 1.6 seconds, proving I can work efficiently with the platform [fullstack_web_dev:cv]. My approach will start with a quick call to confirm the data format and success criteria, then I’ll write a script using a suitable language such as Python or Node.js. I will provide deployment instructions and basic documentation so you can run it independently.","2"
+"13","dev-data-0003","Learning Needs Assessment Data Merge and Results Report","We conducted a in person learning needs assessment:
+That have resulted in 3 separate excel documents containing recorded data from 
+
+Manager 9 tabs 
+Supervisors 13 tabs
+Front Line Employees 26 tabs 
+
+I need help compiling and organizing the data with the goal of creating reports that can generate visuals of the results that will allow us to make decisions.","You need to combine three Excel workbooks—manager, supervisor and front‑line tabs—into a single, clean dataset and then turn the results into decision‑making visuals. I have merged large Excel files and de‑duplicated records for a CRM audit, handling 31,000 contacts and fixing owner mappings, so I know how to consolidate data from multiple workbooks into a consistent structure [data_analyst:proposal:prop-data-144]. My recent projects involved removing duplicates, standardising formats and preparing the data for analysis before building visual reports, as shown in a university survey analysis where I delivered a board report that shaped budgeting decisions [data_analyst:cs:cs-data-09]. I will start with a brief call to confirm the exact fields and success criteria, then deliver an initial merged version, followed by iterative visualisation drafts. Let’s discuss the scope and timeline so I can begin delivering clean, visual‑ready data quickly.","4"
+"14","dev-aiml-0003","Senior Rust Engineer","Digis is looking for a decisive, insightful, and self-driven Senior Rust Engineer to join a wonderful American healthcare project!
+
+You will be working with an English-speaking team, so an Intermediate level of English is a must.
+There is no time trackers, full-time job with flexible hours.
+
+💡About the project:
+iRemedy — is a healthcare products marketplace that hosts the nation’s largest online catalog of health and medical products.
+With 15 years in healthcare supply, iRemedy is a trusted and reliable partner for acquiring medical supplies and Personal Protective Equipment.
+
+Project country and TimeZone: USA, work in Kyiv timezone with a flexible schedule.
+Methodology: Scrum
+Age and stage of the project: 15 years, active development
+Team: PM, 1 Front-End developer, 1 Full-Stack developer, a DevOps engineer, and a CTO.
+Tech Stack: AWS, Docker, Kubernetes and Helm, Rust, Typescript/Javascript/NodeJS, Python, Elasticsearch/Amazon, OpenSearch, GraphQL, SQS queues, Amazon OpenSearch.
+
+📌Requirements:
+— At least 2+ years of experience with Rust
+— 1+ year of experience with AWS and Kubernetes
+— 5+ years of experience in software development overall OR 3,5 years of experience with Rust.
+— Good communication skills and ability to work in English speaking team
+— Intermediate+ English proficiency
+
+📌Responsibilities:
+— Participate in proposing, designing, and planning projects.
+— Take ownership by consistently writing production-ready and testable code.
+— Consistently create optimal des","You need a Senior Rust Engineer who can hit the ground running on a complex healthcare marketplace, and you specifically called out experience with Rust and a team that speaks English. I have built GraphQL services in Rust, integrating tightly with Kubernetes‑based deployments, which gave me deep practical knowledge of Rust in production environments. I plan to start by reviewing the current architecture and begin work on a Rust module, iterating based on code‑review feedback. I look forward to collaborating with your CTO and the rest of the team to enhance the platform’s performance and reliability.","2"
+"15","dev-data-0005","Robust efficient system to extract data and insert into database","Ignore the budget. The job is to build a robust and efficient (i.e. performance is satisfactory) application that will retrieve data from a website and insert into a sql server database. The website has a GraphQL api layer and I anticipate retrieving the data through this would be the best solution. There is a detailed spec document, with a test data pack to aid development and testing. I would like a solution that is not going to break as soon as there is a tiny change on the web site. SQL to create the database tables and the procedures to execute for populating them is provided. Please take a look at the spec document for further details on the job, will provide the test data and db scripts etc when needed. Thanks for taking the time to read this job listing.","You need a system that pulls data through the site’s GraphQL API and loads it into your SQL Server without breaking on minor site tweaks. I have experience building scrapers with Python and automation, so I understand the challenges of keeping a pipeline stable [data_analyst:proposal:prop-data-009]. My recent work involved extracting, reshaping, and loading data nightly into SQL tables, using scripts that retry on failures and log each step for easy maintenance [data_analyst:proposal:prop-data-022]. I will start by reviewing the spec and test data, then create a minimal viable connector that queries the GraphQL endpoint, maps the response to your provided schema, and inserts rows via your scripts. Throughout development I will add error handling, logging, and clear documentation so future updates are straightforward. A short call to confirm priorities and aim to deliver a demo within a week, pending project scope and requirements.","3"
+"16","dev-aiml-0001","Data Engineer","Data Engineer | 6:30PM - 2:30AM | Remote | 10+yrs 
+
+""lease assist with profiles for this position (Single).
+
+Need candidates who are currently located in India for this position. 10+ years of experience for this at least.
+Sr. Azure Data Engineer
+
+100% REMOTE (India Based)
+
+Contract Period : 24+ months
+
+Expert experience on Azure Cloud environment.
+Very good ETL development experience in ADF (Azure Data Factory).
+Very good ETL development experience in Azure Databricks using Python, Pyspark, and SQL.
+Experience in ingesting data from a variety of data sources.
+Very good Data Warehousing experience
+Hours of support: 6:30pm – 2:30am IST, Monday to Friday","You need a senior Azure Data Engineer for a 24‑month remote contract, based in India, with night‑shift support from 6:30 pm to 2:30 am IST. I have experience building pipelines in Python [ai_ml_engineer:proposal:prop-066]. In a recent demand‑forecast project I built a Python‑based pipeline that handled diverse data feeds and reduced stock‑outs by 22% [ai_ml_engineer:proposal:prop-066]. My work on a sensor‑anomaly detector also relied on Python [ai_ml_engineer:proposal:prop-089]. Clients have praised my clear documentation and smooth handovers, enabling their teams to take over without additional calls [ai_ml_engineer:review:26]. I will provide thorough documentation and support during the required hours.","1"
+"17","dev-aiml-0001","Data Engineer","Data Engineer | 6:30PM - 2:30AM | Remote | 10+yrs 
+
+""lease assist with profiles for this position (Single).
+
+Need candidates who are currently located in India for this position. 10+ years of experience for this at least.
+Sr. Azure Data Engineer
+
+100% REMOTE (India Based)
+
+Contract Period : 24+ months
+
+Expert experience on Azure Cloud environment.
+Very good ETL development experience in ADF (Azure Data Factory).
+Very good ETL development experience in Azure Databricks using Python, Pyspark, and SQL.
+Experience in ingesting data from a variety of data sources.
+Very good Data Warehousing experience
+Hours of support: 6:30pm – 2:30am IST, Monday to Friday","I have delivered Python‑based data pipelines and model deployment platforms for enterprise clients, and consistently provided thorough documentation for handover [ai_ml_engineer:proposal:prop-aiml-089] [ai_ml_engineer:review:26].
+
+1. Assess the source systems and define the data ingestion strategy using Python.
+2. Build pipelines to orchestrate the extracts and perform the necessary transformations.
+3. Document the solution and provide runbooks for ongoing maintenance.
+
+I look forward to a short call to align on priorities and next steps.","1"
+"18","hold-web-0006","Hyperledger Fabric V2.x Wep-App development","POC project for research purpose 
+back- end - APIs - basic front-end for testing 
+will need to deal with databases MongoDB , IoT gateway
+through Redis","You need a quick proof‑of‑concept that exposes backend APIs, talks to MongoDB and connects an IoT gateway via Redis, with a simple front‑end to verify the flow. I have built similar stacks: I have worked with MongoDB and documented my development decisions as I go [fullstack_web_dev:proposal:prop-web-096]. In a live‑chat widget project I used Redis as the central message bus and documented the JSON API endpoints [fullstack_web_dev:cs:cs-web-19]. My approach starts with a short call to confirm the exact data flows, then I deliver the API layer in small, testable increments, providing a minimal front‑end after each step so you can validate the integration immediately. I keep all decisions documented, so any team member can pick up the work later. Let’s align on the scope and I’ll start delivering demos within a few days.","2"
+"19","hold-web-0008","Looking for Ongoing React Developer","We are looking for a dynamic and results-driven individual to join our team as a React Developer.
+We are looking for a dedicated individual who can assist us in various projects.
+You will need to be confident, persuasive, and able to think on your feet to overcome problems.
+Your availability (hours per week) and preferred working hours.
+Willing to discuss making this a fixed price or an hourly job.
+We are a small but collaborative team and would hope to work with someone who enjoys collaboration and consistent work.
+Before sending proposals, please Must Read carefully detailed job description by clicking job description section at the web page given below:
+https://t.ly/KTVV
+Click at Job description Section.","You need a React developer who can build and maintain components for multiple projects, work closely with a small team, and adapt to your preferred weekly availability or pricing model. I have eight years of full‑stack experience with React as a core skill, delivering MVPs and production apps for founders and small teams [fullstack_web_dev:cv]. In past proposals I explained how I start with a short call, agree on scope, and deliver demos every few days, a process that fits well with tight collaboration and regular communication [fullstack_web_dev:proposal:prop-web-004]. I’m comfortable joining a small, collaborative group and documenting decisions so anyone can pick up the work later, as I did for a Next.js/web3 project [fullstack_web_dev:proposal:prop-web-013]. Let’s discuss the most urgent component first and I’ll show you a quick prototype.","2"
+"20","dev-data-0005","Robust efficient system to extract data and insert into database","Ignore the budget. The job is to build a robust and efficient (i.e. performance is satisfactory) application that will retrieve data from a website and insert into a sql server database. The website has a GraphQL api layer and I anticipate retrieving the data through this would be the best solution. There is a detailed spec document, with a test data pack to aid development and testing. I would like a solution that is not going to break as soon as there is a tiny change on the web site. SQL to create the database tables and the procedures to execute for populating them is provided. Please take a look at the spec document for further details on the job, will provide the test data and db scripts etc when needed. Thanks for taking the time to read this job listing.","You need a system that pulls data from a website’s GraphQL API and loads it into your SQL Server using the scripts you provide, while staying stable as the site evolves. I have built a competitor price tracker using Python that extracted product data and helped reprice 150 products quickly [data_analyst:proposal:prop-data-086]. My approach will start with a quick review of the spec document and test data pack, then I’ll prototype a minimal GraphQL query client in Python, add retry logic and logging, and map the results to your existing SQL scripts. I’ll run the full test suite you supply, iterate on any edge cases, and document the code and maintenance steps so future changes are easy to handle. This ensures a robust, efficient solution that meets your performance and reliability goals.","3"
+"21","dev-aiml-0004","Developer to create an AI-powered virtual assistant for online coaches and entrepreneurs","I am an online business coach and I am looking for a developer to help me create an AI-powered virtual assistant for my business. The virtual assistant will assist my clients with tasks such as scheduling appointments, managing emails, and answering common questions. The virtual assistant will be accessible through a website or mobile application, and will utilize natural language processing (NLP) to understand and respond to user input.
+
+The ideal candidate for this project will have experience in the following areas:
+
+AI/ML Development
+Natural Language Processing (NLP)
+Web/Mobile App Development
+Experience with virtual assistants or chatbots
+The project will include the following tasks:
+
+Design and development of the virtual assistant
+Integration of natural language processing (NLP) technology
+Testing and debugging
+
+Looking for a developer who can work independently, is proactive and can communicate effectively with me.
+
+Please mention your availability and your hourly rate or total project budget.
+
+Thank you for your time and consideration!
+
+Regenerate response
+line coaches and entrepreneurs","You need an AI‑powered assistant that can schedule appointments, manage emails and answer common questions for your coaching clients, delivered via a web or mobile interface. I have built end‑to‑end language solutions that understand and act on user input, using Python, NLP and LLMs, and I have taken those models into production for small and mid‑size companies [ai_ml_engineer:cv]. For a recent project I created a chatbot that handled HR queries, cutting repeat questions by over half [ai_ml_engineer:proposal:prop-aiml-101]. My work on a service‑business NLP tool showed I can deliver functional language features in just a few days and iterate with frequent demos [ai_ml_engineer:proposal:prop-aiml-106]. I also have experience building mobile app components, as described in my mobile app proposals [ai_ml_engineer:proposal:prop-aiml-076]. I work independently, keep proactive communication, and can start immediately with a short call to define scope and milestones.","3"
+"22","hold-aiml-0002","Developer - Scraping DATA using API!","Hi there im looking for an expert in data scraping who can scrap data from a website using API bug they have in their website! if you are good at this please contact me for more information! thank you","You need to pull data from a site by exploiting an API bug, then store the results reliably. I have built several scraping tools that work around quirky endpoints and respect rate limits. In a recent review‑sentiment tracker I built, I created a scheduled collector that fetched pages politely, handling rate limits and robots rules [ai_ml_engineer:proposal:prop-aiml-066]. Another project involved a LinkedIn scraping tool [ai_ml_engineer:proposal:prop-aiml-098]. My approach will start with endpoint analysis, then implement a robust scraper with error handling and data validation, and finally store the cleaned data in your preferred format. I’m ready to start immediately and will keep you updated daily.","2"
+"23","hold-data-0011","Responsible and certified data analyst needed","We are looking for a passionate certified Data Analyst. The successful candidate will turn data into information, information into insight and insight into business decisions.
+
+Responsibilities
+1.Interpret data, analyze results using statistical techniques and provide ongoing reports.
+
+2.Develop and implement databases, data collection systems, data analytics and other strategies that optimize statistical efficiency and quality.
+
+3.Acquire data from primary or secondary data sources and maintain databases/data systems.
+
+4.Identify, analyze, and interpret trends or patterns in complex data sets","Your need to turn data into business decisions and provide ongoing statistical reports matches projects I’ve delivered recently. I built a supply‑chain KPI dashboard in Microsoft Excel that moved tracking from monthly to daily, improving on‑time delivery insight [data_analyst:proposal:prop-data-131]. I also created a sales performance dashboard that unified definitions across reports, cutting weekly spreadsheet work from two days to two hours [data_analyst:proposal:prop-data-039]. For data acquisition and system maintenance, I designed an automated reporting script in SQL that runs unattended each morning, reducing month‑end reporting from five days to one [data_analyst:proposal:prop-data-122]. My approach starts with reviewing your real data, building the smallest useful version, testing it, and then handing over the scripts with notes [data_analyst:proposal:prop-data-053]. I’m ready to begin with a short call to confirm scope and aim to deliver the first version within a week, pending scope confirmation.","4"
+"24","dev-data-0007","AI Proof of Concept Project with Davinci Model","CUSTOMER wishes to use AI to generate summary analysis (reports) of IT vendor contract proposals (""deals""). To generate these reports, we would train an AI model using existing reports created by CUSTOMER analysts on similar deals by the same vendors.
+ 
+For example, CUSTOMER sees dozens of deals every year from the IT vendor, Salesforce. Currently, CUSTOMER analysts benchmark these Salesforce deals against Salesforce deals we have seen previously. Given CUSTOMER's expertise with Salesforce, the analyst will then create a multipage report, called a ""Fair Market Value"" (FMV) report, that provides guidance to the CUSTOMER client on the potential to improve (or ""optimize"") a given deal. The FMV report will typically contain a summary overview of our findings, an assessment of whether or not the deal can be optimized, and findings and recommendations specific to the deal in question. The findings and recommendations might include negotiation strategy, pricing analysis, pricing targets, and concluding remarks.
+ 
+A significant amount of the content for FMV reports are ""boiler plate"" based upon existing FMV reports on, for example, Salesforce deals. CUSTOMER assumes that AI (ChatGPT or other) has the potential to generate much of the boiler plate FMV content for a given deal, enabling the CUSTOMER analyst to focus on customizing the generated content, tailoring it to the specific deal and client at hand.
+ 
+CUSTOMER is looking for an AI Consulting Company with experience in AI (ChatGP","You need to turn hundreds of FMV reports into a tool that auto‑generates the boiler‑plate sections for vendors like Salesforce, while your CTO and GM of the digital division stay closely involved so analysts can focus on custom insights. I have built reporting automation that consolidates structured business reports into a single, repeatable output, cutting month‑end reporting from five days to one ([data_analyst:proposal:prop-data-127]). In a recent AI‑focused engagement I used GPT‑3/3.5 to draft consistent narrative sections for a service‑business analysis, delivering daily written updates and iterative demos ([data_analyst:proposal:prop-data-142]). My approach is to start with a short call to confirm scope, then deliver a minimal viable model promptly, iterating with demos. I will review your raw FMV texts, define the required data schema, and build a proof‑of‑concept that produces the desired summaries, with thorough documentation and a hand‑over plan for your team.","2"
+"25","dev-web-0012","HTML5/CSS developer","My current B2B solution with existing customers needs a complete user interface design make over. I am looking for someone to design a new look and feel built either from scratch or using an existing template (which I will purchase.) This must be HTML5, latest CSS, responsive, work on mobile devices as well, work on all major browsers, has modal windows if, as necessary, etc. It must have all the client side capabilities using javascript or jquery or the like for validation, etc. I need this to be delivered as the pure code only, not being delivered via a platform like WordPress. I will take what you deliver as the presentation and then place my programming code around to dynamically generate the ultimate web page.
+
+I am looking for someone with new web design and user interface experience that can help me take my existing business website to the next level visually.
+
+If you are interested, let me know and I can provide a document that shows the current user interface for my website and you can provide examples of work you have done and together we can collaborate and determine the look and feel we are going for.","You need a fresh UI built with HTML, CSS and JavaScript. I have experience creating front‑ends using these technologies and I follow an approach that starts with a short call to agree on the scope, then builds the smallest useful version, provides a demo every few days, and supplies written updates at the end of each working day. My process includes reviewing the existing pages, delivering incremental demos, and providing documentation to help with future maintenance. Let’s schedule a short call to align on the look and feel and I’ll begin delivering the first version soon. [fullstack_web_dev:proposal:prop-web-105] [fullstack_web_dev:proposal:prop-web-133] [fullstack_web_dev:proposal:prop-web-038]","1"
+"26","dev-data-0005","Robust efficient system to extract data and insert into database","Ignore the budget. The job is to build a robust and efficient (i.e. performance is satisfactory) application that will retrieve data from a website and insert into a sql server database. The website has a GraphQL api layer and I anticipate retrieving the data through this would be the best solution. There is a detailed spec document, with a test data pack to aid development and testing. I would like a solution that is not going to break as soon as there is a tiny change on the web site. SQL to create the database tables and the procedures to execute for populating them is provided. Please take a look at the spec document for further details on the job, will provide the test data and db scripts etc when needed. Thanks for taking the time to read this job listing.","I have experience building data extraction pipelines that pull data and load it into databases, using Python and SQL to ensure reliability and performance [data_analyst:proposal:prop-data-022] [data_analyst:proposal:prop-data-009] [data_analyst:cs:cs-data-11].
+
+Plan:
+1. Review the GraphQL schema and provided SQL scripts; set up a small Python client to query sample data and validate against the target tables.
+2. Implement error handling, retries, and logging to capture API changes and prevent failures.
+3. Create an automated ETL job that extracts, transforms, and loads data nightly, with configurable parameters for easy maintenance.
+4. Deliver clear documentation covering setup, execution, and troubleshooting steps.
+
+I look forward to a short call to align on details and start delivering a resilient solution.","3"
+"27","dev-aiml-0011","Flumine betfair api customisation","Seeking someone with expertise with Betfair API, betfairlightweight and Flumine to assist with the development and customisation of an efficient automated bot to be used on a virtual machine (AWS or Azure). The bots/apps will have to efficiently manage streaming data between the betfair api and database.","You need a Betfair bot that streams market data efficiently and runs on a cloud VM. I have built Python bots that integrate with external APIs and use pinned build recipes to keep library versions stable, ensuring reliable long‑running processes [ai_ml_engineer:proposal:prop-aiml-025]. My recent work involved deploying a data‑intensive service on AWS with Docker, giving me hands‑on experience setting up virtual machines and handling cloud‑specific networking and security [ai_ml_engineer:proposal:prop-aiml-106]. I also design REST‑API integrations and streaming pipelines that move live data into databases with low latency, a skill set directly applicable to the Betfair streaming requirements [ai_ml_engineer:proposal:prop-aiml-031]. I would start by reviewing your current Flumine setup, then implement the customisation and streaming logic in incremental steps, providing documentation and performance tests along the way. Let’s discuss the exact data flow and deployment preferences so I can tailor the solution to your needs.","2"
+"28","dev-aiml-0004","Developer to create an AI-powered virtual assistant for online coaches and entrepreneurs","I am an online business coach and I am looking for a developer to help me create an AI-powered virtual assistant for my business. The virtual assistant will assist my clients with tasks such as scheduling appointments, managing emails, and answering common questions. The virtual assistant will be accessible through a website or mobile application, and will utilize natural language processing (NLP) to understand and respond to user input.
+
+The ideal candidate for this project will have experience in the following areas:
+
+AI/ML Development
+Natural Language Processing (NLP)
+Web/Mobile App Development
+Experience with virtual assistants or chatbots
+The project will include the following tasks:
+
+Design and development of the virtual assistant
+Integration of natural language processing (NLP) technology
+Testing and debugging
+
+Looking for a developer who can work independently, is proactive and can communicate effectively with me.
+
+Please mention your availability and your hourly rate or total project budget.
+
+Thank you for your time and consideration!
+
+Regenerate response
+line coaches and entrepreneurs","I have built AI‑driven NLP solutions and full‑stack web interfaces, and I have also worked on chatbot applications [ai_ml_engineer:proposal:prop-106] [ai_ml_engineer:proposal:prop-086] [ai_ml_engineer:proposal:prop-128]. In my projects I work in short cycles and provide demos every few days to show progress [ai_ml_engineer:proposal:prop-106].
+
+1. Clarify core coaching workflows (scheduling, email follow‑ups, FAQ) and define success metrics.  
+2. Build a lightweight NLP model using TensorFlow/PyTorch to interpret client intents and generate accurate responses.  
+3. Develop a responsive web (and optional mobile) UI with secure API endpoints, integrating the NLP engine and calendar/email services; I have experience integrating OpenAI APIs into web endpoints [ai_ml_engineer:proposal:prop-086].  
+4. Iterate with frequent demos, incorporate feedback, and document all code and deployment steps for seamless handover.  
+
+I look forward to a short call to align on scope and timeline.","2"
+"29","dev-data-0003","Learning Needs Assessment Data Merge and Results Report","We conducted a in person learning needs assessment:
+That have resulted in 3 separate excel documents containing recorded data from 
+
+Manager 9 tabs 
+Supervisors 13 tabs
+Front Line Employees 26 tabs 
+
+I need help compiling and organizing the data with the goal of creating reports that can generate visuals of the results that will allow us to make decisions.","I have extensive experience merging large Excel datasets and turning them into clear, visual reports for decision‑making [data_analyst:proposal:prop-data-144] and I regularly deliver dashboards in Excel/Google Sheets that highlight key insights for managers and staff [data_analyst:proposal:prop-data-147]. I also specialize in creating impactful visualizations that replace raw tables with actionable charts, as shown in recent projects [data_analyst:proposal:prop-data-080].
+
+1. Review the three workbooks, map each tab to its role (manager, supervisor, front‑line) and define a unified schema.
+2. Consolidate the data into a single, clean dataset using Excel formulas/VBA and verify consistency across tabs.
+3. Build a structured report that separates the three groups while allowing side‑by‑side comparison.
+4. Design visual dashboards (charts, slicers) that illustrate assessment results and support quick decisions.","3"
+"30","dev-web-0013","Import products to Shopify with script","Shopify has a product import limit after reaching 50.000 skus. We have around 100.000 skus. The remaining 50.000 products should be imported daily by 1000sku batches. We want a developer to import the first 50k and then setup a fully automated script to import the remaining 50k items 1000 daily over the next 50 days. The script should run on your server or webserver you may choose.","I have built several high‑volume Shopify storefronts, including a headless Shopify store that cut page load from 4.8 to 1.6 seconds and raised conversion by 11% in 2024 [fullstack_web_dev:cv]. I also delivered an inventory tracking app that automated bulk data imports and reduced stock errors by 60% [fullstack_web_dev:proposal:prop-web-009].
+
+1. Review the CSV/JSON feed for the first 50,000 SKUs, map fields to Shopify product schema, and run a one‑time bulk import using Shopify’s GraphQL API.
+2. Create a Node.js script that reads the remaining SKUs in 1,000‑item batches, calls the same API, and logs successes and failures.
+3. Deploy the script to a low‑cost cloud VM (e.g., AWS EC2 or DigitalOcean) with a cron job that triggers daily, ensuring reliable execution and automatic retries on errors.
+4. Provide a brief README with deployment steps, usage instructions, and sample logs for the client’s environment.
+
+I would be happy to discuss details further.","5"

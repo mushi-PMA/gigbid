@@ -16,6 +16,7 @@ from agent.marketplace_port import MarketplacePort
 from agent.mcp_client import AgentTools, ServerUnavailable
 from agent.memory.promotion_rules import record_outcome
 from agent.memory.store import get_store
+from agent.nodes.pricing import connects_spent_this_week, current_week
 from agent.nodes.scout import content_key, scout_search
 from common import db
 from common.config import load_config
@@ -138,7 +139,8 @@ async def resume_thread(ctx: dict, thread_id: str, user_id: str, decision: dict[
                     json.dumps({"bid": state["price"].amount, "connects": state["price"].connects_cost,
                                 "graph_thread_id": thread_id})))
         settings = _settings(row)
-        settings["connects_spent_week"] = int(settings.get("connects_spent_week", 0)) + state["price"].connects_cost
+        settings["connects_spent_week"] = connects_spent_this_week(settings) + state["price"].connects_cost
+        settings["connects_week"] = current_week()
         db.execute("UPDATE user_settings SET settings = %s WHERE user_id = %s", (json.dumps(settings), user_id))
     return {"status": state.get("status")}
 

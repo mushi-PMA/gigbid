@@ -1,0 +1,85 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T13:06:02.767272+00:00",
+  "commit": "da02850",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "n": 30,
+ "cohen_kappa": 0.0129,
+ "quadratic_weighted_kappa": 0.2947,
+ "exact_agreement": 0.2333,
+ "within_one": 0.6333,
+ "mean_human": 2.633,
+ "mean_judge": 3.7,
+ "disagreements": [
+  {
+   "item": "2",
+   "job_id": "dev-data-0005",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "5",
+   "job_id": "hold-web-0008",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "9",
+   "job_id": "dev-aiml-0011",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "12",
+   "job_id": "dev-web-0013",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "14",
+   "job_id": "dev-aiml-0003",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "16",
+   "job_id": "dev-aiml-0001",
+   "human": 1,
+   "judge": 3
+  },
+  {
+   "item": "18",
+   "job_id": "hold-web-0006",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "19",
+   "job_id": "hold-web-0008",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "24",
+   "job_id": "dev-data-0007",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "27",
+   "job_id": "dev-aiml-0011",
+   "human": 2,
+   "judge": 4
+  },
+  {
+   "item": "28",
+   "job_id": "dev-aiml-0004",
+   "human": 2,
+   "judge": 4
+  }
+ ]
+}

@@ -109,7 +109,14 @@ requirements (H-B1); V2 beats V0 for every persona (H-B2); claim verification ha
 \tablefrom{claims}{Unsupported claims before and after claim verification (shipped pipeline).}
 \textbf{Judge calibration.} A model judge can be biased toward length and style~\cite{zheng2023judge}, so the rubric
 judge was compared with my own blind labels on 30 proposals (Cohen's kappa~\cite{cohen1960kappa}):
-\pending{Cohen's kappa, quadratic-weighted kappa and two disagreements with who was right}.
+agreement was poor, with Cohen's kappa 0.01 and quadratic-weighted kappa 0.29; 7 of 30 scores matched exactly and 19
+were within one point (\file{evals/results/judge\_calibration.json}). The judge was kinder than me (mean 3.70 against
+2.63) and gave 4 to 24 of the 30 letters, so it hardly separates strong letters from weak ones. Two disagreements: for
+a senior Azure data engineer post (item 16) the judge gave 3 and I gave 1, because the letter never mentions Azure,
+Data Factory or Databricks; I was right, as the judge does not punish a missing core requirement. For the contract
+report job (item 24) I gave 2 because the letter seemed to invent the client's CTO and GM, but the full post does name
+them and my labelling sheet showed only its first 1,500 characters, so the judge was right. Small judge-score gaps in
+this report (3.57 against 3.63, 3.88 against 3.75) should therefore not be read as quality differences.
 The blind pairwise human panel (classmates choose between anonymised V0 and shipped proposals for the same job,
 \file{evals/runners/human\_panel.py}) is prepared on the 5 jobs both pipelines drafted, but had not been rated when
 this report was written; with 5 pairs it could only show a very large preference.

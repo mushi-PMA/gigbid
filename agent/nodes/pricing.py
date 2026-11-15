@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+from datetime import UTC, datetime
 from typing import Any
 
 from langchain_core.runnables import RunnableConfig
@@ -91,6 +92,15 @@ def quote(job: Job, fit: FitReport, risk: RiskReport, market: dict, profile: dic
     return price
 
 
+def current_week() -> str:
+    return datetime.now(UTC).strftime("%G-W%V")
+
+
+def connects_spent_this_week(settings: dict) -> int:
+    """Connects spent this calendar week (UTC). The count starts again each Monday."""
+    return int(settings.get("connects_spent_week", 0)) if settings.get("connects_week") == current_week() else 0
+
+
 @node("pricing")
 async def pricing(state: dict, config: RunnableConfig) -> dict:
     job: Job = state["job"]
@@ -101,7 +111,7 @@ async def pricing(state: dict, config: RunnableConfig) -> dict:
     profile = {**persona_profile(config["configurable"]["persona"]), **settings.get("rates", {})}
     if settings.get("weekly_connects_budget") is not None:
         balance["weekly_budget_left"] = min(balance.get("weekly_budget_left") or 10**6,
-                                            settings["weekly_connects_budget"] - settings.get("connects_spent_week", 0))
+                                            settings["weekly_connects_budget"] - connects_spent_this_week(settings))
     price = await asyncio.to_thread(quote, job, state["fit"], state["risk"], market, profile, balance, 0.0)
     update: dict[str, Any] = {"price": price}
     # `skip_connects_gate` is only set by the proposal study, which drafts every fixed job to measure writing alone;
