@@ -855,6 +855,12 @@ export interface components {
         /** SettingsModel */
         SettingsModel: {
             /**
+             * Auto Analyze Per Scout
+             * @description Newest jobs analysed automatically per scout run
+             * @default 5
+             */
+            auto_analyze_per_scout: number;
+            /**
              * Autonomy
              * @default suggest
              * @enum {string}

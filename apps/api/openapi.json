@@ -881,6 +881,14 @@
    },
    "SettingsModel": {
     "properties": {
+     "auto_analyze_per_scout": {
+      "default": 5,
+      "description": "Newest jobs analysed automatically per scout run",
+      "maximum": 50.0,
+      "minimum": 0.0,
+      "title": "Auto Analyze Per Scout",
+      "type": "integer"
+     },
      "autonomy": {
       "default": "suggest",
       "enum": [

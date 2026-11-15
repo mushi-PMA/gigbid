@@ -20,6 +20,7 @@ COOKIE = "gigbid_session"
 DEFAULT_SETTINGS: dict[str, Any] = {
     "autonomy": "suggest",              # suggest | auto_skip_low_fit (never auto-send)
     "weekly_connects_budget": 80,
+    "auto_analyze_per_scout": 5,        # newest jobs analysed automatically per scout run; others wait for a click
     "timezone": "Asia/Karachi",
     "rates": {},                        # overrides persona floors: hourly_floor, fixed_floor, target_hourly_rate
     "saved_searches": [],               # [{"name", "query", "skills", "category", "every_hours"}]

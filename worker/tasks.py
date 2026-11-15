@@ -80,8 +80,10 @@ async def scout_user(ctx: dict, user_id: str, force: bool = False) -> dict[str, 
                    "budget_max": job.budget_max, "skills": job.skills, "job": job.model_dump(mode="json")}
         if not _passes_filters(job, settings):
             status = "filtered"
-        else:
+        elif queued < int(settings.get("auto_analyze_per_scout", 5)):
             status = "queued"
+        else:            # beyond the per-scout cap: listed as new with an Analyze button (keeps model budgets sane)
+            status = "new"
         db.execute("INSERT INTO jobs_seen (user_id, job_id, content_hash, status, summary) VALUES (%s, %s, %s, %s, %s) "
                    "ON CONFLICT DO NOTHING", (user_id, job.job_id, content_key(job), status, json.dumps(summary)))
         if status == "queued":

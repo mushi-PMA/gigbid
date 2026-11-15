@@ -55,6 +55,7 @@ class SettingsModel(BaseModel):
     persona: Persona | None = None
     autonomy: Literal["suggest", "auto_skip_low_fit"] = "suggest"
     weekly_connects_budget: int = Field(80, ge=0, le=1000)
+    auto_analyze_per_scout: int = Field(5, ge=0, le=50, description="Newest jobs analysed automatically per scout run")
     timezone: str = "Asia/Karachi"
     rates: Rates = Field(default_factory=Rates)
     saved_searches: list[SavedSearch] = Field(default_factory=list, max_length=20)

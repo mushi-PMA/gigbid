@@ -11,7 +11,19 @@ _Not measured yet: run `make eval` (needs a model key)._
 ## rag
 
 <!-- results:rag -->
-_Not measured yet: run `make eval` (needs a model key)._
+Unit: a portfolio project (its case study, README, code and proposals). Dev set, all three personas.
+
+| Variant | Recall@5 | Recall@5 (capped) | MRR | nDCG@10 | p95 retrieval (s) | Jobs |
+|---|---|---|---|---|---|---|
+| v0 | 0.453 | 0.698 | 0.748 | 0.566 | 0.47 | 150 |
+| v2 | 0.455 | 0.693 | 0.748 | 0.576 | 0.66 | 150 |
+| v0+v3 | 0.460 | 0.702 | 0.734 | 0.551 | 24.05 | 150 |
+| v2+v3 | 0.432 | 0.672 | 0.717 | 0.543 | 17.69 | 150 |
+| v2+v4 | 0.481 | 0.725 | 0.760 | 0.597 | 4.67 | 150 |
+| v2+v5 | 0.365 | 0.541 | 0.712 | 0.460 | 4.27 | 150 |
+| v2+v3+v4 | 0.332 | 0.586 | 0.602 | 0.472 | 40.74 | 150 |
+| v2+v3+v5 | 0.249 | 0.434 | 0.619 | 0.362 | 10.83 | 150 |
+| v2+v3+v4+v5 | 0.244 | 0.438 | 0.575 | 0.341 | 10.64 | 150 |
 <!-- /results:rag -->
 
 ## decisions
