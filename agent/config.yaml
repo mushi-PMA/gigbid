@@ -124,7 +124,7 @@ embeddings:
   dim: 384
 
 rag:
-  variant: v1_v2_v3                     # chosen by evals/runners/rag_eval.py; see docs/adr/0003-rag-variant.md
+  variant: v2_v4_v7                     # chosen on the dev set (evals/results/rag_variants_*.json); see docs/adr/0003-rag-variant.md
   top_k: 8
   chunk_tokens: 220
   chunk_overlap: 40

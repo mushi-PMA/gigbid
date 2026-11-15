@@ -51,10 +51,11 @@ async def fit_matcher(state: dict, config: RunnableConfig) -> dict:
     persona = config["configurable"]["persona"]
     requirements = await asyncio.to_thread(decompose, f"{job.title}\n{job.description}")
     tools = tools_for("fit_matcher", config)
-    per_requirement: dict[str, list[EvidenceItem]] = {}
-    for number, requirement in enumerate(requirements, start=1):
-        found = await tools.call("search_evidence", {"requirement": requirement, "k": 4})
-        per_requirement[f"r{number}"] = [_evidence(item, persona) for item in found.get("items", [])]
+    # one search per requirement, all at once (each is independent)
+    found = await asyncio.gather(*(tools.call("search_evidence", {"requirement": r, "k": 4}) for r in requirements))
+    per_requirement: dict[str, list[EvidenceItem]] = {
+        f"r{number}": [_evidence(item, persona) for item in result.get("items", [])]
+        for number, result in enumerate(found, start=1)}
     report = await asyncio.to_thread(score_fit, job, requirements, per_requirement)
     seen: set[str] = set()
     evidence = [e for items in per_requirement.values() for e in items
