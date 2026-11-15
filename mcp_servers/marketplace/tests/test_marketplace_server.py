@@ -94,3 +94,21 @@ async def test_annotations_mark_reads_and_writes(market):
     assert tools["submit_proposal"].annotations.destructiveHint is True
     assert tools["submit_proposal"].annotations.idempotentHint is True
     assert tools["create_proposal_draft"].outputSchema is not None
+
+
+def test_gigsim_token_comes_from_the_seed_accounts(monkeypatch):
+    """The live path (no evaluation adapter): each persona has a seeded GigSim account; an env var can replace it."""
+    import json
+
+    from common.config import ROOT
+    from mcp_servers.marketplace import server
+
+    monkeypatch.delenv("DATABASE_URL", raising=False)
+    accounts = json.loads((ROOT / "data" / "gigsim" / "accounts.json").read_text(encoding="utf-8"))
+    for account in accounts:
+        monkeypatch.delenv(f"GIGSIM_TOKEN_{account['persona_id'].upper()}", raising=False)
+        assert server._gigsim_token("u1", account["persona_id"]) == account["token"]
+    monkeypatch.setenv(accounts[0]["env_token"], "override")
+    assert server._gigsim_token("u1", accounts[0]["persona_id"]) == "override"
+    with pytest.raises(server.MarketplaceRejected):
+        server._gigsim_token("u1", "no_such_persona")

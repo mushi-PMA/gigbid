@@ -82,8 +82,8 @@ def _gigsim_token(user_id: str, persona: str) -> str:
             return decrypt(row["secret_enc"])
     accounts = json.loads((ROOT / "data" / "gigsim" / "accounts.json").read_text(encoding="utf-8"))
     for account in accounts:
-        if account.get("persona") == persona:
-            return account["token"]
+        if account.get("persona_id") == persona:
+            return os.environ.get(account.get("env_token") or "") or account["token"]
     raise MarketplaceRejected(401, f"no GigSim account for persona {persona}")
 
 
