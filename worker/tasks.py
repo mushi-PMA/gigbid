@@ -104,14 +104,25 @@ async def scout_user(ctx: dict, user_id: str, force: bool = False) -> dict[str, 
     return {"new": len(new), "duplicates": len(duplicates), "queued": queued}
 
 
+RUNNING_LOCK = "gigbid:running:{user}:{job}"
+
+
 async def analyze_job(ctx: dict, user_id: str, job: dict[str, Any], duplicate_of: str | None) -> dict[str, Any]:
-    row = db.fetch_one("SELECT u.persona, s.settings FROM users u JOIN user_settings s USING (user_id) "
-                       "WHERE u.user_id = %s", (user_id,))
-    settings = _settings(row)
-    db.execute("UPDATE jobs_seen SET status = 'running', updated_at = now() WHERE user_id = %s AND job_id = %s",
-               (user_id, job["job_id"]))
-    result = await runner.run_bid(user_id, row["persona"], Job.model_validate(job), settings, duplicate_of)
-    return {"status": result["state"].get("status"), "pending": result["pending"]}
+    # one run per job at a time: a manual "Analyze" and an automatic one share the same graph thread
+    redis, lock = ctx.get("redis"), RUNNING_LOCK.format(user=user_id, job=job["job_id"])
+    if redis is not None and not await redis.set(lock, "1", nx=True, ex=900):
+        return {"status": "already running"}
+    try:
+        row = db.fetch_one("SELECT u.persona, s.settings FROM users u JOIN user_settings s USING (user_id) "
+                           "WHERE u.user_id = %s", (user_id,))
+        settings = _settings(row)
+        db.execute("UPDATE jobs_seen SET status = 'running', updated_at = now() WHERE user_id = %s AND job_id = %s",
+                   (user_id, job["job_id"]))
+        result = await runner.run_bid(user_id, row["persona"], Job.model_validate(job), settings, duplicate_of)
+        return {"status": result["state"].get("status"), "pending": result["pending"]}
+    finally:
+        if redis is not None:
+            await redis.delete(lock)
 
 
 async def resume_thread(ctx: dict, thread_id: str, user_id: str, decision: dict[str, Any]) -> dict[str, Any]:
@@ -194,8 +205,9 @@ async def recover_interrupted(ctx: dict) -> int:
 
     redis = ctx.get("redis")
     if redis is not None:
-        async for key in redis.scan_iter(match="arq:in-progress:*"):
-            await redis.delete(key)
+        for pattern in ("arq:in-progress:*", RUNNING_LOCK.format(user="*", job="*")):
+            async for key in redis.scan_iter(match=pattern):
+                await redis.delete(key)
     if not os.environ.get("DATABASE_URL"):
         return 0
     rows = db.fetch_all("SELECT user_id, job_id, summary FROM jobs_seen WHERE status = 'running'")
