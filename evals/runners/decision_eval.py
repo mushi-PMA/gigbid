@@ -1,4 +1,4 @@
-﻿"""Decisions on the dev set (or the holdout set): bid-or-skip F1, scam and injection detection, price inside the fair
+"""Decisions on the dev set (or the holdout set): bid-or-skip F1, scam and injection detection, price inside the fair
 band, latency, tokens and USD per job analysed. The graph stops before the Writer, so no proposal is drafted.
 
     python -m evals.runners.decision_eval --limit 60

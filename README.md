@@ -54,7 +54,10 @@ out of sync.
 
 ### RAG: baseline against the shipped pipeline
 <!-- results:main -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Variant | Evidence Recall@5 | nDCG@10 | Unsupported claims per proposal | Judge score | GigSim reply rate | p95 latency (s) | Cost per proposal (USD) |
+|---|---|---|---|---|---|---|---|
+| V0 | 0.453 | 0.566 | 0.86 | 3.57 | 100.0% | n/a | 0.00924 |
+| Best (v2+v4) | 0.447 | 0.587 | 1.00 | 3.62 | 87.5% | n/a | 0.01022 |
 <!-- /results:main -->
 
 ### Retrieval variants (dev set)
@@ -80,7 +83,13 @@ Unit: a portfolio project (its case study, README, code and proposals). Dev set,
 
 ### Multi-agent design against simpler designs (R&D question C)
 <!-- results:architectures -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Design | Jobs finished | Bid-or-skip accuracy | Unsupported claims | Violations caught | Violations left | Scams / injections bid on | Reply rate | Tokens per job | p95 latency (s) |
+|---|---|---|---|---|---|---|---|---|---|
+| (a) one ReAct agent | 9 of 9 | 0.556 | 2.00 | 0 | 0 | 0 / 0 | 100.0% | 8446 | 156.2 |
+| (b) prebuilt supervisor | 9 of 9 | 0.667 | 6.00 | 0 | 1 | 0 / 0 | 66.7% | 7448 | 156.6 |
+| (c) GigBid graph | 9 of 9 | 0.444 | 0.50 | 0 | 0 | 0 / 0 | 50.0% | 23651 | n/a |
+
+A run that crashed on a provider rate limit is left out of every number in its row.
 <!-- /results:architectures -->
 
 ### Decisions, claim verification, injection defence, budgets
@@ -92,13 +101,16 @@ _Not measured yet: run `make eval` (needs a model key)._
 | Scam precision / recall | 1.000 / 0.500 |
 | Injection detection recall | 1.000 |
 | Price inside the fair band | 100.0% |
-| p50 / p95 latency per job analysed (s) | 51.9 / 74.8 |
+| p50 / p95 latency per job analysed (s) | n/a / n/a |
 | Cost per job analysed (USD) | 0.00164 |
 | Jobs | 30 |
 <!-- /results:decisions -->
 
 <!-- results:claims -->
-_Not measured yet: run `make eval` (needs a model key)._
+|  | Before verification | After verification |
+|---|---|---|
+| Unsupported claims per proposal | 2.12 | 1.00 |
+| Unsupported claim rate | 47.2% | 22.2% |
 <!-- /results:claims -->
 
 <!-- results:injection -->
@@ -109,10 +121,26 @@ _Not measured yet: run `make eval` (needs a model key)._
 <!-- /results:injection -->
 
 <!-- results:holdout -->
-_Not measured yet: run `make eval` (needs a model key)._
+| Budget | Declared | Measured (holdout) | Verdict |
+|---|---|---|---|
+| p95 latency seconds per job analysed | 20 | 70.6609 | missed |
+| p95 latency seconds per proposal | 90 | 333.5547 | missed |
+| usd per job analysed | 0.0020 | 0.0013 | met |
+| usd per proposal | 0.0100 | 0.0118 | missed |
+
+Latency rows come from the first holdout run, whose model calls were all live (`evals/results/archive/holdout_first_run_console.txt`); the other rows from `holdout.json`.
 <!-- /results:holdout -->
 
 Full results: [docs/RESULTS.md](docs/RESULTS.md). Public traces: <!-- traces -->added at deployment<!-- /traces -->
+
+### Résumé line
+
+Built GigBid, a LangGraph multi-agent freelancer copilot on three MCP servers where nothing is sent without human
+approval; claim verification cut unsupported claims from 2.13 to 1.00 per proposal and injection detection rose from
+17% to 92% (`evals/results/proposals_best.json`, `injection.json`).
+Designed a 10-tool MCP surface that chose the right tool on 40 of 40 tasks (97.5% argument accuracy against 77.5% for a
+3-tool design), and traced a reasoning-budget bug whose fix took dead letters from 19 of 120 dev jobs to 0 of 30
+(`tool_granularity.json`, `decisions.json`, `archive/`).
 
 ## Run it
 

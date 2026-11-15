@@ -34,17 +34,27 @@ the first, so the before and after numbers below are on the same 30 jobs. Thresh
 | 11 | dev-web-0005 | fullstack_web_dev | wrong skip (watch) | Same client rule (unverified, no spend, no hires); fit 0.40 | Kept on purpose, as in 10 | Not changed (label disagreement) |
 | 12 | dev-aiml-0006 | ai_ml_engineer | missed scam | "Earn $500, data entry, no experience" was skipped for low fit, not flagged as a scam; the scam patterns look for payment and contact tricks, not pay that is too good for the effort | None yet; planned: a pay-against-effort rule in the policy pack | No (the skip was still right) |
 
+### Proposals (`evals/results/proposals_best.json`, 12 fixed jobs, every job drafted on purpose)
+
+| # | Job ids | Category | Root cause (what the trace shows) | Fix tried | Worked? |
+|---|---------|----------|-----------------------------------|-----------|---------|
+| 13 | dev-web-0003, dev-web-0005, dev-web-0012, dev-data-0007 | tool error (token budget) | Thin evidence: claim verification deletes the unsupported sentences, the letter falls below 120 words (83 to 110), the Critic sends it back for length, and after two revisions the job passes the 60,000-token budget and goes to a human | Earlier: the Writer stopped counting evidence ids as words (prompt version 2), which removed the loop on well-evidenced jobs | Partly: the other 8 jobs were drafted; these 4 still stop at needs attention |
+| 14 | every proposal job in the first X2, V0 and holdout runs | tool error (evaluation harness) | Calls replayed from the evaluation cache reach the marketplace server far faster than a live run, its per-user rate limiter refused them, and the Pricing node failed (`pricing failed: ToolError`) | The harness turns the limiter off for its offline marketplace copy (the deployed server keeps it), commit 5bb48aa | Yes: after this fix (and fresh provider keys for the timeouts that remained) V0 has no dead letters (`proposals_v0.json`) |
+| 15 | every job replayed from the evaluation cache | measurement error | A replayed call takes no time, so a replayed run reported a p95 of about 1 s per proposal and "met" a budget it had missed | Each node now counts its replayed calls and latency is computed only over fully live jobs, commit eff5d62 | Yes: replays now report latency as not measured; the holdout latency comes from its first, fully live run |
+
 ## Patterns
 
 - **One fix removed every dead letter.** Rows 1 to 5 share one cause: reasoning tokens used up the Fit Matcher's
   output budget, and the half-written JSON broke the decision. In the first run this hit 19 of 120 jobs (16%); on
-  the 30 shared jobs dead letters fell from 5 to 0 and correct decisions rose from 19 to 22. Three changes
-  made in the same step (low reasoning effort, the portfolio search moved off the event loop, the matcher's searches
-  run in parallel) cut p95 latency on the same 30 jobs from 137 s to 75 s; we did not measure them one by one.
+  the 30 shared jobs dead letters fell from 5 to 0 and correct decisions rose from 19 to 22. We do not compare
+  latency between these two runs: some calls in each were replayed from the evaluation cache, which takes no time.
 - **The matcher is generous with nearby skills** (rows 5 to 7): all three wrong bids have gold coverage of 0.33 or
   less but a fit of 0.60 or more. The opposite error comes from the extractor (rows 8 and 9): named tools become
   extra requirements and drag fit down. Both point to the same next change, separating core skills from named tools
   before matching. It is not built yet, so these rows stay open.
 - **Client rules explain the two watched good fits** (rows 10 and 11). We keep the rule: an unverified client with
   no spend is the riskiest place to spend Connects, and the gold label measures skill fit only.
+- **Verification and length pull against each other** (row 13). On jobs with little evidence the system escalates
+  instead of padding the letter, which is the safe outcome, but it spends the whole token budget first. A cheaper
+  stop would end the loop as soon as the Critic's only complaint is length after verification.
 - **Scam recall is the weakest number** (0.5 on the dev set); row 12 shows the patterns miss "easy money" posts.

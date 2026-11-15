@@ -1,4 +1,4 @@
-﻿"""Proposals end to end on a fixed set of dev jobs whose gold label is bid: unsupported claims before and after claim
+"""Proposals end to end on a fixed set of dev jobs whose gold label is bid: unsupported claims before and after claim
 verification, judge score, GigSim reply and hire rate, latency, tokens and USD per proposal.
 
     RAG_VARIANT=v0 python -m evals.runners.proposal_eval --name proposals_v0

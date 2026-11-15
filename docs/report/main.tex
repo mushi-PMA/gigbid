@@ -104,9 +104,33 @@ requirements (H-B1); V2 beats V0 for every persona (H-B2); claim verification ha
 \tablefrom{claims}{Unsupported claims before and after claim verification (shipped pipeline).}
 \textbf{Judge calibration.} The rubric judge was compared with my own labels on 30 proposals:
 \pending{Cohen's kappa, quadratic-weighted kappa and two disagreements with who was right}.
-\textbf{Ablation and breakdown.} \pending{one component removed at a time; results by persona and job type}.
-\textbf{Where better retrieval did not raise replies.} \pending{H-B3 result and the reason}.
-\textbf{What ships.} \pending{one-paragraph decision: variant, why, latency and cost trade-off}.
+\textbf{Ablation and breakdown.} Removing hybrid search (V2) costs 0.062 nDCG@10 and removing the outcome boost (V4)
+0.021 (\file{evals/results/ablation.json}), so both earn their place and V2 matters most. The breakdown is the honest
+part: the shipped retrieval helps the web-developer persona most (nDCG@10 0.518 to 0.630) and e-commerce and data-pipeline
+jobs, but it is worse than V0 for the AI/ML persona (0.610 to 0.584) and much worse on LLM-app jobs (Recall@5 0.582 to
+0.154, only 6 jobs), which is why H-B2 (``V2 beats V0 for every persona'') is refuted. H-B1 is refuted too: on the 29 jobs with four or
+more requirements that both runs share, V1+V2+V3 reached Recall@5 0.368 against 0.432 for V0, a drop of six points
+where we predicted a gain of ten (rows of \file{rag\_variants\_model.json} and \file{rag\_variants\_offline.json}).
+\tablefrom{ablation}{The shipped retrieval with one component removed at a time (dev set, no model calls).}
+\tablefrom{breakdown}{V0 against the shipped retrieval by persona, number of requirements and job type (dev set).}
+\textbf{Where better retrieval did not raise replies.} The shipped retrieval beats V0 on nDCG@10 (0.587 against 0.566),
+yet in GigSim V0's proposals did as well: every one of V0's 7 drafted proposals got a reply, against 7 of the shipped
+pipeline's 8, with judge scores of 3.57 and 3.63 (\file{evals/results/proposals\_v0.json},
+\file{proposals\_best.json}). H-B3 holds in the direction we predicted it might fail. The reason is in how GigSim's
+clients score a letter (\file{gigsim/clients.py}): naming the job's skills, reusing the post's own words, the price,
+avoiding a generic opening and answering screening questions. Which evidence a letter cites is not scored, so better
+retrieval can only help through those, and both pipelines' Writers already name the skills and quote the post. Extra
+evidence instead shows up as more claims, and more claims means more that cannot be verified (1.00 unsupported per
+shipped proposal after verification against 0.86 for V0). With 7 and 8 proposals none of these differences is significant.
+\textbf{What ships.} V2+V4 (hybrid BM25 and dense search with the outcome-aware boost, \file{docs/adr/0003-rag-variant.md}).
+V2+V4+V7 retrieved better (nDCG@10 0.629 against 0.587 on the same 60 jobs, \file{evals/results/rag\_variants\_model.json}),
+but HyDE adds a model call to every search and the binding limit on our free tier is tokens per day per key, not
+dollars; V2+V4 adds no model call and gives up about 0.04 nDCG@10. The cross-encoder (V3) was dropped because it lowered nDCG@10 on every
+combination and, on the two-core server, made portfolio searches time out. Claim verification ships on: in the shipped
+proposal study it cut unsupported claims from 2.13 to 1.00 per proposal (47\% to 22\% of claims,
+\file{evals/results/proposals\_best.json}). The cost is real: 44,238 tokens and \$0.0102 per drafted proposal, and on four
+of twelve forced weak-fit jobs verification removed so many sentences that the Critic loop ran out of token budget and
+the job went to a human instead (\file{docs/FAILURES.md}, row 13).
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{R\&D question C: single agent, prebuilt supervisor, or our graph}
@@ -115,7 +139,19 @@ tool-using workers and (c) the hand-built graph, with the same MCP tools, model 
 clients (\file{evals/runners/architecture\_comparison.py}). Hypothesis H-C: (c) wins on accuracy, unsupported claims
 and violations; (a) is cheapest and can tie on simple, clearly relevant jobs.
 \tablefrom{architectures}{Architecture comparison on 9 dev jobs.}
-\pending{where (a) wins, why, and whether we would ship it}
+\textbf{Result} (\file{evals/results/architecture\_comparison.json}). H-C is refuted on decisions and supported on
+grounding. The prebuilt supervisor had the best bid-or-skip accuracy (0.667, against 0.556 for one agent and 0.444 for
+our graph), but its proposals carried 6.0 unsupported claims each and one policy violation reached its final text; the
+single agent's carried 2.0; ours 0.5, with no violation. Our graph is also the most expensive: 23,651 tokens per job
+against 8,446 and 7,448, because three agents read every job in parallel and the Writer, verifier and Critic loop over
+each draft. Its lower accuracy has the causes found in the failure analysis: three gold bids were not bid on (the extractor
+splitting named tools into extra requirements, rows 8 and 9, and the unverified-client rule, row 10) and two posts with
+low skill overlap were bid on (the matcher crediting nearby skills, rows 6 and 7).
+\textbf{Where (a) and (b) win and would we ship them.} Both are three times cheaper per job, and on these nine jobs
+both decide better; nine jobs is too few to call that difference reliable. We would still ship the graph: the cost of a wrong decision is one
+watched job, while an unsupported claim sent to a client is the failure the brief (R5) and the platform punish. The
+cheaper fix is to keep the graph and loosen the client rule, not to drop verification. Latency is not compared: the
+graph's calls in this run were replayed from the evaluation cache, which takes no time (Section~\ref{sec:holdout}).
 
 % ------------------------------------------------------------------------------------------------------------------
 \section{The change request}
@@ -177,13 +213,27 @@ verification step that asks for secrets; it uses none of the command words our p
 check did not flag it either. A good-fit job carrying the same line is the case to test next.
 
 % ------------------------------------------------------------------------------------------------------------------
-\section{Held-out test results against the declared budgets}
+\section{Held-out test results against the declared budgets}\label{sec:holdout}
 The holdout sets (50 jobs per persona, never used for tuning) are run end to end on a fixed sample of 10 decisions
 and 2 proposals per persona (the free-tier token limit; see the deviation in \file{docs/HYPOTHESES.md}); the
 instructor's hidden test runs against the live URL.
 \tablefrom{holdout}{Declared budgets against measured values on the holdout set.}
 \tablefrom{decisions}{Decision quality on the dev set.}
-\pending{what was missed and the optimisation that helped most}
+\textbf{What we missed.} Three of four budgets (\file{evals/results/holdout.json}; latency from the first, fully live
+holdout run, \file{evals/results/archive/holdout\_first\_run\_console.txt}). Analysis cost is inside its budget
+(\$0.00135 against \$0.002 per job), but p95 latency per analysed job is 70.7\,s against 20\,s, p95 per proposal is
+334\,s against 90\,s, and a proposal costs \$0.0118 against \$0.010. Latency is measured as wall-clock time per job,
+which on our free tiers includes the time a call waits for a rate-limited lane; we did not separate that wait from
+model time, so we report the number as measured and do not claim the budget is met. The cost miss comes from the
+revision loop: the drafted holdout proposals have a mean revision count of 3.0, and each pass rewrites the whole
+letter; on the dev set the same loop was driven by length after claim verification (\file{docs/FAILURES.md}, row 13).
+\textbf{What helped most.} Low reasoning effort for gpt-oss together with a larger output budget for the Fit Matcher:
+it removed every dead letter on the same 30 dev jobs (5 to 0) and raised correct decisions from 19 to 22
+(\file{evals/results/archive/}, \file{evals/results/decisions.json}). Latency is reported only for jobs whose model
+calls all ran live: a call replayed from the evaluation cache takes no time, so the holdout latency above comes from
+the first, fully live holdout run (\file{evals/results/archive/holdout\_first\_run\_console.txt}). The next change
+with the biggest expected gain is to stop the Critic loop when length is its only complaint after verification.
+Decisions held up on unseen jobs: bid F1 0.571, scam recall 0.667 and injection detection 1.000 on the 30 holdout jobs.
 
 \appendix
 \section{Reproduce}

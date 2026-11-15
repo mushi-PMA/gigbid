@@ -1,0 +1,203 @@
+{
+ "meta": {
+  "generated_at": "2026-11-15T09:18:56.077791+00:00",
+  "commit": "eff5d62",
+  "model_profile": "open",
+  "rag_variant": "v2_v4",
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "reranker": "Xenova/ms-marco-MiniLM-L-6-v2"
+ },
+ "declared": {
+  "p95_latency_seconds_per_job_analysed": 20,
+  "p95_latency_seconds_per_proposal": 90,
+  "usd_per_job_analysed": 0.002,
+  "usd_per_proposal": 0.01
+ },
+ "measured": {
+  "p95_latency_seconds_per_job_analysed": null,
+  "p95_latency_seconds_per_proposal": null,
+  "usd_per_job_analysed": 0.001347,
+  "usd_per_proposal": 0.011781
+ },
+ "within_budget": {
+  "p95_latency_seconds_per_job_analysed": false,
+  "p95_latency_seconds_per_proposal": false,
+  "usd_per_job_analysed": true,
+  "usd_per_proposal": false
+ },
+ "decision_jobs_per_persona": 10,
+ "proposal_jobs_per_persona": 2,
+ "decisions": {
+  "n": 30,
+  "bid_or_skip": {
+   "precision": 0.8,
+   "recall": 0.4444,
+   "f1": 0.5714,
+   "tp": 4,
+   "fp": 1,
+   "fn": 5
+  },
+  "bid_accuracy": 0.8,
+  "scam_detection": {
+   "precision": 1.0,
+   "recall": 0.6667,
+   "f1": 0.8,
+   "tp": 2,
+   "fp": 0,
+   "fn": 1
+  },
+  "injection_detection": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  "price_inside_fair_band": 0.75,
+  "priced_jobs": 4,
+  "per_job_analysed": {
+   "p50_seconds": null,
+   "p95_seconds": null,
+   "live_jobs": 0,
+   "mean_tokens": 5701,
+   "mean_usd": 0.001347
+  },
+  "by_persona": {
+   "ai_ml_engineer": {
+    "bid": {
+     "precision": 1.0,
+     "recall": 0.75,
+     "f1": 0.8571,
+     "tp": 3,
+     "fp": 0,
+     "fn": 1
+    },
+    "scam": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "data_analyst": {
+    "bid": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 1
+    },
+    "scam": {
+     "precision": 1.0,
+     "recall": 0.5,
+     "f1": 0.6667,
+     "tp": 1,
+     "fp": 0,
+     "fn": 1
+    }
+   },
+   "fullstack_web_dev": {
+    "bid": {
+     "precision": 0.5,
+     "recall": 0.25,
+     "f1": 0.3333,
+     "tp": 1,
+     "fp": 1,
+     "fn": 3
+    },
+    "scam": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 1,
+     "fp": 0,
+     "fn": 0
+    }
+   }
+  },
+  "by_job_type": {
+   "backend_api": {
+    "correct": 1.0,
+    "n": 2
+   },
+   "cms_site": {
+    "correct": 0.5,
+    "n": 2
+   },
+   "dashboard": {
+    "correct": 0.0,
+    "n": 1
+   },
+   "data_pipeline": {
+    "correct": 1.0,
+    "n": 3
+   },
+   "ecommerce": {
+    "correct": 1.0,
+    "n": 4
+   },
+   "llm_app": {
+    "correct": 1.0,
+    "n": 2
+   },
+   "ml_model": {
+    "correct": 1.0,
+    "n": 3
+   },
+   "mobile_app": {
+    "correct": 1.0,
+    "n": 1
+   },
+   "other": {
+    "correct": 0.75,
+    "n": 4
+   },
+   "spreadsheet_reporting": {
+    "correct": 1.0,
+    "n": 2
+   },
+   "web_app": {
+    "correct": 0.5,
+    "n": 6
+   }
+  },
+  "errors": []
+ },
+ "proposals": {
+  "n_jobs": 6,
+  "n_proposals": 3,
+  "unsupported_claims_per_proposal": {
+   "before_verification": 1.0,
+   "after_verification": 1.0
+  },
+  "unsupported_claim_rate": {
+   "before": 0.2308,
+   "after": 0.2308
+  },
+  "judge_overall": 4.0,
+  "gigsim_reply_rate": 1.0,
+  "gigsim_hire_rate": 0.3333,
+  "mean_revisions": 3.0,
+  "per_proposal": {
+   "p50_seconds": null,
+   "p95_seconds": null,
+   "live_proposals": 0,
+   "mean_tokens": 51306,
+   "mean_usd": 0.011781
+  },
+  "by_persona": {
+   "data_analyst": {
+    "reply_rate": 1.0,
+    "judge": 4.0
+   },
+   "fullstack_web_dev": {
+    "reply_rate": 1.0,
+    "judge": 4.0
+   }
+  }
+ }
+}

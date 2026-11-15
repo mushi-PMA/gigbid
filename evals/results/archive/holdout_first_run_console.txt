@@ -1,4 +1,4 @@
-﻿Console output of the first holdout run (15 Nov 2026, 07:30 to 07:56 PKT, code at commit 7e16f62, all model calls live because the holdout jobs had never been run). Copied verbatim from the run's log; the result file of this run was overwritten by a later cached replay, whose latency is not real.
+Console output of the first holdout run (15 Nov 2026, 07:30 to 07:56 PKT, code at commit 7e16f62, all model calls live because the holdout jobs had never been run). Copied verbatim from the run's log; the result file of this run was overwritten by a later cached replay, whose latency is not real.
 
 p95_latency_seconds_per_job_analysed: declared 20, measured 70.6609 -> MISSED
 p95_latency_seconds_per_proposal: declared 90, measured 333.5547 -> MISSED

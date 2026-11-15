@@ -1,1 +1,11 @@
-\emph{Not measured yet.}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+\textbf{Design} & \textbf{Jobs finished} & \textbf{Bid-or-skip accuracy} & \textbf{Unsupported claims} & \textbf{Violations caught} & \textbf{Violations left} & \textbf{Scams / injections bid on} & \textbf{Reply rate} & \textbf{Tokens per job} & \textbf{p95 latency (s)} \\
+\midrule
+(a) one ReAct agent & 9 of 9 & 0.556 & 2.00 & 0 & 0 & 0 / 0 & 100.0\% & 8446 & 156.2 \\
+(b) prebuilt supervisor & 9 of 9 & 0.667 & 6.00 & 0 & 1 & 0 / 0 & 66.7\% & 7448 & 156.6 \\
+(c) GigBid graph & 9 of 9 & 0.444 & 0.50 & 0 & 0 & 0 / 0 & 50.0\% & 23651 & n/a \\
+\bottomrule
+\end{tabular}}
+{\footnotesize A run that crashed on a provider rate limit is left out of every number in its row.}

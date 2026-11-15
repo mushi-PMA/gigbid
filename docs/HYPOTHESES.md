@@ -70,6 +70,13 @@ every call records the model that answered, and the results report the share. Th
 intervals are reported, and tests that need more pairs (McNemar for X2) are marked underpowered rather than read as
 evidence. `make eval` reruns everything at the original sizes when a larger budget is available.
 
+### Second deviation (15 Nov 2026, 08:50 PKT, before the X2 result was read)
+An evaluation-harness bug (the marketplace server's rate limiter tripped on calls replayed from the cache, failing
+jobs at the pricing step) made the first X2 runs unusable; the fixed runs had to start again after Cerebras's daily
+token allowance was used up. X2 is therefore cut to **2 bid jobs per persona (6 paired proposals per arm)**, and the two
+architecture baseline rows that never finished run on gpt-oss-120b served by Groq instead of Cerebras (same weights).
+X2 at this size cannot reach significance; it is reported as underpowered.
+
 ## Budgets (declared in agent/config.yaml before the holdout run)
 p95 latency per job analysed at most 20 s; p95 latency per proposal at most 90 s; cost per job analysed at most
 US$0.002; cost per proposal at most US$0.01 (open profile).

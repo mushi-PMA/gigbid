@@ -1,4 +1,4 @@
-﻿"""R&D question C: is the multi-agent design worth it?
+"""R&D question C: is the multi-agent design worth it?
 
 On fixed dev jobs (the brief asks for 50; docs/HYPOTHESES.md records the size we ran), compare (a) one ReAct agent
 holding all tools, (b) a prebuilt supervisor (langgraph-supervisor) with three tool-using workers, and (c) GigBid's

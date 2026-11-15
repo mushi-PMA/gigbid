@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_at": "2026-11-15T03:08:39.919504+00:00",
-  "commit": "dc2aa73",
+  "generated_at": "2026-11-15T09:51:20.716420+00:00",
+  "commit": "ee7b4f4",
   "model_profile": "open",
   "rag_variant": "v2_v4",
   "embedding_model": "BAAI/bge-small-en-v1.5",
@@ -38,8 +38,9 @@
  "price_inside_fair_band": 1.0,
  "priced_jobs": 5,
  "per_job_analysed": {
-  "p50_seconds": 51.9171,
-  "p95_seconds": 74.8347,
+  "p50_seconds": null,
+  "p95_seconds": null,
+  "live_jobs": 0,
   "mean_tokens": 6089,
   "mean_usd": 0.001641
  },
@@ -167,7 +168,8 @@
    "fit": 0.1,
    "status": "skipped",
    "status_reason": "fit 0.10 is below 0.4: the portfolio does not show enough of what the job needs (missing: Azure Cloud, Azure Data Factory, Azure Databricks, Python); No evidence directly demonstrates Azure Cloud or Azure Data Factory experience.",
-   "seconds": 7.392906000022776,
+   "seconds": 3.6813520999858156,
+   "cached_calls": 4,
    "tokens": 7041,
    "usd": 0.002046825,
    "correct": 0.0
@@ -188,7 +190,8 @@
    "fit": 0.75,
    "status": "running",
    "status_reason": "",
-   "seconds": 28.00123260001419,
+   "seconds": 3.90655610000249,
+   "cached_calls": 5,
    "tokens": 9223,
    "usd": 0.0024944999999999998,
    "correct": 0.0
@@ -209,7 +212,8 @@
    "fit": 0.85,
    "status": "running",
    "status_reason": "",
-   "seconds": 9.832634299993515,
+   "seconds": 3.8802305000135675,
+   "cached_calls": 5,
    "tokens": 7068,
    "usd": 0.001447425,
    "correct": 1.0
@@ -230,7 +234,8 @@
    "fit": 0.9,
    "status": "running",
    "status_reason": "",
-   "seconds": 9.859016700007487,
+   "seconds": 0.5386280000093393,
+   "cached_calls": 5,
    "tokens": 6765,
    "usd": 0.0017262749999999998,
    "correct": 1.0
@@ -251,7 +256,8 @@
    "fit": 0.1,
    "status": "skipped",
    "status_reason": "fit 0.10 is below 0.4: the portfolio does not show enough of what the job needs (missing: Brand strategy development, Marketing plan creation, Real estate industry knowledge, Brand consulting); The freelancer's portfolio consists solely of AI/ML, data science, and web development proposals, with no marketing, branding, or real\u2011estate related work.",
-   "seconds": 3.223475699953269,
+   "seconds": 0.33314190001692623,
+   "cached_calls": 4,
    "tokens": 5328,
    "usd": 0.0014183999999999998,
    "correct": 1.0
@@ -272,7 +278,8 @@
    "fit": 0.0,
    "status": "skipped",
    "status_reason": "fit 0.00 is below 0.4: the portfolio does not show enough of what the job needs (missing: Data Entry, Microsoft Excel); The freelancer\u2019s portfolio only contains AI/ML and software development projects.",
-   "seconds": 30.396482300013304,
+   "seconds": 0.4236324999947101,
+   "cached_calls": 4,
    "tokens": 4315,
    "usd": 0.0011741999999999998,
    "correct": 1.0
@@ -293,7 +300,8 @@
    "fit": 0.3,
    "status": "skipped",
    "status_reason": "the post contains instructions aimed at automated tools; skipped for safety; Partial evidence for custom mobile work via Android project.",
-   "seconds": 65.54176729999017,
+   "seconds": 0.45825610001338646,
+   "cached_calls": 4,
    "tokens": 5328,
    "usd": 0.0015336,
    "correct": 1.0
@@ -314,7 +322,8 @@
    "fit": 0.0,
    "status": "skipped",
    "status_reason": "fit 0.00 is below 0.4: the portfolio does not show enough of what the job needs (missing: AutoCAD PDF troubleshooting, AutoCAD plot settings, PDF size reduction, DWG file handling); All provided evidence items are AI/ML proposals unrelated to AutoCAD or PDF printing.",
-   "seconds": 51.98100410000188,
+   "seconds": 0.4525442000012845,
+   "cached_calls": 4,
    "tokens": 5572,
    "usd": 0.0014203500000000001,
    "correct": 1.0
@@ -335,7 +344,8 @@
    "fit": 0.2,
    "status": "skipped",
    "status_reason": "fit 0.20 is below 0.4: the portfolio does not show enough of what the job needs (missing: React, React Native, ECMAScript 2015, Adalo component development); No React/React Native evidence.",
-   "seconds": 34.651194999984,
+   "seconds": 0.6517064999789,
+   "cached_calls": 4,
    "tokens": 6084,
    "usd": 0.0016614,
    "correct": 1.0
@@ -356,7 +366,8 @@
    "fit": 0.0,
    "status": "skipped",
    "status_reason": "fit 0.00 is below 0.4: the portfolio does not show enough of what the job needs (missing: Android game development, Unity, In\u2011app purchases, Ads integration); The freelancer's portfolio contains only unrelated AI/ML and web development proposals.",
-   "seconds": 24.434579199994914,
+   "seconds": 0.3177335999789648,
+   "cached_calls": 5,
    "tokens": 6495,
    "usd": 0.0018288,
    "correct": 1.0
@@ -377,7 +388,8 @@
    "fit": 0.6,
    "status": "running",
    "status_reason": "",
-   "seconds": 77.38115279999329,
+   "seconds": 0.8263321000267752,
+   "cached_calls": 5,
    "tokens": 5876,
    "usd": 0.0016725,
    "correct": 0.0
@@ -398,7 +410,8 @@
    "fit": 0.3,
    "status": "skipped",
    "status_reason": "fit 0.30 is below 0.4: the portfolio does not show enough of what the job needs (missing: Domain recommendation, Hosting purchase, Domain\u2011hosting linking, CPanel credential management); Only WordPress experience is evident; other core tasks lack supporting evidence.",
-   "seconds": 47.27979579998646,
+   "seconds": 0.49502159998519346,
+   "cached_calls": 4,
    "tokens": 5616,
    "usd": 0.0015075000000000002,
    "correct": 1.0
@@ -419,7 +432,8 @@
    "fit": 0.35,
    "status": "skipped",
    "status_reason": "fit 0.35 is below 0.4: the portfolio does not show enough of what the job needs (missing: Canopy integration, IRS payout formula); Partial evidence for custom form creation via JavaScript work on WordPress.",
-   "seconds": 47.23976450000191,
+   "seconds": 0.47382309997919947,
+   "cached_calls": 4,
    "tokens": 5730,
    "usd": 0.0016123499999999998,
    "correct": 0.0
@@ -440,7 +454,8 @@
    "fit": 0.2,
    "status": "skipped",
    "status_reason": "fit 0.20 is below 0.4: the portfolio does not show enough of what the job needs (missing: R, Shiny, R Shiny specific UI development); No direct R/Shiny experience shown.",
-   "seconds": 47.46247729996685,
+   "seconds": 0.3520492999814451,
+   "cached_calls": 4,
    "tokens": 4856,
    "usd": 0.0013665,
    "correct": 1.0
@@ -461,7 +476,8 @@
    "fit": 0.4,
    "status": "watching",
    "status_reason": "borderline: fit 0.40, client quality 0.08; Only the React UI and Django backend requirements have directly relevant evidence.",
-   "seconds": 60.428416799986735,
+   "seconds": 0.4106300999992527,
+   "cached_calls": 4,
    "tokens": 7488,
    "usd": 0.0019512000000000002,
    "correct": 0.0
@@ -482,7 +498,8 @@
    "fit": 0.5,
    "status": "skipped",
    "status_reason": "risk: scam ('registration fee'); Excel skill is strongly proven by chart and report work.",
-   "seconds": 55.36768340005074,
+   "seconds": 0.4556760000414215,
+   "cached_calls": 4,
    "tokens": 4054,
    "usd": 0.0010500000000000002,
    "correct": 1.0
@@ -503,7 +520,8 @@
    "fit": 0.3,
    "status": "skipped",
    "status_reason": "fit 0.30 is below 0.4: the portfolio does not show enough of what the job needs (missing: C# and .NET Core development, ASP.NET Core application development, Entity Framework / EF Core / ADO.NET, Dependency injection with Autofac, Unity, Ninject or SimpleIoc); No C#/.NET Core evidence found.",
-   "seconds": 60.3954950000043,
+   "seconds": 0.45276620000367984,
+   "cached_calls": 4,
    "tokens": 7451,
    "usd": 0.0022179,
    "correct": 1.0
@@ -524,7 +542,8 @@
    "fit": 0.5,
    "status": "skipped",
    "status_reason": "the post contains instructions aimed at automated tools; skipped for safety; Strong Shopify revamp evidence present.",
-   "seconds": 71.72238309995737,
+   "seconds": 0.4954306000145152,
+   "cached_calls": 4,
    "tokens": 5318,
    "usd": 0.0015676499999999999,
    "correct": 1.0
@@ -545,7 +564,8 @@
    "fit": 0.2,
    "status": "skipped",
    "status_reason": "fit 0.20 is below 0.4: the portfolio does not show enough of what the job needs (missing: React, CSS, HTML, Copywriting); Web development evidence shows general JavaScript experience but lacks specific React/CSS/HTML proof.",
-   "seconds": 59.59746909997193,
+   "seconds": 0.340762400010135,
+   "cached_calls": 4,
    "tokens": 4528,
    "usd": 0.0012826499999999998,
    "correct": 1.0
@@ -566,7 +586,8 @@
    "fit": 0.6,
    "status": "running",
    "status_reason": "",
-   "seconds": 59.95047549996525,
+   "seconds": 0.38399120001122355,
+   "cached_calls": 5,
    "tokens": 6661,
    "usd": 0.0018982499999999998,
    "correct": 0.0
@@ -587,7 +608,8 @@
    "fit": 0.8,
    "status": "watching",
    "status_reason": "borderline: fit 0.80, client quality 0.08; Strong evidence for Tableau and large dataset handling",
-   "seconds": 60.40727330005029,
+   "seconds": 0.49779420002596453,
+   "cached_calls": 4,
    "tokens": 6603,
    "usd": 0.0014133000000000001,
    "correct": 1.0
@@ -608,7 +630,8 @@
    "fit": 0.7,
    "status": "watching",
    "status_reason": "borderline: fit 0.70, client quality 0.08; Strong evidence for Excel creation and macros from prop-data-144.",
-   "seconds": 59.56568240001798,
+   "seconds": 0.49573600001167506,
+   "cached_calls": 4,
    "tokens": 5626,
    "usd": 0.0015539999999999998,
    "correct": 1.0
@@ -629,7 +652,8 @@
    "fit": 0.95,
    "status": "watching",
    "status_reason": "borderline: fit 0.95, client quality 0.08; All core requirements are covered by strong evidence.",
-   "seconds": 59.53819630004,
+   "seconds": 0.5267230000463314,
+   "cached_calls": 4,
    "tokens": 5460,
    "usd": 0.0015471,
    "correct": 0.0
@@ -650,7 +674,8 @@
    "fit": 0.4,
    "status": "watching",
    "status_reason": "borderline: fit 0.40, client quality 0.99; Strong evidence for WordPress development and GA setup.",
-   "seconds": 56.22314209997421,
+   "seconds": 0.4696299000061117,
+   "cached_calls": 4,
    "tokens": 5590,
    "usd": 0.0015477,
    "correct": 1.0
@@ -671,7 +696,8 @@
    "fit": 0.4,
    "status": "watching",
    "status_reason": "borderline: fit 0.40, client quality 0.56; No GraphQL experience shown.",
-   "seconds": 42.73307020001812,
+   "seconds": 0.47145420004380867,
+   "cached_calls": 4,
    "tokens": 5643,
    "usd": 0.0012720000000000001,
    "correct": 0.0
@@ -692,7 +718,8 @@
    "fit": 0.78,
    "status": "running",
    "status_reason": "",
-   "seconds": 47.14020470000105,
+   "seconds": 0.8515025999513455,
+   "cached_calls": 5,
    "tokens": 6554,
    "usd": 0.0018560999999999999,
    "correct": 1.0
@@ -713,7 +740,8 @@
    "fit": 0.67,
    "status": "running",
    "status_reason": "",
-   "seconds": 123.11032999999588,
+   "seconds": 0.7207057999912649,
+   "cached_calls": 5,
    "tokens": 8971,
    "usd": 0.002313525,
    "correct": 1.0
@@ -734,7 +762,8 @@
    "fit": 0.2,
    "status": "skipped",
    "status_reason": "fit 0.20 is below 0.4: the portfolio does not show enough of what the job needs (missing: Shopify, e\u2011commerce site setup, product listing, payment gateway configuration); The freelancer's portfolio contains only data\u2011analysis and scraping projects.",
-   "seconds": 68.40737050003372,
+   "seconds": 0.4111180999898352,
+   "cached_calls": 4,
    "tokens": 4872,
    "usd": 0.0012604499999999998,
    "correct": 1.0
@@ -755,7 +784,8 @@
    "fit": 0.1,
    "status": "skipped",
    "status_reason": "fit 0.10 is below 0.4: the portfolio does not show enough of what the job needs (missing: ChatGPT proficiency, Better Proposals experience, fast 2\u2011day turnaround); No proof of ChatGPT usage.",
-   "seconds": 51.85321800003294,
+   "seconds": 0.3338565999874845,
+   "cached_calls": 4,
    "tokens": 6382,
    "usd": 0.0017799,
    "correct": 1.0
@@ -776,7 +806,8 @@
    "fit": 0.55,
    "status": "running",
    "status_reason": "",
-   "seconds": 46.59958670003107,
+   "seconds": 0.36339290003525093,
+   "cached_calls": 5,
    "tokens": 6164,
    "usd": 0.0018214499999999996,
    "correct": 1.0
